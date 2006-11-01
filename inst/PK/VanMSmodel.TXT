@@ -1,0 +1,14 @@
+model
+
+           {     
+           for (i in 1:N) {           # N:number of patients
+           c[i]~dnorm(mu[i], 100)     # c:drug concentration
+           mu[i]<-(D[i]*(1-exp(-cl_F[i]/v_F[i]*tin[i]))/(tin[i]*cl_F[i]*(1-exp(-cl_F[i]/v_F[i]*tau[i]))))*exp(-cl_F[i]/v_F[i]*ts[i])  # oral concentration equation at steady state
+           cl_F[i]~dnorm(theta1[i],1)
+           v_F[i]~dnorm(theta2[i], 1)
+
+           theta1[i]<-1.08*(140-age[i])*bw[i]/(72*Scr[i])*pow(0.85,Gender[i])*60/1000  # population estimate of Vancomycin clerance
+           theta2[i]<-0.98*bw[i]                                                       # population estimate of Vancomycin apparent volume of distribution
+
+           }
+           }

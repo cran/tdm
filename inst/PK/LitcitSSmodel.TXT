@@ -1,0 +1,15 @@
+model
+
+           {
+     
+           for (i in 1:1) {     # one subject
+           c~dnorm(mu, 1.0E+6)     # c:drug concentration
+           mu<-(D/94)/(cl_F*tau)  # oral Lthium citrate concentration equation at steady state
+
+           cl_F~dnorm(theta1, 7.032131)
+
+           theta1<-(31.6-0.634*(age-50)*f+(-7.79+0.225*bw)/Scr)/24   # population estimate of Lithium citrate clerance
+  
+           }
+
+           }

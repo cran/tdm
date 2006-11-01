@@ -1,0 +1,16 @@
+model
+
+           {     
+           for (Z in 1:1) {          # one subject
+           for(j in 1:T) {           # T:number of sampling time
+           c[j]~dnorm(mu[j], 100)    # c:drug concentration
+           mu[j]<-(D*(1-exp(-cl_F[X]/v_F[X]*tin))/(tin*cl_F[X]*(1-exp(-cl_F[X]/v_F[X]*tau))))*exp(-cl_F[X]/v_F[X]*ts[j]) # oral concentration equation at steady state
+           }
+           cl_F[X]~dnorm(theta1,1)
+           v_F[X]~dnorm(theta2, 1)
+
+           theta1<-1.08*(140-age)*bw/(72*Scr)*pow(0.85,(1-Gender))*60/1000  # population estimate of Vancomycin clerance
+           theta2<-0.98*bw                                                  # population estimate of Vancomycin apparent volume of distribution
+
+           }
+           }

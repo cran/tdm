@@ -1,0 +1,19 @@
+model
+
+           {
+     
+           for (i in 1:N) {            # N:number of patients
+           c[i]~dnorm(mu[i], 1.0E+6)  # c:drug concentration
+           mu[i]<-ka[i]*D[i]/(v_F[i]*(ka[i]-k[i]))*((1/(1-exp(-k[i]*tau[i])))*exp(-k[i]*(ts[i]-0.778))-(1/(1-exp(-ka[i]*tau[i])))*exp(-ka[i]*(ts[i]-0.778)))   # oral concentration equation at steady state
+           k[i]<-cl_F[i]/v_F[i]
+
+           cl_F[i]~dnorm(theta1[i],100)
+           v_F[i]~dnorm(theta2[i], 100)
+           ka[i]~dnorm(theta3[i], 10000)
+
+           theta1[i]<-10.5*pow(2.72, LPV[i])  # population estimate of Ritonavir clerance
+           theta2[i]<-96.6                    # population estimate of Ritonavir apparent volume of distribution 
+           theta3[i]<-0.871                   # population estimate of Ritonavir absorption rate constant
+           }
+
+           }

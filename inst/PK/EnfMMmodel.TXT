@@ -1,0 +1,21 @@
+model
+
+           {
+     
+           for (Z in 1:1) {           # one subject
+           for(j in 1:T) {            # T:number of sampling time
+           c[j]~dnorm(mu[j], 100)     # c:drug concentration
+           mu[j]<-ka*D/(v_F[X]*(ka-k))*((1/(1-exp(-k*tau)))*exp(-k*ts[j])-(1/(1-exp(-ka*tau)))*exp(-ka*ts[j]))     # oral concentration equation at steady state
+           }
+           k<-cl_F[X]/v_F[X]
+
+           cl_F[X]~dnorm(theta1, 10000)
+           v_F[X]~dnorm(theta2, 10000)
+           ka~dnorm(theta3, 10000)
+
+           theta1<-(0.99+bw/70*0.833)*(1-Gender*0.203)  # population estimate of Enfuvirtide clerance
+           theta2<-4.43                                 # population estimate of Enfuvirtide apparent volume of distribution 
+           theta3<-0.113                                # population estimate of Enfuvirtide absorption rate constant
+           }
+
+           }

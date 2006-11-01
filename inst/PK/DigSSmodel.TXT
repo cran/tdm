@@ -1,0 +1,15 @@
+model
+
+           {
+     
+           for (i in 1:1) {       # one subject
+           c~dnorm(mu, 1.0E+6)    # c:drug concentration
+           mu<-D*1000/(cl_F*tau)  # oral Digoxin concentration equation at steady state
+
+           cl_F~dnorm(theta1, 10)
+
+           theta1<-(8.03/24)*(1-0.0058*age)*bw*pow(scr,-0.6)*pow(0.88,(1-Gender))   # population estimate of Digxoin clerance
+  
+           }
+
+           }

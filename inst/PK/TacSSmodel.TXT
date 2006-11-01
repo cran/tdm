@@ -1,0 +1,15 @@
+model
+
+           {
+     
+           for (i in 1:1) {     # one subject
+           c~dnorm(mu,1.0E+6)   # c:drug concentration
+           mu<-4.5*D/(314*(4.5-cl_F/314))*((1/(1-exp(-cl_F/314*tau)))*exp(-cl_F/314*ts)-(1/(1-exp(-4.5*tau)))*exp(-4.5*ts))*1000   # oral concentration equation at steady state
+
+           cl_F~dnorm(theta1, 0.471422766)
+
+           theta1<-21.3 + 9.8*(1-Hem) + 3.4*(1-Alb)-2.1*Dil-7.4*Flu   # population estimate of Tacrolimus clerance
+              
+           }
+
+           }

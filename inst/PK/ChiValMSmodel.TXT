@@ -1,0 +1,17 @@
+model
+
+           {
+     
+           for (i in 1:N) {      # number of subjects
+           c[i]~dnorm(mu[i],100)
+           mu[i]<-1.9*D[i]/(v[i]*(1.9-k[i]))*((1/(1-exp(-k[i]*tau[i])))*exp(-k[i]*ts[i])-(1/(1-exp(-1.9*tau[i])))*exp(-1.9*ts[i]))     # oral concentration equation at steady state
+           k[i]<-cl_F[i]/v[i]
+           v[i]<-0.24*TBW[i]
+
+           cl_F[i]~dnorm(theta1[i],10000)
+
+           theta1[i]<-0.012*pow(TBW[i],0.715)*pow((D[i]/TBW[i]*24/tau[i]),0.306)*(1+0.359*CBZ[i])     # population estimate of Carbamazepine clerance
+              
+           }
+
+           }

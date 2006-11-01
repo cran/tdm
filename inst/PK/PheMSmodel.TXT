@@ -1,0 +1,17 @@
+model
+
+           {
+     
+           for (i in 1:N){         # one subject
+           c[i]~dnorm(mu[i],100)         # c:drug concentration
+           mu[i]<-(D[i]*24/tau[i])*Km[i]/(Vmax[i]-D[i]*24/tau[i])     
+
+           Vmax[i]~dnorm(theta1[i], 0.01)
+           Km[i]~dnorm(theta2[i], 10)
+
+           theta1[i]<-7.22*bw[i]   # population estimate of Phenytoin Km
+           theta2[i]<-4.44      # population estimate of Phenytoin Vmax 
+              
+           }
+
+           }

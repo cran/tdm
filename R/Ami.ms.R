@@ -1,0 +1,26 @@
+Ami.ms<-function(a,b,c,d,e,f,g,h,i,j,k){
+library(BRugs)
+oldwd<-getwd()
+setwd(system.file("PK",package="tdm"))
+modelCheck("AmiMSmodel.txt")
+bugsData(
+list(N=a,
+c=c(b),
+tau=c(c),
+ts=c(d),
+tin=c(e),
+D=c(f),
+bw=c(g),
+Ht=c(h),
+Scr=c(i),
+Gender=c(j),
+age=c(k)
+)
+, fileName=file.path(getwd(),"Amidata.txt"),digits=5)
+modelData("Amidata.txt")
+modelCompile(numChains=1)
+modelGenInits()
+modelUpdate(4000)
+samplesSet(c("v_F","cl_F"))
+modelUpdate(10000)
+}

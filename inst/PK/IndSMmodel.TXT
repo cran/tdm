@@ -1,0 +1,19 @@
+model
+
+           {
+     
+           for (i in 1:1) {                # one subject
+           for(j in 1:T) {                 # T:number of sampling time
+           c[j]~dnorm(mu[j], 1.0E+6)       # c:drug concentration
+           mu[j]<-ka*D/(65.7*(ka-cl_F/65.7))*((1/(1-exp(-cl_F/65.7*tau)))*exp(-cl_F/65.7*ts[j])-(1/(1-exp(-ka*tau)))*exp(-ka*ts[j]))   # oral concentration equation at steady state
+           }
+
+           cl_F~dnorm(theta1, 100)
+           ka~dnorm(theta2, 10000)
+
+           theta1<-32.4*(1+0.3*Gender)*(1-0.63*Rit)*(1+0.16*(bw-70)/70)   # population estimate of Indinavir clerance
+           theta2<-1                                                      # population estimate of Indinavir apparent volume of distribution
+              
+           }
+
+           }

@@ -1,0 +1,16 @@
+model
+
+           {
+     
+           for (i in 1:N) {       # N:number of patients
+           c[i]~dnorm(mu[i],100)  # c:drug concentration
+           mu[i]<-ka[i]*D[i]/(11.5*(ka[i]-k[i]))*((1/(1-exp(-k[i]*tau[i])))*exp(-k[i]*ts[i])-(1/(1-exp(-ka[i]*tau[i])))*exp(-ka[i]*ts[i]))  # oral concentration equation at steady state
+           k[i]<-cl_F[i]/11.5
+
+           cl_F[i]~dnorm(theta1[i],157.569)
+
+           theta1[i]<-0.105+0.151*CBZ[i]+0.000248*D[i]/tau[i]*24+0.0968*age[i]/20+0.0803*INDI[i]   # population estimate of Valproate clerance
+              
+           }
+
+           }

@@ -1,0 +1,26 @@
+Lit.ms<-function(a,b,c,d,e,f,g,h){
+library(BRugs)
+oldwd<-getwd()
+setwd(system.file("PK",package="tdm"))
+modelCheck("LitMSmodel.txt")
+bugsData(
+list(N=a,
+c=c(b),
+tau=c(c),
+age=c(d),
+D=c(e),
+Scr=c(f),
+bw=c(g),
+f=c(h)
+)
+, fileName=file.path(getwd(),"Litdata.txt"),digits=5)
+modelData("Litdata.txt")
+modelCompile(numChains=1)
+modelGenInits()
+modelUpdate(4000)
+samplesSet(c("cl_F"))
+modelUpdate(10000)
+}
+
+
+
