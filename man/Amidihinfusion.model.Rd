@@ -2,10 +2,11 @@
 
 \alias{Amidihinfusion.model}
 
-\title{Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous}
+\title{Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous with loading dose }
 
 \description{
- Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous 
+ with loading dose by Bayesian technique(OpenBUGS).
 }
 
 \references{

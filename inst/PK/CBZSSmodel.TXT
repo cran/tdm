@@ -10,7 +10,7 @@ model
            cl_F~dnorm(theta1, 100)
            v_F~dnorm(theta2, 1)
 
-           theta1<-0.0734*pow((D/TBW/tau*24), 0.406)*pow(TBW, 0.694)*pow(1.45,PHT) *pow(1.17,PB)*pow(1.21,VPA)*pow(0.849,E)   # population estimate of Carbamazepine clerance
+           theta1<-0.0734*pow((D/TBW/tau*24), 0.406)*pow(TBW, 0.694)*pow(1.45,PHT) *pow(1.17,PB)*pow(1.21,VPA)*pow(0.849,E)   # population estimate of Carbamazepine clearance
            theta2<-1.91*TBW                                                                                                   # population estimate of Carbamazepine apparent volume of distribution 
               
            }

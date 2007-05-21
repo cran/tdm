@@ -9,9 +9,9 @@ model
 
            cl_F[i]~dnorm(theta1[i],100)
            v_F[i]~dnorm(theta2[i], 100)
-           ka[i]~dnorm(theta3[i], 10000)
+           ka[i]~dnorm(theta3[i], 10000)I(0,100)
 
-           theta1[i]<-10.5*pow(2.72, LPV[i])  # population estimate of Ritonavir clerance
+           theta1[i]<-10.5*pow(2.72, LPV[i])  # population estimate of Ritonavir clearance
            theta2[i]<-96.6                    # population estimate of Ritonavir apparent volume of distribution 
            theta3[i]<-0.871                   # population estimate of Ritonavir absorption rate constant
            }

@@ -1,3 +1,4 @@
+
 model
 
            {
@@ -7,11 +8,11 @@ model
            mu<-ka*D/(v_F*(ka-k))*((1/(1-exp(-k*tau)))*exp(-k*ts)-(1/(1-exp(-ka*tau)))*exp(-ka*ts))    # oral concentration equation at steady state
            k<-cl_F/v_F
 
-           cl_F~dnorm(theta1, 10000)
-           v_F~dnorm(theta2, 10000)
-           ka~dnorm(theta3, 10000)
-
-           theta1<-(0.99+bw/70*0.833)*(1-Gender*0.203)  # population estimate of Enfuvirtide clerance
+           cl_F~dnorm(theta1, 100)
+           v_F~dnorm(theta2, 10)
+           ka~dnorm(theta3, 1000)
+           
+           theta1<-(0.99+bw/70*0.833)*(1-Gender*0.203)  # population estimate of Enfuvirtide clearance
            theta2<-4.43                                 # population estimate of Enfuvirtide apparent volume of distribution 
            theta3<-0.113                                # population estimate of Enfuvirtide absorption rate constant
 

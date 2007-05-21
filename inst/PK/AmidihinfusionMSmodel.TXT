@@ -2,14 +2,15 @@ model
 
            {     
            for (i in 1:N) {                  # i: number of patients
-           c[i]~dnorm(mu[i], 1.0E+6)         # c:drug concentration
-           mu[i]<-0.8*D[i]/(tau[i]*cl_F[i])  # iv infusion concentration equation at steady state
-
-           cl_F[i]~dnorm(theta1[i], 10000)
-
-           theta1[i]<-(0.037*IBW[i]-0.006*age[i])*pow(1.284,smoke[i])*pow(0.751,CHF[i])           # population estimate of Aminophylline dihydrous clerance
-          
-           IBW[i]<-Gender[i]*(50+(2.3*(ht[i]/2.4-60)))+(1-Gender[i])*(45+(2.3*(ht[i]/2.4-60)))   # Lean body weight
+           c[i]~dnorm(mu[i], 100)         # c:drug concentration
+           mu[i]<-DL[i]*0.8/(tinf[i]*cl[i])*(1-exp(-k[i]*tinf[i]))*exp(-k[i]*(T[i]))+R[i]*0.8/cl[i]*(1-exp(-k[i]*(T[i])))
+           k[i]<-cl[i]/v[i]
+           cl[i]~dnorm(theta1[i], 10)
+           v[i]~dnorm(theta2[i], 0.1)
+           
+           theta1[i]<-(0.037*IBW[i]-0.006*age[i])*pow(1.284,smoke[i])*pow(0.751,CHF[i])           # population estimate of Aminophylline dihydrous clearance
+           theta2[i]<-(0.42*IBW[i])                                                               # population estimate of Aminophylline dihydrous volume of distribution
+           IBW[i]<-Gender[i]*(50+(2.3*(ht[i]/2.54-60)))+(1-Gender[i])*(45+(2.3*(ht[i]/2.54-60)))  
 
            }
            }

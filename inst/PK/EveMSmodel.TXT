@@ -10,7 +10,7 @@ model
            cl_F[i]~dnorm(theta1[i], 13.71742)
            v_F[i]~dnorm(theta2[i], 7.716049)
 
-           theta1[i]<-(8.82+0.0391*(bw[i]-71)-0.03*(age[i]-44))*pow(1.2,race[i])*pow(0.806,Ery[i])   # population estimate of Everolimus clerance
+           theta1[i]<-(8.82+0.0391*(bw[i]-71)-0.03*(age[i]-44))*pow(1.2,race[i])*pow(0.806,Ery[i])   # population estimate of Everolimus clearance
            theta2[i]<-110+1.14*(bw[i]-71)                                                            # population estimate of Everolimus apparent volume of distribution 
               
            }

@@ -1,0 +1,18 @@
+model
+
+           {     
+           for (i in 1:1) {            # one subject
+           for(j in 1:T) {             # T:number of sampling time
+           c[j]~dnorm(mu[j], 100)   # c:drug concentration
+           mu[j]<-DL*0.85/(tinf*cl)*(1-exp(-k*tinf))*exp(-k*(ts[j]))+R*0.85/cl*(1-exp(-k*(ts[j]))) 
+           k<-cl/v
+           }
+           cl~dnorm(theta1, 10)
+           v~dnorm(theta2, 0.1)
+
+           theta1<-(0.037*IBW-0.006*age)*pow(1.284,smoke)*pow(0.751,CHF)              # population estimate of Aminophylline anhydrous clearance
+           theta2<-(0.42*IBW)                                                         # population estimate of Aminophylline anhydrous volume of distribution
+          
+           IBW<-Gender*(50+(2.3*(ht/2.54-60)))+(1-Gender)*(45+(2.3*(ht/2.54-60)))      
+           }
+           }

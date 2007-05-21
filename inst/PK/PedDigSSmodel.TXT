@@ -8,7 +8,7 @@ model
 
            cl_F~dnorm(theta1,100)
 
-           theta1<-0.237*(1+0.094*age)    # population estimate of Pediatric Digxoin clerance
+           theta1<-0.237*(1+0.094*age)    # population estimate of Pediatric Digxoin clearance
   
            }
 

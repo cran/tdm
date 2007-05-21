@@ -1,9 +1,9 @@
 Phe.ss<-function(a,b,c,d){
-library(BRugs)
+library(BRugs)                                          # active BRugs
 oldwd<-getwd()
-setwd(system.file("PK",package="tdm"))
-modelCheck("PheSSmodel.txt")
-bugsData(
+setwd(system.file("PK",package="tdm"))                  # set working directory
+modelCheck("PheSSmodel.txt")                            # Load model
+bugsData(                                               # produce a BUGS data file and name it Phedata
 list(
 c=a,
 tau=b,
@@ -11,12 +11,12 @@ D=c,
 bw=d
 )
 , fileName=file.path(getwd(),"Phedata.txt"),digits=5)
-modelData("Phedata.txt")
-modelCompile(numChains=1)
-modelGenInits()
-modelUpdate(4000)
-samplesSet(c("Vmax","Km"))
-modelUpdate(50000)
+modelData("Phedata.txt")                                # Load data
+modelCompile(numChains=1)                               # compile
+modelGenInits()                                         # gen inits
+modelUpdate(4000)                                       # burn in 4000
+samplesSet(c("Vmax","Km"))                              # set monitored PK parameters
+modelUpdate(50000)                                      # update 50000
 }
 
 

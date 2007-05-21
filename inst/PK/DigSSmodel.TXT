@@ -8,7 +8,7 @@ model
 
            cl_F~dnorm(theta1, 10)
 
-           theta1<-(8.03/24)*(1-0.0058*age)*bw*pow(scr,-0.6)*pow(0.88,(1-Gender))   # population estimate of Digxoin clerance
+           theta1<-(8.03/24)*(1-0.0058*age)*bw*pow(scr,-0.6)*pow(0.88,(1-Gender))   # population estimate of Digxoin clearance
   
            }
 

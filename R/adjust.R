@@ -1,14 +1,15 @@
-Ami.more<-function()
+# estimate dose adjusment of Aminoglcoside with single subject and single concentration
+Ami.more<-function(B,E,F,G)
 {
- cat("\n")
+ cat("\n")                                      # menu of dose adjustment
   file.menu <- c("Dose -> Css_trough",
                  "Css_trough -> Dose",
                  "Css_trough <-> Dose",
                  "exit")
   pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
-  if (pick == 1){
+  if (pick == 1){                                                                               # choose D -> C
      cat("\n")
-     cat("********************************************\n")
+     cat("********************************************\n")                                      # information of dose adjustment
      cat("  --input data--                            \n")
      cat("  D = desired dose (mg)                     \n")
      cat("  tau = desired dosing interval (hr)        \n")
@@ -21,28 +22,29 @@ Ami.more<-function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amicpar<-data.frame(input=c("D (mg)","tau (hr)","tin (hr)"),value=c(0))
-     Amicpar<-edit(Amicpar)
-     Amicpar<-check(Amicpar)
-     C<-(Amicpar[1,2]*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Amicpar[3,2]))/(Amicpar[3,2]*(samplesStats("cl_F"))*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Amicpar[2,2]))))*exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*(Amicpar[2,2]-Amicpar[3,2]))
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_trough (mg/L)")
+     Amicpar<-data.frame(input=c("D (mg)","tau (hr)","tin (hr)"),value=c(0))                    # edit table of aminoglycoside input data information     
+     Amicpar<-edit(Amicpar)                                                                     # show table of Aminoglycoside input data information for user editing
+     Amicpar<-check(Amicpar)                                                                    # avoid user missing input information
+     C<-(Amicpar[1,2]*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Amicpar[3,2]))/(Amicpar[3,2]*(samplesStats("cl"))*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Amicpar[2,2]))))*exp(-(samplesStats("cl"))/(samplesStats("v"))*(Amicpar[2,2]-Amicpar[3,2]))   # calculate concentratin of Aminoglycoside
+     sim<-matrix(C[1 ,1])                                                                       # 取表格[1,1]之答案
+     coutput<-data.frame(sim)                                                                   # 命名所取出來的[1,1]為couput
+     colnames(coutput)<-list("Css_trough (mg/L)")                                               # 並命名此欄位為Css_trough(mg/L)
      cat("\n")
      show(coutput)
-       cat("\n")                          # dose adjustment again or not
-       file.menu <- c("Yes",
+       cat("\n")                          
+       file.menu <- c("Yes",                                             # dose adjustment again or not
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
-       if (pick == 1){
-          Ami.more()
+       if (pick == 1){                                                   # if yes, dose adjustment again
+          Ami.more(B,E,F,G)
        } else {
-             if (pick == 2){
+             if (pick == 2){                                             # is no, show output file(包含病人資訊,預測參數跟劑量調整部分)
+             Amiss.output(B,E,F,G,Amicpar,coutput)
              cal.again()
              }
          } 
   } else {
-    if (pick == 2){
+    if (pick == 2){                                                                               # choose C -> D
      cat("\n")
      cat("********************************************\n")
      cat("  --input data--                            \n")
@@ -60,25 +62,26 @@ Ami.more<-function()
      Amidpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)","tin (hr)"),value=c(0))
      Amidpar<-edit(Amidpar)
      Amidpar<-check(Amidpar)
-     d<-Amidpar[1,2]/(((1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Amidpar[3,2]))/(Amidpar[3,2]*(samplesStats("cl_F"))*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Amidpar[2,2]))))*exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*(Amidpar[2,2]-Amidpar[3,2])))
+     d<-Amidpar[1,2]/(((1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Amidpar[3,2]))/(Amidpar[3,2]*(samplesStats("cl"))*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Amidpar[2,2]))))*exp(-(samplesStats("cl"))/(samplesStats("v"))*(Amidpar[2,2]-Amidpar[3,2])))   # calculate dose of Aminoglycoside
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
      cat("\n")
      show(doutput)
        cat("\n")
-       file.menu <- c("Yes",
+       file.menu <- c("Yes",                                             # dose adjustment again or not
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
-       if (pick == 1){
-          Ami.more()
+       if (pick == 1){                                                   # if yes, dose adjustment again
+          Ami.more(B,E,F,G)
        } else {
-             if (pick == 2){
+             if (pick == 2){                                             # is no, show output file(包含病人資訊,預測參數跟劑量調整部分)
+             Amiss.output(B,E,F,G,Amidpar,doutput)
              cal.again()
              }
          } 
     } else {
-    if (pick == 3){
+    if (pick == 3){                                                                               # choose D <-> C(綜合上面兩者，先算濃度再算劑量)
      cat("\n")
      cat("********************************************\n")
      cat("  --input data--                            \n")
@@ -96,7 +99,7 @@ Ami.more<-function()
      Amicpar<-data.frame(input=c("D (mg)","tau (hr)","tin (hr)"),value=c(0))
      Amicpar<-edit(Amicpar)
      Amicpar<-check(Amicpar)
-     C<-(Amicpar[1,2]*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Amicpar[3,2]))/(Amicpar[3,2]*(samplesStats("cl_F"))*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Amicpar[2,2]))))*exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*(Amicpar[2,2]-Amicpar[3,2]))
+     C<-(Amicpar[1,2]*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Amicpar[3,2]))/(Amicpar[3,2]*(samplesStats("cl"))*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Amicpar[2,2]))))*exp(-(samplesStats("cl"))/(samplesStats("v"))*(Amicpar[2,2]-Amicpar[3,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -104,7 +107,7 @@ Ami.more<-function()
      show(coutput)
      cat("\n\n")
      cat("          Pressing Enter to continue..                  \n")
-     readline()
+     readline()        # 按enter之後會繼續進行
      cat("\n")
      cat("********************************************\n")
      cat("  --input data--                            \n")
@@ -122,25 +125,27 @@ Ami.more<-function()
      Amidpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)","tin (hr)"),value=c(0))
      Amidpar<-edit(Amidpar)
      Amidpar<-check(Amidpar)
-     d<-Amidpar[1,2]/(((1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Amidpar[3,2]))/(Amidpar[3,2]*(samplesStats("cl_F"))*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Amidpar[2,2]))))*exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*(Amidpar[2,2]-Amidpar[3,2])))
+     d<-Amidpar[1,2]/(((1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Amidpar[3,2]))/(Amidpar[3,2]*(samplesStats("cl"))*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Amidpar[2,2]))))*exp(-(samplesStats("cl"))/(samplesStats("v"))*(Amidpar[2,2]-Amidpar[3,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
      cat("\n")
      show(doutput)
        cat("\n")
-       file.menu <- c("Yes", 
+       file.menu <- c("Yes",                                             # dose adjustment again or not 
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
-       if (pick == 1){
-          Ami.more()
+       if (pick == 1){                                                   # if yes, dose adjustment again
+          Ami.more(B,E,F,G)
        } else {
-             if (pick == 2){
+             if (pick == 2){                                             # is no, show output file(包含病人資訊,預測參數跟劑量調整部分)
+             Amisscd.output(B,E,F,G,Amicpar,coutput,Amidpar,doutput)
              cal.again()
              }
          } 
       } else {
-      if (pick == 4){
+      if (pick == 4){                   # 選4表示其不進行 dose adjustment，所以會呈現outout report包含病人資料跟預測出的餐數值
+      	Amiss.pkoutput(B,E,F,G)
         cal.again()
         }   
       }
@@ -148,7 +153,7 @@ Ami.more<-function()
   }
 }
 
-Van.more<-function()
+Van.more<-function(A,B,E,F)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -174,7 +179,7 @@ Van.more<-function()
      Vancpar<-data.frame(input=c("D (mg)","tau (hr)","tin (hr)"),value=c(0))
      Vancpar<-edit(Vancpar)
      Vancpar<-check(Vancpar)
-     C<-(Vancpar[1,2]*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Vancpar[3,2]))/(Vancpar[3,2]*(samplesStats("cl_F"))*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Vancpar[2,2]))))*exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*(Vancpar[2,2]-Vancpar[3,2]))
+     C<-(Vancpar[1,2]*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Vancpar[3,2]))/(Vancpar[3,2]*(samplesStats("cl"))*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Vancpar[2,2]))))*exp(-(samplesStats("cl"))/(samplesStats("v"))*(Vancpar[2,2]-Vancpar[3,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -185,9 +190,10 @@ Van.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Van.more()
+          Van.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Vanss.output(A,B,E,F,Vancpar,coutput)
              cal.again()
              }
          } 
@@ -210,7 +216,7 @@ Van.more<-function()
      Vandpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)","tin (hr)"),value=c(0))
      Vandpar<-edit(Vandpar)
      Vandpar<-check(Vandpar)
-     d<-Vandpar[1,2]/(((1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Vandpar[3,2]))/(Vandpar[3,2]*(samplesStats("cl_F"))*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Vandpar[2,2]))))*exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*(Vandpar[2,2]-Vandpar[2,2])))
+     d<-Vandpar[1,2]/(((1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Vandpar[3,2]))/(Vandpar[3,2]*(samplesStats("cl"))*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Vandpar[2,2]))))*exp(-(samplesStats("cl"))/(samplesStats("v"))*(Vandpar[2,2]-Vandpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -221,9 +227,10 @@ Van.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Van.more()
+          Van.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Vanss.output(A,B,E,F,Vandpar,doutput)
              cal.again()
              }
          } 
@@ -246,7 +253,7 @@ Van.more<-function()
      Vancpar<-data.frame(input=c("D (mg)","tau (hr)","tin (hr)"),value=c(0))
      Vancpar<-edit(Vancpar)
      Vancpar<-check(Vancpar)
-     C<-(Vancpar[1,2]*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Vancpar[3,2]))/(Vancpar[3,2]*(samplesStats("cl_F"))*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Vancpar[2,2]))))*exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*(Vancpar[2,2]-Vancpar[3,2]))
+     C<-(Vancpar[1,2]*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Vancpar[3,2]))/(Vancpar[3,2]*(samplesStats("cl"))*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Vancpar[2,2]))))*exp(-(samplesStats("cl"))/(samplesStats("v"))*(Vancpar[2,2]-Vancpar[3,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -272,7 +279,7 @@ Van.more<-function()
      Vandpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)","tin (hr)"),value=c(0))
      Vandpar<-edit(Vandpar)
      Vandpar<-check(Vandpar)
-     d<-Vandpar[1,2]/(((1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Vandpar[3,2]))/(Vandpar[3,2]*(samplesStats("cl_F"))*(1-exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*Vandpar[2,2]))))*exp(-(samplesStats("cl_F"))/(samplesStats("v_F"))*(Vandpar[2,2]-Vandpar[3,2])))
+     d<-Vandpar[1,2]/(((1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Vandpar[3,2]))/(Vandpar[3,2]*(samplesStats("cl"))*(1-exp(-(samplesStats("cl"))/(samplesStats("v"))*Vandpar[2,2]))))*exp(-(samplesStats("cl"))/(samplesStats("v"))*(Vandpar[2,2]-Vandpar[3,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -283,14 +290,16 @@ Van.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Van.more()
+          Van.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Vansscd.output(A,B,E,F,Vancpar,coutput,Vandpar,doutput)
              cal.again()
              }
          } 
       } else {
       if (pick == 4){
+      	Vanss.pkoutput(A,B,E,F)
         cal.again()
         }   
       }
@@ -299,7 +308,7 @@ Van.more<-function()
 }
 
 
-Car.more<-function()
+Car.more<-function(B,E,F)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -335,9 +344,10 @@ Car.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Car.more()
+          Car.more(B,E,F)
        } else {
              if (pick == 2){
+             Carss.output(B,E,F,CBZcpar,coutput)
              cal.again()
              }
          } 
@@ -370,9 +380,10 @@ Car.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Car.more()
+          Car.more(B,E,F)
        } else {
              if (pick == 2){
+             Carss.output(B,E,F,CBZdpar,doutput)
              cal.again()
              }
          } 
@@ -430,14 +441,16 @@ Car.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Car.more()
+          Car.more(B,E,F)
        } else {
              if (pick == 2){
+             Carsscd.output(B,E,F,CBZcpar,coutput,CBZdpar,doutput)
              cal.again()
              }
          } 
       } else {
       if (pick == 4){
+      	Carss.pkoutput(B,E,F)
         cal.again()
         }   
       }
@@ -446,7 +459,7 @@ Car.more<-function()
 }
 
 
-Dig.more<-function()
+Dig.more<-function(B,F)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -482,9 +495,10 @@ Dig.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Dig.more()
+          Dig.more(B,F)
        } else {
              if (pick == 2){
+             Digss.output(B,F,Digcpar,coutput)
              cal.again()
              }
          }  
@@ -517,9 +531,10 @@ Dig.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Dig.more()
+          Dig.more(B,F)
        } else {
              if (pick == 2){
+             Digss.output(B,F,Digdpar,doutput)
              cal.again()
              }
          }  
@@ -577,14 +592,16 @@ Dig.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Dig.more()
+          Dig.more(B,F)
        } else {
              if (pick == 2){
+             Digsscd.output(B,F,Digcpar,coutput,Digdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Digss.pkoutput(B,F)
         cal.again()
         }   
       }
@@ -594,7 +611,7 @@ Dig.more<-function()
 
 
 
-Lit.more<-function()
+Lit.more<-function(B,E)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -604,13 +621,13 @@ Lit.more<-function()
   pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
   if (pick == 1){
      cat("\n")
-     cat("********************************************\n")
+     cat("*********************************************\n")
      cat("  --input data--                            \n")
      cat("  D = desired dose (mg)                     \n")
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
+     cat("  Css_trough = predicted trough conc (mEq/L*) \n")
      cat("********************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
@@ -630,9 +647,10 @@ Lit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Lit.more()
+          Lit.more(B,E)
        } else {
              if (pick == 2){
+             Litss.output(B,E,Litcpar,coutput)
              cal.again()
              }
          }  
@@ -641,7 +659,7 @@ Lit.more<-function()
      cat("\n")
      cat("********************************************\n")
      cat("  --input data--                            \n")
-     cat("  Css_trough = desired trough conc (mg/L)   \n")
+     cat("  Css_trough = desired trough conc (mEq/L)   \n")
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
@@ -665,23 +683,24 @@ Lit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Lit.more()
+          Lit.more(B,E)
        } else {
              if (pick == 2){
+             Litss.output(B,E,Litdpar,doutput)
              cal.again()
              }
          }  
     } else {
     if (pick == 3){
      cat("\n")
-     cat("********************************************\n")
+     cat("*********************************************\n")
      cat("  --input data--                            \n")
      cat("  D = desired dose (mg)                     \n")
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("  Css_trough = predicted trough conc (mEq/L) \n")
+     cat("*********************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
@@ -701,7 +720,7 @@ Lit.more<-function()
      cat("\n")
      cat("********************************************\n")
      cat("  --input data--                            \n")
-     cat("  Css_trough = desired trough conc (mg/L)   \n")
+     cat("  Css_trough = desired trough conc (mEq/L)   \n")
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
@@ -725,14 +744,16 @@ Lit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Lit.more()
+          Lit.more(B,E)
        } else {
              if (pick == 2){
+             Litsscd.output(B,E,Litcpar,coutput,Litdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Litss.pkoutput(B,E)
         cal.again() 
         }   
       }
@@ -740,7 +761,7 @@ Lit.more<-function()
   }
 }
 
-Litcit.more<-function()
+Litcit.more<-function(B,E)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -750,14 +771,14 @@ Litcit.more<-function()
   pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
   if (pick == 1){
      cat("\n")
-     cat("********************************************\n")
+     cat("*********************************************\n")
      cat("  --input data--                            \n")
      cat("  D = desired dose (mg)                     \n")
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("  Css_trough = predicted trough conc (mEq/L) \n")
+     cat("*********************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
@@ -776,9 +797,10 @@ Litcit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Litcit.more()
+          Litcit.more(B,E)
        } else {
              if (pick == 2){
+             Litcitss.output(B,E,Litcitcpar,coutput)
              cal.again()
              }
          }  
@@ -787,7 +809,7 @@ Litcit.more<-function()
      cat("\n")
      cat("********************************************\n")
      cat("  --input data--                            \n")
-     cat("  Css_trough = desired trough conc (mg/L)   \n")
+     cat("  Css_trough = desired trough conc (mEq/L)   \n")
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
@@ -811,23 +833,24 @@ Litcit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Litcit.more()
+          Litcit.more(B,E)
        } else {
              if (pick == 2){
+             Litcitss.output(B,E,Litcitdpar,doutput)
              cal.again()
              }
          }  
     } else {
     if (pick == 3){
      cat("\n")
-     cat("********************************************\n")
+     cat("*********************************************\n")
      cat("  --input data--                            \n")
      cat("  D = desired dose (mg)                     \n")
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("  Css_trough = predicted trough conc (mEq/L) \n")
+     cat("*********************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
@@ -847,7 +870,7 @@ Litcit.more<-function()
      cat("\n")
      cat("********************************************\n")
      cat("  --input data--                            \n")
-     cat("  Css_trough = desired trough conc (mg/L)   \n")
+     cat("  Css_trough = desired trough conc (mEq/L)   \n")
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
@@ -871,14 +894,16 @@ Litcit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Litcit.more()
+          Litcit.more(B,E)
        } else {
              if (pick == 2){
+             Litcitsscd.output(B,E,Litcitcpar,coutput,Litcitdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Litcitss.pkoutput(B,E)
         cal.again() 
         }   
       }
@@ -887,7 +912,7 @@ Litcit.more<-function()
 }
 
 
-Enf.more<-function()
+Enf.more<-function(A,B,E)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -923,9 +948,10 @@ Enf.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Enf.more()
+          Enf.more(A,B,E)
        } else {
              if (pick == 2){
+             Enfss.output(A,B,E,Enfcpar,coutput)
              cal.again()
              }
          }  
@@ -958,9 +984,10 @@ Enf.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Enf.more()
+          Enf.more(A,B,E)
        } else {
              if (pick == 2){
+             Enfss.output(A,B,E,Enfdpar,doutput)
              cal.again()
              }
          }  
@@ -1018,14 +1045,16 @@ Enf.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Enf.more()
+          Enf.more(A,B,E)
        } else {
              if (pick == 2){
+             Enfsscd.output(A,B,E,Enfcpar,coutput,Enfdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Enfss.pkoutput(A,B,E)
         cal.again()  
         }   
       }
@@ -1033,7 +1062,7 @@ Enf.more<-function()
   }
 }
 
-Ind.more<-function()
+Ind.more<-function(A,B,E)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -1069,9 +1098,10 @@ Ind.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Ind.more()
+          Ind.more(A,B,E)
        } else {
              if (pick == 2){
+             Indss.output(A,B,E,Indcpar,coutput)
              cal.again()
              }
          }  
@@ -1104,9 +1134,10 @@ Ind.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Ind.more()
+          Ind.more(A,B,E)
        } else {
              if (pick == 2){
+             Indss.output(A,B,E,Inddpar,doutput)
              cal.again()
              }
          }  
@@ -1164,14 +1195,16 @@ Ind.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Ind.more()
+          Ind.more(A,B,E)
        } else {
              if (pick == 2){
+             Indsscd.output(A,B,E,Indcpar,coutput,Inddpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Indss.pkoutput(A,B,E)
         cal.again()  
         }   
       }
@@ -1180,7 +1213,7 @@ Ind.more<-function()
 }
 
 
-Rit.more<-function()
+Rit.more<-function(A,B,E)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -1216,9 +1249,10 @@ Rit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Rit.more()
+          Rit.more(A,B,E)
        } else {
              if (pick == 2){
+             Ritss.output(A,B,E,Ritcpar,coutput)
              cal.again()
              }
          }  
@@ -1251,9 +1285,10 @@ Rit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Rit.more()
+          Rit.more(A,B,E)
        } else {
              if (pick == 2){
+             Ritss.output(A,B,E,Ritdpar,doutput)
              cal.again()
              }
          }  
@@ -1311,14 +1346,16 @@ Rit.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Rit.more()
+          Rit.more(A,B,E)
        } else {
              if (pick == 2){
+             Ritsscd.output(A,B,E,Ritcpar,coutput,Ritdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Ritss.pkoutput(A,B,E)
         cal.again()  
         }   
       }
@@ -1329,7 +1366,7 @@ Rit.more<-function()
 
 
 
-Eve.more<-function()
+Eve.more<-function(A,B,E)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -1365,9 +1402,10 @@ Eve.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Eve.more()
+          Eve.more(A,B,E)
        } else {
              if (pick == 2){
+             Evess.output(A,B,E,Evecpar,coutput)
              cal.again()
              }
          }  
@@ -1400,9 +1438,10 @@ Eve.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Eve.more()
+          Eve.more(A,B,E)
        } else {
              if (pick == 2){
+             Evess.output(A,B,E,Evedpar,doutput)
              cal.again()
              }
          }  
@@ -1460,14 +1499,16 @@ Eve.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Eve.more()
+          Eve.more(A,B,E)
        } else {
              if (pick == 2){
+             Evesscd.output(A,B,E,Evecpar,coutput,Evedpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Evess.pkoutput(A,B,E)
         cal.again()  
         }   
       }
@@ -1475,7 +1516,7 @@ Eve.more<-function()
   }
 }
 
-Tac.more<-function()
+Tac.more<-function(A,B,E)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -1511,9 +1552,10 @@ Tac.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Tac.more()
+          Tac.more(A,B,E)
        } else {
              if (pick == 2){
+             Tacss.output(A,B,E,Taccpar,coutput)
              cal.again()
              }
          }  
@@ -1546,9 +1588,10 @@ Tac.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Tac.more()
+          Tac.more(A,B,E)
        } else {
              if (pick == 2){
+             Tacss.output(A,B,E,Tacdpar,doutput)
              cal.again()
              }
          }  
@@ -1606,14 +1649,16 @@ Tac.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Tac.more()
+          Tac.more(A,B,E)
        } else {
              if (pick == 2){
+             Tacsscd.output(A,B,E,Taccpar,coutput,Tacdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Tacss.pkoutput(A,B,E)
         cal.again() 
         }   
       }
@@ -1622,7 +1667,7 @@ Tac.more<-function()
 }
 
 
-Eno.more<-function()
+Eno.more<-function(A,B)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -1658,9 +1703,10 @@ Eno.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Eno.more()
+          Eno.more(A,B)
        } else {
              if (pick == 2){
+             Enoss.output(A,B,Enocpar,coutput)
              cal.again()
              }
          }  
@@ -1693,9 +1739,10 @@ Eno.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Eno.more()
+          Eno.more(A,B)
        } else {
              if (pick == 2){
+             Enoss.output(A,B,Enodpar,doutput)
              cal.again()
              }
          }  
@@ -1753,14 +1800,16 @@ Eno.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Eno.more()
+          Eno.more(A,B)
        } else {
              if (pick == 2){
+             Enosscd.output(A,B,Enocpar,coutput,Enodpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Enoss.pkoutput(A,B)
         cal.again() 
         }   
       }
@@ -1770,7 +1819,7 @@ Eno.more<-function()
 
 
 
-Amianhir.more<-function()
+Amianhir.more<-function(A,B,E,F)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -1806,9 +1855,10 @@ Amianhir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhir.more()
+          Amianhir.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Amianhirss.output(A,B,E,F,Amianhircpar,coutput)
              cal.again()
              }
          }  
@@ -1841,9 +1891,10 @@ Amianhir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhir.more()
+          Amianhir.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Amianhirss.output(A,B,E,F,Amianhirdpar,doutput)
              cal.again()
              }
          }  
@@ -1901,14 +1952,16 @@ Amianhir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhir.more()
+          Amianhir.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Amianhirsscd.output(A,B,E,F,Amianhircpar,coutput,Amianhirdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Amianhirss.pkoutput(A,B,E,F)
         cal.again()
         }   
       }
@@ -1918,7 +1971,7 @@ Amianhir.more<-function()
 
 
 
-Amianhcr.more<-function()
+Amianhcr.more<-function(A,B)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -1954,9 +2007,10 @@ Amianhcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhcr.more()
+          Amianhcr.more(A,B)
        } else {
              if (pick == 2){
+             Amianhcr.output(A,B,Amianhcrcpar,coutput)
              cal.again()
              }
          }  
@@ -1989,9 +2043,10 @@ Amianhcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhcr.more()
+          Amianhcr.more(A,B)
        } else {
              if (pick == 2){
+             Amianhcr.output(A,B,Amianhcrdpar,coutput)
              cal.again()
              }
          }  
@@ -2048,14 +2103,16 @@ Amianhcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhcr.more()
+          Amianhcr.more(A,B)
        } else {
              if (pick == 2){
+             Amianhcrcd.output(A,B,Amianhcrcpar,coutput,Amianhcrdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Amianhcrss.pkoutput(A,B)
         cal.again()
         }   
       }
@@ -2063,70 +2120,69 @@ Amianhcr.more<-function()
   }
 }
 
-Amianhinfusion.more<-function()
+Amianhinfusion.more<-function(A,B,E)
 {
  cat("\n")
-  file.menu <- c("Dose -> Css_trough",
-                 "Css_trough -> Dose",
-                 "Css_trough <-> Dose",
+  file.menu <- c("R -> Css_trough",
+                 "Css_trough -> R",
+                 "Css_trough <-> R",
                  "exit")
   pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
   if (pick == 1){
      cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  D = desired dose (mg)                     \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("*************************************************\n")
+     cat("  --input data--                                 \n")
+     cat("  R = constant intravenous infusion rate (mg/hr) \n")
+     cat("                                                 \n")
+     cat("  --output data--                                \n")
+     cat("  Css_trough = predicted trough conc (mg/L)      \n")
+     cat("*************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amianhinfusioncpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
+     Amianhinfusioncpar<-data.frame(input=c("R (mg/hr)"),value=c(0))
      Amianhinfusioncpar<-edit(Amianhinfusioncpar)
      Amianhinfusioncpar<-check(Amianhinfusioncpar)
-     C<-0.85*Amianhinfusioncpar[1,2]/(samplesStats("cl_F")*Amianhinfusioncpar[2,2])
+     C<-0.85*Amianhinfusioncpar[1,2]/(samplesStats("cl"))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
      cat("\n")
      show(coutput)
-        cat("\n")
+       cat("\n")
        file.menu <- c("Yes", 
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhinfusion.more()
+          Amianhinfusion.more(A,B,E)
        } else {
              if (pick == 2){
+             Amianhinfusionss.output(A,B,E,Amianhinfusioncpar,coutput)
              cal.again()
              }
          }  
   } else {
     if (pick == 2){
      cat("\n")
-     cat("********************************************\n")
+     cat("*************************************************\n")
      cat("  --input data--                            \n")
      cat("  Css_trough = desired trough conc (mg/L)   \n")
-     cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Dose = desired/predicted dose (mg)        \n")
-     cat("********************************************\n\n")
+     cat("  R = constant intravenous infusion rate (mg/hr) \n")
+     cat("*************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amianhinfusiondpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
+     Amianhinfusiondpar<-data.frame(input=c("Css_trough (mg/L)"),value=c(0))
      Amianhinfusiondpar<-edit(Amianhinfusiondpar)
      Amianhinfusiondpar<-check(Amianhinfusiondpar)
-     d<-Amianhinfusiondpar[1,2]*samplesStats("cl_F")*Amianhinfusiondpar[2,2]/0.85
+     d<-Amianhinfusiondpar[1,2]*samplesStats("cl")/0.85
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
-     colnames(doutput)<-list("Dose (mg)")
+     colnames(doutput)<-list("R (mg/hr)")
      cat("\n")
      show(doutput)
         cat("\n")
@@ -2134,31 +2190,31 @@ Amianhinfusion.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhinfusion.more()
+          Amianhinfusion.more(A,B,E)
        } else {
              if (pick == 2){
+             Amianhinfusionss.output(A,B,E,Amianhinfusiondpar,doutput)
              cal.again()
              }
          }  
     } else {
     if (pick == 3){
      cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  D = desired dose (mg)                     \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("*************************************************\n")
+     cat("  --input data--                                 \n")
+     cat("  R = constant intravenous infusion rate (mg/hr) \n")
+     cat("                                                 \n")
+     cat("  --output data--                                \n")
+     cat("  Css_trough = predicted trough conc (mg/L)      \n")
+     cat("*************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amianhinfusioncpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
+     Amianhinfusioncpar<-data.frame(input=c("R (mg/hr)"),value=c(0))
      Amianhinfusioncpar<-edit(Amianhinfusioncpar)
      Amianhinfusioncpar<-check(Amianhinfusioncpar)
-     C<-0.85*Amianhinfusioncpar[1,2]/(samplesStats("cl_F")*Amianhinfusioncpar[2,2])
+     C<-0.85*Amianhinfusioncpar[1,2]/(samplesStats("cl"))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -2168,25 +2224,24 @@ Amianhinfusion.more<-function()
      cat("          Pressing Enter to continue..                  \n")
      readline()
      cat("\n")
-     cat("********************************************\n")
+     cat("*************************************************\n")
      cat("  --input data--                            \n")
      cat("  Css_trough = desired trough conc (mg/L)   \n")
-     cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Dose = desired/predicted dose (mg)        \n")
-     cat("********************************************\n\n")
+     cat("  R = constant intravenous infusion rate (mg/hr) \n")
+     cat("*************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amianhinfusiondpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
+     Amianhinfusiondpar<-data.frame(input=c("Css_trough (mg/L)"),value=c(0))
      Amianhinfusiondpar<-edit(Amianhinfusiondpar)
      Amianhinfusiondpar<-check(Amianhinfusiondpar)
-     d<-Amianhinfusiondpar[1,2]*samplesStats("cl_F")*Amianhinfusiondpar[2,2]/0.85
+     d<-Amianhinfusiondpar[1,2]*samplesStats("cl")/0.85
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
-     colnames(doutput)<-list("Dose (mg)")
+     colnames(doutput)<-list("R (mg/hr)")
      cat("\n")
      show(doutput)
         cat("\n")
@@ -2194,14 +2249,16 @@ Amianhinfusion.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amianhinfusion.more()
+          Amianhinfusion.more(A,B,E)
        } else {
              if (pick == 2){
+             Amianhinfusionsscd.output(A,B,E,Amianhinfusioncpar,coutput,Amianhinfusiondpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Amianhinfusionss.pkoutput(A,B,E)
         cal.again()
         }   
       }
@@ -2211,7 +2268,7 @@ Amianhinfusion.more<-function()
 
 
 
-Amidihir.more<-function()
+Amidihir.more<-function(A,B,E,F)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -2247,9 +2304,10 @@ Amidihir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihir.more()
+          Amidihir.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Amidihirss.output(A,B,E,F,Amidihircpar,coutput)
              cal.again()
              }
          }  
@@ -2282,9 +2340,10 @@ Amidihir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihir.more()
+          Amidihir.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Amidihirss.output(A,B,E,F,Amidihirdpar,doutput)
              cal.again()
              }
          }  
@@ -2342,14 +2401,16 @@ Amidihir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihir.more()
+          Amidihir.more(A,B)
        } else {
              if (pick == 2){
+             Amidihirsscd.output(A,B,E,F,Amidihircpar,coutput,Amidihirdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Amidihirss.pkoutput(A,B,E,F)
         cal.again()
         }   
       }
@@ -2359,7 +2420,7 @@ Amidihir.more<-function()
 
 
 
-Amidihcr.more<-function()
+Amidihcr.more<-function(A,B)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -2395,9 +2456,10 @@ Amidihcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihcr.more()
+          Amidihcr.more(A,B)
        } else {
              if (pick == 2){
+             Amidihcrss.output(A,B,Amidihcrcpar,coutput)
              cal.again()
              }
          }  
@@ -2430,9 +2492,10 @@ Amidihcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihcr.more()
+          Amidihcr.more(A,B)
        } else {
              if (pick == 2){
+             Amidihcrss.output(A,B,Amidihcrdpar,doutput)
              cal.again()
              }
          }  
@@ -2489,14 +2552,16 @@ Amidihcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihcr.more()
+          Amidihcr.more(A,B)
        } else {
              if (pick == 2){
+             Amidihcrsscd.output(A,B,Amidihcrcpar,coutput,Amidihcrdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Amidihcrss.pkoutput(A,B)
         cal.again()
         }   
       }
@@ -2505,32 +2570,31 @@ Amidihcr.more<-function()
 }
 
 
-Amidihinfusion.more<-function()
+Amidihinfusion.more<-function(A,B,E)
 {
  cat("\n")
-  file.menu <- c("Dose -> Css_trough",
-                 "Css_trough -> Dose",
-                 "Css_trough <-> Dose",
+  file.menu <- c("R -> Css_trough",
+                 "Css_trough -> R",
+                 "Css_trough <-> R",
                  "exit")
   pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
   if (pick == 1){
      cat("\n")
-     cat("********************************************\n")
+     cat("*************************************************\n")
      cat("  --input data--                            \n")
-     cat("  D = desired dose (mg)                     \n")
-     cat("  tau = desired dosing interval (hr)        \n")
+     cat("  R = constant intravenous infusion rate (mg/hr) \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
      cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("*************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amidihinfusioncpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
+     Amidihinfusioncpar<-data.frame(input=c("R (mg/hr)"),value=c(0))
      Amidihinfusioncpar<-edit(Amidihinfusioncpar)
      Amidihinfusioncpar<-check(Amidihinfusioncpar)
-     C<-0.8*Amidihinfusioncpar[1,2]/(samplesStats("cl_F")*Amidihinfusioncpar[2,2])
+     C<-0.8*Amidihinfusioncpar[1,2]/(samplesStats("cl"))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -2541,34 +2605,34 @@ Amidihinfusion.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihinfusion.more()
+          Amidihinfusion.more(A,B,E)
        } else {
              if (pick == 2){
+             Amidihinfusionss.output(A,B,E,Amidihinfusioncpar,coutput)
              cal.again()
              }
          }  
   } else {
     if (pick == 2){
      cat("\n")
-     cat("********************************************\n")
+     cat("*************************************************\n")
      cat("  --input data--                            \n")
      cat("  Css_trough = desired trough conc (mg/L)   \n")
-     cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Dose = desired/predicted dose (mg)        \n")
-     cat("********************************************\n\n")
+     cat("  R = constant intravenous infusion rate (mg/hr) \n")
+     cat("*************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amidihinfusiondpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
+     Amidihinfusiondpar<-data.frame(input=c("Css_trough (mg/L)"),value=c(0))
      Amidihinfusiondpar<-edit(Amidihinfusiondpar)
      Amidihinfusiondpar<-check(Amidihinfusiondpar)
-     d<-Amidihinfusiondpar[1,2]*samplesStats("cl_F")*Amidihinfusiondpar[2,2]/0.8
+     d<-Amidihinfusiondpar[1,2]*samplesStats("cl")/0.8
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
-     colnames(doutput)<-list("Dose (mg)")
+     colnames(doutput)<-list("R (mg/hr)")
      cat("\n")
      show(doutput)
         cat("\n")
@@ -2576,31 +2640,31 @@ Amidihinfusion.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihinfusion.more()
+          Amidihinfusion.more(A,B,E)
        } else {
              if (pick == 2){
+             Amidihinfusionss.output(A,B,E,Amidihinfusiondpar,doutput)
              cal.again()
              }
          }  
     } else {
     if (pick == 3){
      cat("\n")
-     cat("********************************************\n")
+     cat("*************************************************\n")
      cat("  --input data--                            \n")
-     cat("  D = desired dose (mg)                     \n")
-     cat("  tau = desired dosing interval (hr)        \n")
+     cat("  R = constant intravenous infusion rate (mg/hr) \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
      cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("*************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amidihinfusioncpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
+     Amidihinfusioncpar<-data.frame(input=c("R (mg/hr)"),value=c(0))
      Amidihinfusioncpar<-edit(Amidihinfusioncpar)
      Amidihinfusioncpar<-check(Amidihinfusioncpar)
-     C<-0.8*Amidihinfusioncpar[1,2]/(samplesStats("cl_F")*Amidihinfusioncpar[2,2])
+     C<-0.8*Amidihinfusioncpar[1,2]/(samplesStats("cl"))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -2610,25 +2674,24 @@ Amidihinfusion.more<-function()
      cat("          Pressing Enter to continue..                  \n")
      readline()
      cat("\n")
-     cat("********************************************\n")
+     cat("*************************************************\n")
      cat("  --input data--                            \n")
      cat("  Css_trough = desired trough conc (mg/L)   \n")
-     cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Dose = desired/predicted dose (mg)        \n")
-     cat("********************************************\n\n")
+     cat("  R = constant intravenous infusion rate (mg/hr) \n")
+     cat("*************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     Amidihinfusiondpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
+     Amidihinfusiondpar<-data.frame(input=c("Css_trough (mg/L)"),value=c(0))
      Amidihinfusiondpar<-edit(Amidihinfusiondpar)
      Amidihinfusiondpar<-check(Amidihinfusiondpar)
-     d<-Amidihinfusiondpar[1,2]*samplesStats("cl_F")*Amidihinfusiondpar[2,2]/0.8
+     d<-Amidihinfusiondpar[1,2]*samplesStats("cl")/0.8
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
-     colnames(doutput)<-list("Dose (mg)")
+     colnames(doutput)<-list("R (mg/hr)")
      cat("\n")
      show(doutput)
         cat("\n")
@@ -2636,14 +2699,16 @@ Amidihinfusion.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Amidihinfusion.more()
+          Amidihinfusion.more(A,B,E)
        } else {
              if (pick == 2){
+             Amidihinfusionsscd.output(A,B,E,Amidihinfusioncpar,coutput,Amidihinfusiondpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Amidihinfusionss.pkoutput(A,B,E)
         cal.again()
         }   
       }
@@ -2652,7 +2717,7 @@ Amidihinfusion.more<-function()
 }
 
 
-Oxtir.more<-function()
+Oxtir.more<-function(A,B,E,F)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -2688,9 +2753,10 @@ Oxtir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Oxtir.more()
+          Oxtir.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Oxtirss.output(A,B,E,F,Oxtircpar,coutput)
              cal.again()
              }
          }  
@@ -2723,9 +2789,10 @@ Oxtir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Oxtir.more()
+          Oxtir.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Oxtirss.output(A,B,E,F,Oxtirdpar,doutput)
              cal.again()
              }
          }  
@@ -2783,14 +2850,16 @@ Oxtir.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Oxtir.more()
+          Oxtir.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Oxtirsscd.output(A,B,E,F,Oxtircpar,coutput,Oxtirdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Oxtirss.pkoutput(A,B,E,F)
         cal.again()
         }   
       }
@@ -2800,7 +2869,7 @@ Oxtir.more<-function()
 
 
 
-Oxtcr.more<-function()
+Oxtcr.more<-function(A,B)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -2836,9 +2905,10 @@ Oxtcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Oxtcr.more()
+          Oxtcr.more(A,B)
        } else {
              if (pick == 2){
+             Oxtcrss.output(A,B,Oxtcrcpar,coutput)
              cal.again()
              }
          }  
@@ -2871,9 +2941,10 @@ Oxtcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Oxtcr.more()
+          Oxtcr.more(A,B)
        } else {
              if (pick == 2){
+             Oxtcrss.output(A,B,Oxtcrdpar,doutput)
              cal.again()
              }
          }  
@@ -2930,14 +3001,16 @@ Oxtcr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Oxtcr.more()
+          Oxtcr.more(A,B)
        } else {
              if (pick == 2){
+             Oxtcrsscd.output(A,B,Oxtcrcpar,coutput,Oxtcrdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Oxtcrss.pkoutput(A,B)
         cal.again()
         }   
       }
@@ -2947,7 +3020,7 @@ Oxtcr.more<-function()
 
 
 
-Their.more<-function()
+Their.more<-function(A,B,E,F)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -2983,9 +3056,10 @@ Their.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Their.more()
+          Their.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Theirss.output(A,B,E,F,Theircpar,coutput)
              cal.again()
              }
          }  
@@ -3018,9 +3092,10 @@ Their.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Their.more()
+          Their.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Theirss.output(A,B,E,F,Theirdpar,doutput)
              cal.again()
              }
          }  
@@ -3078,14 +3153,16 @@ Their.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Their.more()
+          Their.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Theirsscd.output(A,B,E,F,Theircpar,coutput,Theirdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Theirss.pkoutput(A,B,E,F)
         cal.again()
         }   
       }
@@ -3095,7 +3172,7 @@ Their.more<-function()
 
 
 
-Thecr.more<-function()
+Thecr.more<-function(A,B)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -3131,9 +3208,10 @@ Thecr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Thecr.more()
+          Thecr.more(A,B)
        } else {
              if (pick == 2){
+             Thecrss.output(A,B,Thecrcpar,coutput)
              cal.again()
              }
          }  
@@ -3166,9 +3244,10 @@ Thecr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Thecr.more()
+          Thecr.more(A,B)
        } else {
              if (pick == 2){
+             Thecrss.output(A,B,Thecrdpar,doutput)
              cal.again()
              }
          }  
@@ -3225,14 +3304,16 @@ Thecr.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Thecr.more()
+          Thecr.more(A,B)
        } else {
              if (pick == 2){
+             Thecrsscd.output(A,B,Thecrcpar,coutput,Thecrdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Thecrss.pkoutput(A,B)
         cal.again()
         }   
       }
@@ -3241,153 +3322,7 @@ Thecr.more<-function()
 }
 
 
-Theinfusion.more<-function()
-{
- cat("\n")
-  file.menu <- c("Dose -> Css_trough",
-                 "Css_trough -> Dose",
-                 "Css_trough <-> Dose",
-                 "exit")
-  pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
-  if (pick == 1){
-     cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  D = desired dose (mg)                     \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
-     cat("\n")
-     cat("     Please enter all parameters values at Data Editor          \n")
-     cat("     window, and close Data Editor window by clicking           \n")
-     cat("           (x) button at upper right corner.                    \n\n")
-     Theinfusioncpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
-     Theinfusioncpar<-edit(Theinfusioncpar)
-     Theinfusioncpar<-check(Theinfusioncpar)
-     C<-Theinfusioncpar[1,2]/(Theinfusioncpar[2,2]*samplesStats("cl_F"))
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_trough (mg/L)")
-     cat("\n")
-     show(coutput)
-       cat("\n")
-       file.menu <- c("Yes", 
-                      "No")
-       pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
-       if (pick == 1){
-          Theinfusion.more()
-       } else {
-             if (pick == 2){
-             cal.again()
-             }
-         }  
-  } else {
-    if (pick == 2){
-     cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  Css_trough = desired trough conc (mg/L)   \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Dose = desired/predicted dose (mg)        \n")
-     cat("********************************************\n\n")
-     cat("\n")
-     cat("     Please enter all parameters values at Data Editor          \n")
-     cat("     window, and close Data Editor window by clicking           \n")
-     cat("           (x) button at upper right corner.                    \n\n")
-     Theinfusiondpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
-     Theinfusiondpar<-edit(Theinfusiondpar)
-     Theinfusiondpar<-check(Theinfusiondpar)
-     d<-Theinfusiondpar[1,2]*(samplesStats("cl_F"))*Theinfusiondpar[2,2]
-     sim<-matrix(d[1 ,1])
-     doutput<-data.frame(sim)
-     colnames(doutput)<-list("Dose (mg)")
-     cat("\n")
-     show(doutput)
-       cat("\n")
-       file.menu <- c("Yes", 
-                      "No")
-       pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
-       if (pick == 1){
-          Theinfusion.more()
-       } else {
-             if (pick == 2){
-             cal.again()
-             }
-         }  
-    } else {
-    if (pick == 3){
-     cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  D = desired dose (mg)                     \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Css_trough = predicted conc (mg/L)        \n")
-     cat("********************************************\n\n")
-     cat("\n")
-     cat("     Please enter all parameters values at Data Editor          \n")
-     cat("     window, and close Data Editor window by clicking           \n")
-     cat("           (x) button at upper right corner.                    \n\n")
-     Theinfusioncpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
-     Theinfusioncpar<-edit(Theinfusioncpar)
-     Theinfusioncpar<-check(Theinfusioncpar)
-     C<-Theinfusioncpar[1,2]/(Theinfusioncpar[2,2]*samplesStats("cl_F"))
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_trough (mg/L)")
-     cat("\n")
-     show(coutput)
-     cat("\n\n")
-     cat("          Pressing Enter to continue..                  \n")
-     readline()
-     cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  Css_trough = desired trough conc (mg/L)   \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Dose = desired/predicted dose (mg)        \n")
-     cat("********************************************\n\n")
-     cat("\n")
-     cat("     Please enter all parameters values at Data Editor          \n")
-     cat("     window, and close Data Editor window by clicking           \n")
-     cat("           (x) button at upper right corner.                    \n\n")
-     Theinfusiondpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
-     Theinfusiondpar<-edit(Theinfusiondpar)
-     Theinfusiondpar<-check(Theinfusiondpar)
-     d<-Theinfusiondpar[1,2]*(samplesStats("cl_F"))*Theinfusiondpar[2,2]
-     sim<-matrix(d[1 ,1])
-     doutput<-data.frame(sim)
-     colnames(doutput)<-list("Dose (mg)")
-     cat("\n")
-     show(doutput)
-       cat("\n")
-       file.menu <- c("Yes", 
-                      "No")
-       pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
-       if (pick == 1){
-          Theinfusion.more()
-       } else {
-             if (pick == 2){
-             cal.again()
-             }
-         }  
-      } else {
-      if (pick == 4){
-        cal.again()
-        }   
-      }
-    }  
-  }
-}
-
-PedDig.more<-function(A)
+PedDig.more<-function(A,B,E)
 {
 cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -3423,9 +3358,10 @@ cat("\n")
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          PedDig.more(A)
+          PedDig.more(A,B,E)
        } else {
              if (pick == 2){
+             PedDigss.output(B,E,PedDigcpar,coutput)
              cal.again()
              }
          }  
@@ -3458,9 +3394,10 @@ cat("\n")
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          PedDig.more(A)
+          PedDig.more(A,B,E)
        } else {
              if (pick == 2){
+             PedDigss.output(B,E,PedDigdpar,doutput)
              cal.again()
              }
          }  
@@ -3518,14 +3455,16 @@ cat("\n")
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          PedDig.more(A)
+          PedDig.more(A,B,E)
        } else {
              if (pick == 2){
+             PedDigsscd.output(B,E,PedDigcpar,coutput,PedDigdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	PedDigss.pkoutput(B,E)
         cal.again() 
         }   
       }
@@ -3534,7 +3473,7 @@ cat("\n")
   }
   
 #Val.more
-Val.more<-function(A)
+Val.more<-function(A,B,E,F)
 {
   cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -3559,7 +3498,7 @@ Val.more<-function(A)
      Valcpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Valcpar<-edit(Valcpar)
      Valcpar<-check(Valcpar)
-     C<-A*Valcpar[1,2]/(11.5*(A-(samplesStats("cl_F"))/11.5))*((1/(1-exp(-(samplesStats("cl_F"))/11.5*Valcpar[2,2])))*exp(-(samplesStats("cl_F"))/11.5*Valcpar[2,2])-(1/(1-exp(-A*Valcpar[2,2])))*exp(-A*Valcpar[2,2]))
+     C<-A*Valcpar[1,2]/(11.5*(A-(samplesStats("cl"))/11.5))*((1/(1-exp(-(samplesStats("cl"))/11.5*Valcpar[2,2])))*exp(-(samplesStats("cl"))/11.5*Valcpar[2,2])-(1/(1-exp(-A*Valcpar[2,2])))*exp(-A*Valcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -3570,9 +3509,10 @@ Val.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Val.more(A)
+          Val.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Valss.output(B,E,F,Valcpar,coutput)
              cal.again()
              }
          }  
@@ -3594,7 +3534,7 @@ Val.more<-function(A)
      Valdpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
      Valdpar<-edit(Valdpar)
      Valdpar<-check(Valdpar)
-     d<-Valdpar[1,2]/(A/(11.5*(A-(samplesStats("cl_F"))/11.5))*((1/(1-exp(-(samplesStats("cl_F"))/11.5*Valdpar[2,2])))*exp(-(samplesStats("cl_F"))/11.5*Valdpar[2,2])-(1/(1-exp(-A*Valdpar[2,2])))*exp(-A*Valdpar[2,2])))
+     d<-Valdpar[1,2]/(A/(11.5*(A-(samplesStats("cl"))/11.5))*((1/(1-exp(-(samplesStats("cl"))/11.5*Valdpar[2,2])))*exp(-(samplesStats("cl"))/11.5*Valdpar[2,2])-(1/(1-exp(-A*Valdpar[2,2])))*exp(-A*Valdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -3605,9 +3545,10 @@ Val.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Val.more(A)
+          Val.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Valss.output(B,E,F,Valdpar,doutput)
              cal.again()
              }
          }  
@@ -3629,7 +3570,7 @@ Val.more<-function(A)
      Valcpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Valcpar<-edit(Valcpar)
      Valcpar<-check(Valcpar)
-     C<-A*Valcpar[1,2]/(11.5*(A-(samplesStats("cl_F"))/11.5))*((1/(1-exp(-(samplesStats("cl_F"))/11.5*Valcpar[2,2])))*exp(-(samplesStats("cl_F"))/11.5*Valcpar[2,2])-(1/(1-exp(-A*Valcpar[2,2])))*exp(-A*Valcpar[2,2]))
+     C<-A*Valcpar[1,2]/(11.5*(A-(samplesStats("cl"))/11.5))*((1/(1-exp(-(samplesStats("cl"))/11.5*Valcpar[2,2])))*exp(-(samplesStats("cl"))/11.5*Valcpar[2,2])-(1/(1-exp(-A*Valcpar[2,2])))*exp(-A*Valcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -3654,7 +3595,7 @@ Val.more<-function(A)
      Valdpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
      Valdpar<-edit(Valdpar)
      Valdpar<-check(Valdpar)
-     d<-Valdpar[1,2]/(A/(11.5*(A-(samplesStats("cl_F"))/11.5))*((1/(1-exp(-(samplesStats("cl_F"))/11.5*Valdpar[2,2])))*exp(-(samplesStats("cl_F"))/11.5*Valdpar[2,2])-(1/(1-exp(-A*Valdpar[2,2])))*exp(-A*Valdpar[2,2])))
+     d<-Valdpar[1,2]/(A/(11.5*(A-(samplesStats("cl"))/11.5))*((1/(1-exp(-(samplesStats("cl"))/11.5*Valdpar[2,2])))*exp(-(samplesStats("cl"))/11.5*Valdpar[2,2])-(1/(1-exp(-A*Valdpar[2,2])))*exp(-A*Valdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -3665,14 +3606,16 @@ Val.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Val.more(A)
+          Val.more(A,B,E,F)
        } else {
              if (pick == 2){
+             Valsscd.output(B,E,F,Valcpar,coutput,Valdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Valss.pkoutput(A,B,E,F)
         cal.again()
         }   
       }
@@ -3682,7 +3625,7 @@ Val.more<-function(A)
   
   
 #Valtwo.more
-Valtwo.more<-function(B)
+Valtwo.more<-function(B,E,F,G)
 {
   cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -3707,7 +3650,7 @@ Valtwo.more<-function(B)
      Valsmcpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Valsmcpar<-edit(Valsmcpar)
      Valsmcpar<-check(Valsmcpar)
-     C<-B*Valsmcpar[1,2]/(11.5*(B-(samplesStats("cl_F"))/11.5))*((1/(1-exp(-(samplesStats("cl_F"))/11.5*Valsmcpar[2,2])))*exp(-(samplesStats("cl_F"))/11.5*Valsmcpar[2,2])-(1/(1-exp(-B*Valsmcpar[2,2])))*exp(-B*Valsmcpar[2,2]))
+     C<-B*Valsmcpar[1,2]/(11.5*(B-(samplesStats("cl"))/11.5))*((1/(1-exp(-(samplesStats("cl"))/11.5*Valsmcpar[2,2])))*exp(-(samplesStats("cl"))/11.5*Valsmcpar[2,2])-(1/(1-exp(-B*Valsmcpar[2,2])))*exp(-B*Valsmcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -3718,9 +3661,10 @@ Valtwo.more<-function(B)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Valtwo.more(B)
+          Valtwo.more(B,E,F,G)
        } else {
              if (pick == 2){
+             Valsm.output(E,F,G,Valsmcpar,coutput)
              cal.again()
              }
          }  
@@ -3742,7 +3686,7 @@ Valtwo.more<-function(B)
      Valsmdpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
      Valsmdpar<-edit(Valsmdpar)
      Valsmdpar<-check(Valsmdpar)
-     d<-Valsmdpar[1,2]/(B/(11.5*(B-(samplesStats("cl_F"))/11.5))*((1/(1-exp(-(samplesStats("cl_F"))/11.5*Valsmdpar[2,2])))*exp(-(samplesStats("cl_F"))/11.5*Valsmdpar[2,2])-(1/(1-exp(-B*Valsmdpar[2,2])))*exp(-B*Valsmdpar[2,2])))
+     d<-Valsmdpar[1,2]/(B/(11.5*(B-(samplesStats("cl"))/11.5))*((1/(1-exp(-(samplesStats("cl"))/11.5*Valsmdpar[2,2])))*exp(-(samplesStats("cl"))/11.5*Valsmdpar[2,2])-(1/(1-exp(-B*Valsmdpar[2,2])))*exp(-B*Valsmdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -3753,9 +3697,10 @@ Valtwo.more<-function(B)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Valtwo.more(B)
+          Valtwo.more(B,E,F,G)
        } else {
              if (pick == 2){
+             Valsm.output(E,F,G,Valsmdpar,doutput)
              cal.again()
              }
          }  
@@ -3777,7 +3722,7 @@ Valtwo.more<-function(B)
      Valsmcpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Valsmcpar<-edit(Valsmcpar)
      Valsmcpar<-check(Valsmcpar)
-     C<-B*Valsmcpar[1,2]/(11.5*(B-(samplesStats("cl_F"))/11.5))*((1/(1-exp(-(samplesStats("cl_F"))/11.5*Valsmcpar[2,2])))*exp(-(samplesStats("cl_F"))/11.5*Valsmcpar[2,2])-(1/(1-exp(-B*Valsmcpar[2,2])))*exp(-B*Valsmcpar[2,2]))
+     C<-B*Valsmcpar[1,2]/(11.5*(B-(samplesStats("cl"))/11.5))*((1/(1-exp(-(samplesStats("cl"))/11.5*Valsmcpar[2,2])))*exp(-(samplesStats("cl"))/11.5*Valsmcpar[2,2])-(1/(1-exp(-B*Valsmcpar[2,2])))*exp(-B*Valsmcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -3802,7 +3747,7 @@ Valtwo.more<-function(B)
      Valsmdpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
      Valsmdpar<-edit(Valsmdpar)
      Valsmdpar<-check(Valsmdpar)
-     d<-Valsmdpar[1,2]/(B/(11.5*(B-(samplesStats("cl_F"))/11.5))*((1/(1-exp(-(samplesStats("cl_F"))/11.5*Valsmdpar[2,2])))*exp(-(samplesStats("cl_F"))/11.5*Valsmdpar[2,2])-(1/(1-exp(-B*Valsmdpar[2,2])))*exp(-B*Valsmdpar[2,2])))
+     d<-Valsmdpar[1,2]/(B/(11.5*(B-(samplesStats("cl"))/11.5))*((1/(1-exp(-(samplesStats("cl"))/11.5*Valsmdpar[2,2])))*exp(-(samplesStats("cl"))/11.5*Valsmdpar[2,2])-(1/(1-exp(-B*Valsmdpar[2,2])))*exp(-B*Valsmdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -3813,14 +3758,16 @@ Valtwo.more<-function(B)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Valtwo.more()
+          Valtwo.more(B,E,F,G)
        } else {
              if (pick == 2){
+             	Valsmcd.output(E,F,G,Valsmcpar,coutput,Valsmdpar,doutput)
              cal.again(B)
              }
          }  
       } else {
       if (pick == 4){
+      	Valsm.pkoutput(E,F,G)
         cal.again()
         }   
       }
@@ -3830,7 +3777,7 @@ Valtwo.more<-function(B)
   
   
 #Cyc.more
-Cyc.more<-function(A,B)
+Cyc.more<-function(A,B,E,F,G)
 {
    cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -3855,7 +3802,7 @@ Cyc.more<-function(A,B)
      Cyccpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Cyccpar<-edit(Cyccpar)
      Cyccpar<-check(Cyccpar)
-     C<-(0.2+10*abs(A-7)/((A+10)*60))*Cyccpar[1,2]*1000*0.3/((4*B)*(0.3-(samplesStats("cl_F")/(4*B))))*((1/(1-exp(-(samplesStats("cl_F")/(4*B))*Cyccpar[2,2])))*exp(-(samplesStats("cl_F"))/(4*B)*Cyccpar[2,2])-(1/(1-exp(-0.3*Cyccpar[2,2])))*exp(-0.3*Cyccpar[2,2]))
+     C<-(0.2+10*abs(A-7)/((A+10)*60))*Cyccpar[1,2]*1000*0.3/((4*B)*(0.3-(samplesStats("cl")/(4*B))))*((1/(1-exp(-(samplesStats("cl")/(4*B))*Cyccpar[2,2])))*exp(-(samplesStats("cl"))/(4*B)*Cyccpar[2,2])-(1/(1-exp(-0.3*Cyccpar[2,2])))*exp(-0.3*Cyccpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mcg/L)")
@@ -3866,9 +3813,10 @@ Cyc.more<-function(A,B)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Cyc.more(A,B)
+          Cyc.more(A,B,E,F,G)
        } else {
              if (pick == 2){
+             Cycss.output(E,F,G,Cyccpar,coutput)
              cal.again()
              }
          }  
@@ -3890,7 +3838,7 @@ Cyc.more<-function(A,B)
      Cycdpar<-data.frame(input=c("Css_trough (mcg/L)","tau (hr)"),value=c(0))
      Cycdpar<-edit(Cycdpar)
      Cycdpar<-check(Cycdpar)
-     d<-Cycdpar[1,2]/((0.2+10*abs(A-7)/((A+10)*60))*1000*0.3/((4*B)*(0.3-(samplesStats("cl_F")/(4*B))))*((1/(1-exp(-(samplesStats("cl_F")/(4*B))*Cycdpar[2,2])))*exp(-(samplesStats("cl_F"))/(4*B)*Cycdpar[2,2])-(1/(1-exp(-0.3*Cycdpar[2,2])))*exp(-0.3*Cycdpar[2,2])))
+     d<-Cycdpar[1,2]/((0.2+10*abs(A-7)/((A+10)*60))*1000*0.3/((4*B)*(0.3-(samplesStats("cl")/(4*B))))*((1/(1-exp(-(samplesStats("cl")/(4*B))*Cycdpar[2,2])))*exp(-(samplesStats("cl"))/(4*B)*Cycdpar[2,2])-(1/(1-exp(-0.3*Cycdpar[2,2])))*exp(-0.3*Cycdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -3901,9 +3849,10 @@ Cyc.more<-function(A,B)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Cyc.more(A,B)
+          Cyc.more(A,B,E,F,G)
        } else {
              if (pick == 2){
+             Cycss.output(E,F,G,Cycdpar,doutput)
              cal.again()
              }
          }  
@@ -3925,7 +3874,7 @@ Cyc.more<-function(A,B)
      Cyccpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Cyccpar<-edit(Cyccpar)
      Cyccpar<-check(Cyccpar)
-     C<-(0.2+10*abs(A-7)/((A+10)*60))*Cyccpar[1,2]*1000*0.3/((4*B)*(0.3-(samplesStats("cl_F")/(4*B))))*((1/(1-exp(-(samplesStats("cl_F")/(4*B))*Cyccpar[2,2])))*exp(-(samplesStats("cl_F"))/(4*B)*Cyccpar[2,2])-(1/(1-exp(-0.3*Cyccpar[2,2])))*exp(-0.3*Cyccpar[2,2]))
+     C<-(0.2+10*abs(A-7)/((A+10)*60))*Cyccpar[1,2]*1000*0.3/((4*B)*(0.3-(samplesStats("cl")/(4*B))))*((1/(1-exp(-(samplesStats("cl")/(4*B))*Cyccpar[2,2])))*exp(-(samplesStats("cl"))/(4*B)*Cyccpar[2,2])-(1/(1-exp(-0.3*Cyccpar[2,2])))*exp(-0.3*Cyccpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mcg/L)")
@@ -3950,7 +3899,7 @@ Cyc.more<-function(A,B)
      Cycdpar<-data.frame(input=c("Css_trough (mcg/L)","tau (hr)"),value=c(0))
      Cycdpar<-edit(Cycdpar)
      Cycdpar<-check(Cycdpar)
-     d<-Cycdpar[1,2]/((0.2+10*abs(A-7)/((A+10)*60))*1000*0.3/((4*B)*(0.3-(samplesStats("cl_F")/(4*B))))*((1/(1-exp(-(samplesStats("cl_F")/(4*B))*Cycdpar[2,2])))*exp(-(samplesStats("cl_F"))/(4*B)*Cycdpar[2,2])-(1/(1-exp(-0.3*Cycdpar[2,2])))*exp(-0.3*Cycdpar[2,2])))
+     d<-Cycdpar[1,2]/((0.2+10*abs(A-7)/((A+10)*60))*1000*0.3/((4*B)*(0.3-(samplesStats("cl")/(4*B))))*((1/(1-exp(-(samplesStats("cl")/(4*B))*Cycdpar[2,2])))*exp(-(samplesStats("cl"))/(4*B)*Cycdpar[2,2])-(1/(1-exp(-0.3*Cycdpar[2,2])))*exp(-0.3*Cycdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -3961,14 +3910,16 @@ Cyc.more<-function(A,B)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Cyc.more(A,B)
+          Cyc.more(A,B,E,F,G)
        } else {
              if (pick == 2){
+             Cycsscd.output(E,F,G,Cyccpar,coutput,Cycdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Cycss.pkoutput(E,F,G)
         cal.again()  
         }   
       }
@@ -3978,7 +3929,7 @@ Cyc.more<-function(A,B)
 
 
 #Cyctwo.more
-Cyctwo.more<-function(A,B)
+Cyctwo.more<-function(A,B,E,F,G)
 {
 cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -4003,7 +3954,7 @@ cat("\n")
      Cycsmcpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Cycsmcpar<-edit(Cycsmcpar)
      Cycsmcpar<-check(Cycsmcpar)
-     C<-(0.2+10*abs(A-7)/((A+10)*60))*Cycsmcpar[1,2]*1000*0.3/((4*B)*(0.3-(samplesStats("cl_F")/(4*B))))*((1/(1-exp(-(samplesStats("cl_F")/(4*B))*Cycsmcpar[2,2])))*exp(-(samplesStats("cl_F"))/(4*B)*Cycsmcpar[2,2])-(1/(1-exp(-0.3*Cycsmcpar[2,2])))*exp(-0.3*Cycsmcpar[2,2]))
+     C<-(0.2+10*abs(A-7)/((A+10)*60))*Cycsmcpar[1,2]*1000*0.3/((4*B)*(0.3-(samplesStats("cl")/(4*B))))*((1/(1-exp(-(samplesStats("cl")/(4*B))*Cycsmcpar[2,2])))*exp(-(samplesStats("cl"))/(4*B)*Cycsmcpar[2,2])-(1/(1-exp(-0.3*Cycsmcpar[2,2])))*exp(-0.3*Cycsmcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mcg/L)")
@@ -4014,9 +3965,10 @@ cat("\n")
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Cyctwo.more(A,B)
+          Cyctwo.more(A,B,E,F,G)
        } else {
              if (pick == 2){
+             Cycsm.output(E,F,G,Cycsmcpar,coutput)
              cal.again()
              }
          }  
@@ -4038,7 +3990,7 @@ cat("\n")
      Cycsmdpar<-data.frame(input=c("Css_trough (mcg/L)","tau (hr)"),value=c(0))
      Cycsmdpar<-edit(Cycsmdpar)
      Cycsmdpar<-check(Cycsmdpar)
-     d<-Cycsmdpar[1,2]/((0.2+10*abs(A-7)/((A+10)*60))*1000*0.3/((4*B)*(0.3-(samplesStats("cl_F")/(4*B))))*((1/(1-exp(-(samplesStats("cl_F")/(4*B))*Cycsmdpar[2,2])))*exp(-(samplesStats("cl_F"))/(4*B)*Cycsmdpar[2,2])-(1/(1-exp(-0.3*Cycsmdpar[2,2])))*exp(-0.3*Cycsmdpar[2,2])))
+     d<-Cycsmdpar[1,2]/((0.2+10*abs(A-7)/((A+10)*60))*1000*0.3/((4*B)*(0.3-(samplesStats("cl")/(4*B))))*((1/(1-exp(-(samplesStats("cl")/(4*B))*Cycsmdpar[2,2])))*exp(-(samplesStats("cl"))/(4*B)*Cycsmdpar[2,2])-(1/(1-exp(-0.3*Cycsmdpar[2,2])))*exp(-0.3*Cycsmdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -4049,9 +4001,10 @@ cat("\n")
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Cyctwo.more(A,B)
+          Cyctwo.more(A,B,E,F,G)
        } else {
              if (pick == 2){
+             Cycsm.output(E,F,G,Cycsmdar,doutput)
              cal.again()
              }
          }  
@@ -4073,7 +4026,7 @@ cat("\n")
      Cycsmcpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Cycsmcpar<-edit(Cycsmcpar)
      Cycsmcpar<-check(Cycsmcpar)
-     C<-(0.2+10*abs(A-7)/((A+10)*60))*Cycsmcpar[1,2]*1000*0.3/((4*B)*(0.3-(samplesStats("cl_F")/(4*B))))*((1/(1-exp(-(samplesStats("cl_F")/(4*B))*Cycsmcpar[2,2])))*exp(-(samplesStats("cl_F"))/(4*B)*Cycsmcpar[2,2])-(1/(1-exp(-0.3*Cycsmcpar[2,2])))*exp(-0.3*Cycsmcpar[2,2]))
+     C<-(0.2+10*abs(A-7)/((A+10)*60))*Cycsmcpar[1,2]*1000*0.3/((4*B)*(0.3-(samplesStats("cl")/(4*B))))*((1/(1-exp(-(samplesStats("cl")/(4*B))*Cycsmcpar[2,2])))*exp(-(samplesStats("cl"))/(4*B)*Cycsmcpar[2,2])-(1/(1-exp(-0.3*Cycsmcpar[2,2])))*exp(-0.3*Cycsmcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mcg/L)")
@@ -4098,7 +4051,7 @@ cat("\n")
      Cycsmdpar<-data.frame(input=c("Css_trough (mcg/L)","tau (hr)"),value=c(0))
      Cycsmdpar<-edit(Cycsmdpar)
      Cycsmdpar<-check(Cycsmdpar)
-     d<-Cycsmdpar[1,2]/((0.2+10*abs(A-7)/((A+10)*60))*1000*0.3/((4*B)*(0.3-(samplesStats("cl_F")/(4*B))))*((1/(1-exp(-(samplesStats("cl_F")/(4*B))*Cycsmdpar[2,2])))*exp(-(samplesStats("cl_F"))/(4*B)*Cycsmdpar[2,2])-(1/(1-exp(-0.3*Cycsmdpar[2,2])))*exp(-0.3*Cycsmdpar[2,2])))
+     d<-Cycsmdpar[1,2]/((0.2+10*abs(A-7)/((A+10)*60))*1000*0.3/((4*B)*(0.3-(samplesStats("cl")/(4*B))))*((1/(1-exp(-(samplesStats("cl")/(4*B))*Cycsmdpar[2,2])))*exp(-(samplesStats("cl"))/(4*B)*Cycsmdpar[2,2])-(1/(1-exp(-0.3*Cycsmdpar[2,2])))*exp(-0.3*Cycsmdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -4109,14 +4062,16 @@ cat("\n")
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Cyctwo.more(A,B)
+          Cyctwo.more(A,B,E,F,G)
        } else {
              if (pick == 2){
+             Cycsmcd.output(E,F,G,Cycsmcpar,coutput,Cycsmdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	Cycsm.pkoutput(E,F,G)
         cal.again()  
         }   
       }
@@ -4127,7 +4082,7 @@ cat("\n")
 
 
 # Imatinib mesylate
-Ima.more<-function()
+Ima.more<-function(A,B,F)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -4137,14 +4092,14 @@ Ima.more<-function()
   pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
   if (pick == 1){
      cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  D = desired dose (mg)                     \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("**********************************************************\n")
+     cat("  --input data--                                          \n")
+     cat("  D = desired dose (mg)                                   \n")
+     cat("  tau = desired dosing interval (hr)                      \n")
+     cat("                                                          \n")
+     cat("  --output data--                                         \n")
+     cat("  Css_trough = predicted steady-state trough conc. (mg/L) \n")
+     cat("**********************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
@@ -4163,23 +4118,24 @@ Ima.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Ima.more()
+          Ima.more(A,B,F)
        } else {
              if (pick == 2){
+             Imass.output(A,B,F,Imacpar,coutput)
              cal.again()
              }
          } 
   } else {
     if (pick == 2){
      cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  Css_trough = desired trough conc (mg/L)   \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Dose = predicted dose (mg)                \n")
-     cat("********************************************\n\n")
+     cat("**********************************************************\n\n")
+     cat("  --input data--                                          \n")
+     cat("  Css_trough = predicted steady-state trough conc. (mg/L) \n")
+     cat("  tau = desired dosing interval (hr)                      \n")
+     cat("                                                          \n")
+     cat("  --output data--                                         \n")
+     cat("  Dose = predicted dose (mg)                              \n")
+     cat("**********************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
@@ -4198,23 +4154,24 @@ Ima.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Ima.more()
+          Ima.more(A,B,F)
        } else {
              if (pick == 2){
+             Imass.output(A,B,F,Imadpar,doutput)
              cal.again()
              }
          } 
     } else {
     if (pick == 3){
      cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  D = desired dose (mg)                     \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
-     cat("********************************************\n\n")
+     cat("**********************************************************\n")
+     cat("  --input data--                                          \n")
+     cat("  D = desired dose (mg)                                   \n")
+     cat("  tau = desired dosing interval (hr)                      \n")
+     cat("                                                          \n")
+     cat("  --output data--                                         \n")
+     cat("  Css_trough = predicted steady-state trough conc. (mg/L) \n")
+     cat("**********************************************************\n\n")
      cat("\n\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
@@ -4232,14 +4189,14 @@ Ima.more<-function()
      cat("          Pressing Enter to continue..                  \n")
      readline()
      cat("\n")
-     cat("********************************************\n")
-     cat("  --input data--                            \n")
-     cat("  Css_trough = desired trough conc (mg/L)   \n")
-     cat("  tau = desired dosing interval (hr)        \n")
-     cat("                                            \n")
-     cat("  --output data--                           \n")
-     cat("  Dose = predicted dose (mg)                \n")
-     cat("********************************************\n\n")
+     cat("**********************************************************\n\n")
+     cat("  --input data--                                          \n")
+     cat("  Css_trough = predicted steady-state trough conc. (mg/L) \n")
+     cat("  tau = desired dosing interval (hr)                      \n")
+     cat("                                                          \n")
+     cat("  --output data--                                         \n")
+     cat("  Dose = predicted dose (mg)                              \n")
+     cat("**********************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
@@ -4258,14 +4215,16 @@ Ima.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Ima.more()
+          Ima.more(A,B,F)
        } else {
              if (pick == 2){
+             Imasscd.output(A,B,F,Imacpar,coutput,Imadpar,doutput)
              cal.again()
              }
          } 
       } else {
       if (pick == 4){
+      	Imass.pkoutput(A,B,F)
         cal.again()
         }   
       }
@@ -4276,7 +4235,7 @@ Ima.more<-function()
 
 
 #ChiVal.more
-ChiVal.more<-function(A)
+ChiVal.more<-function(A,B,E,F)
 {
   cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -4301,7 +4260,7 @@ ChiVal.more<-function(A)
      ChiValcpar<-data.frame(input=c("D (mg)","tau (hr)"),Value=c(0))
      ChiValcpar<-edit(ChiValcpar)
      ChiValcpar<-check(ChiValcpar)
-     C<-1.9*ChiValcpar[1,2]/((0.24*A)*(1.9-(samplesStats("cl_F"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValcpar[2,2])))*exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValcpar[2,2])-(1/(1-exp(-1.9*ChiValcpar[2,2])))*exp(-1.9*ChiValcpar[2,2]))
+     C<-1.9*ChiValcpar[1,2]/((0.24*A)*(1.9-(samplesStats("cl"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl"))/(0.24*A)*ChiValcpar[2,2])))*exp(-(samplesStats("cl"))/(0.24*A)*ChiValcpar[2,2])-(1/(1-exp(-1.9*ChiValcpar[2,2])))*exp(-1.9*ChiValcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -4312,9 +4271,10 @@ ChiVal.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          ChiVal.more(A)
+          ChiVal.more(A,B,E,F)
        } else {
              if (pick == 2){
+             ChiValss.output(B,E,F,ChiValcpar,coutput)
              cal.again()
              }
          }  
@@ -4336,7 +4296,7 @@ ChiVal.more<-function(A)
      ChiValdpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
      ChiValdpar<-edit(ChiValdpar)
      ChiValdpar<-check(ChiValdpar)
-     d<-ChiValdpar[1,2]/(1.9/((0.24*A)*(1.9-(samplesStats("cl_F"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValdpar[2,2])))*exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValdpar[2,2])-(1/(1-exp(-1.9*ChiValdpar[2,2])))*exp(-1.9*ChiValdpar[2,2])))
+     d<-ChiValdpar[1,2]/(1.9/((0.24*A)*(1.9-(samplesStats("cl"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl"))/(0.24*A)*ChiValdpar[2,2])))*exp(-(samplesStats("cl"))/(0.24*A)*ChiValdpar[2,2])-(1/(1-exp(-1.9*ChiValdpar[2,2])))*exp(-1.9*ChiValdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -4347,9 +4307,10 @@ ChiVal.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          ChiVal.more(A)
+          ChiVal.more(A,B,E,F)
        } else {
              if (pick == 2){
+             ChiValss.output(B,E,F,ChiValdpar,doutput)
              cal.again()
              }
          }  
@@ -4371,7 +4332,7 @@ ChiVal.more<-function(A)
      ChiValcpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      ChiValcpar<-edit(ChiValcpar)
      ChiValcpar<-check(ChiValcpar)
-     C<-1.9*ChiValcpar[1,2]/((0.24*A)*(1.9-(samplesStats("cl_F"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValcpar[2,2])))*exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValcpar[2,2])-(1/(1-exp(-1.9*ChiValcpar[2,2])))*exp(-1.9*ChiValcpar[2,2]))
+     C<-1.9*ChiValcpar[1,2]/((0.24*A)*(1.9-(samplesStats("cl"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl"))/(0.24*A)*ChiValcpar[2,2])))*exp(-(samplesStats("cl"))/(0.24*A)*ChiValcpar[2,2])-(1/(1-exp(-1.9*ChiValcpar[2,2])))*exp(-1.9*ChiValcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -4396,7 +4357,7 @@ ChiVal.more<-function(A)
      ChiValdpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
      ChiValdpar<-edit(ChiValdpar)
      ChiValdpar<-check(ChiValdpar)
-     d<-ChiValdpar[1,2]/(1.9/((0.24*A)*(1.9-(samplesStats("cl_F"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValdpar[2,2])))*exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValdpar[2,2])-(1/(1-exp(-1.9*ChiValdpar[2,2])))*exp(-1.9*ChiValdpar[2,2])))
+     d<-ChiValdpar[1,2]/(1.9/((0.24*A)*(1.9-(samplesStats("cl"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl"))/(0.24*A)*ChiValdpar[2,2])))*exp(-(samplesStats("cl"))/(0.24*A)*ChiValdpar[2,2])-(1/(1-exp(-1.9*ChiValdpar[2,2])))*exp(-1.9*ChiValdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -4407,9 +4368,10 @@ ChiVal.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          ChiVal.more(A)
+          ChiVal.more(A,B,E,F)
        } else {
              if (pick == 2){
+             ChiValsscd.output(B,E,F,ChiValcpar,coutput,ChiValdpar,doutput)
              cal.again()
              }
          }  
@@ -4426,7 +4388,7 @@ ChiVal.more<-function(A)
   
   
 #ChiValtwo.more
-ChiValtwo.more<-function(A)
+ChiValtwo.more<-function(A,B,E,F)
 {
   cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -4451,7 +4413,7 @@ ChiValtwo.more<-function(A)
      ChiValcpar<-data.frame(input=c("D (mg)","tau (hr)"),Value=c(0))
      ChiValcpar<-edit(ChiValcpar)
      ChiValcpar<-check(ChiValcpar)
-     C<-1.9*ChiValcpar[1,2]/((0.24*A)*(1.9-(samplesStats("cl_F"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValcpar[2,2])))*exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValcpar[2,2])-(1/(1-exp(-1.9*ChiValcpar[2,2])))*exp(-1.9*ChiValcpar[2,2]))
+     C<-1.9*ChiValcpar[1,2]/((0.24*A)*(1.9-(samplesStats("cl"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl"))/(0.24*A)*ChiValcpar[2,2])))*exp(-(samplesStats("cl"))/(0.24*A)*ChiValcpar[2,2])-(1/(1-exp(-1.9*ChiValcpar[2,2])))*exp(-1.9*ChiValcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -4462,9 +4424,10 @@ ChiValtwo.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          ChiVal.more(A)
+          ChiVal.more(A,B,E,f)
        } else {
              if (pick == 2){
+             ChiValsm.output(B,E,F,ChiValcpar,coutput)
              cal.again()
              }
          }  
@@ -4486,7 +4449,7 @@ ChiValtwo.more<-function(A)
      ChiValdpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
      ChiValdpar<-edit(ChiValdpar)
      ChiValdpar<-check(ChiValdpar)
-     d<-ChiValdpar[1,2]/(1.9/((0.24*A)*(1.9-(samplesStats("cl_F"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValdpar[2,2])))*exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValdpar[2,2])-(1/(1-exp(-1.9*ChiValdpar[2,2])))*exp(-1.9*ChiValdpar[2,2])))
+     d<-ChiValdpar[1,2]/(1.9/((0.24*A)*(1.9-(samplesStats("cl"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl"))/(0.24*A)*ChiValdpar[2,2])))*exp(-(samplesStats("cl"))/(0.24*A)*ChiValdpar[2,2])-(1/(1-exp(-1.9*ChiValdpar[2,2])))*exp(-1.9*ChiValdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -4497,9 +4460,10 @@ ChiValtwo.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          ChiVal.more(A)
+          ChiVal.more(A,B,E,F)
        } else {
              if (pick == 2){
+             ChiValsm.output(B,E,F,ChiValdpar,doutput)
              cal.again()
              }
          }  
@@ -4521,7 +4485,7 @@ ChiValtwo.more<-function(A)
      ChiValcpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      ChiValcpar<-edit(ChiValcpar)
      ChiValcpar<-check(ChiValcpar)
-     C<-1.9*ChiValcpar[1,2]/((0.24*A)*(1.9-(samplesStats("cl_F"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValcpar[2,2])))*exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValcpar[2,2])-(1/(1-exp(-1.9*ChiValcpar[2,2])))*exp(-1.9*ChiValcpar[2,2]))
+     C<-1.9*ChiValcpar[1,2]/((0.24*A)*(1.9-(samplesStats("cl"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl"))/(0.24*A)*ChiValcpar[2,2])))*exp(-(samplesStats("cl"))/(0.24*A)*ChiValcpar[2,2])-(1/(1-exp(-1.9*ChiValcpar[2,2])))*exp(-1.9*ChiValcpar[2,2]))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Css_trough (mg/L)")
@@ -4546,7 +4510,7 @@ ChiValtwo.more<-function(A)
      ChiValdpar<-data.frame(input=c("Css_trough (mg/L)","tau (hr)"),value=c(0))
      ChiValdpar<-edit(ChiValdpar)
      ChiValdpar<-check(ChiValdpar)
-     d<-ChiValdpar[1,2]/(1.9/((0.24*A)*(1.9-(samplesStats("cl_F"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValdpar[2,2])))*exp(-(samplesStats("cl_F"))/(0.24*A)*ChiValdpar[2,2])-(1/(1-exp(-1.9*ChiValdpar[2,2])))*exp(-1.9*ChiValdpar[2,2])))
+     d<-ChiValdpar[1,2]/(1.9/((0.24*A)*(1.9-(samplesStats("cl"))/(0.24*A)))*((1/(1-exp(-(samplesStats("cl"))/(0.24*A)*ChiValdpar[2,2])))*exp(-(samplesStats("cl"))/(0.24*A)*ChiValdpar[2,2])-(1/(1-exp(-1.9*ChiValdpar[2,2])))*exp(-1.9*ChiValdpar[2,2])))
      sim<-matrix(d[1 ,1])
      doutput<-data.frame(sim)
      colnames(doutput)<-list("Dose (mg)")
@@ -4557,14 +4521,16 @@ ChiValtwo.more<-function(A)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          ChiVal.more(A)
+          ChiVal.more(A,B,E,F)
        } else {
              if (pick == 2){
+             ChiValsmcd.output(B,E,F,ChiValcpar,coutput,ChiValdpar,doutput)
              cal.again()
              }
          }  
       } else {
       if (pick == 4){
+      	ChiValsm.pkoutput(B,E,F)
         cal.again()
         }   
       }
@@ -4573,7 +4539,7 @@ ChiValtwo.more<-function(A)
   }
   
 # Phenytoin  
-Phe.more<-function()
+Phe.more<-function(B,E)
 {
  cat("\n")
   file.menu <- c("Dose -> Css_trough",
@@ -4598,7 +4564,7 @@ Phe.more<-function()
      Phecpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Phecpar<-edit(Phecpar)
      Phecpar<-check(Phecpar)
-     Phelimit(Phecpar[1,2],Phecpar[2,2])
+     Phelimit(Phecpar[1,2],Phecpar[2,2],B,E,Phecpar)
   } else {
     if (pick == 2){
      cat("\n")
@@ -4628,9 +4594,10 @@ Phe.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Phe.more()
+          Phe.more(B,E)
        } else {
              if (pick == 2){
+             Phess.output(B,E,Phedpar,doutput)
              cal.again()
              }
          } 
@@ -4677,9 +4644,10 @@ Phe.more<-function()
      Phecpar<-data.frame(input=c("D (mg)","tau (hr)"),value=c(0))
      Phecpar<-edit(Phecpar)
      Phecpar<-check(Phecpar)
-     Phelimit(Phecpar[1,2],Phecpar[2,2]) 
+     Phelimit(Phecpar[1,2],Phecpar[2,2],B,E,Phecpar) 
       } else {
       if (pick == 4){
+      	Phess.pkoutput(B,E)
         cal.again()
         }   
       }
@@ -4689,7 +4657,7 @@ Phe.more<-function()
 
 
 # Warfarin  
-War.more<-function()
+War.more<-function(A,B)
 {
  cat("\n")
   file.menu <- c("Dose -> INR",
@@ -4725,9 +4693,10 @@ War.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          War.more()
+          War.more(A,B)
        } else {
              if (pick == 2){
+             Warss.output(A,B,Warcpar,coutput)
              cal.again()
              }
          }  
@@ -4760,9 +4729,10 @@ War.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          War.more()
+          War.more(A,B)
        } else {
              if (pick == 2){
+             Warss.output(A,B,Wardpar,doutput)
              cal.again()
              }
          } 
@@ -4820,17 +4790,21 @@ War.more<-function()
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          War.more()
+          War.more(A,B)
        } else {
              if (pick == 2){
+             Warsscd.output(A,B,Warcpar,coutput,Wardpar,doutput)
              cal.again()
              }
          } 
       } else {
       if (pick == 4){
+      	Warss.pkoutput(A,B)
         cal.again()
         }   
       }
     }  
   }
 }
+
+

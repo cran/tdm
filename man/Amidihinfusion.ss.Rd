@@ -2,10 +2,11 @@
 
 \alias{Amidihinfusion.ss}
 
-\title{Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous}
+\title{Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous with loading dose }
 
 \description{
- Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous with one sampling at steady-state.
+ Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous 
+ with loading dose with one sampling at steady-state.
 }
 
 \references{

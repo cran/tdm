@@ -8,7 +8,7 @@ model
 
            cl_F~dnorm(theta1, 0.471422766)
 
-           theta1<-21.3 + 9.8*(1-Hem) + 3.4*(1-Alb)-2.1*Dil-7.4*Flu   # population estimate of Tacrolimus clerance
+           theta1<-21.3 + 9.8*(1-Hem) + 3.4*(1-Alb)-2.1*Dil-7.4*Flu   # population estimate of Tacrolimus clearance
               
            }
 

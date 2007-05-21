@@ -1,3 +1,4 @@
+# ask user dose he want to dose adjustment again?
 dose.again<-function(a)
 {
  cat("\n")

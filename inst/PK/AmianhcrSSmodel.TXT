@@ -1,15 +1,15 @@
 model
 
            {     
-           for (i in 1:1) {          # one subject
-           c~dnorm(mu, 1.0E+6)       # c:drug concentration
-           mu<-0.85*D/(tau*cl_F)      # oral CR tablet concentration equation at steady state
+           for (i in 1:1) {            # one subject
+           c~dnorm(mu, 1.0E+6)         # c:drug concentration
+           mu<-0.85*D/(tau*cl_F)       # 85% of salt, D: Dose, tau: dosing interval, mu: Cs
             
-           cl_F~dnorm(theta1, 10000)
+           cl_F~dnorm(theta1, 10000)   # population estimate of Aminophylline anhydrous clearance
            
-           theta1<-(0.037*IBW-0.006*age)*pow(1.284,smoke)*pow(0.751,CHF)              # population estimate of Aminophylline anhydrous clerance
+           theta1<-(0.037*IBW-0.006*age)*pow(1.284,smoke)*pow(0.751,CHF)             
          
-           IBW<-Gender*(50+(2.3*(ht/2.4-60)))+(1-Gender)*(45+(2.3*(ht/2.4-60)))       # Lean body weight
+           IBW<-Gender*(50+(2.3*(ht/2.54-60)))+(1-Gender)*(45+(2.3*(ht/2.54-60)))      
 
            }
            }

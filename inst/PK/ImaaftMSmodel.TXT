@@ -4,14 +4,14 @@ model
      
            for (i in 1:N) {           # N:number of patients
            c[i]~dnorm(mu[i],1.0E+6)        # c:drug concentration
-           mu[i]<-((D[i]/(1.5*cl_F[i]))*(1-exp(-k[i]*1.5))*(exp(-k[i]*(ts[i]-1.5)))*((exp(-k[i]*n[i]*tau[i]))-1))/((exp(-k[i]*tau[i]))-1)    # oral concentration equation at steady state
+           mu[i]<-((D[i]/(1.5*cl_F[i]))*(1-exp(-k[i]*1.5))*(exp(-k[i]*(ts[i]-1.5)))*((exp(-k[i]*n[i]*tau[i]))-1))/((exp(-k[i]*tau[i]))-1)    # oral concentration equation at non-steady state
            k[i]<-cl_F[i]/v_F[i]
 
            cl_F[i]~dnorm(theta1[i], 10000)
-           v_F[i]~dnorm(theta2[i], 10000)
+           v_F[i]~dnorm(theta2[i], 1)
 
-           theta1[i]<-(13.8-3.81*OCC[i])*pow((BW[i]/80),0.301)*pow((Hb[i]/13),0.897)*pow((WBC[i]/16),(-0.105))    # population estimate of Carbamazepine clerance
-           theta2[i]<-(252-7.82*OCC[i])*pow((BW[i]/80),0.405)*pow((Hb[i]/13),0.676)*pow((WBC[i]/16),0.07)                                                                                                   # population estimate of Carbamazepine apparent volume of distribution 
+           theta1[i]<-(13.8-3.81*OCC[i])*pow((BW[i]/80),0.301)*pow((Hb[i]/13),0.897)*pow((WBC[i]/16),(-0.105))    # population estimate of Imatinib mesylate clearance
+           theta2[i]<-(252-7.82*OCC[i])*pow((BW[i]/80),0.405)*pow((Hb[i]/13),0.676)*pow((WBC[i]/16),0.07)         # population estimate of Imatibib mesylate apparent volume of distribution 
               
            }
 

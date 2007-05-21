@@ -4,13 +4,12 @@ model
      
            for (i in 1:N) {          # N:number of patients
            c[i]~dnorm(mu[i], 100)    # c:drug concentration
-           mu[i]<-(0.2+10*abs(PTD[i]-7)/((PTD[i]+10)*60))*D[i]*1000*0.3/(4*bw[i]*(0.3-k[i]))*((1/(1-exp(-k[i]*tau[i])))*exp(-k[i]*ts[i])-(1/(1-exp(-0.3*tau[i])))*exp(-0.3*ts[i]))     # oral concentration equation at steady state
-           k[i]<-cl_F[i]/(4*bw[i])
+           mu[i]<-(0.2+10*abs(PTD[i]-7)/((PTD[i]+10)*60))*D[i]*1000*0.3/(v[i]*(0.3-k[i]))*((1/(1-exp(-k[i]*tau[i])))*exp(-k[i]*ts[i])-(1/(1-exp(-0.3*tau[i])))*exp(-0.3*ts[i]))     # oral concentration equation at steady state
+           k[i]<-cl[i]/(4*bw[i])
 
-           cl_F[i]~dnorm(theta1[i], 0.106797)          
+           cl[i]~dnorm(theta1[i], 0.106797)          
 
-           theta1[i]<-0.281*bw[i]*(0.629*Dia[i]+1-Dia[i])     # population estimate of Cyclosporine clerance
-  
+           theta1[i]<-0.281*bw[i]*(0.629*Dia[i]+1-Dia[i])     # population estimate of Cyclosporine clearance
            }
 
            }

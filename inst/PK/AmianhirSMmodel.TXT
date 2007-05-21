@@ -8,13 +8,13 @@ model
 
            }
            cl_F~dnorm(theta1, 10000)
-           v_F~dnorm(theta2, 1000)
+           v_F~dnorm(theta2, 10)
            k<-cl_F/v_F
 
            theta1<-(0.037*IBW-0.006*age)*pow(1.284,smoke)*pow(0.751,CHF)      # population estimate of Aminophylline anhydrous clerance
            theta2<-0.42*IBW                                                   # population estimate of Aminophylline anhydrous apparent volume of distribution 
 
-           IBW<-Gender*(50+(2.3*(ht/2.4-60)))+(1-Gender)*(45+(2.3*(ht/2.4-60)))   # Lean body weight
+           IBW<-Gender*(50+(2.3*(ht/2.4-60)))+(1-Gender)*(45+(2.3*(ht/2.4-60)))   
 
            }
            }

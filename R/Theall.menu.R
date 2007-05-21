@@ -35,13 +35,13 @@ Theall.menu<-function()
     }
     
 # Aminophylline anhydrous    
-Amianh.menu <- function()
+Amianh.menu <- function()                        #list of Aminophylline anhydrous input form  
 {
   file.menu <- c("immdediate release",
                  "control release",
                  "iv infusion",
                  "Go back one upper level")
-  pick <- menu(file.menu, title = "<< Aminophylline anhydrous input dtat menu >>")
+  pick <- menu(file.menu, title = "<< Aminophylline anhydrous input form menu >>")
   if (pick == 1){
      cat("\n\n")      
      Amianhir.model()
@@ -60,18 +60,17 @@ Amianh.menu <- function()
   }      
 }
 
-# Aminophylline anhydrous immdediate release model
-Amianhir.model <- function()
-{
- # list of Aminophylline anhydrous data type   
+# Aminophylline anhydrous immdediate release model          
+Amianhir.model <- function()                                       #list of Aminophylline anhydrous IR data type               
+{  
   file.menu <- c("single subj with single conc",               
                  "single subj with mutiple conc (sampling times must more than twice)",
                  "multiple subj with each single conc",
                  "multiple subj and mutiple conc (each subj's sampling times must more than twice)",
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>") 
-  if (pick == 1){                                                                    
-     cat("\n")                                                                       
+  if (pick == 1){                                                                    # chosse single subject with single concentration                                                                   
+     cat("\n")                                                                       # show input and output information make user convenience to use                                                                        
      cat("***********************************************************\n")
      cat("    --Aminophylline anhydrous IR input data information--  \n")
      cat("    Gender = Male=1 ; Female=0                             \n")
@@ -85,22 +84,22 @@ Amianhir.model <- function()
      cat("    C = measured steady-state conc.                        \n")
      cat("***********************************************************\n\n")
      cat("\n")
-     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     Please enter all parameters values at Data Editor          \n")       # tell user how to edit table of aminophylline anhydrous input data information
      cat("     window, and close Data Editor window by clicking           \n")    
      cat("           (x) button at upper right corner.                    \n\n")
-     AmianhirSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))                                            
-     AmianhirSSpar<-edit(AmianhirSSpar)                                                                                                                                           
-     AmianhirSSpar<-ycheck(AmianhirSSpar)
-     cat("\n")                                                                                                                                         
-     Amianhir.ss(AmianhirSSpar[9,2],AmianhirSSpar[7,2],AmianhirSSpar[8,2],AmianhirSSpar[6,2],AmianhirSSpar[3,2],AmianhirSSpar[2,2],AmianhirSSpar[5,2],AmianhirSSpar[1,2],AmianhirSSpar[4,2])
+     AmianhirSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))      # edit table of aminophylline anhydrous input data information                                               
+     AmianhirSSpar<-edit(AmianhirSSpar)                                                                                                           # show table of aminophylline anhydrous input data information for user editing                                                                                                                                           
+     AmianhirSSpar<-ycheck(AmianhirSSpar)                                                                                                         # avoid user missing input information
+     cat("\n")                                                                                                                                    # 空一行
+     Amianhir.ss(AmianhirSSpar[9,2],AmianhirSSpar[7,2],AmianhirSSpar[8,2],AmianhirSSpar[6,2],AmianhirSSpar[3,2],AmianhirSSpar[2,2],AmianhirSSpar[5,2],AmianhirSSpar[1,2],AmianhirSSpar[4,2])    # calculate individual aminophylline anhydrous PK parameters and show its prediction
+     get(getOption("device"))()                                              # open a new window
+     samplesHistory("*",mfrow=c(3,1), ask = FALSE)                           # show plots of history
      get(getOption("device"))()
-     samplesHistory("*",mfrow=c(3,1), ask = FALSE)
+     samplesDensity("*", mfrow = c(3, 2), ask = FALSE)                       # show plots of density
      get(getOption("device"))()
-     samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
-     get(getOption("device"))()
-     samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
+     samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)                       # show plots of autocorrection
      cat("\n\n")
-     cat("***********************************************************\n")
+     cat("***********************************************************\n")    # show aminophylline anhydrous output data information
      cat("    --Aminophylline anhydrous IR output data information-- \n")
      cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
      cat("    V_F = volume of distribution/bioavailability (L)       \n")
@@ -108,31 +107,33 @@ Amianhir.model <- function()
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)      \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)    \n")
      cat("***********************************************************\n")
-     show(samplesStats("*")) 
+     show(samplesStats("*"))                                                 # show predicted PK parameters of aminophylline anhydrous 
      cat("\n") 
-     C<-TheIRcpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],AmianhirSSpar[8,2])
+     C<-TheIRsscpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],AmianhirSSpar[8,2])     # calculate predicted steady-state measured concentration of aminophylline anhydrous (equation of _phylline IR concentration)
+     sim<-matrix(C[1 ,1])                                                           # 取表格[1,1]之答案
+     coutput<-data.frame(sim)                                                       # 命名所取出來的[1,1]為couput
+     colnames(coutput)<-list("Cmss_pr (mg/L)")                                      # 並命名此欄位為Cmss_pr(mg/L)
+     output1<-coutput                                                               # 將Cmss_pr命名為coutput1   
+     show(coutput)                                                                  # show the concentration of aminophylline anhydrous  
+     r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))      # 計算tmax
+     C<-TheIRsscpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],r)                                                     # calculate predicted steady-state peak concentration of aminophylline anhydrous
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
-     colnames(coutput)<-list("Cmss_pr (mg/L)")
+     colnames(coutput)<-list("Cpss_pr (mg/L)")                                                                     # 並命名此欄為為Cpss_pr(mg/L)
+     output2<-coutput                                                                                              # 將Cmss_pr命名為coutput2 
      show(coutput)
-     r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],r)
+     C<-TheIRsscpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],AmianhirSSpar[7,2])                                    # calculate predicted steady-state trough concentration of aminophylline anhydrous
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
-     colnames(coutput)<-list("Cpss_pr (mg/L)")
-     show(coutput)
-     C<-TheIRcpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],AmianhirSSpar[7,2])
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Ctss_pr (mg/L)")
+     colnames(coutput)<-list("Ctss_pr (mg/L)")                                                                     # 並命名此欄為為Ctss_pr(mg/L)
+     output3<-coutput                                                                                              # 將Cmss_pr命名為coutput3
      show(coutput)     
      cat("\n")    
-     Amianhir.more()                                                                                                                                                            
+     Amianhir.more(AmianhirSSpar,output1,output2,output3)                                           # calculate dose adjustment of Aminoflycoside with single subject single concentration                                    s                                                                                                                        
   } 
-   else if (pick == 2){     
- # show input and output information make user convenience to use 
+   else if (pick == 2){                                                                   # choose single subject with each multiple concentrations         
      cat("\n")                                                                       
-     cat("***********************************************************\n")
+     cat("***********************************************************\n")                 # show input and output information make user convenience to use 
      cat("    --Aminophylline anhydrous IR input data information--  \n")
      cat("    Gender = Male=1 ; Female=0                             \n")
      cat("    age = age (yr)                                         \n")
@@ -146,7 +147,7 @@ Amianhir.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmianhirSMMpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)"),value=c(0))
+     AmianhirSMMpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)"),value=c(0))       # edit table of aminophylline anhydrous input data information except ts and conc 
      AmianhirSMMpar<-edit(AmianhirSMMpar)
      AmianhirSMMpar<-ycheck(AmianhirSMMpar)
      cat("\n")
@@ -159,11 +160,11 @@ Amianhir.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmianhirSMpar<-data.frame(ts=c(0),conc=c(0))                                                                                                                            
-     AmianhirSMpar<-edit(AmianhirSMpar)                                            
-     AmianhirSMpar<-mscheck(AmianhirSMpar)                                         
+     AmianhirSMpar<-data.frame(ts=c(0),conc=c(0))                                         # edit table of aminophylline anhydrous input data information including ts and conc (此表格的呈現方式跟上面表格呈現方式不同)                                                                                                                                                   
+     AmianhirSMpar<-edit(AmianhirSMpar)                                                   # show table of aminophylline anhydrous input data information for user editing                                            
+     AmianhirSMpar<-mscheck(AmianhirSMpar)                                                # avoid user missing input information                                         
      cat("\n")
-     Amianhir.sm(length(AmianhirSMpar$ts),AmianhirSMpar$conc,AmianhirSMpar$ts,AmianhirSMMpar[7,2],AmianhirSMMpar[6,2],AmianhirSMMpar[3,2],AmianhirSMMpar[2,2],AmianhirSMMpar[5,2],AmianhirSMMpar[1,2],AmianhirSMMpar[4,2])    
+     Amianhir.sm(length(AmianhirSMpar$ts),AmianhirSMpar$conc,AmianhirSMpar$ts,AmianhirSMMpar[7,2],AmianhirSMMpar[6,2],AmianhirSMMpar[3,2],AmianhirSMMpar[2,2],AmianhirSMMpar[5,2],AmianhirSMMpar[1,2],AmianhirSMMpar[4,2])   # calculate individual aminophylline anhydrous PK parameters and show its prediction    
      get(getOption("device"))()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      get(getOption("device"))()
@@ -180,21 +181,21 @@ Amianhir.model <- function()
      cat("***********************************************************\n")
      show(samplesStats("*"))
      cat("\n")
-     C<-TheIRcpr(0.85,AmianhirSMMpar[6,2],AmianhirSMMpar[7,2],AmianhirSMMpar[7,2])
+     C<-TheIRsscpr(0.85,AmianhirSMMpar[6,2],AmianhirSMMpar[7,2],AmianhirSMMpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)     
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.85,AmianhirSMMpar[6,2],AmianhirSMMpar[7,2],r)
+     C<-TheIRsscpr(0.85,AmianhirSMMpar[6,2],AmianhirSMMpar[7,2],r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
      show(coutput) 
      cat("\n")   
-     Amianhir.more()                                                                                                                                                                                            
+     Amianhirsm.more(AmianhirSMMpar,AmianhirSMpar,output1,output2)                # calculate dose adjustment of Aminoflycoside with single subject and each multiple concentrations                                                                                                                                                                                            
   } 
-     else if (pick == 3){
+     else if (pick == 3){                                                                   # chosse multiple subjects with each single concentration
      rm(list=ls(all=TRUE))
  # show input and output information make user convenience to use 
      cat("\n")                                                                       
@@ -218,7 +219,7 @@ Amianhir.model <- function()
      AmianhirMSpar<-edit(AmianhirMSpar)
      AmianhirMSpar<-ymscheck(AmianhirMSpar)
      cat("\n")
-     Amianhir.ms(length(AmianhirMSpar$subject),AmianhirMSpar$c,AmianhirMSpar$tau,AmianhirMSpar$ts,AmianhirMSpar$D,AmianhirMSpar$ht,AmianhirMSpar$age,AmianhirMSpar$smoke,AmianhirMSpar$Gender,AmianhirMSpar$CHF)
+     Amianhir.ms(length(AmianhirMSpar$subject),AmianhirMSpar$c,AmianhirMSpar$tau,AmianhirMSpar$ts,AmianhirMSpar$D,AmianhirMSpar$ht,AmianhirMSpar$age,AmianhirMSpar$smoke,AmianhirMSpar$Gender,AmianhirMSpar$CHF)   # calculate individual aminophylline anhydrous PK parameters and show its prediction
      cat("\n\n")
      cat("**********************************************************\n")
      cat("   You can PgUp/PgDown to scroll through your checking    \n")
@@ -239,26 +240,32 @@ Amianhir.model <- function()
      cat("***********************************************************\n")   
      show(samplesStats("*"))
      cat("\n")
-     C<-TheIRcpr(0.85,AmianhirMSpar$D,AmianhirMSpar$tau,AmianhirMSpar$ts)
-     sim<-matrix(C[ ,1])
+     C<-TheIRsscpr(0.85,AmianhirMSpar$D,AmianhirMSpar$tau,AmianhirMSpar$ts)
+     sim<-matrix(C[ ,1])                                                      # 取表格[ ,1]之答案
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.85,AmianhirMSpar$D,AmianhirMSpar$tau,r)
+     C<-TheIRsscpr(0.85,AmianhirMSpar$D,AmianhirMSpar$tau,r)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
-     C<-TheIRcpr(0.85,AmianhirMSpar$D,AmianhirMSpar$tau,AmianhirMSpar$tau)
+     C<-TheIRsscpr(0.85,AmianhirMSpar$D,AmianhirMSpar$tau,AmianhirMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)     
      cat("\n") 
-     Amianhirms.more()                                                                                                                                                                              
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Amianhirms.pkoutput(AmianhirMSpar,output1,output2,output3)                                                                                                                                                                                                           
+     cal.again()  
   } 
-     else if (pick == 4){     
+     else if (pick == 4){                                                                   # chosse multiple subjects with each multiple concentrations     
      cat("\n")                                                                       
      cat("***********************************************************\n")
      cat("    --Aminophylline anhydrous IR input data information--  \n")
@@ -274,7 +281,7 @@ Amianhir.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmianhirMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0))
+     AmianhirMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0))      # edit table of aminophylline anhydrous input data information except ts and conc 
      AmianhirMMpar<-edit(AmianhirMMpar)
      AmianhirMMpar<-mscheck(AmianhirMMpar)
      cat("\n")
@@ -287,7 +294,7 @@ Amianhir.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmianhirMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))
+     AmianhirMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))                  # edit table of aminophylline anhydrous input data information including subject, ts and conc
      AmianhirMMMpar<-edit(AmianhirMMMpar)
      AmianhirMMMpar<-mscheck(AmianhirMMMpar)
      cat("\n")
@@ -298,18 +305,18 @@ Amianhir.model <- function()
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)     \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
      cat("***********************************************************\n\n")
-     for(i in 1:length(unique(AmianhirMMpar$subject))){
-     a=length(AmianhirMMMpar$ts[AmianhirMMpar$subject==i])
-     b=AmianhirMMMpar$conc[AmianhirMMMpar$subject==i]
-     C=AmianhirMMMpar$ts[AmianhirMMMpar$subject==i]
-     d=AmianhirMMpar$tau[AmianhirMMpar$subject==i]
-     e=AmianhirMMpar$D[AmianhirMMpar$subject==i]
-     f=AmianhirMMpar$ht[AmianhirMMpar$subject==i]
-     g=AmianhirMMpar$age[AmianhirMMpar$subject==i]
-     h=AmianhirMMpar$smoke[AmianhirMMpar$subject==i]
-     l=AmianhirMMpar$Gender[AmianhirMMpar$subject==i]
-     J=AmianhirMMpar$CHF[AmianhirMMpar$subject==i]
-     Amianhir.mm(a,b,C,d,e,f,g,h,l,J,i)
+     for(i in 1:length(unique(AmianhirMMpar$subject))){          # Loop, 為了計算多人多點的參數(選擇計算一個人)
+     a=length(AmianhirMMMpar$ts[AmianhirMMMpar$subject==i])        # a=number of sampling time of subject[i]
+     b=AmianhirMMMpar$conc[AmianhirMMMpar$subject==i]             # b=concentration of subject[i]
+     C=AmianhirMMMpar$ts[AmianhirMMMpar$subject==i]               # c=sampling time of subject[i]
+     d=AmianhirMMpar$tau[AmianhirMMpar$subject==i]                # d=dosing interval of subject[i]
+     e=AmianhirMMpar$D[AmianhirMMpar$subject==i]                  # e=dose of subject[i]
+     f=AmianhirMMpar$ht[AmianhirMMpar$subject==i]                 # f=height of subject[i]
+     g=AmianhirMMpar$age[AmianhirMMpar$subject==i]                # g=age of subject[i]
+     h=AmianhirMMpar$smoke[AmianhirMMpar$subject==i]              # h=subject[i]是否有抽煙
+     l=AmianhirMMpar$Gender[AmianhirMMpar$subject==i]             # l=Gender of subject[i]
+     J=AmianhirMMpar$CHF[AmianhirMMpar$subject==i]                # J=subject[i]使否有CHF
+     Amianhir.mm(a,i,b,C,d,e,f,g,h,l,J,i)                           # calculate individual aminophylline anhydrous PK parameters and show its prediction
      cat("\n")
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )
@@ -324,21 +331,21 @@ Amianhir.model <- function()
      show(samplesStats("*"))
      cat("\n")
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.85,e,d,r)
+     C<-TheIRsscpr(0.85,e,d,r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)  
-     C<-TheIRcpr(0.85,e,d,d)
+     C<-TheIRsscpr(0.85,e,d,d)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)     
      cat("\n**************************************************************************\n")
      }
-     cal.again()
+     cal.again()         # ask user does he want to calculate another drug again?
   } 
-  else if (pick == 5){
+  else if (pick == 5){   # go back to upper layer
      cat("\n\n") 
      Amianh.menu()
   }      
@@ -349,13 +356,11 @@ Amianhir.model <- function()
 # Aminophylline anhydrous control release model
 Amianhcr.model <- function()
 {
- # list of Aminophylline anhydrous data type 
   file.menu <- c("single subj with single conc",                 
                  "multiple subj with each single conc",
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>") 
   if (pick == 1){                                                                    
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Aminophylline anhydrous CR input data information--  \n")
@@ -385,10 +390,9 @@ Amianhcr.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("\n\n")
      cat("***********************************************************\n")
-     cat("    --Aminophylline anhydrous CR output data information-- \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
-     cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
+     cat("   --Aminophylline anhydrous CR output data information-- \n")
+     cat("   cl_F = clerance/bioavailability (L/hr)                 \n")
+     cat("   Css_pr = predicted steady-state conc.(mg/L)            \n")
      cat("***********************************************************\n")
      show(samplesStats("*"))
      cat("\n") 
@@ -398,11 +402,10 @@ Amianhcr.model <- function()
      colnames(coutput)<-list("Css_pr (mg/L)")    
      show(coutput) 
      cat("\n")   
-     Amianhcr.more()                                                                                                                                                              
+     Amianhcr.more(AmianhcrSSpar,coutput)                                                                                                                                                              
   } 
     else if (pick == 2){
      rm(list=ls(all=TRUE))
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Aminophylline anhydrous CR input data information--  \n")
@@ -436,7 +439,6 @@ Amianhcr.model <- function()
      cat("***********************************************************\n")
      cat("    --Aminophylline anhydrous CR output data information-- \n")
      cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
      cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
      cat("***********************************************************\n")    
      show(samplesStats("*"))
@@ -447,7 +449,10 @@ Amianhcr.model <- function()
      colnames(coutput)<-list("Css_pr (mg/L)")     
      show(coutput)
      cat("\n")
-     Amianhcrms.more()                                                                                                                                                                               
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Amianhcrms.pkoutput(AmianhcrMSpar,coutput)
+     cal.again()                                                                                                                                                                               
   } 
   else if (pick == 3){
      cat("\n\n") 
@@ -456,16 +461,15 @@ Amianhcr.model <- function()
 }
 
 
-# 3 Amianhinfusion.model()
-#Aminoglycoside data file 
 Amianhinfusion.model <- function()
 {
- # list of Aminoglycoside data type   
   file.menu <- c("single subj with single conc",               
+                 "single subj with mutiple conc (sampling times must more than twice)",
                  "multiple subj with each single conc",
+                 "multiple subj and mutiple conc (each subj's sampling times must more than twice)",
                  "Go back one upper level")
-  pick <- menu(file.menu, title = "<< data type >>")          
-  if (pick == 1){ 
+  pick <- menu(file.menu, title = "<< data type >>") 
+  if (pick == 1){                                                                    
      cat("\n")                                                                      
      cat("********************************************************************\n")
      cat("    --Aminophylline anhydrous iv infusion input data information--  \n")
@@ -474,19 +478,21 @@ Amianhinfusion.model <- function()
      cat("    ht = height (cm)                                       \n") 
      cat("    CHF = 1 for yes ; otherwise = 0                        \n")
      cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
-     cat("    D = dose for each dosing interval (mg)                 \n") 
-     cat("    tau = dosing interval (hr)                             \n")
-     cat("    C = measured steady-state conc.                        \n")
+     cat("    DL = loading dose (mg)                                 \n")
+     cat("    tinf = infusion time of loading dose (hr)              \n") 
+     cat("    R = constant intravenous infusion rate (mg/hr)         \n") 
+     cat("    ts = sampling time since infusion end (hr)             \n")
+     cat("    C = measured conc. (mg/L)                             \n")
      cat("********************************************************************\n\n")                                                              
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmianhinfusionSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","c (mg/L)"),value=c(0))                                                                                                          
+     AmianhinfusionSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","DL (mg)","tinf (hr)","R (mg/hr)","ts (hr)","c (mg/L)"),value=c(0))                                                                                                          
      AmianhinfusionSSpar<-edit(AmianhinfusionSSpar)                                                                                                                                                                                                             
      AmianhinfusionSSpar<-ycheck(AmianhinfusionSSpar)     
      cat("\n")
-     Amianhinfusion.ss(AmianhinfusionSSpar[8,2],AmianhinfusionSSpar[7,2],AmianhinfusionSSpar[6,2],AmianhinfusionSSpar[3,2],AmianhinfusionSSpar[2,2],AmianhinfusionSSpar[5,2],AmianhinfusionSSpar[1,2],AmianhinfusionSSpar[4,2])
+     Amianhinfusion.ss(AmianhinfusionSSpar[10,2],AmianhinfusionSSpar[9,2],AmianhinfusionSSpar[3,2],AmianhinfusionSSpar[2,2],AmianhinfusionSSpar[5,2],AmianhinfusionSSpar[1,2],AmianhinfusionSSpar[4,2],AmianhinfusionSSpar[6,2],AmianhinfusionSSpar[8,2],AmianhinfusionSSpar[7,2])
      get(getOption("device"))()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      get(getOption("device"))()
@@ -494,45 +500,113 @@ Amianhinfusion.model <- function()
      get(getOption("device"))()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("\n\n")
-     cat("********************************************************************\n") 
-     cat("    --Aminophylline anhydrous iv infusion output data information-- \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
-     cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
-     cat("********************************************************************\n")   
+     cat("*********************************************************************\n") 
+     cat("   --Aminophylline anhydrous iv infusion output data information-- \n")
+     cat("   cl = clerance (L/hr)                 \n")
+     cat("   v = volume of distribution (L)       \n")
+     cat("   Cm_pr = predicted measured conc.(mg/L)   \n")
+     cat("   Ctss_pr = predicted steady-state trough conc.(mg/L)     \n")
+     cat("*********************************************************************\n")   
      show(samplesStats("*"))                                                                                                                                                                                                            
      cat("\n")
-     C<-TheCRcpr(0.85,AmianhinfusionSSpar[6,2],AmianhinfusionSSpar[7,2])
+     C<-Theinfusioncpr(0.85,AmianhinfusionSSpar[6,2],AmianhinfusionSSpar[8,2],AmianhinfusionSSpar[9,2],AmianhinfusionSSpar[7,2])
      sim<-matrix(C[1,1])
      coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_pr (mg/L)")     
+     colnames(coutput)<-list("Cm_pr (mg/L)")    
+     coutput1<-coutput 
+     show(coutput)
+     C<-0.85*AmianhinfusionSSpar[8,2]/(samplesStats("cl"))
+     sim<-matrix(C[1,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Ctss_pr (mg/L)")  
+     coutput2<-coutput   
      show(coutput)
      cat("\n")   
-     Amianhinfusion.more()                                                                                                                                                                                                                                                  
-  } 
-      else if (pick == 2){
-      rm(list=ls(all=TRUE))
-     cat("\n")                                                                      
-     cat("********************************************************************\n\n")
+     Amianhinfusion.more(AmianhinfusionSSpar,coutput1,coutput2)                                                                                                                                                                                                                                                  
+   } 
+   else if (pick == 2){     
+     cat("\n")                                                                       
+     cat("*********************************************************************\n")
      cat("    --Aminophylline anhydrous iv infusion input data information--  \n")
      cat("    Gender = Male=1 ; Female=0                             \n")
      cat("    age = age (yr)                                         \n")
      cat("    ht = height (cm)                                       \n") 
      cat("    CHF = 1 for yes ; otherwise = 0                        \n")
      cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
-     cat("    D = dose for each dosing interval (mg)                 \n") 
-     cat("    tau = dosing interval (hr)                             \n")
-     cat("    C = measured steady-state conc.                        \n")
-     cat("********************************************************************\n\n")
+     cat("    DL = loading dose (mg)                                 \n")
+     cat("    tinf = infusion time of loading dose (hr)              \n") 
+     cat("    R = constant intravenous infusion rate (mg/hr)         \n") 
+     cat("*********************************************************************\n\n")                                                              
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmianhinfusionMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),c=c(0))
+     AmianhinfusionSMMpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","DL (mg)","tinf (hr)","R (mg/hr)"),value=c(0))
+     AmianhinfusionSMMpar<-edit(AmianhinfusionSMMpar)
+     AmianhinfusionSMMpar<-ycheck(AmianhinfusionSMMpar)
+     cat("\n")
+     cat("******************************************************************\n")
+     cat("    --Aminophylline anhydrous infusion input data information--  \n")
+     cat("    c = measured conc.(mg/L)                  \n")
+     cat("    ts = sampling time since infusion end                  \n")
+     cat("******************************************************************\n\n")
+     cat("\n")
+     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     window, and close Data Editor window by clicking           \n")
+     cat("           (x) button at upper right corner.                    \n\n")
+     AmianhinfusionSMpar<-data.frame(ts=c(0),conc=c(0))                                                                                                                            
+     AmianhinfusionSMpar<-edit(AmianhinfusionSMpar)                                            
+     AmianhinfusionSMpar<-mscheck(AmianhinfusionSMpar)                                         
+     cat("\n")
+     Amianhinfusion.sm(length(AmianhinfusionSMpar$ts),AmianhinfusionSMpar$conc,AmianhinfusionSMpar$ts,AmianhinfusionSMMpar[3,2],AmianhinfusionSMMpar[2,2],AmianhinfusionSMMpar[5,2],AmianhinfusionSMMpar[1,2],AmianhinfusionSMMpar[4,2],AmianhinfusionSMMpar[6,2],AmianhinfusionSMMpar[8,2],AmianhinfusionSMMpar[7,2])
+     get(getOption("device"))()
+     samplesHistory("*",mfrow=c(3,1), ask = FALSE)
+     get(getOption("device"))()
+     samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
+     get(getOption("device"))()
+     samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
+     cat("\n\n")
+     cat("********************************************************************\n")
+     cat("    --Aminophylline anhydrous infusion output data information-- \n")
+     cat("    cl = clerance(L/hr)                 \n")
+     cat("    V = volume of distribution (L)       \n")
+     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)    \n")
+     cat("********************************************************************\n")
+     show(samplesStats("*"))
+     cat("\n")
+     C<-0.85*AmianhinfusionSMMpar[8,2]/(samplesStats("cl"))
+     sim<-matrix(C[1 ,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Ctss_pr (mg/L)")
+     show(coutput)     
+     cat("\n")   
+     Amianhinfusionsm.more(AmianhinfusionSMMpar,AmianhinfusionSMpar,coutput)                                                                                                                                                                                            
+  } 
+     else if (pick == 3){
+      rm(list=ls(all=TRUE))
+     cat("\n")                                                                      
+     cat("*********************************************************************\n\n")
+     cat("    --Aminophylline anhydrous iv infusion input data information--  \n")
+     cat("    Gender = Male=1 ; Female=0                             \n")
+     cat("    age = age (yr)                                         \n")
+     cat("    ht = height (cm)                                       \n") 
+     cat("    CHF = 1 for yes ; otherwise = 0                        \n")
+     cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
+     cat("    DL = loading dose (mg)                                 \n") 
+     cat("    tinf = infusion time of loading dose (hr)              \n") 
+     cat("    R = constant intravenous infusion rate (mg/hr)         \n") 
+     cat("    ts = sampling time since infusion end (hr)           \n")
+     cat("    C = measured conc. (mg/L)                              \n")
+     cat("*********************************************************************\n\n")
+     cat("\n")
+     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     window, and close Data Editor window by clicking           \n")
+     cat("           (x) button at upper right corner.                    \n\n")
+     AmianhinfusionMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),DL=c(0),tinf=c(0),R=c(0),ts=c(0),c=c(0))
      AmianhinfusionMSpar<-edit(AmianhinfusionMSpar)
      AmianhinfusionMSpar<-ymscheck(AmianhinfusionMSpar)
      cat("\n")
-     Amianhinfusion.ms(length(AmianhinfusionMSpar$subject),AmianhinfusionMSpar$c,AmianhinfusionMSpar$tau,AmianhinfusionMSpar$D,AmianhinfusionMSpar$ht,AmianhinfusionMSpar$age,AmianhinfusionMSpar$smoke,AmianhinfusionMSpar$Gender,AmianhinfusionMSpar$CHF)
+     Amianhinfusion.ms(length(AmianhinfusionMSpar$subject),AmianhinfusionMSpar$c,AmianhinfusionMSpar$ts,AmianhinfusionMSpar$ht,AmianhinfusionMSpar$age,AmianhinfusionMSpar$smoke,AmianhinfusionMSpar$Gender,AmianhinfusionMSpar$CHF,AmianhinfusionMSpar$DL,AmianhinfusionMSpar$R,AmianhinfusionMSpar$tinf)
      cat("\n\n")
      cat("**********************************************************\n")
      cat("   You can PgUp/PgDown to scroll through your checking    \n")
@@ -542,29 +616,107 @@ Amianhinfusion.model <- function()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
-     cat("********************************************************************\n") 
+     cat("***********************************************************************\n") 
      cat("    --Aminophylline anhydrous iv infusion output data information-- \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
-     cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
-     cat("********************************************************************\n")       
+     cat("    cl = clerance (L/hr)                 \n")
+     cat("    v = volume of distribution (L)       \n")
+     cat("    Cm_pr = predicted measured conc.(mg/L)   \n")
+     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)     \n")
+     cat("***********************************************************************\n")       
      show(samplesStats("*"))
      cat("\n")
-     C<-TheCRcpr(0.85,AmianhinfusionMSpar$D,AmianhinfusionMSpar$tau)
+     C<-Theinfusioncpr(0.85,AmianhinfusionMSpar$DL,AmianhinfusionMSpar$R,AmianhinfusionMSpar$ts,AmianhinfusionMSpar$tinf)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_pr (mg/L)")     
+     colnames(coutput)<-list("Cm_pr (mg/L)")   
+     coutput1<-coutput  
+     show(coutput)
+     C<-0.85*AmianhinfusionMSpar$R/(samplesStats("cl"))
+     sim<-matrix(C[ ,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Ctss_pr (mg/L)")     
+     coutput2<-coutput
      show(coutput)
      cat("\n")  
-     Amianhinfusionms.more()                                                                                                                                                              
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Amianhinfusionms.pkoutput(AmianhinfusionMSpar,coutput1,coutput2)  
+     cal.again()                                                                                                                                                            
   } 
-  else if (pick == 3){
+     else if (pick == 4){     
+     cat("\n")                                                                       
+     cat("*******************************************************************\n")
+     cat("    --Aminophylline anhydrous infusion input data information--  \n")
+     cat("    Gender = Male=1 ; Female=0                             \n")
+     cat("    age = age (yr)                                         \n")
+     cat("    ht = height (cm)                                       \n") 
+     cat("    CHF = 1 for yes ; otherwise = 0                        \n")
+     cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
+     cat("    DL = loading dose (mg)                                 \n")
+     cat("    tinf = infusion time of loading dose (hr)              \n") 
+     cat("    R = constant intravenous infusion rate (mg/hr)         \n") 
+     cat("*******************************************************************\n\n")
+     cat("\n")
+     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     window, and close Data Editor window by clicking           \n")
+     cat("           (x) button at upper right corner.                    \n\n")
+     AmianhinfusionMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),DL=c(0),tinf=c(0),R=c(0))
+     AmianhinfusionMMpar<-edit(AmianhinfusionMMpar)
+     AmianhinfusionMMpar<-mscheck(AmianhinfusionMMpar)
+     cat("\n")
+     cat("********************************************************************\n")
+     cat("    --Aminophylline anhydrous infusion input data information--  \n")
+     cat("    c = measured steady-state conc.(mg/L)                  \n")
+     cat("    ts = sampling time since infusion end                  \n")
+     cat("********************************************************************\n\n")
+     cat("\n")
+     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     window, and close Data Editor window by clicking           \n")
+     cat("           (x) button at upper right corner.                    \n\n")
+     AmianhinfusionMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))
+     AmianhinfusionMMMpar<-edit(AmianhinfusionMMMpar)
+     AmianhinfusionMMMpar<-mscheck(AmianhinfusionMMMpar)
+     for(i in 1:length(unique(AmianhinfusionMMpar$subject))){
+     a=length(AmianhinfusionMMMpar$ts[AmianhinfusionMMMpar$subject==i])
+     b=AmianhinfusionMMMpar$conc[AmianhinfusionMMMpar$subject==i]
+     C=AmianhinfusionMMMpar$ts[AmianhinfusionMMMpar$subject==i]
+     e=AmianhinfusionMMpar$DL[AmianhinfusionMMpar$subject==i]
+     k=AmianhinfusionMMpar$R[AmianhinfusionMMpar$subject==i]
+     m=AmianhinfusionMMpar$tinf[AmianhinfusionMMpar$subject==i]
+     f=AmianhinfusionMMpar$ht[AmianhinfusionMMpar$subject==i]
+     g=AmianhinfusionMMpar$age[AmianhinfusionMMpar$subject==i]
+     h=AmianhinfusionMMpar$smoke[AmianhinfusionMMpar$subject==i]
+     l=AmianhinfusionMMpar$Gender[AmianhinfusionMMpar$subject==i]
+     J=AmianhinfusionMMpar$CHF[AmianhinfusionMMpar$subject==i]
+     Amianhinfusion.mm(a,i,b,C,f,g,h,l,J,e,k,m)
+     cat("\n")
+     cat("**************************************************************************\n")
+     cat("                 << Subject",i,">>                           \n\n" )
+     cat("cl = clerance (L/hr)                         \n")
+     cat("v = volume of distribution (L)               \n")
+     cat("Ctss_pr = predicted steady-state trough conc.(mg/L)    \n\n")
+     windows()
+     samplesHistory("*",mfrow=c(3,1),ask=FALSE)
+     windows()
+     samplesDensity("*",mfrow=c(3,2),ask=FALSE)
+     windows()
+     samplesAutoC("*",1,mfrow=c(3,2),ask=FALSE)
+     show(samplesStats("*"))
+     cat("\n")
+     C<-0.85*k/(samplesStats("cl"))
+     sim<-matrix(C[1 ,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Ctss_pr (mg/L)")
+     show(coutput)     
+     cat("\n**************************************************************************\n")
+     }
+     cal.again()
+  } 
+  else if (pick == 5){
      cat("\n\n") 
      Amianh.menu()
   }      
 }
-
-
 
 
 # Aminophylline dihydrous
@@ -574,7 +726,7 @@ Amidih.menu <- function()
                  "control release",
                  "iv infusion",
                  "Go back one upper level")
-  pick <- menu(file.menu, title = "<< Aminophylline dihydrous input dtat menu >>")
+  pick <- menu(file.menu, title = "<< Aminophylline dihydrous input form menu >>")
   if (pick == 1){
      cat("\n\n")      
      Amidihir.model()
@@ -597,7 +749,6 @@ Amidih.menu <- function()
 # Aminophylline dihydrous immdediate release model
 Amidihir.model <- function()
 {
- # list of Aminophylline dihydrous data type   
   file.menu <- c("single subj with single conc",               
                  "single subj with mutiple conc (sampling times must more than twice)",
                  "multiple subj with each single conc",
@@ -605,7 +756,6 @@ Amidihir.model <- function()
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>") 
   if (pick == 1){                                                                    
- # show input and output information make user convenience to use 
      cat("\n")                                                                       
      cat("***********************************************************\n")
      cat("    --Aminophylline dihydrous IR input data information--  \n")
@@ -626,8 +776,11 @@ Amidihir.model <- function()
      AmidihirSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))                                            
      AmidihirSSpar<-edit(AmidihirSSpar)                                                                                                                                           
      AmidihirSSpar<-ycheck(AmidihirSSpar)    
-     cat("\n")                                                                                                                                      
-     Amidihir.ss(AmidihirSSpar[9,2],AmidihirSSpar[7,2],AmidihirSSpar[8,2],AmidihirSSpar[6,2],AmidihirSSpar[3,2],AmidihirSSpar[2,2],AmidihirSSpar[5,2],AmidihirSSpar[1,2],AmidihirSSpar[4,2])
+     cat("\n")              
+     IBW<-AmidihirSSpar[1,2]*(50+(2.3*(AmidihirSSpar[3,2]/2.54-60)))+(1-AmidihirSSpar[1,2])*(45+(2.3*(AmidihirSSpar[3,2]/2.54-60)))
+     X<-(0.037*IBW-0.006*AmidihirSSpar[2,2])*(1.284^AmidihirSSpar[5,2])*(0.751^AmidihirSSpar[4,2])
+     Y<-0.42*IBW                                                                                                                                                                                                                                                              
+     Amidihir.ss(AmidihirSSpar[9,2],AmidihirSSpar[7,2],AmidihirSSpar[8,2],AmidihirSSpar[6,2],AmidihirSSpar[3,2],AmidihirSSpar[2,2],AmidihirSSpar[5,2],AmidihirSSpar[1,2],AmidihirSSpar[4,2],X,Y)
      get(getOption("device"))()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      get(getOption("device"))()
@@ -645,27 +798,29 @@ Amidihir.model <- function()
      cat("***********************************************************\n")     
      show(samplesStats("*"))
      cat("\n") 
-     C<-TheIRcpr(0.8,AmidihirSSpar[6,2],AmidihirSSpar[7,2],AmidihirSSpar[8,2])
+     C<-TheIRsscpr(0.8,AmidihirSSpar[6,2],AmidihirSSpar[7,2],AmidihirSSpar[8,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.8,AmidihirSSpar[6,2],AmidihirSSpar[7,2],r)
+     C<-TheIRsscpr(0.8,AmidihirSSpar[6,2],AmidihirSSpar[7,2],r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
-     C<-TheIRcpr(0.8,AmidihirSSpar[6,2],AmidihirSSpar[7,2],AmidihirSSpar[7,2])
+     C<-TheIRsscpr(0.8,AmidihirSSpar[6,2],AmidihirSSpar[7,2],AmidihirSSpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)     
      cat("\n")   
-     Amidihir.more()                                                                                                                                                             
+     Amidihir.more(AmidihirSSpar,output1,output2,output3)                                                                                                                                                             
   } 
    else if (pick == 2){     
- # show input and output information make user convenience to use 
      cat("\n")                                                                       
      cat("***********************************************************\n")
      cat("    --Aminophylline dihydrous IR input data information--  \n")
@@ -716,22 +871,23 @@ Amidihir.model <- function()
      show(samplesStats("*"))
      cat("\n")
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.8,AmidihirSMMpar[6,2],AmidihirSMMpar[7,2],r)
+     C<-TheIRsscpr(0.8,AmidihirSMMpar[6,2],AmidihirSMMpar[7,2],r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output1<-coutput
      show(coutput) 
-     C<-TheIRcpr(0.8,AmidihirSMMpar[6,2],AmidihirSMMpar[7,2],AmidihirSMMpar[7,2])
+     C<-TheIRsscpr(0.8,AmidihirSMMpar[6,2],AmidihirSMMpar[7,2],AmidihirSMMpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)     
      cat("\n")   
-     Amidihir.more()                                                                                                                                                                                            
+     Amidihirsm.more(AmidihirSMMpar,AmidihirSMpar,output1,output2)                                                                                                                                                                                            
   } 
      else if (pick == 3){
      rm(list=ls(all=TRUE))
- # show input and output information make user convenience to use 
      cat("\n")                                                                       
      cat("***********************************************************\n")
      cat("    --Aminophylline dihydrous IR input data information--  \n")
@@ -753,7 +909,10 @@ Amidihir.model <- function()
      AmidihirMSpar<-edit(AmidihirMSpar)
      AmidihirMSpar<-ymscheck(AmidihirMSpar)
      cat("\n")
-     Amidihir.ms(length(AmidihirMSpar$subject),AmidihirMSpar$c,AmidihirMSpar$tau,AmidihirMSpar$ts,AmidihirMSpar$D,AmidihirMSpar$ht,AmidihirMSpar$age,AmidihirMSpar$smoke,AmidihirMSpar$Gender,AmidihirMSpar$CHF)
+     IBW<-AmidihirMSpar$Gender*(50+(2.3*(AmidihirMSpar$ht/2.54-60)))+(1-AmidihirMSpar$Gender)*(45+(2.3*(AmidihirMSpar$ht/2.54-60)))
+     X<-(0.037*IBW-0.006*AmidihirMSpar$age)*(1.284^AmidihirMSpar$smoke)*(0.751^AmidihirMSpar$CHF)
+     Y<-0.42*IBW  
+     Amidihir.ms(length(AmidihirMSpar$subject),AmidihirMSpar$c,AmidihirMSpar$tau,AmidihirMSpar$ts,AmidihirMSpar$D,AmidihirMSpar$ht,AmidihirMSpar$age,AmidihirMSpar$smoke,AmidihirMSpar$Gender,AmidihirMSpar$CHF,X,Y)
      cat("\n\n")
      cat("**********************************************************\n")
      cat("   You can PgUp/PgDown to scroll through your checking    \n")
@@ -773,24 +932,30 @@ Amidihir.model <- function()
      cat("***********************************************************\n")         
      show(samplesStats("*"))
      cat("\n")
-     C<-TheIRcpr(0.8,AmidihirMSpar$D,AmidihirMSpar$tau,AmidihirMSpar$ts)
+     C<-TheIRsscpr(0.8,AmidihirMSpar$D,AmidihirMSpar$tau,AmidihirMSpar$ts)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.8,AmidihirMSpar$D,AmidihirMSpar$tau,r)
+     C<-TheIRsscpr(0.8,AmidihirMSpar$D,AmidihirMSpar$tau,r)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput) 
-     C<-TheIRcpr(0.8,AmidihirMSpar$D,AmidihirMSpar$tau,AmidihirMSpar$tau)
+     C<-TheIRsscpr(0.8,AmidihirMSpar$D,AmidihirMSpar$tau,AmidihirMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)     
      cat("\n")  
-     Amidihirms.more()                                                                                                                                                                                
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Amidihirms.pkoutput(AmidihirMSpar,output1,output2,output3)                                                                                                                                                                                
+     cal.again()
   } 
      else if (pick == 4){     
       cat("\n")                                                                       
@@ -833,7 +998,7 @@ Amidihir.model <- function()
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)    \n")
      cat("***********************************************************\n")
      for(i in 1:length(unique(AmidihirMMpar$subject))){
-     a=length(AmidihirMMMpar$ts[AmidihirMMpar$subject==i])
+     a=length(AmidihirMMMpar$ts[AmidihirMMMpar$subject==i])
      b=AmidihirMMMpar$conc[AmidihirMMMpar$subject==i]
      C=AmidihirMMMpar$ts[AmidihirMMMpar$subject==i]
      d=AmidihirMMpar$tau[AmidihirMMpar$subject==i]
@@ -843,7 +1008,7 @@ Amidihir.model <- function()
      h=AmidihirMMpar$smoke[AmidihirMMpar$subject==i]
      l=AmidihirMMpar$Gender[AmidihirMMpar$subject==i]
      J=AmidihirMMpar$CHF[AmidihirMMpar$subject==i]
-     Amidihir.mm(a,b,C,d,e,f,g,h,l,J,i)
+     Amidihir.mm(a,i,b,C,d,e,f,g,h,l,J,i)
      cat("\n")
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )
@@ -858,12 +1023,12 @@ Amidihir.model <- function()
      show(samplesStats("*"))
      cat("\n")
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.8,e,d,r)
+     C<-TheIRsscpr(0.8,e,d,r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
      show(coutput) 
-     C<-TheIRcpr(0.8,e,d,d)
+     C<-TheIRsscpr(0.8,e,d,d)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
@@ -882,15 +1047,13 @@ Amidihir.model <- function()
 
 # 2 
 # Aminophylline dihydrous control release model
-Amidihcr.model <- function()
+Amidihcr.model<-function()
 {
- # list of Aminophylline dihydrous data type   
-  file.menu <- c("single subj with single conc",               
+   file.menu <- c("single subj with single conc",               
                  "multiple subj with each single conc",
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>") 
   if (pick == 1){                                                                    
- # show input and output information make user convenience to use 
      cat("\n")                                                                       
      cat("***********************************************************\n")
      cat("    --Aminophylline dihydrous CR input data information--  \n")
@@ -922,7 +1085,6 @@ Amidihcr.model <- function()
      cat("***********************************************************\n")
      cat("    --Aminophylline dihydrous CR output data information-- \n")
      cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
      cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
      cat("***********************************************************\n")
      show(samplesStats("*"))
@@ -933,11 +1095,10 @@ Amidihcr.model <- function()
      colnames(coutput)<-list("Css_pr (mg/L)")     
      show(coutput)
      cat("\n")   
-     Amidihcr.more()                                                                                                                                                             
+     Amidihcr.more(AmidihcrSSpar,coutput)                                                                                                                                                             
   } 
      else if (pick == 2){
      rm(list=ls(all=TRUE))
- # show input and output information make user convenience to use 
      cat("\n")                                                                       
      cat("***********************************************************\n")
      cat("    --Aminophylline dihydrous CR input data information--  \n")
@@ -971,7 +1132,6 @@ Amidihcr.model <- function()
      cat("***********************************************************\n")
      cat("    --Aminophylline dihydrous CR output data information-- \n")
      cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
      cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
      cat("***********************************************************\n")    
      show(samplesStats("*"))
@@ -982,7 +1142,10 @@ Amidihcr.model <- function()
      colnames(coutput)<-list("Css_pr (mg/L)")     
      show(coutput)
      cat("\n")   
-     Amidihcrms.more()                                                                                                                                                                               
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Amidihcrms.pkoutput(AmidihcrMSpar,coutput)  
+     cal.again()                                                                                                                                                                             
   } 
   else if (pick == 3){
      cat("\n\n") 
@@ -990,17 +1153,17 @@ Amidihcr.model <- function()
   }      
 }
 
-# 3 Amidihinfusion.model()
-#Aminoglycoside data file 
-Amidihinfusion.model <- function()
+
+#Aminophylline dihydrous iv infusion model
+Amidihinfusion.model<-function()
 {
- # list of Aminophylline dihydrous data type   
   file.menu <- c("single subj with single conc",               
+                 "single subj with mutiple conc (sampling times must more than twice)",
                  "multiple subj with each single conc",
+                 "multiple subj and mutiple conc (each subj's sampling times must more than twice)",
                  "Go back one upper level")
-  pick <- menu(file.menu, title = "<< data type >>")          
-  if (pick == 1){ 
- # show input and output information make user convenience to use
+  pick <- menu(file.menu, title = "<< data type >>") 
+  if (pick == 1){                                                                    
      cat("\n")                                                                        
      cat("********************************************************************\n")
      cat("    --Aminophylline dihydrous iv infusion input data information--  \n")
@@ -1009,19 +1172,22 @@ Amidihinfusion.model <- function()
      cat("    ht = height (cm)                                       \n") 
      cat("    CHF = 1 for yes ; otherwise = 0                        \n")
      cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
-     cat("    D = dose for each dosing interval (mg)                 \n") 
+     cat("    DL = loading dose (mg)                                 \n")
+     cat("    tinf = infusion time of loading dose (hr)              \n") 
+     cat("    R = constant intravenous infusion rate (mg/hr)         \n") 
      cat("    tau = dosing interval (hr)                             \n")
-     cat("    C = measured steady-state conc.                        \n")
+     cat("    ts = sampling time since infusion end (hr)           \n")
+     cat("    C = measured conc. (mg/L)                              \n")
      cat("********************************************************************\n\n")                                                              
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmidihinfusionSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","c (mg/L)"),value=c(0))                                                                                                          
+     AmidihinfusionSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","DL (mg)","tinf (hr)","R (hr)","ts (hr)","c (mg/L)"),value=c(0))                                                                                                          
      AmidihinfusionSSpar<-edit(AmidihinfusionSSpar)                                                                                                                                                                                                              
      AmidihinfusionSSpar<-ycheck(AmidihinfusionSSpar)     
      cat("\n")                                                                                                                                                                                                        
-     Amidihinfusion.ss(AmidihinfusionSSpar[8,2],AmidihinfusionSSpar[7,2],AmidihinfusionSSpar[6,2],AmidihinfusionSSpar[3,2],AmidihinfusionSSpar[2,2],AmidihinfusionSSpar[5,2],AmidihinfusionSSpar[1,2],AmidihinfusionSSpar[4,2])
+     Amidihinfusion.ss(AmidihinfusionSSpar[10,2],AmidihinfusionSSpar[9,2],AmidihinfusionSSpar[6,2],AmidihinfusionSSpar[3,2],AmidihinfusionSSpar[2,2],AmidihinfusionSSpar[5,2],AmidihinfusionSSpar[1,2],AmidihinfusionSSpar[4,2],AmidihinfusionSSpar[6,2],AmidihinfusionSSpar[8,2],AmidihinfusionSSpar[9,2])
      get(getOption("device"))()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      get(getOption("device"))()
@@ -1031,23 +1197,87 @@ Amidihinfusion.model <- function()
      cat("\n\n")
      cat("********************************************************************\n") 
      cat("    --Aminophylline dihydrous iv infusion output data information-- \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                          \n")
-     cat("    V_F = volume of distribution/bioavailability (L)                \n")
-     cat("    Css_pr = predicted steady-state conc.(mg/L)                     \n")
+     cat("    cl = clerance (L/hr)                          \n")
+     cat("    v = volume of distribution (L)                \n")
+     cat("    Cm_pr = predicted measured conc.(mg/L)   \n")
+     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)     \n")
      cat("********************************************************************\n")  
      show(samplesStats("*"))
      cat("\n") 
-     C<-TheCRcpr(0.8,AmidihinfusionSSpar[6,2],AmidihinfusionSSpar[7,2])
+     C<-Theinfusioncpr(0.8,AmidihinfusionSSpar[6,2],AmidihinfusionSSpar[8,2],AmidihinfusionSSpar[9,2],AmidihinfusionSSpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_pr (mg/L)")     
+     colnames(coutput)<-list("Cm_pr (mg/L)")   
+     coutput1<-coutput  
      show(coutput)
+     C<-0.8*AmidihinfusionSSpar[8,2]/(samplesStats("cl"))
+     sim<-matrix(C[1,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Ctss_pr (mg/L)") 
+     coutput2<-coutput
      cat("\n")   
-     Amidihinfusion.more()                                                                                                                                                                                                                                                  
+     Amidihinfusion.more(AmidihinfusionSSpar,coutput1,coutput2)                                                                                                                                                                                                                                                  
+   } 
+   else if (pick == 2){     
+     cat("\n")                                                                       
+     cat("********************************************************************\n")
+     cat("    --Aminophylline dihydrous iv infusion input data information--  \n")
+     cat("    Gender = Male=1 ; Female=0                             \n")
+     cat("    age = age (yr)                                         \n")
+     cat("    ht = height (cm)                                       \n") 
+     cat("    CHF = 1 for yes ; otherwise = 0                        \n")
+     cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
+     cat("    DL = loading dose (mg)                                 \n")
+     cat("    tinf = infusion time of loading dose (hr)              \n") 
+     cat("    R = constant intravenous infusion rate (mg/hr)         \n") 
+     cat("********************************************************************\n\n")                                                              
+     cat("\n")
+     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     window, and close Data Editor window by clicking           \n")
+     cat("           (x) button at upper right corner.                    \n\n")
+     AmidihinfusionSMMpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","DL (mg)","tinf (hr)","R (mg/hr)"),value=c(0))
+     AmidihinfusionSMMpar<-edit(AmidihinfusionSMMpar)
+     AmidihinfusionSMMpar<-ycheck(AmidihinfusionSMMpar)
+     cat("\n")
+     cat("*****************************************************************\n")
+     cat("    --Aminophylline dihydrous infusion input data information--  \n")
+     cat("    c = measured conc.(mg/L)                  \n")
+     cat("    ts = sampling time since infusion end                  \n")
+     cat("*****************************************************************\n\n")
+     cat("\n")
+     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     window, and close Data Editor window by clicking           \n")
+     cat("           (x) button at upper right corner.                    \n\n")
+     AmidihinfusionSMpar<-data.frame(ts=c(0),conc=c(0))                                                                                                                            
+     AmidihinfusionSMpar<-edit(AmidihinfusionSMpar)                                            
+     AmidihinfusionSMpar<-mscheck(AmidihinfusionSMpar)                                         
+     cat("\n")
+     Amidihinfusion.sm(length(AmidihinfusionSMpar$ts),AmidihinfusionSMpar$conc,AmidihinfusionSMpar$ts,AmidihinfusionSMMpar[3,2],AmidihinfusionSMMpar[2,2],AmidihinfusionSMMpar[5,2],AmidihinfusionSMMpar[1,2],AmidihinfusionSMMpar[4,2],AmidihinfusionSMMpar[6,2],AmidihinfusionSMMpar[8,2],AmidihinfusionSMMpar[7,2])
+     get(getOption("device"))()
+     samplesHistory("*",mfrow=c(3,1), ask = FALSE)
+     get(getOption("device"))()
+     samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
+     get(getOption("device"))()
+     samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
+     cat("\n\n")
+     cat("*****************************************************************\n")
+     cat("    --Aminophylline dihydrous infusion output data information-- \n")
+     cat("    cl = clerance(L/hr)                 \n")
+     cat("    V = volume of distribution (L)       \n")
+     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)    \n")
+     cat("*****************************************************************\n")
+     show(samplesStats("*"))
+     cat("\n")
+     C<-0.8*AmidihinfusionSMMpar[8,2]/(samplesStats("cl"))
+     sim<-matrix(C[1 ,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Ctss_pr (mg/L)")
+     show(coutput)     
+     cat("\n")   
+     Amidihinfusionsm.more(AmidihinfusionSMMpar,AmidihinfusionSMpar,coutput)                                                                                                                                                                                            
   } 
-     else if (pick == 2){
+     else if (pick == 3){
      rm(list=ls(all=TRUE))
-  # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("********************************************************************\n\n")
      cat("    --Aminophylline dihydrous iv infusion input data information--  \n")
@@ -1056,19 +1286,21 @@ Amidihinfusion.model <- function()
      cat("    ht = height (cm)                                       \n") 
      cat("    CHF = 1 for yes ; otherwise = 0                        \n")
      cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
-     cat("    D = dose for each dosing interval (mg)                 \n") 
-     cat("    tau = dosing interval (hr)                             \n")
-     cat("    C = measured steady-state conc.                        \n")
+     cat("    DL = loading dose (mg)                                 \n") 
+     cat("    tinf = infusion time of loading dose (hr)              \n")
+     cat("    R = constant intravenous infusion rate (mg/hr)         \n") 
+     cat("    ts = sampling time since infusion end (hr)           \n")
+     cat("    C = measured conc. (mg/L)                              \n")
      cat("********************************************************************\n\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmidihinfusionMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),c=c(0))
+     AmidihinfusionMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),DL=c(0),tinf=c(0),R=c(0),ts=c(0),c=c(0))
      AmidihinfusionMSpar<-edit(AmidihinfusionMSpar)
      AmidihinfusionMSpar<-ymscheck(AmidihinfusionMSpar)
      cat("\n")
-     Amidihinfusion.ms(length(AmidihinfusionMSpar$subject),AmidihinfusionMSpar$c,AmidihinfusionMSpar$tau,AmidihinfusionMSpar$D,AmidihinfusionMSpar$ht,AmidihinfusionMSpar$age,AmidihinfusionMSpar$smoke,AmidihinfusionMSpar$Gender,AmidihinfusionMSpar$CHF)
+     Amidihinfusion.ms(length(AmidihinfusionMSpar$subject),AmidihinfusionMSpar$c,AmidihinfusionMSpar$ts,AmidihinfusionMSpar$ht,AmidihinfusionMSpar$age,AmidihinfusionMSpar$smoke,AmidihinfusionMSpar$Gender,AmidihinfusionMSpar$CHF,AmidihinfusionMSpar$DL,AmidihinfusionMSpar$R,AmidihinfusionMSpar$tinf)
      cat("\n\n")
      cat("**********************************************************\n")
      cat("   You can PgUp/PgDown to scroll through your checking    \n")
@@ -1078,28 +1310,107 @@ Amidihinfusion.model <- function()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
-     cat("********************************************************************\n") 
+     cat("**********************************************************************\n") 
      cat("    --Aminophylline dihydrous iv infusion output data information-- \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                          \n")
-     cat("    V_F = volume of distribution/bioavailability (L)                \n")
-     cat("    Css_pr = predicted steady-state conc.(mg/L)                     \n")
-     cat("********************************************************************\n")      
+     cat("    cl = clerance (L/hr)                          \n")
+     cat("    v = volume of distribution (L)                \n")
+     cat("    Cm_pr = predicted measured conc.(mg/L)   \n")
+     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)     \n")
+     cat("**********************************************************************\n")      
      show(samplesStats("*"))
      cat("\n") 
-     C<-TheCRcpr(0.8,AmidihinfusionMSpar$D,AmidihinfusionMSpar$tau)
+     C<-Theinfusioncpr(0.8,AmidihinfusionMSpar$DL,AmidihinfusionMSpar$R,AmidihinfusionMSpar$ts,AmidihinfusionMSpar$tinf)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_pr (mg/L)")     
+     colnames(coutput)<-list("Cm_pr (mg/L)")     
+     coutput1<-coutput
+     show(coutput)
+     C<-0.8*AmidihinfusionMSpar$R/(samplesStats("cl"))
+     sim<-matrix(C[ ,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Ctss_pr (mg/L)") 
+     coutput2<-coutput
      show(coutput)
      cat("\n")   
-     Amidihinfusionms.more()                                                                                                                                                             
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Amidihinfusionms.pkoutput(AmidihinfusionMSpar,coutput1,coutput2)      
+     cal.again()                                                                                                                                                       
   } 
-  else if (pick == 3){
+     else if (pick == 4){     
+     cat("\n")                                                                       
+     cat("*****************************************************************\n")
+     cat("    --Aminophylline dihydrous infusion input data information--  \n")
+     cat("    Gender = Male=1 ; Female=0                             \n")
+     cat("    age = age (yr)                                         \n")
+     cat("    ht = height (cm)                                       \n") 
+     cat("    CHF = 1 for yes ; otherwise = 0                        \n")
+     cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
+     cat("    DL = loading dose (mg)                                 \n")
+     cat("    tinf = infusion time of loading dose (hr)              \n") 
+     cat("    R = constant intravenous infusion rate (mg/hr)         \n") 
+     cat("*****************************************************************\n\n")
+     cat("\n")
+     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     window, and close Data Editor window by clicking           \n")
+     cat("           (x) button at upper right corner.                    \n\n")
+     AmidihinfusionMMpar<-data.frame(usbject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),DL=c(0),tinf=c(0),R=c(0))
+     AmidihinfusionMMpar<-edit(AmidihinfusionMMpar)
+     AmidihinfusionMMpar<-mscheck(AmidihinfusionMMpar)
+     cat("\n")
+     cat("********************************************************************\n")
+     cat("    --Aminophylline dihydrous infusion input data information--  \n")
+     cat("    c = measured steady-state conc.(mg/L)                  \n")
+     cat("    ts = sampling time since infusion end                  \n")
+     cat("********************************************************************\n\n")
+     cat("\n")
+     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     window, and close Data Editor window by clicking           \n")
+     cat("           (x) button at upper right corner.                    \n\n")
+     AmidihinfusionMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))
+     AmidihinfusionMMMpar<-edit(AmidihinfusionMMMpar)
+     AmidihinfusionMMMpar<-mscheck(AmidihinfusionMMMpar)
+     for(i in 1:length(unique(AmidihinfusionMMpar$subject))){
+     a=length(AmidihinfusionMMMpar$ts[AmidihinfusionMMMpar$subject==i])
+     b=AmidihinfusionMMMpar$conc[AmidihinfusionMMMpar$subject==i]
+     C=AmidihinfusionMMMpar$ts[AmidihinfusionMMMpar$subject==i]
+     e=AmidihinfusionMMpar$DL[AmidihinfusionMMpar$subject==i]
+     k=AmidihinfusionMMpar$R[AmidihinfusionMMpar$subject==i]
+     m=AmidihinfusionMMpar$tinf[AmidihinfusionMMpar$subject==i]
+     f=AmidihinfusionMMpar$ht[AmidihinfusionMMpar$subject==i]
+     g=AmidihinfusionMMpar$age[AmidihinfusionMMpar$subject==i]
+     h=AmidihinfusionMMpar$smoke[AmidihinfusionMMpar$subject==i]
+     l=AmidihinfusionMMpar$Gender[AmidihinfusionMMpar$subject==i]
+     J=AmidihinfusionMMpar$CHF[AmidihinfusionMMpar$subject==i]
+     Amidihinfusion.mm(a,i,b,C,f,g,h,l,J,e,k,m)
+     cat("\n")
+     cat("**************************************************************************\n")
+     cat("                 << Subject",i,">>                           \n\n" )
+     cat("cl = clerance (L/hr)                         \n")
+     cat("v = volume of distribution (L)               \n")
+     cat("Ctss_pr = predicted steady-state trough conc.(mg/L)    \n\n")
+     windows()
+     samplesHistory("*",mfrow=c(3,1),ask=FALSE)
+     windows()
+     samplesDensity("*",mfrow=c(3,2),ask=FALSE)
+     windows()
+     samplesAutoC("*",1,mfrow=c(3,2),ask=FALSE)
+     show(samplesStats("*"))
+     cat("\n")
+     C<-0.8*k/(samplesStats("cl"))
+     sim<-matrix(C[1 ,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Ctss_pr (mg/L)")
+     show(coutput)     
+     cat("\n**************************************************************************\n")
+     }
+     cal.again()
+  } 
+  else if (pick == 5){
      cat("\n\n") 
      Amidih.menu()
   }      
 }
-
 
 
 # Oxtriphylline
@@ -1108,7 +1419,7 @@ Oxt.menu <- function()
   file.menu <- c("immdediate release",
                  "control release",
                  "Go back one upper level")
-  pick <- menu(file.menu, title = "<< Oxtriphylline input dtat menu >>")
+  pick <- menu(file.menu, title = "<< Oxtriphylline input form menu >>")
   if (pick == 1){
      cat("\n\n")      
      Oxtir.model()
@@ -1126,7 +1437,6 @@ Oxt.menu <- function()
 # Oxtriphylline immdediate release model
 Oxtir.model <- function()
 {
- #list of Oxtriphylline data type   
   file.menu <- c("single subj with single conc",               
                  "single subj with mutiple conc (sampling times must more than twice)",
                  "multiple subj with each single conc",
@@ -1134,7 +1444,6 @@ Oxtir.model <- function()
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>") 
   if (pick == 1){                                                                    
- # show input and output information make user convenience to use 
      cat("\n")                                                                       
      cat("***********************************************************\n")
      cat("    --Oxtriphylline IR input data information--  \n")
@@ -1174,27 +1483,29 @@ Oxtir.model <- function()
      cat("***********************************************************\n")
      show(samplesStats("*"))
      cat("\n") 
-     C<-TheIRcpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],OxtirSSpar[8,2])
+     C<-TheIRsscpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],OxtirSSpar[8,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],r)
+     C<-TheIRsscpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
-     C<-TheIRcpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],OxtirSSpar[7,2])
+     C<-TheIRsscpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],OxtirSSpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)     
      cat("\n")  
-     Oxtir.more()                                                                                                                                    
+     Oxtir.more(OxtirSSpar,output1,output2,output3)                                                                                                                                    
   } 
    else if (pick == 2){     
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Oxtriphylline IR input data information--            \n")
@@ -1247,22 +1558,23 @@ Oxtir.model <- function()
      show(samplesStats("*"))
      cat("\n")
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.65,OxtirSMMpar[6,2],OxtirSMMpar[7,2],r)
+     C<-TheIRsscpr(0.65,OxtirSMMpar[6,2],OxtirSMMpar[7,2],r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
-     C<-TheIRcpr(0.65,OxtirSMMpar[6,2],OxtirSMMpar[7,2],OxtirSMMpar[7,2])
+     C<-TheIRsscpr(0.65,OxtirSMMpar[6,2],OxtirSMMpar[7,2],OxtirSMMpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)     
      cat("\n")   
-     Oxtir.more()                                                                                                                                                                 
+     Oxtirsm.more(OxtirSMMpar,OxtirSMpar,output1,output2)                                                                                                                                                                 
   } 
      else if (pick == 3){
      rm(list=ls(all=TRUE))
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Oxtriphylline IR input data information--  \n")
@@ -1304,24 +1616,30 @@ Oxtir.model <- function()
      cat("***********************************************************\n")   
      show(samplesStats("*"))
      cat("\n")
-     C<-TheIRcpr(0.65,OxtirMSpar$D,OxtirMSpar$tau,OxtirMSpar$ts)
+     C<-TheIRsscpr(0.65,OxtirMSpar$D,OxtirMSpar$tau,OxtirMSpar$ts)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.65,OxtirMSpar$D,OxtirMSpar$tau,r)
+     C<-TheIRsscpr(0.65,OxtirMSpar$D,OxtirMSpar$tau,r)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
-     C<-TheIRcpr(0.65,OxtirMSpar$D,OxtirMSpar$tau,OxtirMSpar$tau)
+     C<-TheIRsscpr(0.65,OxtirMSpar$D,OxtirMSpar$tau,OxtirMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)     
      cat("\n")   
-     Oxtirms.more()                                                                                                                                                            
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Oxtirms.pkoutput(OxtirMSpar,output1,output2,output3)     
+     cal.again()                                                                                                                                                       
   } 
      else if (pick == 4){     
       cat("\n")                                                                      
@@ -1365,7 +1683,7 @@ Oxtir.model <- function()
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)    \n")
      cat("***********************************************************\n")
      for(i in 1:length(unique(OxtirMMpar$subject))){
-     a=length(OxtirMMMpar$ts[OxtirMMpar$subject==i])
+     a=length(OxtirMMMpar$ts[OxtirMMMpar$subject==i])
      b=OxtirMMMpar$conc[OxtirMMMpar$subject==i]
      C=OxtirMMMpar$ts[OxtirMMMpar$subject==i]
      d=OxtirMMpar$tau[OxtirMMpar$subject==i]
@@ -1375,7 +1693,7 @@ Oxtir.model <- function()
      h=OxtirMMpar$smoke[OxtirMMpar$subject==i]
      l=OxtirMMpar$Gender[OxtirMMpar$subject==i]
      J=OxtirMMpar$CHF[OxtirMMpar$subject==i]
-     Oxtir.mm(a,b,C,d,e,f,g,h,l,J,i)
+     Oxtir.mm(a,i,b,C,d,e,f,g,h,l,J,i)
      cat("\n")
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )
@@ -1390,12 +1708,12 @@ Oxtir.model <- function()
      show(samplesStats("*"))
      cat("\n")
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(0.65,e,d,r)
+     C<-TheIRsscpr(0.65,e,d,r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
      show(coutput)
-     C<-TheIRcpr(0.65,e,d,d)
+     C<-TheIRsscpr(0.65,e,d,d)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
@@ -1412,17 +1730,16 @@ Oxtir.model <- function()
 }
 
 
+
 # 2. 
 # Oxtriphylline control release model
 Oxtcr.model <- function()
 {
- # list of Oxtriphylline data type   
   file.menu <- c("single subj with single conc",               
                  "multiple subj with each single conc",
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>") 
   if (pick == 1){                                                                    
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Oxtriphylline CR input data information--            \n")
@@ -1454,7 +1771,6 @@ Oxtcr.model <- function()
      cat("***********************************************************\n")
      cat("    --Oxtriphylline CR output data information--           \n")
      cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
      cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
      cat("***********************************************************\n")
      show(samplesStats("*"))
@@ -1465,11 +1781,10 @@ Oxtcr.model <- function()
      colnames(coutput)<-list("Css_pr (mg/L)")     
      show(coutput)
      cat("\n")   
-     Oxtcr.more()                                                                                                                                      
+     Oxtcr.more(OxtcrSSpar,coutput)                                                                                                                                      
   } 
      else if (pick == 2){
      rm(list=ls(all=TRUE))
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Oxtriphylline CR input data information--             \n")
@@ -1503,7 +1818,6 @@ Oxtcr.model <- function()
      cat("***********************************************************\n")
      cat("    --Oxtriphylline CR output data information--           \n")
      cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
      cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
      cat("***********************************************************\n")   
      show(samplesStats("*"))
@@ -1514,7 +1828,10 @@ Oxtcr.model <- function()
      colnames(coutput)<-list("Css_pr (mg/L)")     
      show(coutput)
      cat("\n")   
-     Oxtcrms.more()                                                                                                                                                            
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Oxtcrms.pkoutput(OxtcrMSpar,coutput)      
+     cal.again()                                                                                                                                                     
   } 
   else if (pick == 3){
      cat("\n\n") 
@@ -1529,9 +1846,8 @@ The.menu <- function()
 {
   file.menu <- c("immdediate release",
                  "control release",
-                 "iv infusion",
                  "Go back one upper level")
-  pick <- menu(file.menu, title = "<< Aminophylline dihydrous input dtat menu >>")
+  pick <- menu(file.menu, title = "<< Theophylline input form menu >>")
   if (pick == 1){
      cat("\n\n")      
      Their.model()
@@ -1539,12 +1855,8 @@ The.menu <- function()
   else if (pick == 2){
      cat("\n\n") 
      Thecr.model()
-  }         
+  }           
   else if (pick == 3){
-     cat("\n\n") 
-     Theinfusion.model()
-  }   
-  else if (pick == 4){
      cat("\n\n") 
      Theall.menu()
   }      
@@ -1555,7 +1867,6 @@ The.menu <- function()
 # Theophylline immdediate release model
 Their.model <- function()
 {
- # list of Theophylline data type   
   file.menu <- c("single subj with single conc",              
                  "single subj with mutiple conc (sampling times must more than twice)",
                  "multiple subj with each single conc",
@@ -1563,7 +1874,6 @@ Their.model <- function()
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>") 
   if (pick == 1){                                                                    
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Theophylline IR input data information--             \n")
@@ -1603,27 +1913,29 @@ Their.model <- function()
      cat("***********************************************************\n")
      show(samplesStats("*"))
      cat("\n") 
-     C<-TheIRcpr(1,TheirSSpar[6,2],TheirSSpar[7,2],TheirSSpar[8,2])
+     C<-TheIRsscpr(1,TheirSSpar[6,2],TheirSSpar[7,2],TheirSSpar[8,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(1,TheirSSpar[6,2],TheirSSpar[7,2],r)
+     C<-TheIRsscpr(1,TheirSSpar[6,2],TheirSSpar[7,2],r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
-     C<-TheIRcpr(1,TheirSSpar[6,2],TheirSSpar[7,2],TheirSSpar[7,2])
+     C<-TheIRsscpr(1,TheirSSpar[6,2],TheirSSpar[7,2],TheirSSpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)     
      cat("\n")  
-     Their.more()                                                                                                                                     
+     Their.more(TheirSSpar,output1,output2,output3)                                                                                                                                     
   } 
    else if (pick == 2){     
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Theophylline IR input data information--             \n")
@@ -1676,22 +1988,21 @@ Their.model <- function()
      show(samplesStats("*"))
      cat("\n")
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(1,TheirSMMpar[6,2],TheirSMMpar[7,2],r)
+     C<-TheIRsscpr(1,TheirSMMpar[6,2],TheirSMMpar[7,2],r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
      show(coutput) 
-     C<-TheIRcpr(1,TheirSMMpar[6,2],TheirSMMpar[7,2],TheirSMMpar[7,2])
+     C<-TheIRsscpr(1,TheirSMMpar[6,2],TheirSMMpar[7,2],TheirSMMpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)     
      cat("\n")     
-     Their.more()                                                                                                                                                                 
+     Theirsm.more(TheirSMMpar,TheirSMpar,outptu1,output2)                                                                                                                                                                 
   } 
      else if (pick == 3){
      rm(list=ls(all=TRUE))
- # show input and output information make user convenience to use 
      cat("\n")                                                                       
      cat("***********************************************************\n")
      cat("    --Theophylline IR input data information--             \n")
@@ -1733,24 +2044,30 @@ Their.model <- function()
      cat("***********************************************************\n")    
      show(samplesStats("*"))
      cat("\n")
-     C<-TheIRcpr(1,TheirMSpar$D,TheirMSpar$tau,TheirMSpar$ts)
+     C<-TheIRsscpr(1,TheirMSpar$D,TheirMSpar$tau,TheirMSpar$ts)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(1,TheirMSpar$D,TheirMSpar$tau,r)
+     C<-TheIRsscpr(1,TheirMSpar$D,TheirMSpar$tau,r)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
-     C<-TheIRcpr(1,TheirMSpar$D,TheirMSpar$tau,TheirMSpar$tau)
+     C<-TheIRsscpr(1,TheirMSpar$D,TheirMSpar$tau,TheirMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)     
      cat("\n") 
-     Theirms.more()                                                                                                                                                     
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Theirms.pkoutput(TheirMSpar,output1,output2,output3)   
+     cal.again()                                                                                                                                                  
   } 
      else if (pick == 4){     
      cat("\n")                                                                      
@@ -1793,7 +2110,7 @@ Their.model <- function()
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
      cat("***********************************************************\n")
      for(i in 1:length(unique(TheirMMpar$subject))){
-     a=length(TheirMMMpar$ts[TheirMMpar$subject==i])
+     a=length(TheirMMMpar$ts[TheirMMMpar$subject==i])
      b=TheirMMMpar$conc[TheirMMMpar$subject==i]
      C=TheirMMMpar$ts[TheirMMMpar$subject==i]
      d=TheirMMpar$tau[TheirMMpar$subject==i]
@@ -1803,7 +2120,7 @@ Their.model <- function()
      h=TheirMMpar$smoke[TheirMMpar$subject==i]
      l=TheirMMpar$Gender[TheirMMpar$subject==i]
      J=TheirMMpar$CHF[TheirMMpar$subject==i]
-     Their.mm(a,b,C,d,e,f,g,h,l,J,i)
+     Their.mm(a,i,b,C,d,e,f,g,h,l,J,i)
      cat("\n")
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )
@@ -1818,12 +2135,12 @@ Their.model <- function()
      show(samplesStats("*"))
      cat("\n")
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
-     C<-TheIRcpr(1,e,d,r)
+     C<-TheIRsscpr(1,e,d,r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)  
-     C<-TheIRcpr(1,e,d,d)
+     C<-TheIRsscpr(1,e,d,d)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
@@ -1840,17 +2157,16 @@ Their.model <- function()
 }
 
 
+
 # 2. 
 # Theophylline control release model
 Thecr.model <- function()
 {
- #list of Theophylline data type 
   file.menu <- c("single subj with single conc",                 
                  "multiple subj with each single conc",
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>") 
   if (pick == 1){                                                                    
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Theophylline CR input data information--             \n")
@@ -1882,7 +2198,6 @@ Thecr.model <- function()
      cat("***********************************************************\n")
      cat("    --Theophylline CR output data information--            \n")
      cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
      cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
      cat("***********************************************************\n")
      show(samplesStats("*"))
@@ -1893,11 +2208,10 @@ Thecr.model <- function()
      colnames(coutput)<-list("Css_pr (mg/L)")     
      show(coutput)
      cat("\n")   
-     Thecr.more()                                                                                                                                     
+     Thecr.more(ThecrSSpar,coutput)                                                                                                                                     
   } 
     else if (pick == 2){
      rm(list=ls(all=TRUE))
- # show input and output information make user convenience to use 
      cat("\n")                                                                      
      cat("***********************************************************\n")
      cat("    --Theophylline CR input data information--             \n")
@@ -1931,7 +2245,6 @@ Thecr.model <- function()
      cat("***********************************************************\n")
      cat("    --Theophylline CR output data information--            \n")
      cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
      cat("    Css_pr = predicted steady-state conc.(mg/L)            \n")
      cat("***********************************************************\n")    
      show(samplesStats("*"))
@@ -1942,7 +2255,10 @@ Thecr.model <- function()
      colnames(coutput)<-list("Css_pr (mg/L)")     
      show(coutput)
      cat("\n")   
-     Thecrms.more()                                                                                                                                                     
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Thecrms.pkoutput(ThecrMSpar,coutput)        
+     cal.again()                                                                                                                                             
   } 
   else if (pick == 3){
      cat("\n\n") 
@@ -1951,112 +2267,4 @@ Thecr.model <- function()
 }
 
 
-# 3 Theinfusion.model
-# infusion
-Theinfusion.model <- function()
-{
- # list of Theophylline data type   
-  file.menu <- c("single subj with single conc",               
-                 "multiple subj with each single conc",
-                 "Go back one upper level")
-  pick <- menu(file.menu, title = "<< data type >>")          
-  if (pick == 1){ 
- # show input and output information make user convenience to use 
-     cat("\n")                                                                       
-     cat("*********************************************************\n")
-     cat("    --Theophylline iv infusion input data information--  \n")
-     cat("    Gender = Male=1 ; Female=0                             \n")
-     cat("    age = age (yr)                                         \n")
-     cat("    ht = height (cm)                                       \n") 
-     cat("    CHF = 1 for yes ; otherwise = 0                        \n")
-     cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
-     cat("    D = dose for each dosing interval (mg)                 \n") 
-     cat("    tau = dosing interval (hr)                             \n")
-     cat("    C = measured steady-state conc.                        \n")
-     cat("*********************************************************\n")                                                            
-     cat("\n")
-     cat("     Please enter all parameters values at Data Editor          \n")
-     cat("     window, and close Data Editor window by clicking           \n")
-     cat("           (x) button at upper right corner.                    \n\n")
-     TheinfusionSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","c (mg/L)"),value=c(0))                                                                                                         
-     TheinfusionSSpar<-edit(TheinfusionSSpar)                                                                                                                                                                                                              
-     TheinfusionSSpar<-ycheck(TheinfusionSSpar)   
-     cat("\n")                                                                                                                                                                                                          
-     Theinfusion.ss(TheinfusionSSpar[8,2],TheinfusionSSpar[7,2],TheinfusionSSpar[6,2],TheinfusionSSpar[3,2],TheinfusionSSpar[2,2],TheinfusionSSpar[5,2],TheinfusionSSpar[1,2],TheinfusionSSpar[4,2])
-     get(getOption("device"))()
-     samplesHistory("*",mfrow=c(3,1), ask = FALSE)
-     get(getOption("device"))()
-     samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
-     get(getOption("device"))()
-     samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
-     cat("\n\n")
-     cat("*********************************************************\n") 
-     cat("    --Theophylline iv infusion output data information-- \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")
-     cat("    V_F = volume of distribution/bioavailability (L)     \n")
-     cat("    Css_pr = predicted steady-state conc.(mg/L)          \n")
-     cat("*********************************************************\n") 
-     show(samplesStats("*"))
-     cat("\n") 
-     C<-TheCRcpr(1,TheinfusionSSpar[6,2],TheinfusionSSpar[7,2])
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_pr (mg/L)")     
-     show(coutput)
-     cat("\n")   
-     Theinfusion.more()                                                                                                                                                                                                                                                  
-  } 
-       else if (pick == 2){
-       rm(list=ls(all=TRUE))
- # show input and output information make user convenience to use 
-     cat("\n")                                                                       
-     cat("*********************************************************\n")
-     cat("    --Theophylline iv infusion input data information--  \n")
-     cat("    Gender = Male=1 ; Female=0                             \n")
-     cat("    age = age (yr)                                         \n")
-     cat("    ht = height (cm)                                       \n") 
-     cat("    CHF = 1 for yes ; otherwise = 0                        \n")
-     cat("    smoke = 1 for a amoker ; otherwise 0                   \n") 
-     cat("    D = dose for each dosing interval (mg)                 \n") 
-     cat("    tau = dosing interval (hr)                             \n")
-     cat("    C = measured steady-state conc.                        \n")
-     cat("*********************************************************\n")
-     cat("\n")
-     cat("     Please enter all parameters values at Data Editor          \n")
-     cat("     window, and close Data Editor window by clicking           \n")
-     cat("           (x) button at upper right corner.                    \n\n")
-     TheinfusionMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),c=c(0))
-     TheinfusionMSpar<-edit(TheinfusionMSpar)
-     TheinfusionMSpar<-ymscheck(TheinfusionMSpar)
-     cat("\n")
-     Theinfusion.ms(length(TheinfusionMSpar$subject),TheinfusionMSpar$c,TheinfusionMSpar$tau,TheinfusionMSpar$D,TheinfusionMSpar$ht,TheinfusionMSpar$age,TheinfusionMSpar$smoke,TheinfusionMSpar$Gender,TheinfusionMSpar$CHF)
-     cat("\n\n")
-     cat("**********************************************************\n")
-     cat("   You can PgUp/PgDown to scroll through your checking    \n")
-     cat("   convergence plots.                                     \n")  
-     cat("**********************************************************\n\n")
-     options("graphics.record"=TRUE)
-     samplesHistory("*",mfrow=c(3,1), ask = FALSE)
-     samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
-     samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
-     cat("*********************************************************\n") 
-     cat("    --Theophylline iv infusion output data information-- \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")
-     cat("    V_F = volume of distribution/bioavailability (L)     \n")
-     cat("    Css_pr = predicted steady-state conc.(mg/L)          \n")
-     cat("*********************************************************\n")     
-     show(samplesStats("*"))
-     cat("\n") 
-     C<-TheCRcpr(1,TheinfusionMSpar$D,TheinfusionMSpar$tau)
-     sim<-matrix(C[ ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Css_pr (mg/L)")     
-     show(coutput)
-     cat("\n")   
-     Theinfusionms.more()                                                                                                                                                              
-  } 
-  else if (pick == 3){
-     cat("\n\n") 
-     The.menu()
-  }      
-}
+

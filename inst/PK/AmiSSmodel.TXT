@@ -4,12 +4,12 @@ model
      
            for (i in 1:1) {              # one subject
            c~dnorm(mu,100)               # c:drug concentration
-           mu<-(D*(1-exp(-cl_F/v_F*tin))/(tin*cl_F*(1-exp(-cl_F/v_F*tau))))*exp(-cl_F/v_F*ts)     # iv infusion concentration equation at steady state
+           mu<-(D*(1-exp(-cl/v*tin))/(tin*cl*(1-exp(-cl/v*tau))))*exp(-cl/v*ts)     # iv infusion concentration equation at steady state
 
-           cl_F~dnorm(theta1, 100)
-           v_F~dnorm(theta2, 100)
+           cl~dnorm(theta1, 100)
+           v~dnorm(theta2, 1)
 
-           theta1<-(0.01+0.0024*(293-2.03*age)*(0.5175-0.01685*Scr)/Scr*(0.86+0.14*Gender))*v_F      # population estimate of Aminoglycoside clerance
+           theta1<-(0.01+0.0024*(293-2.03*age)*(0.5175-0.01685*Scr)/Scr*(0.86+0.14*Gender))*v      # population estimate of Aminoglycoside clearance
            theta2<-0.25*(0.4*bw+0.6*((0.73*Ht-59.42)*Gender+(0.65*Ht-50.74)*(1-Gender)))             # population estimate of Aminoclycoside apparent volume of distribution 
            }
 

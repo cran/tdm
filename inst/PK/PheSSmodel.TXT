@@ -4,7 +4,7 @@ model
      
            for (i in 1:1){         # one subject
            c~dnorm(mu,100)         # c:drug concentration
-           mu<-(D*24/tau)*Km/(Vmax-D*24/tau)     
+           mu<-(D*24/tau)*Km/(Vmax-D*24/tau)    # oral phenytoin concentration equation at steady state 
 
            Vmax~dnorm(theta1, 0.01)
            Km~dnorm(theta2, 10)

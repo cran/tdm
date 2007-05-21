@@ -32,7 +32,6 @@ run<-function()
     if (pick == 4){
       cat("\n\n") 
       Dig.menu()
-      
     } else {
     if (pick == 5){
       cat("\n\n") 
@@ -91,13 +90,13 @@ run<-function()
 #Aminoglycoside data file 
 Ami.model <- function()
 {
-  file.menu <- c("single subj with single conc",               #list of Aminoglycoside data type   
+  file.menu <- c("single subj with single conc",                                                     #list of Aminoglycoside data type   
                  "single subj with mutiple conc (sampling times must more than twice)",
                  "multiple subj with each single conc",
                  "multiple subj and mutiple conc (each subj's sampling times must more than twice)",
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type >>")          
-  if (pick == 1){                                                                    
+  if (pick == 1){                                                                    # chosse single subject with single concentration
      cat("\n")                                                                       # show input and output information make user convenience to use 
      cat("*********************************************************\n")
      cat("    --Aminoglycoside input data information--            \n")
@@ -113,50 +112,53 @@ Ami.model <- function()
      cat("    c = measured steady-state conc.(mg/L)                \n") 
      cat("*********************************************************\n\n")
      cat("\n")
-     cat("     Please enter all parameters values at Data Editor          \n")
+     cat("     Please enter all parameters values at Data Editor          \n")       # tell user how to edit table of Aminoglycoside input data information
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmiSSpar<-data.frame(parameter=c("Gender","age (yr)","bw (kg)","Ht (cm)","Scr (mg/dL)","D (mg)","tau (hr)","tin (hr)","ts (hr)","c (mg/L)"),value=c(0))      # single subject table form setting    
-     AmiSSpar<-edit(AmiSSpar)                                                                                                                                     # show table of input parameter for user editing
-     AmiSSpar<-ycheck(AmiSSpar)                                                                                                                                 # avoid user missing input concentration values
-     cat("\n")
-     Ami.ss(AmiSSpar[10,2],AmiSSpar[7,2],AmiSSpar[9,2],AmiSSpar[8,2],AmiSSpar[6,2],AmiSSpar[3,2],AmiSSpar[4,2],AmiSSpar[5,2],AmiSSpar[1,2],AmiSSpar[2,2])   # calculate individual Aminoglycoside PK paramter and show its value
+     AmiSSpar<-data.frame(parameter=c("Gender","age (yr)","bw (kg)","Ht (cm)","Scr (mg/dL)","D (mg)","tau (hr)","tin (hr)","ts (hr)","c (mg/L)"),value=c(0))      # edit table of Aminoglycoside input data information     
+     AmiSSpar<-edit(AmiSSpar)                                                                                                                                     # show table of Aminoglycoside input data information for user editing
+     AmiSSpar<-ycheck(AmiSSpar)                                                                                                                                   # avoid user missing input information
+     cat("\n")                                                                                                                                                    # 空一行
+     Ami.ss(AmiSSpar[10,2],AmiSSpar[7,2],AmiSSpar[9,2],AmiSSpar[8,2],AmiSSpar[6,2],AmiSSpar[3,2],AmiSSpar[4,2],AmiSSpar[5,2],AmiSSpar[1,2],AmiSSpar[2,2])   # calculate individual Aminoglycoside PK parameters and show its prediction
+     get(getOption("device"))()                                              # open a new window
+     samplesHistory("*",mfrow=c(3,1), ask = FALSE)                           # show plots of history
+     get(getOption("device"))()                                              
+     samplesDensity("*", mfrow = c(3, 2), ask = FALSE)                       # show plots of density
      get(getOption("device"))()
-     samplesHistory("*",mfrow=c(3,1), ask = FALSE)
-     get(getOption("device"))()
-     samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
-     get(getOption("device"))()
-     samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
-     cat("\n\n")
-     cat("**********************************************************\n")
+     samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)                       # show pots of autocorrection
+     cat("\n\n")          
+     cat("**********************************************************\n")     # show Aminoglycoside output data information
      cat("    --Aminoglycoside output data information--            \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                \n")
-     cat("    V_F = volume of distribution/bioavailability (L)      \n")
+     cat("    cl = clerance (L/hr)                                  \n")
+     cat("    V = volume of distribution (L)                        \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L) \n")
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)     \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
      cat("**********************************************************\n")
-     show(samplesStats("*"))
+     show(samplesStats("*"))                                                 # show predicted PK parameters of Aminoglycoside
      cat("\n") 
-     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[9,2]+AmiSSpar[8,2])
-     sim<-matrix(C[1 ,1])
+     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[9,2]+AmiSSpar[8,2])     # calculate predicted steady-state measured concentration of Aminoglycoside (equation of intermediate iv infusion concentration)
+     sim<-matrix(C[1 ,1])                                                                 # take the entry of form[1,1] as the input of sim
+     coutput<-data.frame(sim)                                                             # 命名所取出來的[1,1]為couput
+     colnames(coutput)<-list("Cmss_pr (mg/L)")                                            # 並命名此欄為為Cmss_pr(mg/L)
+     output1<-coutput                                                                     # 將Cmss_pr命名為coutput1    
+     show(coutput)                                                                        # show the concentration of Aminoglycoside  
+     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[8,2])                   # calculate predicted steady-state peak concentration of Aminoglycoside
+     sim<-matrix(C[1 ,1])                                                                 
      coutput<-data.frame(sim)
-     colnames(coutput)<-list("Cmss_pr (mg/L)")
+     colnames(coutput)<-list("Cpss_pr (mg/L)")                                            # 並命名此欄為為Cpss_pr(mg/L)
+     output2<-coutput                                                                     # 將Cpss_pr命名為coutput2
      show(coutput)
-     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[8,2])
+     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[7,2])                   # calculate predicted steady-state trough concentration of Aminoglycoside
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
-     colnames(coutput)<-list("Cpss_pr (mg/L)")
-     show(coutput)
-     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[7,2])
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Ctss_pr (mg/L)")
+     colnames(coutput)<-list("Ctss_pr (mg/L)")                                            # 並命名此欄為為Ctss_pr(mg/L)
+     output3<-coutput                                                                     # 將Cmss_pr命名為coutput3
      show(coutput)     
      cat("\n")   
-     Ami.more()                                                          # calculate Aminoglycoside dose adjustment for single subject
+     Ami.more(AmiSSpar,output1,output2,output3)                                           # calculate dose adjustment of Aminoflycoside with single subject single concentration
   } 
-   else if (pick == 2){     
+   else if (pick == 2){                                                                   # chosse single subject with each multiple concentrations    
      cat("\n")
      cat("*********************************************************\n")
      cat("    --Aminoglycoside input data information--            \n")
@@ -173,7 +175,7 @@ Ami.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmiSMMpar<-data.frame(parameter=c("Gender","age (yr)","bw (kg)","Ht (cm)","Scr (mg/dL)","D (mg)","tau (hr)","tin (hr)"),value=c(0))
+     AmiSMMpar<-data.frame(parameter=c("Gender","age (yr)","bw (kg)","Ht (cm)","Scr (mg/dL)","D (mg)","tau (hr)","tin (hr)"),value=c(0))   # edit table of Aminoglycoside input data information except ts and conc 
      AmiSMMpar<-edit(AmiSMMpar)
      AmiSMMpar<-ycheck(AmiSMMpar)
      cat("\n")
@@ -187,11 +189,11 @@ Ami.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmiSMpar<-data.frame(ts=c(0),conc=c(0))        # mutiple concentrations table form setting                                                                                                 
-     AmiSMpar<-edit(AmiSMpar)
-     AmiSMpar<-mscheck(AmiSMpar)
+     AmiSMpar<-data.frame(ts=c(0),conc=c(0))                                         # edit table of Aminoglycoside input data information including ts and conc (此表格的呈現方式跟上面表格呈現方式不同)                                                                                              
+     AmiSMpar<-edit(AmiSMpar)                                                        # show table of Aminoglycoside input data information for user editing
+     AmiSMpar<-mscheck(AmiSMpar)                                                     # avoid user missing input information
      cat("\n")
-     Ami.sm(length(AmiSMpar$ts),AmiSMpar$conc,AmiSMpar$ts,AmiSMMpar[7,2],AmiSMMpar[8,2],AmiSMMpar[6,2],AmiSMMpar[3,2],AmiSMMpar[4,2],AmiSMMpar[5,2],AmiSMMpar[1,2],AmiSMMpar[2,2])
+     Ami.sm(length(AmiSMpar$ts),AmiSMpar$conc,AmiSMpar$ts,AmiSMMpar[7,2],AmiSMMpar[8,2],AmiSMMpar[6,2],AmiSMMpar[3,2],AmiSMMpar[4,2],AmiSMMpar[5,2],AmiSMMpar[1,2],AmiSMMpar[2,2])   # calculate individual Aminoglycoside PK parameters and show its prediction
      get(getOption("device"))()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      get(getOption("device"))()
@@ -200,9 +202,9 @@ Ami.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("\n\n")
      cat("**********************************************************\n")
-     cat("    --Aminoglycoside output data information--           \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")
-     cat("    V_F = volume of distribution/bioavailability (L)     \n")
+     cat("    --Aminoglycoside output data information--            \n")
+     cat("    cl = clerance (L/hr)                                  \n")
+     cat("    V = volume of distribution (L)                        \n")
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)     \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
      cat("**********************************************************\n")
@@ -212,16 +214,18 @@ Ami.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     outptu1<-coutput
      show(coutput)  
      C<-infcpr(AmiSMMpar[6,2],AmiSMMpar[8,2],AmiSMMpar[7,2],AmiSMMpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)     
      cat("\n")
-     Ami.more()
+     Amism.more(AmiSMMpar,AmiSMpar,output1,output2)                # calculate dose adjustment of Aminoflycoside with single subject and each multiple concentrations
   } 
-     else if (pick == 3){
+     else if (pick == 3){                                                                   # chosse multiple subjects with each single concentration    
      rm(list=ls(all=TRUE))
      cat("\n")
      cat("*********************************************************\n")
@@ -241,11 +245,11 @@ Ami.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmiMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),bw=c(0),Ht=c(0),Scr=c(0),D=c(0),tau=c(0),tin=c(0),ts=c(0),c=c(0))
+     AmiMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),bw=c(0),Ht=c(0),Scr=c(0),D=c(0),tau=c(0),tin=c(0),ts=c(0),c=c(0))    
      AmiMSpar<-edit(AmiMSpar)
      AmiMSpar<-ymscheck(AmiMSpar)
      cat("\n")
-     Ami.ms(length(AmiMSpar$subject),AmiMSpar$c,AmiMSpar$tau,AmiMSpar$ts,AmiMSpar$tin,AmiMSpar$D,AmiMSpar$bw,AmiMSpar$Ht,AmiMSpar$Scr,AmiMSpar$Gender,AmiMSpar$age)
+     Ami.ms(length(AmiMSpar$subject),AmiMSpar$c,AmiMSpar$tau,AmiMSpar$ts,AmiMSpar$tin,AmiMSpar$D,AmiMSpar$bw,AmiMSpar$Ht,AmiMSpar$Scr,AmiMSpar$Gender,AmiMSpar$age)  # calculate individual Aminoglycoside PK parameters and show its prediction
      cat("\n\n")
      cat("**********************************************************\n")
      cat("   You can PgUp/PgDown to scroll through your checking    \n")
@@ -256,9 +260,9 @@ Ami.model <- function()
      samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("**********************************************************\n")
-     cat("    --Aminoglycoside output data information--           \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")
-     cat("    V_F = volume of distribution/bioavailability (L)     \n")
+     cat("    --Aminoglycoside output data information--            \n")
+     cat("    cl = clerance (L/hr)                                  \n")
+     cat("    V = volume of distribution (L)                        \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L) \n")
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)     \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
@@ -266,24 +270,30 @@ Ami.model <- function()
      show(samplesStats("*"))
      cat("\n")
      C<-infcpr(AmiMSpar$D,AmiMSpar$tin,AmiMSpar$tau,AmiMSpar$ts+AmiMSpar$tin)  
-     sim<-matrix(C[ ,1])
+     sim<-matrix(C[ ,1])                                                         # 取表格[,1]之答案
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput) 
      C<-infcpr(AmiMSpar$D,AmiMSpar$tin,AmiMSpar$tau,AmiMSpar$tin)  
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)  
      C<-infcpr(AmiMSpar$D,AmiMSpar$tin,AmiMSpar$tau,AmiMSpar$tau)  
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
-     show(coutput)
-     cat("\n") 
-     Amims.more()                                                                                                                                                              # calculate Aminoglycoside dose adjustment for mutiple subjects
+     output3<-coutput
+     show(coutput)                            
+     cat("\n")
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Amims.pkoutput(AmiMSpar,output1,output2,output3)         
+     cal.again()
   } 
-     else if (pick == 4){     
+     else if (pick == 4){                                                                   # chosse multiple subjects with each multiple concentrations         
      cat("\n")
      cat("*********************************************************\n")
      cat("    --Aminoglycoside input data information--            \n")
@@ -300,7 +310,7 @@ Ami.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     AmiMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),bw=c(0),Ht=c(0),Scr=c(0),D=c(0),tau=c(0),tin=c(0))
+     AmiMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),bw=c(0),Ht=c(0),Scr=c(0),D=c(0),tau=c(0),tin=c(0))      # edit table of Aminoglycoside input data information except ts and conc 
      AmiMMpar<-edit(AmiMMpar)
      AmiMMpar<-ymscheck(AmiMMpar)
      cat("\n")
@@ -309,31 +319,31 @@ Ami.model <- function()
      cat("    c = measured steady-state conc.(mg/L)                \n")
      cat("    ts = sampling time since infusion end (hr)           \n")
      cat("*********************************************************\n\n")
-     AmiMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))
+     AmiMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))                  # edit table of Aminoglycoside input data information including subject, ts and conc
      AmiMMMpar<-edit(AmiMMMpar)
      AmiMMMpar<-mscheck(AmiMMMpar)
-     for(i in 1:length(unique(AmiMMpar$subject))){
-     a=length(AmiMMMpar$ts[AmiMMpar$subject==i])
-     b=AmiMMMpar$conc[AmiMMMpar$subject==i]
-     C=AmiMMMpar$ts[AmiMMMpar$subject==i]
-     d=AmiMMpar$tau[AmiMMpar$subject==i]
-     e=AmiMMpar$tin[AmiMMpar$subject==i]
-     f=AmiMMpar$D[AmiMMpar$subject==i]
-     g=AmiMMpar$bw[AmiMMpar$subject==i]
-     h=AmiMMpar$Ht[AmiMMpar$subject==i]
-     l=AmiMMpar$Scr[AmiMMpar$subject==i]
-     J=AmiMMpar$Gender[AmiMMpar$subject==i]
-     k=AmiMMpar$age[AmiMMpar$subject==i]
-     Ami.mm(a,b,C,d,e,f,g,h,l,J,k,i)
+     for(i in 1:length(unique(AmiMMpar$subject))){       # Loop, 為了計算多人多點的參數(選擇計算一個人)
+     a=length(AmiMMMpar$ts[AmiMMMpar$subject==i])        # a=number of sampling time of subject[i]
+     b=AmiMMMpar$conc[AmiMMMpar$subject==i]              # b=concentration of subject[i]
+     C=AmiMMMpar$ts[AmiMMMpar$subject==i]                # c=sampling time of subject[i]
+     d=AmiMMpar$tau[AmiMMpar$subject==i]                 # d=dosing interval of subject[i]
+     e=AmiMMpar$tin[AmiMMpar$subject==i]                 # e=infusion tiem of subject[i]
+     f=AmiMMpar$D[AmiMMpar$subject==i]                   # f=dose of subject[i]  
+     g=AmiMMpar$bw[AmiMMpar$subject==i]                  # g=bw of subject[i]
+     h=AmiMMpar$Ht[AmiMMpar$subject==i]                  # h=ht of subject[i]
+     l=AmiMMpar$Scr[AmiMMpar$subject==i]                 # l=Scr of subject[i]
+     J=AmiMMpar$Gender[AmiMMpar$subject==i]              # J=Gender of subject[i]
+     k=AmiMMpar$age[AmiMMpar$subject==i]                 # k=age of subject[i]
+     Ami.mm(a,b,C,d,e,f,g,h,l,J,k,i)                     # calculate individual Aminoglycoside PK parameters and show its prediction
      cat("\n")
      cat("**************************************************************************\n")
      cat("                          << Subject",i,">>                           \n\n" )
-     cat("    --Aminoglycoside output data information--            \n")
-     cat("   cl_F = clerance/bioavailability (L/hr)                         \n")
-     cat("   v_F = volume of distribution/bioavailability (L)               \n")
+     cat("    --Aminoglycoside output data information--                        \n")
+     cat("   cl = clerance (L/hr)                                               \n")
+     cat("   v = volume of distribution (L)                                 \n")
      cat("   Cpss_pr = predicted steady-state peak conc.(mg/L)     \n")
      cat("   Ctss_pr = predicted steady-state trough conc.(mg/L)   \n\n")
-     windows()
+     windows()                                           # open a new window
      samplesHistory("*",mfrow=c(3,1),ask=FALSE)
      windows()
      samplesDensity("*",mfrow=c(3,2),ask=FALSE)
@@ -341,7 +351,7 @@ Ami.model <- function()
      samplesAutoC("*",1,mfrow=c(3,2),ask=FALSE)
      show(samplesStats("*"))
      cat("\n")
-     C<-infcpr(f,e,d,e)
+     C<-infcpr(f,e,d,e)                                   
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
@@ -353,9 +363,9 @@ Ami.model <- function()
      show(coutput)     
      cat("\n**************************************************************************\n")
      }
-     cal.again()
+     cal.again()         # ask user does he want to calculate another drug again?
   } 
-  else if (pick == 5){
+  else if (pick == 5){   # go back to upper layer
      cat("\n\n") 
      run()
   }      
@@ -377,7 +387,7 @@ Car.model <- function()
      cat("    TBW = body weight(kg)                                  \n")
      cat("    PB = combine Phenobarbital(Y=1;N=0)                    \n")
      cat("    VPA = taking VPA and VPA daily dose >18 mg/kg(Y=1;N=0) \n")
-     cat("    PHT = combine Phenytoin(Y=1;N=0)                       \n")
+     cat("    PHT = combine Phenytoin(Yes=1;No=0)                    \n")
      cat("    E = age more than 65yr(Y=1;N=0)                        \n")
      cat("    D = dose for each dosing interval(mg)                  \n")
      cat("    tau = dosing interval(hr)                              \n")
@@ -402,25 +412,27 @@ Car.model <- function()
      cat("\n\n")
      cat("***********************************************************\n")
      cat("    --Carbamazepine output data information--              \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
-     cat("    V_F = volume of distribution/bioavailability (L)       \n")
+     cat("    cl = clerance/bioavailability (L/hr)                 \n")
+     cat("    V = volume of distribution/bioavailability (L)       \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)  \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)    \n")
      cat("***********************************************************\n")
      show(samplesStats("*"))
      cat("\n") 
-     C<-pocpr(1.2,CBZSSpar[6,2],CBZSSpar[7,2],CBZSSpar[8,2])
+     C<-pocpr(1.2,CBZSSpar[6,2],CBZSSpar[7,2],CBZSSpar[8,2])               # calculate predicted steady-state measured concentration of Carbamazepine (equation of oral concentration)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-pocpr(1.2,CBZSSpar[6,2],CBZSSpar[7,2],CBZSSpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)     
      cat("\n")   
-     Car.more()
+     Car.more(CBZSSpar,output1,output2)
   }
     else if (pick == 2){
      cat("\n")
@@ -478,7 +490,7 @@ Car.model <- function()
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)     
      cat("\n")
-     Car.more()  
+     Carsm.more(CBZSMMpar,CBZSMpar,coutput)  
   }     
     else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -526,14 +538,19 @@ Car.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)  
      C<-pocpr(1.2,CBZMSpar$D,CBZMSpar$tau,CBZMSpar$tau)  
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
      cat("\n") 
-     Carms.more()  
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()  
+     Carms.pkoutput(CBZMSpar,output1,output2)  
+     cal.again()
   }     
    else if (pick == 4){
    cat("\n")
@@ -568,7 +585,7 @@ Car.model <- function()
      CBZMMMpar<-edit(CBZMMMpar)
      CBZMMMpar<-mscheck(CBZMMMpar)
      for(i in 1:length(unique(CBZMMpar$subject))){
-     J=length(CBZMMMpar$ts[CBZMMpar$subject==i])
+     J=length(CBZMMMpar$ts[CBZMMMpar$subject==i])
      A=CBZMMMpar$conc[CBZMMMpar$subject==i]
      B=CBZMMMpar$ts[CBZMMMpar$subject==i]
      C=CBZMMpar$tau[CBZMMpar$subject==i]
@@ -678,7 +695,7 @@ Dig.model <- function()
      colnames(coutput)<-list("Cmss_pr (ng/mL)")
      show(coutput)
      cat("\n") 
-     Dig.more()
+     Dig.more(DigSSpar,coutput)
   } 
     else if (pick == 2){
      rm(list=ls(all=TRUE))
@@ -724,7 +741,10 @@ Dig.model <- function()
      colnames(coutput)<-list("Cmss_pr (ng/mL)")
      show(coutput)  
      cat("\n") 
-     Digms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Digms.pkoutput(DigMSpar,coutput)
+     cal.again()
   } 
   else if (pick == 3){
      cat("\n\n") 
@@ -768,7 +788,7 @@ PedDig.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("***********************************************************\n")
      cat("    --Pediatric Digoxin output data information--          \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
+     cat("    cl_F = clerance/bioavailability (L/hr/kg)              \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mcg/L) \n")     
      cat("***********************************************************\n")
      show(samplesStats("*"))
@@ -779,7 +799,7 @@ PedDig.model <- function()
      colnames(coutput)<-list("Cmss_pr (mcg/L)")
      show(coutput)
      cat("\n")
-     PedDig.more(PedDigSSpar[2,2])
+     PedDig.more(PedDigSSpar[2,2],PedDigSSpar,coutput)
   } 
    else if (pick == 2){
      rm(list=ls(all=TRUE))
@@ -793,7 +813,7 @@ PedDig.model <- function()
      cat("    c = measured steady-state conc.(mcg/L)               \n")
      cat("                                                         \n")     
      cat("    --Pediatric Digoxin output data information--        \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")  
+     cat("    cl_F = clerance/bioavailability (L/hr/kg)               \n")  
      cat("    Cmss_pr = predicted steady-state measured conc.(mcg/L) \n")
      cat("**********************************************************\n\n")
      cat("\n")
@@ -816,7 +836,7 @@ PedDig.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("***********************************************************\n")
      cat("    --Pediatric Digoxin output data information--          \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                 \n")
+     cat("    cl_F = clerance/bioavailability (L/hr/kg)                 \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mcg/L) \n")     
      cat("***********************************************************\n")    
      show(samplesStats("*"))
@@ -827,7 +847,10 @@ PedDig.model <- function()
      colnames(coutput)<-list("Cmss_pr (mcg/L)")
      show(coutput)  
      cat("\n")
-     PedDigms.more(PedDigMSpar$bw)
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     PedDigms.pkoutput(PedDigMSpar$bw,PedDigMSpar,coutput)
+     cal.again()
   } 
   else if (pick == 3){
      cat("\n\n") 
@@ -905,7 +928,7 @@ Lit.model <- function()
      colnames(coutput)<-list("Cmss_pr (mEq/L)")
      show(coutput)
      cat("\n")   
-     Lit.more()
+     Lit.more(LitSSpar,coutput)
   } 
   else if (pick == 2){
      rm(list=ls(all=TRUE))
@@ -951,11 +974,14 @@ Lit.model <- function()
      colnames(coutput)<-list("Cmss_pr (mEq/L)")
      show(coutput)  
      cat("\n")   
-     Litms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Litms.pkoutput(LitMSpar,coutput)
+     cal.again()
   } 
   else if (pick == 3){
      cat("\n\n") 
-     run()
+     Lit.menu()
   }      
 }
 
@@ -1007,7 +1033,7 @@ Litcit.model <- function()
      colnames(coutput)<-list("Cmss_pr (mEq/L)")
      show(coutput)
      cat("\n")
-     Litcit.more()
+     Litcit.more(LitcitSSpar,coutput)
   } 
     else if (pick == 2){
      rm(list=ls(all=TRUE))
@@ -1053,11 +1079,14 @@ Litcit.model <- function()
      colnames(coutput)<-list("Cmss_pr (mEq/L)")
      show(coutput)  
      cat("\n")   
-     Litcitms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Litcitms.pkoutput(LitcitMSpar,coutput)
+     cal.again()
   } 
   else if (pick == 3){
      cat("\n\n") 
-     run()
+     Lit.menu()
   }      
 }
 
@@ -1097,8 +1126,8 @@ Phe.model <- function()
      cat("**********************************************************\n")
      cat("    --Phenytoin output data information--                \n")
      cat("    Vamx = maximum rate of metabolism (mg/day)           \n")
-     cat("    Km = plasm concentration at which metabolidm is      \n")
-     cat("         occuring at half the maximum rate (mg/L)        \n")
+     cat("    Km = plasma concentration at which metabolism is      \n")
+     cat("         occurring at half the maximum rate (mg/L)        \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)\n")
      cat("**********************************************************\n")    
      show(samplesStats("*"))
@@ -1109,7 +1138,7 @@ Phe.model <- function()
      colnames(coutput)<-list("Cmss_pr (mg/L)")
      show(coutput)
      cat("\n")   
-     Phe.more()
+     Phe.more(PheSSpar,coutput)
   } 
     else if (pick == 2){
      rm(list=ls(all=TRUE))
@@ -1142,8 +1171,8 @@ Phe.model <- function()
      cat("**********************************************************\n")
      cat("    --Phenytoin output data information--                \n")
      cat("    Vamx = maximum rate of metabolism (mg/day)           \n")
-     cat("    Km = plasm concentration at which metabolidm is      \n")
-     cat("         occuring at half the maximum rate (mg/L)        \n")
+     cat("    Km = plasma concentration at which metabolism is      \n")
+     cat("         occurring at half the maximum rate (mg/L)        \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)\n")
      cat("**********************************************************\n")   
      show(samplesStats("*"))
@@ -1154,7 +1183,10 @@ Phe.model <- function()
      colnames(coutput)<-list("Cmss_pr (mg/L)")
      show(coutput)  
      cat("\n") 
-     Phems.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Phems.pkoutput(PheMSpar,coutput)
+     cal.again()
   } 
   else if (pick == 3){
      cat("\n\n") 
@@ -1221,7 +1253,7 @@ ChiVal.model <- function()
      cat("\n\n")
      cat("****************************************************************\n")
      cat("    --Children Valpraote output data information--              \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                      \n")
+     cat("    cl = clerance (L/hr)                      \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)       \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)         \n")
      cat("****************************************************************\n")
@@ -1231,14 +1263,16 @@ ChiVal.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-ChiValcpr(ChiValSSpar[3,2],ChiValSSpar[4,2],ChiValSSpar[4,2],ChiValSSpar[1,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n")
-     ChiVal.more(ChiValSSpar[1,2])
+     ChiVal.more(ChiValSSpar[1,2],ChiValSSpar,output1,output2)
   } 
   else if (pick == 2){
      cat("\n")
@@ -1279,7 +1313,7 @@ ChiVal.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("*********************************************************\n")
      cat("    --Children Valpraote output data information--       \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")
+     cat("    cl = clerance (L/hr)               \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)  \n")
      cat("*********************************************************\n")
      show(samplesStats("*"))
@@ -1290,7 +1324,7 @@ ChiVal.model <- function()
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)    
      cat("\n") 
-     ChiValtwo.more(ChiValSMMpar[1,2])
+     ChiValtwo.more(ChiValSMMpar[1,2],ChiValSMMpar,ChiValSMpar,coutput)
   }   
    else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -1324,7 +1358,7 @@ ChiVal.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("****************************************************************\n")
      cat("    --Children Valpraote output data information--              \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                      \n")
+     cat("    cl = clerance (L/hr)                      \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)       \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)         \n")
      cat("****************************************************************\n")
@@ -1334,14 +1368,19 @@ ChiVal.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-ChiValcpr(ChiValMSpar$D,ChiValMSpar$tau,ChiValMSpar$tau,ChiValMSpar$TBW)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n") 
-     ChiValms.more(ChiValMSpar$TBW)
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     ChiValms.pkoutput(ChiValMSpar$TBW,ChiValMSpar,output1,output2)
+     cal.again()
   } 
    else if (pick == 4){
      cat("\n")
@@ -1373,7 +1412,7 @@ ChiVal.model <- function()
      ChiValMMMpar<-edit(ChiValMMMpar)
      ChiValMMMpar<-mscheck(ChiValMMMpar)
      for(i in 1:length(unique(ChiValMMpar$subject))){
-     k=length(ChiValMMMpar$ts[ChiValMMpar$subject==i])
+     k=length(ChiValMMMpar$ts[ChiValMMMpar$subject==i])
      A=ChiValMMMpar$conc[ChiValMMMpar$subject==i]
      B=ChiValMMMpar$ts[ChiValMMMpar$subject==i]
      d=ChiValMMpar$tau[ChiValMMpar$subject==i]
@@ -1385,7 +1424,7 @@ ChiVal.model <- function()
      cat("**************************************************************************\n")
      cat("                       << Subject",i,">>                           \n\n" )
      cat("    --Children Valpraote output data information--                 \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                         \n")
+     cat("    cl = clerance (L/hr)                         \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)            \n\n")
      windows()
      samplesHistory("*",mfrow=c(3,1),ask=FALSE)
@@ -1406,7 +1445,7 @@ ChiVal.model <- function()
   }   
   else if (pick == 5){
      cat("\n\n") 
-     run()
+     Val.menu()
   }      
 }
 
@@ -1453,7 +1492,7 @@ Val.model <- function()
      cat("\n\n")
      cat("*************************************************************\n")
      cat("    --Valpraote output data information--                    \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                   \n")
+     cat("    cl = clerance (L/hr)                   \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)    \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)      \n")
      cat("*************************************************************\n")
@@ -1463,14 +1502,16 @@ Val.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Valcpr(ValSSpar[4,2],ValSSpar[5,2],ValSSpar[6,2],ValSSpar[6,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n")   
-     Val.more(ValSSpar[4,2])
+     Val.more(ValSSpar[4,2],ValSSpar,output1,output2)
   } 
   else if (pick == 2){
      cat("\n")
@@ -1513,7 +1554,7 @@ Val.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("*********************************************************\n")
      cat("    --Valpraote output data information--                \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")
+     cat("    cl = clerance (L/hr)               \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)  \n")
      cat("*********************************************************\n")
      show(samplesStats("*"))
@@ -1524,7 +1565,7 @@ Val.model <- function()
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)    
      cat("\n") 
-     Valtwo.more(ValSMMpar[4,2])
+     Valtwo.more(ValSMMpar[4,2],ValSMMpar,ValSMpar,coutput)
   }   
    else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -1559,7 +1600,7 @@ Val.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("*************************************************************\n")
      cat("    --Valpraote output data information--                    \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                   \n")
+     cat("    cl = clerance (L/hr)                   \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)    \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)      \n")
      cat("*************************************************************\n")
@@ -1569,14 +1610,19 @@ Val.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Valcpr(ValMSpar$ka,ValMSpar$D,ValMSpar$tau,ValMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n") 
-     Valms.more(ValMSpar$ka)
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Valms.pkoutput(ValMSpar$ka,ValMSpar,output1,output2)
+     cal.again()
   } 
    else if (pick == 4){
      cat("\n")
@@ -1606,7 +1652,7 @@ Val.model <- function()
      ValMMMpar<-edit(ValMMMpar)
      ValMMMpar<-mscheck(ValMMMpar)
      for(i in 1:length(unique(ValMMpar$subject))){
-     k=length(ValMMMpar$ts[ValMMpar$subject==i])
+     k=length(ValMMMpar$ts[ValMMMpar$subject==i])
      A=ValMMMpar$conc[ValMMMpar$subject==i]
      B=ValMMMpar$ts[ValMMMpar$subject==i]
      d=ValMMpar$tau[ValMMpar$subject==i]
@@ -1620,7 +1666,7 @@ Val.model <- function()
      cat("**************************************************************************\n")
      cat("                     << Subject",i,">>                           \n\n" )
      cat("    --Valpraote output data information--                        \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                       \n")
+     cat("    cl = clerance (L/hr)                       \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)          \n\n")
      windows()
      samplesHistory("*",mfrow=c(3,1),ask=FALSE)
@@ -1641,7 +1687,7 @@ Val.model <- function()
   }   
   else if (pick == 5){
      cat("\n\n") 
-     run()
+     Val.menu()
   }      
 }
 
@@ -1686,8 +1732,8 @@ Van.model <- function()
      cat("\n\n")
      cat("************************************************************\n")
      cat("    --Vancomycin output data information--                  \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                  \n")
-     cat("    V_F = volume of distribution/bioavailability (L)        \n")
+     cat("    cl = clerance (L/hr)                  \n")
+     cat("    V = volume of distribution (L)        \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L) \n")
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)     \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
@@ -1698,19 +1744,22 @@ Van.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)    
-     C<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[6,2])/(exp(-(samplesStats("cl_F")/samplesStats("v_F"))*(VanSSpar[6,2]-(VanSSpar[7,2]+1))))
+     C<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[6,2])/(exp(-(samplesStats("cl")/samplesStats("v"))*(VanSSpar[6,2]-(VanSSpar[7,2]+1))))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
      C<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[6,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)     
      cat("\n")   
-     Van.more()
+     Van.more(VanSSpar,output1,output2,output3)
   } 
    else if (pick == 2){
      cat("\n")
@@ -1755,25 +1804,27 @@ Van.model <- function()
      cat("\n\n")
      cat("*********************************************************\n")
      cat("    --Vancomycin output data information--               \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")
-     cat("    V_F = volume of distribution/bioavailability (L)     \n")
+     cat("    cl = clerance (L/hr)               \n")
+     cat("    V = volume of distribution (L)     \n")
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)     \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
      cat("*********************************************************\n")
      show(samplesStats("*"))
      cat("\n")
-     C<-infcpr(VanSMMpar[5,2],VanSMMpar[7,2],VanSMMpar[6,2],VanSMMpar[6,2])/(exp(-(samplesStats("cl_F")/samplesStats("v_F"))*(VanSMMpar[6,2]-(VanSMMpar[7,2]+1))))
+     C<-infcpr(VanSMMpar[5,2],VanSMMpar[7,2],VanSMMpar[6,2],VanSMMpar[6,2])/(exp(-(samplesStats("cl")/samplesStats("v"))*(VanSMMpar[6,2]-(VanSMMpar[7,2]+1))))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-infcpr(VanSMMpar[5,2],VanSMMpar[7,2],VanSMMpar[6,2],VanSMMpar[6,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)     
      cat("\n")
-     Van.more()
+     Vansm.more(VanSMMpar,VanSMpar,output1,output2)
   } 
      else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -1810,8 +1861,8 @@ Van.model <- function()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("*********************************************************\n")
      cat("    --Vancomycin output data information--             \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)             \n")
-     cat("    V_F = volume of distribution/bioavailability (L)   \n")
+     cat("    cl = clerance (L/hr)             \n")
+     cat("    V = volume of distribution (L)   \n")
      cat("    Cmss_pr = predicted steady-state measured conc.(mg/L) \n")
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)     \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
@@ -1822,19 +1873,25 @@ Van.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)  
-     C<-infcpr(VanMSpar$D,VanMSpar$tin,VanMSpar$tau,VanMSpar$tau)/(exp(-(samplesStats("cl_F")/samplesStats("v_F"))*(VanMSpar$tau-(VanMSpar$tin+1))))
+     C<-infcpr(VanMSpar$D,VanMSpar$tin,VanMSpar$tau,VanMSpar$tau)/(exp(-(samplesStats("cl")/samplesStats("v"))*(VanMSpar$tau-(VanMSpar$tin+1))))
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput)
      C<-infcpr(VanMSpar$D,VanMSpar$tin,VanMSpar$tau,VanMSpar$tau)  
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)
      cat("\n") 
-     Vanms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Vanms.pkoutput(VanMSpar,output1,output2,output3)
+     cal.again()
   }
   else if (pick == 4){
      cat("\n")
@@ -1869,7 +1926,7 @@ Van.model <- function()
      VanMMMpar<-edit(VanMMMpar)
      VanMMMpar<-mscheck(VanMMMpar)
      for(i in 1:length(unique(VanMMpar$subject))){
-     k=length(VanMMMpar$ts[VanMMpar$subject==i])
+     k=length(VanMMMpar$ts[VanMMMpar$subject==i])
      A=VanMMMpar$conc[VanMMMpar$subject==i]
      B=VanMMMpar$ts[VanMMMpar$subject==i]
      d=VanMMpar$tau[VanMMpar$subject==i]
@@ -1884,8 +1941,8 @@ Van.model <- function()
      cat("**************************************************************************\n")
      cat("                        << Subject",i,">>                           \n\n" )
      cat("    --Vancomycin output data information--                          \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                          \n")
-     cat("    V_F = volume of distribution/bioavailability (L)                 \n")
+     cat("    cl = clerance (L/hr)                          \n")
+     cat("    V = volume of distribution (L)                 \n")
      cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)                \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)              \n\n")
      windows()
@@ -1896,7 +1953,7 @@ Van.model <- function()
      samplesAutoC("*",1,mfrow=c(3,2),ask=FALSE)
      show(samplesStats("*"))
      cat("\n")
-     C<-infcpr(f,e,d,d)/(exp(-(samplesStats("cl_F")/samplesStats("v_F"))*(d-(e+1))))
+     C<-infcpr(f,e,d,d)/(exp(-(samplesStats("cl")/samplesStats("v"))*(d-(e+1))))
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
@@ -1992,14 +2049,16 @@ Enf.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-pocpr(samplesStats("ka"),EnfSSpar[3,2],EnfSSpar[4,2],EnfSSpar[4,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n")  
-     Enf.more()
+     Enf.more(EnfSSpar,output1,output2)
   } 
     else if (pick == 2){
      cat("\n")
@@ -2053,7 +2112,7 @@ Enf.model <- function()
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)    
      cat("\n") 
-     Enf.more()
+     Enfsm.more(EnfSMMpar,EnfSMpar,coutput)
   } 
      else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -2099,14 +2158,19 @@ Enf.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-pocpr(samplesStats("ka"),EnfMSpar$D,EnfMSpar$tau,EnfMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n") 
-     Enfms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Enfms.pkoutput(EnfMSpar,output1,output2)
+     cal.again()
   }
   else if (pick == 4){
      cat("\n")
@@ -2138,7 +2202,7 @@ Enf.model <- function()
      EnfMMMpar<-edit(EnfMMMpar)
      EnfMMMpar<-mscheck(EnfMMMpar)
      for(i in 1:length(unique(EnfMMpar$subject))){
-     h=length(EnfMMMpar$ts[EnfMMpar$subject==i])
+     h=length(EnfMMMpar$ts[EnfMMMpar$subject==i])
      A=EnfMMMpar$conc[EnfMMMpar$subject==i]
      B=EnfMMMpar$ts[EnfMMMpar$subject==i]
      d=EnfMMpar$tau[EnfMMpar$subject==i]
@@ -2226,14 +2290,16 @@ Ind.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Indcpr(samplesStats("ka"),IndSSpar[4,2],IndSSpar[5,2],IndSSpar[6,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n")  
-     Ind.more()
+     Ind.more(IndSSpar,output1,output2)
   } 
     else if (pick == 2){
      cat("\n")
@@ -2288,7 +2354,7 @@ Ind.model <- function()
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)    
      cat("\n") 
-     Ind.more()
+     Indsm.more(IndSMMpar,IndSMpar,coutput)
   } 
      else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -2334,14 +2400,19 @@ Ind.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Indcpr(samplesStats("ka"),IndMSpar$D,IndMSpar$tau,IndMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n") 
-     Indms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Indms.pkoutput(IndMSpar,output1,output2)
+     cal.again()
   }
   else if (pick == 4){
      cat("\n")
@@ -2374,7 +2445,7 @@ Ind.model <- function()
      IndMMMpar<-edit(IndMMMpar)
      IndMMMpar<-mscheck(IndMMMpar)
      for(i in 1:length(unique(IndMMpar$subject))){
-     J=length(IndMMMpar$ts[IndMMpar$subject==i])
+     J=length(IndMMMpar$ts[IndMMMpar$subject==i])
      A=IndMMMpar$conc[IndMMMpar$subject==i]
      B=IndMMMpar$ts[IndMMMpar$subject==i]
      d=IndMMpar$tau[IndMMpar$subject==i]
@@ -2461,14 +2532,16 @@ Rit.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Ritcpr(samplesStats("ka"),RitSSpar[2,2],RitSSpar[3,2],RitSSpar[3,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n")   
-     Rit.more()
+     Rit.more(RitSSpar,output1,output2)
   } 
     else if (pick == 2){
      cat("\n")
@@ -2521,7 +2594,7 @@ Rit.model <- function()
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)    
      cat("\n") 
-     Rit.more()
+     Ritsm.more(RitSMMpar,RitSMpar,coutput)
   } 
     else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -2565,14 +2638,19 @@ Rit.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Ritcpr(samplesStats("ka"),RitMSpar$D,RitMSpar$tau,RitMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n") 
-     Ritms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Ritms.pkoutput(RitMSpar,output1,output2)
+     cal.again()
   }
   else if (pick == 4){
      cat("\n")
@@ -2603,7 +2681,7 @@ Rit.model <- function()
      RitMMMpar<-edit(RitMMMpar)
      RitMMMpar<-mscheck(RitMMMpar)
      for(i in 1:length(unique(RitMMpar$subject))){
-     g=length(RitMMMpar$ts[RitMMpar$subject==i])
+     g=length(RitMMMpar$ts[RitMMMpar$subject==i])
      A=RitMMMpar$conc[RitMMMpar$subject==i]
      B=RitMMMpar$ts[RitMMMpar$subject==i]
      d=RitMMpar$tau[RitMMpar$subject==i]
@@ -2703,26 +2781,28 @@ Cyc.model <- function()
      get(getOption("device"))()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("\n\n")
-     cat("*********************************************************\n")
-     cat("    --Cyclosporine output data information--             \n")
-     cat("    cl = clerance/bioavailability (L/hr)                 \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L) \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
-     cat("*********************************************************\n")
+     cat("**********************************************************\n")
+     cat("   --Cyclosporine output data information--               \n")
+     cat("   cl = clerance (L/hr)                   \n")
+     cat("   Cmss_pr = predicted steady-state measured conc.(mcg/L) \n")
+     cat("   Ctss_pr = predicted steady-state trough conc.(mcg/L)   \n")
+     cat("**********************************************************\n")
      show(samplesStats("*"))
      cat("\n") 
      C<-Cyccpr(CycSSpar[2,2],CycSSpar[1,2],CycSSpar[4,2],CycSSpar[5,2],CycSSpar[6,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Cyccpr(CycSSpar[2,2],CycSSpar[1,2],CycSSpar[4,2],CycSSpar[5,2],CycSSpar[5,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n")   
-     Cyc.more(CycSSpar[2,2],CycSSpar[1,2])
+     Cyc.more(CycSSpar[2,2],CycSSpar[1,2],CycSSpar,output1,output2)
   } 
    else if (pick == 2){
      cat("\n")
@@ -2763,11 +2843,11 @@ Cyc.model <- function()
      get(getOption("device"))()
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
      cat("\n\n")
-     cat("*********************************************************\n")
-     cat("    --Cyclosporine output data information--             \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)               \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
-     cat("*********************************************************\n")
+     cat("**********************************************************\n")
+     cat("   --Cyclosporine output data information--               \n")
+     cat("   cl = clerance (L/hr)                   \n")
+     cat("   Ctss_pr = predicted steady-state trough conc.(mcg/L)   \n")
+     cat("**********************************************************\n")
      show(samplesStats("*"))
      cat("\n") 
      C<-Cyccpr(CycSMMpar[2,2],CycSMMpar[1,2],CycSMMpar[4,2],CycSMMpar[5,2],CycSMMpar[5,2])
@@ -2776,7 +2856,7 @@ Cyc.model <- function()
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)    
      cat("\n")    
-     Cyctwo.more(CycSMMpar[2,2],CycSMMpar[1,2])
+     Cyctwo.more(CycSMMpar[2,2],CycSMMpar[1,2],CycSMMpar,CycSMpar,coutput)
   } 
     else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -2809,26 +2889,31 @@ Cyc.model <- function()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      samplesDensity("*", mfrow = c(3, 2), ask = FALSE)
      samplesAutoC("*",1, mfrow = c(3, 2), ask = FALSE)
-     cat("*********************************************************\n")
-     cat("    --Cyclosporine output data information--             \n")
-     cat("    cl = clerance/bioavailability (L/hr)                 \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L) \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)   \n")
-     cat("*********************************************************\n")    
+     cat("**********************************************************\n")
+     cat("   --Cyclosporine output data information--               \n")
+     cat("   cl = clerance (L/hr)                   \n")
+     cat("   Cmss_pr = predicted steady-state measured conc.(mcg/L) \n")
+     cat("   Ctss_pr = predicted steady-state trough conc.(mcg/L)   \n")
+     cat("**********************************************************\n") 
      show(samplesStats("*"))
      cat("\n") 
      C<-Cyccpr(CycMSpar$PTD,CycMSpar$bw,CycMSpar$D,CycMSpar$tau,CycMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Cyccpr(CycMSpar$PTD,CycMSpar$bw,CycMSpar$D,CycMSpar$tau,CycMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n") 
-     Cycms.more(CycMSpar$PTD,CycMSpar$bw)
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Cycms.pkoutput(CycMSpar$PTD,CycMSpar$bw,CycMSpar,output1,output2)
+     cal.again()
   }
   else if (pick == 4){
      cat("\n")
@@ -2861,7 +2946,7 @@ Cyc.model <- function()
      CycMMMpar<-edit(CycMMMpar)
      CycMMMpar<-mscheck(CycMMMpar)
      for(i in 1:length(unique(CycMMpar$subject))){
-     J=length(CycMMMpar$ts[CycMMpar$subject==i])
+     J=length(CycMMMpar$ts[CycMMMpar$subject==i])
      A=CycMMMpar$conc[CycMMMpar$subject==i]
      B=CycMMMpar$ts[CycMMMpar$subject==i]
      d=CycMMpar$PTD[CycMMpar$subject==i]
@@ -2874,8 +2959,8 @@ Cyc.model <- function()
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )
      cat("    --Cyclosporine output data information--                 \n")
-     cat("    cl_F = clerance/bioavailability (L/hr)                   \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)      \n\n")
+     cat("    cl = clerance (L/hr)                   \n")
+     cat("    Ctss_pr = predicted steady-state trough conc.(mcg/L)     \n\n")
      windows()
      samplesHistory("*",mfrow=c(3,1),ask=FALSE)
      windows()
@@ -2910,7 +2995,7 @@ Eve.model <- function()
   pick <- menu(file.menu, title = "<< data type >>")
   if (pick == 1){
      cat("\n")
-     cat("***********************************************************\n")
+     cat("*********************************************************\n")
      cat("    --Everolimus input data information--                \n")
      cat("    bw = body weight(kg)                                 \n")
      cat("    age = age(yr)                                        \n")
@@ -2920,6 +3005,7 @@ Eve.model <- function()
      cat("    tau = dosing interval(hr)                            \n")
      cat("    ts = sampling time(hr)                               \n")
      cat("    c = measured steady-state conc.(mcg/L)               \n")  
+     cat("*********************************************************\n")
      cat("\n")
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
@@ -2949,14 +3035,16 @@ Eve.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mcg/L)")
+     output1<-coutput
      show(coutput)
      C<-Evecpr(6.07,EveSSpar[5,2],EveSSpar[6,2],EveSSpar[6,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mcg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n")  
-     Eve.more()
+     Eve.more(EveSSpar,output1,output2)
   } 
     else if (pick == 2){
      cat("\n")
@@ -3012,7 +3100,7 @@ Eve.model <- function()
      colnames(coutput)<-list("Ctss_pr (mcg/L)")
      show(coutput)    
      cat("\n") 
-     Eve.more()
+     Evesm.more(EveSMMpar,EveSMpar,coutput)
   } 
     else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -3059,14 +3147,19 @@ Eve.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mcg/L)")
+     output1<-coutput
      show(coutput)
      C<-Evecpr(6.07,EveMSpar$D,EveMSpar$tau,EveMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mcg/L)")
+     output2<-coutput
      show(coutput)    
      cat("\n") 
-     Evems.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Evems.pkoutput(EveMSpar,output1,output2)
+     cal.again()
   }
    else if (pick == 4){
      cat("\n")
@@ -3100,7 +3193,7 @@ Eve.model <- function()
      EveMMMpar<-edit(EveMMMpar)
      EveMMMpar<-mscheck(EveMMMpar)
      for(i in 1:length(unique(EveMMpar$subject))){
-     a=length(EveMMMpar$ts[EveMMpar$subject==i])
+     a=length(EveMMMpar$ts[EveMMMpar$subject==i])
      b=EveMMMpar$conc[EveMMMpar$subject==i]
      C=EveMMMpar$ts[EveMMMpar$subject==i]
      d=EveMMpar$tau[EveMMpar$subject==i]
@@ -3191,14 +3284,16 @@ Tac.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mcg/mL)")
+     output1<-coutput
      show(coutput)
      C<-Taccpr(4.5,TacSSpar[5,2],TacSSpar[6,2],TacSSpar[6,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mcg/mL)")
+     output2<-output
      show(coutput)    
      cat("\n")   
-     Tac.more()
+     Tac.more(TacSSpar,output1,output2)
   } 
     else if (pick == 2){
      cat("\n")
@@ -3254,7 +3349,7 @@ Tac.model <- function()
      colnames(coutput)<-list("Ctss_pr (mcg/mL)")
      show(coutput)    
      cat("\n")      
-     Tac.more()
+     Tacsm.more(TacSMMpar,TacSMpar,coutput)
   } 
     else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -3301,14 +3396,19 @@ Tac.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cmss_pr (mcg/mL)")
+     output1<-coutput
      show(coutput)
      C<-Taccpr(4.5,TacMSpar$D,TacMSpar$tau,TacMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mcg/mL)")
+     output2<-coutput
      show(coutput)    
      cat("\n") 
-     Tacms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Tacms.pkoutput(TacMSpar,output1,output2)
+     cal.again()
   }
    else if (pick == 4){
      cat("\n")
@@ -3342,7 +3442,7 @@ Tac.model <- function()
      TacMMMpar<-edit(TacMMMpar)
      TacMMMpar<-mscheck(TacMMMpar)
      for(i in 1:length(unique(TacMMpar$subject))){
-     J=length(TacMMMpar$ts[TacMMpar$subject==i])
+     J=length(TacMMMpar$ts[TacMMMpar$subject==i])
      A=TacMMMpar$conc[TacMMMpar$subject==i]
      B=TacMMMpar$ts[TacMMMpar$subject==i]
      d=TacMMpar$tau[TacMMpar$subject==i]
@@ -3429,7 +3529,7 @@ Eno.model <- function()
      colnames(coutput)<-list("Amaxss_pr (IU/mL) ")
      show(coutput)
      cat("\n") 
-     Eno.more()
+     Eno.more(EnoSSpar,coutput)
   } 
    else if (pick == 2){
      rm(list=ls(all=TRUE))
@@ -3475,7 +3575,10 @@ Eno.model <- function()
      colnames(coutput)<-list("Amaxss_pr (IU/mL)")
      show(coutput)   
      cat("\n") 
-     Enoms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Enoms.pkoutput(EnoMSpar,coutput)
+     cal.again()
   }
   else if (pick == 3){
      cat("\n\n") 
@@ -3538,7 +3641,6 @@ Ima.model <- function()
      cat("    cl_F = clerance/bioavailability (L/hr)                      \n")
      cat("    V_F = volume of distribution/bioavailability (L)            \n")
      cat("    Cm_pr = predicted measured conc.(mg/L)                      \n")
-     cat("    Ct_pr = predicted trough conc.(mg/L)                        \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)         \n")
      cat("****************************************************************\n")
      show(samplesStats("*"))
@@ -3547,19 +3649,16 @@ Ima.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cm_pr (mg/L)")
-     show(coutput)
-     C<-Imacpr(ImaSSpar[5,2],ImaSSpar[6,2],ImaSSpar[7,2],ImaSSpar[7,2])
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Ct_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Imasscpr(ImaSSpar[6,2],ImaSSpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)    
      cat("\n")   
-     Ima.more()
+     Ima.more(ImaSSpar,output1,output3)
   } 
   else if (pick == 2){
      cat("\n")
@@ -3577,7 +3676,7 @@ Ima.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     ImaSMMpar<-data.frame(parameter=c("BW (kg)","OCC","Hb (g/dL)","WBC (10^9/L)","n","D (mg)","tau (hr)"),value=c(0))
+     ImaSMMpar<-data.frame(parameter=c("BW (kg)","OCC","Hb (g/dL)","WBC (10^9/L)","D (mg)","tau (hr)"),value=c(0))
      ImaSMMpar<-edit(ImaSMMpar)
      ImaSMMpar<-ycheck(ImaSMMpar)
      cat("\n")
@@ -3598,11 +3697,11 @@ Ima.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     ImaSMpar<-data.frame(ts=c(0),conc=c(0))
+     ImaSMpar<-data.frame(n=c(0),ts=c(0),conc=c(0))
      ImaSMpar<-edit(ImaSMpar)
      ImaSMpar<-mscheck(ImaSMpar)
      cat("\n")
-     Ima.sm(length(ImaSMpar$ts),ImaSMpar$conc,ImaSMpar$ts,ImaSMMpar[7,2],ImaSMMpar[5,2],ImaSMMpar[6,2],ImaSMMpar[2,2],ImaSMMpar[1,2],ImaSMMpar[3,2],ImaSMMpar[4,2])
+     Ima.sm(length(ImaSMpar$ts),ImaSMpar$conc,ImaSMpar$ts,ImaSMMpar[6,2],ImaSMpar$n,ImaSMMpar[5,2],ImaSMMpar[2,2],ImaSMMpar[1,2],ImaSMMpar[3,2],ImaSMMpar[4,2])
      get(getOption("device"))()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      get(getOption("device"))()
@@ -3614,23 +3713,17 @@ Ima.model <- function()
      cat("    --Imatinib mesylate output data information--        \n")
      cat("    cl_F = clerance/bioavailability (L/hr)               \n")
      cat("    V_F = volume of distribution/bioavailability (L)     \n")
-     cat("    Ct_pr = predicted trough conc.(mg/L)                 \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)  \n")
      cat("*********************************************************\n")
      show(samplesStats("*"))
      cat("\n") 
-     C<-Imacpr(ImaSMMpar[5,2],ImaSMMpar[6,2],ImaSMMpar[7,2],ImaSMMpar[7,2])
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Ct_pr (mg/L)")
-     show(coutput)
-     C<-Imasscpr(ImaSMMpar[6,2],ImaSMMpar[7,2])
+     C<-Imasscpr(ImaSMMpar[5,2],ImaSMMpar[6,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
      show(coutput)    
      cat("\n") 
-     Ima.more()
+     Imasm.more(ImaSMMpar,ImaSMpar,coutput)
   }   
    else if (pick == 3){
      cat("\n")
@@ -3677,7 +3770,6 @@ Ima.model <- function()
      cat("    cl_F = clerance/bioavailability (L/hr)                      \n")
      cat("    V_F = volume of distribution/bioavailability (L)            \n")
      cat("    Cm_pr = predicted measured conc.(mg/L)                      \n")
-     cat("    Ct_pr = predicted trough conc.(mg/L)                        \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)         \n")
      cat("****************************************************************\n")    
      show(samplesStats("*"))
@@ -3686,19 +3778,19 @@ Ima.model <- function()
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cm_pr (mg/L)")
-     show(coutput)
-     C<-Imacpr(ImaMSpar$n,ImaMSpar$D,ImaMSpar$tau,ImaMSpar$tau)
-     sim<-matrix(C[ ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Ct_pr (mg/L)")
+     output1<-coutput
      show(coutput)
      C<-Imasscpr(ImaMSpar$D,ImaMSpar$tau)
      sim<-matrix(C[ ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output3<-coutput
      show(coutput)    
      cat("\n")
-     Imams.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Imams.pkoutput(ImaMSpar,output1,output3)
+     cal.again()
   } 
    else if (pick == 4){
      cat("\n")
@@ -3716,7 +3808,7 @@ Ima.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     ImaMMpar<-data.frame(subject=c(1,2),BW=c(0),OCC=c(0),Hb=c(0),WBC=c(0),n=c(0),D=c(0),tau=c(0))
+     ImaMMpar<-data.frame(subject=c(1,2),BW=c(0),OCC=c(0),Hb=c(0),WBC=c(0),D=c(0),tau=c(0))
      ImaMMpar<-edit(ImaMMpar)
      ImaMMpar<-ymscheck(ImaMMpar)
      cat("\n")
@@ -3737,15 +3829,15 @@ Ima.model <- function()
      cat("     Please enter all parameters values at Data Editor          \n")
      cat("     window, and close Data Editor window by clicking           \n")
      cat("           (x) button at upper right corner.                    \n\n")
-     ImaMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))
+     ImaMMMpar<-data.frame(subject=c(1),n=c(0),ts=c(0),conc=c(0))
      ImaMMMpar<-edit(ImaMMMpar)
      ImaMMMpar<-mscheck(ImaMMMpar)
      for(i in 1:length(unique(ImaMMpar$subject))){
-     J=length(ImaMMMpar$ts[ImaMMpar$subject==i])
+     J=length(ImaMMMpar$ts[ImaMMMpar$subject==i])
      A=ImaMMMpar$conc[ImaMMMpar$subject==i]
      B=ImaMMMpar$ts[ImaMMMpar$subject==i]
      l=ImaMMpar$tau[ImaMMpar$subject==i]
-     d=ImaMMpar$n[ImaMMpar$subject==i]
+     d=ImaMMMpar$n[ImaMMMpar$subject==i]
      e=ImaMMpar$D[ImaMMpar$subject==i]
      f=ImaMMpar$OCC[ImaMMpar$subject==i]
      g=ImaMMpar$BW[ImaMMpar$subject==i]
@@ -3758,7 +3850,6 @@ Ima.model <- function()
      cat("    --Imatinib mesylate output data information--        \n")
      cat("    cl_F = clerance/bioavailability (L/hr)               \n")
      cat("    V_F = volume of distribution/bioavailability (L)     \n")
-     cat("    Ct_pr = predicted trough conc.(mg/L)                 \n")
      cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)  \n\n")
      windows()
      samplesHistory("*",mfrow=c(3,1),ask=FALSE)
@@ -3768,11 +3859,6 @@ Ima.model <- function()
      samplesAutoC("*",1,mfrow=c(3,2),ask=FALSE)
      show(samplesStats("*"))
      cat("\n") 
-     C<-Imacpr(d,e,l,l)
-     sim<-matrix(C[1 ,1])
-     coutput<-data.frame(sim)
-     colnames(coutput)<-list("Ct_pr (mg/L)")
-     show(coutput)
      C<-Imasscpr(e,l)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
@@ -3840,7 +3926,7 @@ War.model <- function()
      colnames(coutput)<-list("INR")
      show(coutput)
      cat("\n")   
-     War.more()
+     War.more(WarSSpar,coutput)
   } 
     else if (pick == 2){
      rm(list=ls(all=TRUE))
@@ -3888,7 +3974,10 @@ War.model <- function()
      colnames(coutput)<-list("INR (mg/L)")
      show(coutput)  
      cat("\n") 
-     Warms.more()
+     cat("          Pressing Enter to show individual summary report                  \n")
+     readline()
+     Warms.pkoutput(WarMSpar,coutput)
+     cal.again()
   } 
   else if (pick == 3){
      cat("\n\n") 

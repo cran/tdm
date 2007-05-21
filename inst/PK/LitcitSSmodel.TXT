@@ -8,7 +8,7 @@ model
 
            cl_F~dnorm(theta1, 7.032131)
 
-           theta1<-(31.6-0.634*(age-50)*f+(-7.79+0.225*bw)/Scr)/24   # population estimate of Lithium citrate clerance
+           theta1<-(31.6-0.634*(age-50)*f+(-7.79+0.225*bw)/Scr)/24   # population estimate of Lithium citrate clearance
   
            }
 

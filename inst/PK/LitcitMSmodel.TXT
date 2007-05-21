@@ -8,7 +8,7 @@ model
 
            cl_F[i]~dnorm(theta1[i],7.032131)
 
-           theta1[i]<-(31.6-0.634*(age[i]-50)*f[i]+(-7.79+0.225*bw[i])/Scr[i])/24   # population estimate of Lithium carbonate clerance
+           theta1[i]<-(31.6-0.634*(age[i]-50)*f[i]+(-7.79+0.225*bw[i])/Scr[i])/24   # population estimate of Lithium carbonate clearance
   
            }
 

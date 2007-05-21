@@ -7,9 +7,9 @@ model
            
            cl_F~dnorm(theta1, 10000)
            
-           theta1<-(0.037*IBW-0.006*age)*pow(1.284,smoke)*pow(0.751,CHF)              # population estimate of Aminophylline dihydrous clerance
+           theta1<-(0.037*IBW-0.006*age)*pow(1.284,smoke)*pow(0.751,CHF)              # population estimate of Aminophylline dihydrous clearance
 
-           IBW<-Gender*(50+(2.3*(ht/2.4-60)))+(1-Gender)*(45+(2.3*(ht/2.4-60)))       # Lean body weight
+           IBW<-Gender*(50+(2.3*(ht/2.54-60)))+(1-Gender)*(45+(2.3*(ht/2.54-60)))       
 
            }
            }

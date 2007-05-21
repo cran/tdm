@@ -2,7 +2,7 @@ model
 
            {
      
-           for (Z in 1:1) {              # one subject
+           for (i in 1:1) {              # one subject
            for(j in 1:T) {               # T:number of sampling time
            c[j]~dnorm(mu[j], 1.0E+6)     # c:drug concentration
            mu[j]<-6.07*D/(v_F[X]*(6.07-k))*((1/(1-exp(-k*tau)))*exp(-k*ts[j])-(1/(1-exp(-6.07*tau)))*exp(-6.07*ts[j]))*1000    # oral concentration equation at steady state
@@ -12,7 +12,7 @@ model
            cl_F[X]~dnorm(theta1, 13.71742)
            v_F[X]~dnorm(theta2, 7.716049)
 
-           theta1<-(8.82+0.0391*(bw-71)-0.03*(age-44))*pow(1.2,race)*pow(0.806,Ery)   # population estimate of Everolimus clerance
+           theta1<-(8.82+0.0391*(bw-71)-0.03*(age-44))*pow(1.2,race)*pow(0.806,Ery)   # population estimate of Everolimus clearance
            theta2<-110+1.14*(bw-71)                                                   # population estimate of Everolimus apparent volume of distribution 
               
            }

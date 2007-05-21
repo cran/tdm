@@ -1,3 +1,4 @@
+# check if the user correctly enters initial values for PK parameters ([2,2] can't be NA )
 mscheck<-function(a)
 {
   repeat{
@@ -20,6 +21,7 @@ mscheck<-function(a)
   show(a)
 }
 
+# To check if the user correctly enters initial values for PK parameters ([2,7] can't be NA )
 ymscheck<-function(a)
 {
   repeat{
@@ -42,6 +44,7 @@ ymscheck<-function(a)
   show(a)
 }
 
+# To check if the user correctly enters initial values for PK parameters ([2,5] can't be NA )
 zmscheck<-function(a)
 {
   repeat{
@@ -64,6 +67,7 @@ zmscheck<-function(a)
   show(a)
 }
 
+# To check if the user correctly enters initial values for PK parameters ([2,4] can't be NA )
 wmscheck<-function(a)
 {
   repeat{

@@ -2,10 +2,10 @@
 
 \alias{Amianhir.mm}
 
-\title{Algorithm to estimate many subjects' PK parameters of aminophylline anhydrous IR with different concentrations}
+\title{Algorithm to estimate many subjects' PK parameters of aminophylline anhydrous IR with each different concentrations}
 
 \description{
- Algorithm to estimate many subjects' PK parameters of aminophylline anhydrous IR with different 
+ Algorithm to estimate many subjects' PK parameters of aminophylline anhydrous IR with each different 
  concentrations at steady-state.
 }
 

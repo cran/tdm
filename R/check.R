@@ -1,3 +1,4 @@
+# check if the user correctly enters initial values for PK parameters ([1,2] should not be NA)
 check<-function(a)
 {
   repeat{
@@ -20,7 +21,7 @@ check<-function(a)
   show(a)
 }
 
-
+# check if the user correctly enters initial values for PK parameters ([6,2] should not be NA)
 ycheck<-function(b)
 {
   repeat{
@@ -43,6 +44,7 @@ ycheck<-function(b)
   show(b)
 }
 
+# check if the user correctly enters initial values for PK parameters ([4,2] should not be NA)
 zcheck<-function(c)
 {
   repeat{
@@ -65,6 +67,7 @@ zcheck<-function(c)
   show(c)
 }
 
+# check if the user correctly enters initial values for PK parameters ([3,2] should not be NA)
 wcheck<-function(c)
 {
   repeat{

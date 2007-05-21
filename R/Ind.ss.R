@@ -1,9 +1,9 @@
 Ind.ss<-function(a,b,c,d,e,f,g){
-library(BRugs)
+library(BRugs)                                                # active BRugs
 oldwd<-getwd()
-setwd(system.file("PK",package="tdm"))
-modelCheck("IndSSmodel.txt")
-bugsData(
+setwd(system.file("PK",package="tdm"))                        # set working directory
+modelCheck("IndSSmodel.txt")                                  # load model
+bugsData(                                                     # produce a BUGS data file and name it Inddata
 list(
 c=a,
 tau=b,
@@ -14,12 +14,12 @@ Rit=f,
 Gender=g
 )
 , fileName=file.path(getwd(),"Inddata.txt"),digits=5)
-modelData("Inddata.txt")
-modelCompile(numChains=1)
-modelGenInits()
-modelUpdate(4000)
-samplesSet(c("ka","cl_F"))
-modelUpdate(10000)
+modelData("Inddata.txt")                                      # Load data
+modelCompile(numChains=1)                                     # compile
+modelGenInits()                                               # gen inits
+modelUpdate(25000)                                            # burn in 25000
+samplesSet(c("ka","cl_F"))                                    # set monitored PK parameters
+modelUpdate(50000)                                            # update 50000
 }
 
 

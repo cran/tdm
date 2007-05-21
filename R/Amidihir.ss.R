@@ -1,9 +1,9 @@
 Amidihir.ss<-function(a,b,c,d,e,f,g,h,i){
-library(BRugs)
+library(BRugs)                                          # active BRugs
 oldwd<-getwd()
-setwd(system.file("PK",package="tdm"))
-modelCheck("AmidihirSSmodel.txt")
-bugsData(
+setwd(system.file("PK",package="tdm"))                  # set working directory
+modelCheck("AmidihirSSmodel.txt")                       # Load model
+bugsData(                                               # produce a BUGS data file and name it Amidihirdata
 list(
 c=a,
 tau=b,
@@ -16,11 +16,11 @@ Gender=h,
 CHF=i
 )
 , fileName=file.path(getwd(),"Amidihirdata.txt"),digits=5)
-modelData("Amidihirdata.txt")
-modelCompile(numChains=1)
-modelGenInits()
-modelUpdate(4000)
-samplesSet(c("v_F","cl_F"))
-modelUpdate(10000)
+modelData("Amidihirdata.txt")                                # Load data
+modelCompile(numChains=1)                                    # compile
+modelGenInits()                                              # gen inits
+modelUpdate(4000)                                            # burn in 4000
+samplesSet(c("v_F","cl_F"))                                  # set monitored PK paremeters
+modelUpdate(30000)                                           # update 30000
 }
 

@@ -7,10 +7,10 @@ model
            mu[i]<-D[i]*exp(-k[i]*(log(0.34*(1-exp(-k[i]*tau[i]))/(k[i]*(1-exp(-0.34*tau[i])))))/(0.34-k[i]))/v_F[i]*(1-exp(-k[i]*tau[i]))/1000  # equation of anti-Xa maximal activity at stedy state 
            k[i]<-cl_F[i]/v_F[i]
 
-           cl_F[i]~dnorm(theta1[i],10000)
+           cl_F[i]~dnorm(theta1[i],100)
            v_F[i]~dnorm(theta2[i],10)
 
-           theta1[i]<-0.74*pow((TBW[i]/Scr[i]/0.79),0.24)*pow(0.75,(1-Gender[i]))    # population estimate of Enoxaparin clerance
+           theta1[i]<-0.74*pow((TBW[i]/Scr[i]/0.79),0.24)*pow(0.75,(1-Gender[i]))    # population estimate of Enoxaparin clearance
            theta2[i]<-5.29*pow((TBW[i]/73),1.49)                                     # population estimate of Enoxaparin apparent volume of distribution
               
            }

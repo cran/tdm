@@ -2,11 +2,12 @@
 
 \alias{Amidihinfusion.ms}
 
-\title{Algorithm to estimate many subjects' PK parameters of iv infusion aminophylline dihydrous by each one conc.}
+\title{Algorithm to estimate many subjects' PK parameters of iv infusion aminophylline dihydrous 
+with loading dose by each one conc.}
 
 \description{
- Algorithm to estimate many subjects' PK parameters of iv infusion aminophylline dihydrous by each one conc. 
- at steady-state.
+ Algorithm to estimate many subjects' PK parameters of iv infusion aminophylline dihydrous 
+ with loading dose by each one conc.  at steady-state.
 }
 
 \references{
