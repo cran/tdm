@@ -185,12 +185,14 @@ Amianhir.model <- function()                                       #list of Amin
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output1<-coutput
      show(coutput)     
      r=log(1.85-(samplesStats("cl_F")/samplesStats("v_F")))/(1.85-(samplesStats("cl_F")/samplesStats("v_F")))
      C<-TheIRsscpr(0.85,AmianhirSMMpar[6,2],AmianhirSMMpar[7,2],r)
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output2<-coutput
      show(coutput) 
      cat("\n")   
      Amianhirsm.more(AmianhirSMMpar,AmianhirSMpar,output1,output2)                # calculate dose adjustment of Aminoflycoside with single subject and each multiple concentrations                                                                                                                                                                                            
@@ -316,7 +318,7 @@ Amianhir.model <- function()                                       #list of Amin
      h=AmianhirMMpar$smoke[AmianhirMMpar$subject==i]              # h=subject[i]是否有抽煙
      l=AmianhirMMpar$Gender[AmianhirMMpar$subject==i]             # l=Gender of subject[i]
      J=AmianhirMMpar$CHF[AmianhirMMpar$subject==i]                # J=subject[i]使否有CHF
-     Amianhir.mm(a,i,b,C,d,e,f,g,h,l,J,i)                           # calculate individual aminophylline anhydrous PK parameters and show its prediction
+     Amianhir.mm(a,b,C,d,e,f,g,h,l,J,i)                           # calculate individual aminophylline anhydrous PK parameters and show its prediction
      cat("\n")
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )
@@ -776,11 +778,8 @@ Amidihir.model <- function()
      AmidihirSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))                                            
      AmidihirSSpar<-edit(AmidihirSSpar)                                                                                                                                           
      AmidihirSSpar<-ycheck(AmidihirSSpar)    
-     cat("\n")              
-     IBW<-AmidihirSSpar[1,2]*(50+(2.3*(AmidihirSSpar[3,2]/2.54-60)))+(1-AmidihirSSpar[1,2])*(45+(2.3*(AmidihirSSpar[3,2]/2.54-60)))
-     X<-(0.037*IBW-0.006*AmidihirSSpar[2,2])*(1.284^AmidihirSSpar[5,2])*(0.751^AmidihirSSpar[4,2])
-     Y<-0.42*IBW                                                                                                                                                                                                                                                              
-     Amidihir.ss(AmidihirSSpar[9,2],AmidihirSSpar[7,2],AmidihirSSpar[8,2],AmidihirSSpar[6,2],AmidihirSSpar[3,2],AmidihirSSpar[2,2],AmidihirSSpar[5,2],AmidihirSSpar[1,2],AmidihirSSpar[4,2],X,Y)
+     cat("\n")                                                                                                                                                                                                                                                                        
+     Amidihir.ss(AmidihirSSpar[9,2],AmidihirSSpar[7,2],AmidihirSSpar[8,2],AmidihirSSpar[6,2],AmidihirSSpar[3,2],AmidihirSSpar[2,2],AmidihirSSpar[5,2],AmidihirSSpar[1,2],AmidihirSSpar[4,2])
      get(getOption("device"))()
      samplesHistory("*",mfrow=c(3,1), ask = FALSE)
      get(getOption("device"))()
@@ -909,10 +908,7 @@ Amidihir.model <- function()
      AmidihirMSpar<-edit(AmidihirMSpar)
      AmidihirMSpar<-ymscheck(AmidihirMSpar)
      cat("\n")
-     IBW<-AmidihirMSpar$Gender*(50+(2.3*(AmidihirMSpar$ht/2.54-60)))+(1-AmidihirMSpar$Gender)*(45+(2.3*(AmidihirMSpar$ht/2.54-60)))
-     X<-(0.037*IBW-0.006*AmidihirMSpar$age)*(1.284^AmidihirMSpar$smoke)*(0.751^AmidihirMSpar$CHF)
-     Y<-0.42*IBW  
-     Amidihir.ms(length(AmidihirMSpar$subject),AmidihirMSpar$c,AmidihirMSpar$tau,AmidihirMSpar$ts,AmidihirMSpar$D,AmidihirMSpar$ht,AmidihirMSpar$age,AmidihirMSpar$smoke,AmidihirMSpar$Gender,AmidihirMSpar$CHF,X,Y)
+     Amidihir.ms(length(AmidihirMSpar$subject),AmidihirMSpar$c,AmidihirMSpar$tau,AmidihirMSpar$ts,AmidihirMSpar$D,AmidihirMSpar$ht,AmidihirMSpar$age,AmidihirMSpar$smoke,AmidihirMSpar$Gender,AmidihirMSpar$CHF)
      cat("\n\n")
      cat("**********************************************************\n")
      cat("   You can PgUp/PgDown to scroll through your checking    \n")
@@ -1008,7 +1004,7 @@ Amidihir.model <- function()
      h=AmidihirMMpar$smoke[AmidihirMMpar$subject==i]
      l=AmidihirMMpar$Gender[AmidihirMMpar$subject==i]
      J=AmidihirMMpar$CHF[AmidihirMMpar$subject==i]
-     Amidihir.mm(a,i,b,C,d,e,f,g,h,l,J,i)
+     Amidihir.mm(a,b,C,d,e,f,g,h,l,J,i)
      cat("\n")
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )
@@ -1693,7 +1689,7 @@ Oxtir.model <- function()
      h=OxtirMMpar$smoke[OxtirMMpar$subject==i]
      l=OxtirMMpar$Gender[OxtirMMpar$subject==i]
      J=OxtirMMpar$CHF[OxtirMMpar$subject==i]
-     Oxtir.mm(a,i,b,C,d,e,f,g,h,l,J,i)
+     Oxtir.mm(a,b,C,d,e,f,g,h,l,J,i)
      cat("\n")
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )
@@ -1992,14 +1988,16 @@ Their.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Cpss_pr (mg/L)")
+     output1<-coutput
      show(coutput) 
      C<-TheIRsscpr(1,TheirSMMpar[6,2],TheirSMMpar[7,2],TheirSMMpar[7,2])
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mg/L)")
+     output2<-coutput
      show(coutput)     
      cat("\n")     
-     Theirsm.more(TheirSMMpar,TheirSMpar,outptu1,output2)                                                                                                                                                                 
+     Theirsm.more(TheirSMMpar,TheirSMpar,output1,output2)                                                                                                                                                                 
   } 
      else if (pick == 3){
      rm(list=ls(all=TRUE))
@@ -2120,7 +2118,7 @@ Their.model <- function()
      h=TheirMMpar$smoke[TheirMMpar$subject==i]
      l=TheirMMpar$Gender[TheirMMpar$subject==i]
      J=TheirMMpar$CHF[TheirMMpar$subject==i]
-     Their.mm(a,i,b,C,d,e,f,g,h,l,J,i)
+     Their.mm(a,b,C,d,e,f,g,h,l,J,i)
      cat("\n")
      cat("**************************************************************************\n")
      cat("                 << Subject",i,">>                           \n\n" )

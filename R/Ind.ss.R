@@ -17,9 +17,9 @@ Gender=g
 modelData("Inddata.txt")                                      # Load data
 modelCompile(numChains=1)                                     # compile
 modelGenInits()                                               # gen inits
-modelUpdate(25000)                                            # burn in 25000
+modelUpdate(10000)                                            # burn in 25000
 samplesSet(c("ka","cl_F"))                                    # set monitored PK parameters
-modelUpdate(50000)                                            # update 50000
+modelUpdate(60000)                                            # update 50000
 }
 
 

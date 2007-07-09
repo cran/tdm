@@ -1355,7 +1355,7 @@ Imasm.more<-function(A,B,E)
          } 
       } else {
       if (pick == 4){
-      	Imasm.pkoutput(A,B,E,f)
+      	Imasm.pkoutput(A,B,E)
         cal.again()
         }   
       }

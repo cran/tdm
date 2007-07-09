@@ -2010,7 +2010,7 @@ Amianhcr.more<-function(A,B)
           Amianhcr.more(A,B)
        } else {
              if (pick == 2){
-             Amianhcr.output(A,B,Amianhcrcpar,coutput)
+             Amianhcrss.output(A,B,Amianhcrcpar,coutput)
              cal.again()
              }
          }  
@@ -2046,7 +2046,7 @@ Amianhcr.more<-function(A,B)
           Amianhcr.more(A,B)
        } else {
              if (pick == 2){
-             Amianhcr.output(A,B,Amianhcrdpar,coutput)
+             Amianhcrss.output(A,B,Amianhcrdpar,coutput)
              cal.again()
              }
          }  
@@ -2106,7 +2106,7 @@ Amianhcr.more<-function(A,B)
           Amianhcr.more(A,B)
        } else {
              if (pick == 2){
-             Amianhcrcd.output(A,B,Amianhcrcpar,coutput,Amianhcrdpar,doutput)
+             Amianhcrsscd.output(A,B,Amianhcrcpar,coutput,Amianhcrdpar,doutput)
              cal.again()
              }
          }  
@@ -3615,7 +3615,7 @@ Val.more<-function(A,B,E,F)
          }  
       } else {
       if (pick == 4){
-      	Valss.pkoutput(A,B,E,F)
+      	Valss.pkoutput(B,E,F)
         cal.again()
         }   
       }
@@ -3762,7 +3762,7 @@ Valtwo.more<-function(B,E,F,G)
        } else {
              if (pick == 2){
              	Valsmcd.output(E,F,G,Valsmcpar,coutput,Valsmdpar,doutput)
-             cal.again(B)
+             cal.again()
              }
          }  
       } else {
@@ -4004,7 +4004,7 @@ cat("\n")
           Cyctwo.more(A,B,E,F,G)
        } else {
              if (pick == 2){
-             Cycsm.output(E,F,G,Cycsmdar,doutput)
+             Cycsm.output(E,F,G,Cycsmdpar,doutput)
              cal.again()
              }
          }  
@@ -4424,7 +4424,7 @@ ChiValtwo.more<-function(A,B,E,F)
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          ChiVal.more(A,B,E,f)
+          ChiVal.more(A,B,E,F)
        } else {
              if (pick == 2){
              ChiValsm.output(B,E,F,ChiValcpar,coutput)

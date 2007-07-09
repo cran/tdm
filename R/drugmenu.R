@@ -849,7 +849,7 @@ PedDig.model <- function()
      cat("\n")
      cat("          Pressing Enter to show individual summary report                  \n")
      readline()
-     PedDigms.pkoutput(PedDigMSpar$bw,PedDigMSpar,coutput)
+     PedDigms.pkoutput(PedDigMSpar,coutput)
      cal.again()
   } 
   else if (pick == 3){
@@ -1379,7 +1379,7 @@ ChiVal.model <- function()
      cat("\n") 
      cat("          Pressing Enter to show individual summary report                  \n")
      readline()
-     ChiValms.pkoutput(ChiValMSpar$TBW,ChiValMSpar,output1,output2)
+     ChiValms.pkoutput(ChiValMSpar,output1,output2)
      cal.again()
   } 
    else if (pick == 4){
@@ -1621,7 +1621,7 @@ Val.model <- function()
      cat("\n") 
      cat("          Pressing Enter to show individual summary report                  \n")
      readline()
-     Valms.pkoutput(ValMSpar$ka,ValMSpar,output1,output2)
+     Valms.pkoutput(ValMSpar,output1,output2)
      cal.again()
   } 
    else if (pick == 4){
@@ -2912,7 +2912,7 @@ Cyc.model <- function()
      cat("\n") 
      cat("          Pressing Enter to show individual summary report                  \n")
      readline()
-     Cycms.pkoutput(CycMSpar$PTD,CycMSpar$bw,CycMSpar,output1,output2)
+     Cycms.pkoutput(CycMSpar,output1,output2)
      cal.again()
   }
   else if (pick == 4){
@@ -3290,7 +3290,7 @@ Tac.model <- function()
      sim<-matrix(C[1 ,1])
      coutput<-data.frame(sim)
      colnames(coutput)<-list("Ctss_pr (mcg/mL)")
-     output2<-output
+     output2<-coutput
      show(coutput)    
      cat("\n")   
      Tac.more(TacSSpar,output1,output2)

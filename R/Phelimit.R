@@ -13,7 +13,7 @@ R=a*24/b
                       "No")
        pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
        if (pick == 1){
-          Phe.more(B,E)
+          Phe.more(H,E)
        } else {
              if (pick == 2){
              Phess.output(H,E,G,coutput)
