@@ -13,11 +13,6 @@ Digcpr<-function(D,tau){
      Digcpr<-D*1000/((samplesStats("cl_F"))*tau)
 }
 
-# concentration of pediatric Digoxin
-PedDigcpr<-function(bw,D,tau){
-     Digcpr<-D/(samplesStats("cl_F")*bw*tau)*1000
-}
-
 # concentration of Lithium corbonate
 Litcpr<-function(D,tau){
      Litcpr<-(D/36.9458)/((samplesStats("cl_F"))*tau)

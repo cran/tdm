@@ -11,7 +11,7 @@ model
            k<-cl_F/v_F
 
            theta1<-(0.037*IBW-0.006*age)*pow(1.284,smoke)*pow(0.751,CHF)      # population estimate of Theophylline clearance
-           theta2<-0.42*sIBW                                                   # population estimate of Theophylline apparent volume of distribution 
+           theta2<-0.42*IBW                                                   # population estimate of Theophylline apparent volume of distribution 
 
            IBW<-Gender*(50+(2.3*(ht/2.4-60)))+(1-Gender)*(45+(2.3*(ht/2.4-60)))   
 

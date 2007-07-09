@@ -3,7 +3,7 @@ model
            {
      
            for (i in 1:N) {          # N:number of patients
-           c[i]~dnorm(mu[i],1.0E+6)  # c:drug concentration
+           c[i]~dnorm(mu[i],100)  # c:drug concentration
            mu[i]<-4.5*D[i]/(314*(4.5-cl_F[i]/314))*((1/(1-exp(-cl_F[i]/314*tau[i])))*exp(-cl_F[i]/314*ts[i])-(1/(1-exp(-4.5*tau[i])))*exp(-4.5*ts[i]))*1000    # oral concentration equation at steady state
 
            cl_F[i]~dnorm(theta1[i], 0.471422766)

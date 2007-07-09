@@ -1,5 +1,5 @@
 # Avoid Dose greater than Vmax when performing dosage adjustment for phenytoin
-Phelimit<-function(a,b,H,E,G){                                              
+Phelimit<-function(a,b){                                              
 R=a*24/b
      if (samplesStats("Vmax")[1,1]>R){                                       # if Vamx > Dose, tdm would continue to adjust does and ask user does he want to dose adjustment again?
      C<-(a*24/b)*(samplesStats("Km"))/((samplesStats("Vmax"))-a*24/b) 
@@ -8,19 +8,9 @@ R=a*24/b
      colnames(coutput)<-list("Css(mg/L)")
      cat("\n")
      show(coutput)
-     cat("\n")                          
-       file.menu <- c("Yes",
-                      "No")
-       pick <- menu(file.menu, title = "<< Dose Adjustment again? >>")
-       if (pick == 1){
-          Phe.more(H,E)
-       } else {
-             if (pick == 2){
-             Phess.output(H,E,G,coutput)
-             cal.again()
-             }
-         } 
-         }
+     cat("\n")            
+     Phe.more()   
+   }            
   if (!samplesStats("Vmax")[1,1]>R){                                       # if Vamx < Dose, we would give user a caution and ask user to edit desired Does agian
      cat("\n\n")
      cat("*******************************************************\n")
