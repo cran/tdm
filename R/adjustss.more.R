@@ -2,7 +2,7 @@
 Ami.more<-function()
 {
  cat("\n")                                     
-  file.menu <- c("Css_trough -> Dose",
+  file.menu <- c("Css_trough -> Dose",                       
                  "exit")
   pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
   if (pick == 1){                                                                              

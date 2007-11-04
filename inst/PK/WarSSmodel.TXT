@@ -6,10 +6,10 @@ model
            mu<-pow(a,(1/0.383))
            a<-((1/((-m*(cl_F/v_F))/(pow(kc,2))*(1-(kc*tau/(1-exp(-kc*tau))))-m/kc*log((D/v_F)/(Cpmax*(1-exp(-cl_F/v_F*tau)))))+3.36)/4.368)
 
-           m~dnorm(0.422,1.0E+6)
-           Cpmax~dnorm(5.49,10)
-           kc~dnorm(0.98,4.0E+4)
-           cl_F~dnorm(2.19,1.0E+4)
-           v_F~dnorm(7.5,100) 
+           m~dgamma(0.1,0.1)
+           Cpmax~dgamma(0.1,0.1)
+           kc~dgamma(0.1,0.1)
+           cl_F~dgamma(0.1,0.1)
+           v_F~dnorm(7.5,100)
            }
            }
