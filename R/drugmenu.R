@@ -614,16 +614,12 @@ Ima.model <- function()
 War.model <- function()
 {
   file.menu <- c("single subj with single conc",
-                 "multiple subj with each single conc",
                  "Go back one upper level")
   pick <- menu(file.menu, title = "<< data type for warfarin >>")
   if (pick == 1){
      all.Warss()
   } 
     else if (pick == 2){
-     all.Warms()
-  } 
-  else if (pick == 3){
      cat("\n\n") 
      run()
   }      

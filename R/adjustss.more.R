@@ -1404,7 +1404,7 @@ Phe.more<-function()
 War.more<-function()
 {
  cat("\n")
-  file.menu <- c("Css_trough -> Dose",
+  file.menu <- c("INR -> Dose",
                  "exit")
   pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
   if (pick == 1){
@@ -1422,7 +1422,7 @@ War.more<-function()
      cat("\n")
      show(doutput)
      cat("\n")
-   file.menu <- c("Dose -> Css_trough",
+   file.menu <- c("Dose -> INR",
                   "exit")
    pick <- menu(file.menu, title = "<< Dose Adjustment >>") 
     if (pick == 1){

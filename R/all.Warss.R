@@ -9,7 +9,7 @@ all.Warss<-function(){
      cat("\n")
      War.ss(WarSSpar[1,2],WarSSpar[2,2],WarSSpar[3,2])
      note_for_convergence_plots()
-     convergence_plots_sep()
+     convergence_plots_war_sep()
      note_for_War_output()
      show(samplesStats("*"))
      cat("\n") 
