@@ -8,7 +8,7 @@ all.Amianhinfusionss<-function(){
      note_for_close_window()
      AmianhinfusionSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","DL (mg)","tinf (hr)","R (mg/hr)","ts (hr)","c (mg/L)"),value=c(0))                                                                                                          
      AmianhinfusionSSpar<-edit(AmianhinfusionSSpar)                                                                                                                                                                                                             
-     AmianhinfusionSSpar<-ycheck(AmianhinfusionSSpar)     
+##     AmianhinfusionSSpar<-ycheck(AmianhinfusionSSpar)     
      cat("\n")
      Amianhinfusion.ss(AmianhinfusionSSpar[10,2],AmianhinfusionSSpar[9,2],AmianhinfusionSSpar[3,2],AmianhinfusionSSpar[2,2],AmianhinfusionSSpar[5,2],AmianhinfusionSSpar[1,2],AmianhinfusionSSpar[4,2],AmianhinfusionSSpar[6,2],AmianhinfusionSSpar[8,2],AmianhinfusionSSpar[7,2])
      note_for_convergence_plots()

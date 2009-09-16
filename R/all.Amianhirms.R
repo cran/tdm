@@ -8,7 +8,7 @@ all.Amianhirms<-function(){
      note_for_close_window()
      AmianhirMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      AmianhirMSpar<-edit(AmianhirMSpar)
-     AmianhirMSpar<-ymscheck(AmianhirMSpar)
+##     AmianhirMSpar<-ymscheck(AmianhirMSpar)
      cat("\n")
      Amianhir.ms(length(AmianhirMSpar$subject),AmianhirMSpar$c,AmianhirMSpar$tau,AmianhirMSpar$ts,AmianhirMSpar$D,AmianhirMSpar$ht,AmianhirMSpar$age,AmianhirMSpar$smoke,AmianhirMSpar$Gender,AmianhirMSpar$CHF)   # calculate individual aminophylline anhydrous PK parameters and show its prediction
      note_for_convergence_plots()

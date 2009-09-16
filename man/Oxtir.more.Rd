@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Oxtir.more}
 
 \alias{Oxtir.more}

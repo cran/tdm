@@ -5,7 +5,7 @@ all.Vansm<-function(){
      note_for_close_window()
      VanSMMpar<-data.frame(parameter=c("Gender","age (yr)","bw (kg)","Scr (mg/dL)","D (mg)","tau (hr)","tin (hr)"),value=c(0))
      VanSMMpar<-edit(VanSMMpar)
-     VanSMMpar<-ycheck(VanSMMpar)
+##     VanSMMpar<-ycheck(VanSMMpar)
      cat("\n")
      note_for_Vansm_conc_input()
      cat("\n")

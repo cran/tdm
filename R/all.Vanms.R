@@ -5,7 +5,7 @@ all.Vanms<-function(){
      note_for_close_window()
      VanMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),bw=c(0),Scr=c(0),D=c(0),tau=c(0),tin=c(0),ts=c(0),c=c(0))
      VanMSpar<-edit(VanMSpar)
-     VanMSpar<-ymscheck(VanMSpar)
+##     VanMSpar<-ymscheck(VanMSpar)
      cat("\n")
      Van.ms(length(VanMSpar$subject),VanMSpar$c,VanMSpar$tau,VanMSpar$ts,VanMSpar$tin,VanMSpar$D,VanMSpar$bw,VanMSpar$Scr,VanMSpar$Gender,VanMSpar$age)
      note_for_convergence_plots()

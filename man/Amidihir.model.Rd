@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amidihir.model}
 
 \alias{Amidihir.model}

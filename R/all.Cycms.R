@@ -5,7 +5,7 @@ all.Cycms<-function(){
      note_for_close_window()
      CycMSpar<-data.frame(subject=c(1,2),bw=c(0),PTD=c(0),Dia=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      CycMSpar<-edit(CycMSpar)
-     CycMSpar<-ymscheck(CycMSpar)
+##     CycMSpar<-ymscheck(CycMSpar)
      cat("\n")
      Cyc.ms(length(CycMSpar$subject),CycMSpar$c,CycMSpar$PTD,CycMSpar$tau,CycMSpar$ts,CycMSpar$D,CycMSpar$bw,CycMSpar$Dia)
      note_for_convergence_plots()

@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{all.Carsm}
 
 \alias{all.Carsm}

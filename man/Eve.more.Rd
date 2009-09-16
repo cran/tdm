@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Eve.more}
 
 \alias{Eve.more}

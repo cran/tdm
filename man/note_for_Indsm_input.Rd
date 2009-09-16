@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{note_for_Indsm_input}
 
 \alias{note_for_Indsm_input}

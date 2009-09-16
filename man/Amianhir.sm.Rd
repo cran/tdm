@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amianhir.sm}
 
 \alias{Amianhir.sm}

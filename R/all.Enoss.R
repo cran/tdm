@@ -5,7 +5,7 @@ all.Enoss<-function(){
      note_for_close_window()
      EnoSSpar<-data.frame(parameter=c("Gender","TBW (kg)","Scr (mg/dL)","D (IU)","tau (hr)","Amax (IU/mL)"),value=c(0))
      EnoSSpar<-edit(EnoSSpar)
-     EnoSSpar<-ycheck(EnoSSpar)
+##     EnoSSpar<-ycheck(EnoSSpar)
      cat("\n")
      Eno.ss(EnoSSpar[6,2],EnoSSpar[5,2],EnoSSpar[4,2],EnoSSpar[2,2],EnoSSpar[1,2],EnoSSpar[3,2])
      note_for_convergence_plots()

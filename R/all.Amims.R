@@ -5,7 +5,7 @@ all.Amims<-function(){
      note_for_close_window()
      AmiMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),bw=c(0),Ht=c(0),Scr=c(0),D=c(0),tau=c(0),tin=c(0),ts=c(0),c=c(0))    
      AmiMSpar<-edit(AmiMSpar)
-     AmiMSpar<-ymscheck(AmiMSpar)
+##     AmiMSpar<-ymscheck(AmiMSpar)
      cat("\n")
      Ami.ms(length(AmiMSpar$subject),AmiMSpar$c,AmiMSpar$tau,AmiMSpar$ts,AmiMSpar$tin,AmiMSpar$D,AmiMSpar$bw,AmiMSpar$Ht,AmiMSpar$Scr,AmiMSpar$Gender,AmiMSpar$age)  # calculate individual Aminoglycoside PK parameters and show its prediction
      note_for_convergence_plots()

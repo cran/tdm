@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Rit.ms}
 
 \alias{Rit.ms}

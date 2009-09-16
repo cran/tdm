@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{note_for_c_to_d_mcg}
 
 \alias{note_for_c_to_d_mcg}

@@ -8,7 +8,7 @@ all.Amidihirsm<-function(){
      note_for_close_window()
      AmidihirSMMpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)"),value=c(0))
      AmidihirSMMpar<-edit(AmidihirSMMpar)
-     AmidihirSMMpar<-ycheck(AmidihirSMMpar)
+##     AmidihirSMMpar<-ycheck(AmidihirSMMpar)
      cat("\n")
      cat("-------------------------------------------------------------\n")
      cat("    --Aminophylline dihydrous IR input data information--    \n")

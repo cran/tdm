@@ -5,7 +5,7 @@ all.Ritsm<-function(){
      note_for_close_window()
      RitSMMpar<-data.frame(parameter=c("LPV","D (mg)","tau (hr)"),value=c(0))
      RitSMMpar<-edit(RitSMMpar)
-     RitSMMpar<-wcheck(RitSMMpar)
+##     RitSMMpar<-wcheck(RitSMMpar)
      cat("\n")
      note_for_Ritsm_conc_input()
      cat("\n")

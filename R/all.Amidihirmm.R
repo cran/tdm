@@ -8,7 +8,7 @@ all.Amidihirmm<-function(){
      note_for_close_window()
      AmidihirMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0))
      AmidihirMMpar<-edit(AmidihirMMpar)
-     AmidihirMmpar<-ymscheck(AmidihirMMpar)
+##     AmidihirMmpar<-ymscheck(AmidihirMMpar)
      cat("\n")
      cat("-------------------------------------------------------------\n")
      cat("    --Aminophylline dihydrous IR input data information--    \n")

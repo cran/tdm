@@ -5,7 +5,7 @@ all.ChiValss<-function(){
      note_for_close_window()
      ChiValSSpar<-data.frame(parameter=c("TBW (Kg)","CBZ","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))
      ChiValSSpar<-edit(ChiValSSpar)
-     ChiValSSpar<-ycheck(ChiValSSpar)
+##     ChiValSSpar<-ycheck(ChiValSSpar)
      ChiVal.ss(ChiValSSpar[6,2],ChiValSSpar[4,2],ChiValSSpar[5,2],ChiValSSpar[3,2],ChiValSSpar[1,2],ChiValSSpar[2,2])
      note_for_convergence_plots()
      convergence_plots_sep()

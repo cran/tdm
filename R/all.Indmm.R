@@ -5,7 +5,7 @@ all.Indmm<-function(){
      note_for_close_window()
      IndMMpar<-data.frame(subject=c(1,2),Gender=c(0),bw=c(0),Rit=c(0),D=c(0),tau=c(0))
      IndMMpar<-edit(IndMMpar)
-     IndMMpar<-zmscheck(IndMMpar)
+##     IndMMpar<-zmscheck(IndMMpar)
      cat("\n")
      note_for_Indsm_conc_input()
      cat("\n")

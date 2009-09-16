@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Eno.ms}
 
 \alias{Eno.ms}

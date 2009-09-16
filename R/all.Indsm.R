@@ -5,7 +5,7 @@ all.Indsm<-function(){
      note_for_close_window()
      IndSMMpar<-data.frame(parameter=c("Gender","bw (kg)","Rit","D (mg)","tau (hr)"),value=c(0))
      IndSMMpar<-edit(IndSMMpar)
-     IndSMMpar<-zcheck(IndSMMpar)
+##     IndSMMpar<-zcheck(IndSMMpar)
      cat("\n")
      note_for_Indsm_conc_input()
      cat("\n")

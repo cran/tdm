@@ -14,9 +14,10 @@ note_for_plot <- function(){
 
      
 note_for_convergence_plots <- function(){
-cat(" ---------------------------------------------------------------------------------\n") 
-cat("     A good convergence of Markov chains cannot represent accurate prediction    \n")       
-cat(" ---------------------------------------------------------------------------------\n")        
+cat(" ----------------------------------------------------------\n") 
+cat(" Please note that a good convergence of Markov chains      \n") 
+cat(" does not necessarily to guarantee an accurate prediction. \n")       
+cat(" ----------------------------------------------------------\n")        
     }
     
     
@@ -162,7 +163,7 @@ note_for_c_to_d_eno <- function(){
      cat("  tau = desired dosing interval (hr)                             \n")
      cat("                                                                 \n")
      cat("  --output data--                                                \n")
-     cat("  Dose = predicted dose (IU,1mg=100IU)                           \n")
+     cat("  Dose = predicted dose (IU,1 mg = 100 IU)                       \n")
      cat("-----------------------------------------------------------------\n\n")
  }
  
@@ -202,7 +203,7 @@ note_for_d_to_c_war <- function(){
 note_for_Amiss_input <- function(){
      cat("-------------------------------------------------------\n")
      cat("    --Aminoglycoside input data information--          \n")
-     cat("    Gender = Male=1 ; Female=0                         \n")
+     cat("    Gender: Male=1 ; Female=0                         \n")
      cat("    age = age(yr)                                      \n")
      cat("    bw = body weight(kg)                               \n")
      cat("    Ht = height(cm)                                    \n")

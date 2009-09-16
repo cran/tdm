@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Litcit.more}
 
 \alias{Litcit.more}

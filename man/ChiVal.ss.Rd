@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{ChiVal.ss}
 
 \alias{ChiVal.ss}

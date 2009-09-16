@@ -5,7 +5,7 @@ all.Carmm<-function(){
      note_for_close_window()
      CBZMMpar<-data.frame(subject=c(1,2),TBW=c(0),PB=c(0),VPA=c(0),PHT=c(0),E=c(0),D=c(0),tau=c(0))
      CBZMMpar<-edit(CBZMMpar)
-     CBZMMpar<-ymscheck(CBZMMpar)
+##     CBZMMpar<-ymscheck(CBZMMpar)
      cat("\n")
      note_for_CBZsm_conc_input()
      cat("\n")

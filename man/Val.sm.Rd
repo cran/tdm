@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Val.sm}
 
 \alias{Val.sm}

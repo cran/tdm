@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Eve.ss}
 
 \alias{Eve.ss}

@@ -5,7 +5,7 @@ all.Evess<-function(){
      note_for_close_window()
      EveSSpar<-data.frame(parameter=c("bw (kg)","age (yr)","race","Ery","D (mg)","tau (hr)","ts (hr)","c (mcg/L)"),value=c(0))
      EveSSpar<-edit(EveSSpar)
-     EveSSpar<-ycheck(EveSSpar)
+##     EveSSpar<-ycheck(EveSSpar)
      cat("\n")
      Eve.ss(EveSSpar[8,2],EveSSpar[6,2],EveSSpar[7,2],EveSSpar[5,2],EveSSpar[1,2],EveSSpar[2,2],EveSSpar[3,2],EveSSpar[4,2])
      note_for_convergence_plots()

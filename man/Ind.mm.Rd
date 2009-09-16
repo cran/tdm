@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Ind.mm}
 
 \alias{Ind.mm}

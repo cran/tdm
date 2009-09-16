@@ -5,7 +5,7 @@ all.Carss<-function(){
      note_for_close_window()
      CBZSSpar<-data.frame(parameter=c("TBW (kg)","PB","VPA","PHT","E","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))
      CBZSSpar<-edit(CBZSSpar)
-     CBZSSpar<-ycheck(CBZSSpar)
+##     CBZSSpar<-ycheck(CBZSSpar)
      cat("\n")
      Car.ss(CBZSSpar[9,2],CBZSSpar[7,2],CBZSSpar[8,2],CBZSSpar[6,2],CBZSSpar[1,2],CBZSSpar[2,2],CBZSSpar[3,2],CBZSSpar[4,2],CBZSSpar[5,2])
      note_for_convergence_plots()

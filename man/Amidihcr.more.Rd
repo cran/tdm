@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amidihcr.more}
 
 \alias{Amidihcr.more}

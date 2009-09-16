@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Dig.ms}
 
 \alias{Dig.ms}

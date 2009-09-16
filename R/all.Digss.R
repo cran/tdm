@@ -5,7 +5,7 @@ all.Digss<-function(){
      note_for_close_window()
      DigSSpar<-data.frame(parameter=c("Gender","age (yr)","bw (kg)","scr (mg/dL)","D (mg)","tau (hr)","c (ng/mL)"),value=c(0))
      DigSSpar<-edit(DigSSpar)
-     DigSSpar<-ycheck(DigSSpar)
+##     DigSSpar<-ycheck(DigSSpar)
      cat("\n")
      Dig.ss(DigSSpar[7,2],DigSSpar[6,2],DigSSpar[5,2],DigSSpar[4,2],DigSSpar[3,2],DigSSpar[2,2],DigSSpar[1,2])
      note_for_convergence_plots()

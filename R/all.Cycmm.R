@@ -5,14 +5,14 @@ all.Cycmm<-function(){
      note_for_close_window()
      CycMMpar<-data.frame(subject=c(1,2),bw=c(0),PTD=c(0),Dia=c(0),D=c(0),tau=c(0))
      CycMMpar<-edit(CycMMpar)
-     CycMMpar<-zmscheck(CycMMpar)
+##     CycMMpar<-zmscheck(CycMMpar)
      cat("\n")
      note_for_Cycsm_conc_input()
      cat("\n")
      note_for_close_window()
      CycMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))
      CycMMMpar<-edit(CycMMMpar)
-     CycMMMpar<-mscheck(CycMMMpar)
+##     CycMMMpar<-mscheck(CycMMMpar)
      for(i in 1:length(unique(CycMMpar$subject))){
      J=length(CycMMMpar$ts[CycMMMpar$subject==i])
      A=CycMMMpar$conc[CycMMMpar$subject==i]

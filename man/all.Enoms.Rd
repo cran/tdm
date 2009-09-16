@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{all.Enoms}
 
 \alias{all.Enoms}

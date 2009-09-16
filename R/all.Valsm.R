@@ -5,7 +5,7 @@ all.Valsm<-function(){
      note_for_close_window()
      ValSMMpar<-data.frame(parameter=c("age (yr)","INDI","CBZ","ka","D (mg)","tau (hr)"),value=c(0))
      ValSMMpar<-edit(ValSMMpar)
-     ValSMMpar<-ycheck(ValSMMpar)
+##     ValSMMpar<-ycheck(ValSMMpar)
      cat("\n")
      note_for_Valsm_conc_input()
      cat("\n")

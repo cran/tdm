@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amidihinfusion.ms}
 
 \alias{Amidihinfusion.ms}

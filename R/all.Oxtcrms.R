@@ -8,7 +8,7 @@ all.Oxtcrms<-function(){
      note_for_close_window()
      OxtcrMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),c=c(0))
      OxtcrMSpar<-edit(OxtcrMSpar)
-     OxtcrMSpar<-ymscheck(OxtcrMSpar)
+##     OxtcrMSpar<-ymscheck(OxtcrMSpar)
      cat("\n")
      Oxtcr.ms(length(OxtcrMSpar$subject),OxtcrMSpar$c,OxtcrMSpar$tau,OxtcrMSpar$D,OxtcrMSpar$ht,OxtcrMSpar$age,OxtcrMSpar$smoke,OxtcrMSpar$Gender,OxtcrMSpar$CHF)
      note_for_convergence_plots()

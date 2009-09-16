@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{ChiVal.model}
 
 \alias{ChiVal.model}

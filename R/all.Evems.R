@@ -5,7 +5,7 @@ all.Evems<-function(){
      note_for_close_window()
      EveMSpar<-data.frame(subject=c(1,2),bw=c(0),age=c(0),race=c(0),Ery=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      EveMSpar<-edit(EveMSpar)
-     EveMSpar<-ymscheck(EveMSpar)
+##     EveMSpar<-ymscheck(EveMSpar)
      cat("\n\n")
      Eve.ms(length(EveMSpar$subject),EveMSpar$c,EveMSpar$tau,EveMSpar$ts,EveMSpar$D,EveMSpar$bw,EveMSpar$age,EveMSpar$race,EveMSpar$Ery)
      note_for_convergence_plots()

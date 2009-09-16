@@ -5,7 +5,7 @@ all.Cycss<-function(){
      note_for_close_window()
      CycSSpar<-data.frame(parameter=c("bw (kg)","PTD (day)","Dia","D (mg)","tau (hr)","ts (hr)","c (mcg/L)"),value=c(0))
      CycSSpar<-edit(CycSSpar)
-     CycSSpar<-ycheck(CycSSpar)
+##     CycSSpar<-ycheck(CycSSpar)
      cat("\n")
      Cyc.ss(CycSSpar[7,2],CycSSpar[2,2],CycSSpar[5,2],CycSSpar[6,2],CycSSpar[4,2],CycSSpar[1,2],CycSSpar[3,2])
      note_for_convergence_plots()

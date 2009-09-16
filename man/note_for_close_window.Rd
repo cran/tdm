@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{note_for_close_window}
 
 \alias{note_for_close_window}

@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{note_for_infusion_d_to_c}
 
 \alias{note_for_infusion_d_to_c}

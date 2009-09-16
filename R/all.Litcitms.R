@@ -5,7 +5,7 @@ all.Litcitms<-function(){
      note_for_close_window()
      LitcitMSpar<-data.frame(subject=c(1,2),age=c(0),f=c(0),bw=c(0),Scr=c(0),D=c(0),tau=c(0),c=c(0))
      LitcitMSpar<-edit(LitcitMSpar)
-     LitcitMSpar<-ymscheck(LitcitMSpar)
+##     LitcitMSpar<-ymscheck(LitcitMSpar)
      cat("\n")
      Litcit.ms(length(LitcitMSpar$subject),LitcitMSpar$c,LitcitMSpar$tau,LitcitMSpar$age,LitcitMSpar$D,LitcitMSpar$Scr,LitcitMSpar$bw,LitcitMSpar$f)
      note_for_convergence_plots()

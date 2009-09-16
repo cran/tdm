@@ -5,7 +5,7 @@ all.ChiValms<-function(){
      note_for_close_window()
      ChiValMSpar<-data.frame(subject=c(1,2),TBW=c(0),CBZ=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      ChiValMSpar<-edit(ChiValMSpar)
-     ChiValMSpar<-ymscheck(ChiValMSpar)
+##     ChiValMSpar<-ymscheck(ChiValMSpar)
      cat("\n")
      ChiVal.ms(length(ChiValMSpar$subject),ChiValMSpar$c,ChiValMSpar$tau,ChiValMSpar$ts,ChiValMSpar$D,ChiValMSpar$TBW,ChiValMSpar$CBZ)
      note_for_convergence_plots()

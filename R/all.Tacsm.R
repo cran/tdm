@@ -5,7 +5,7 @@ all.Tacsm<-function(){
      note_for_close_window()
      TacSMMpar<-data.frame(parameter=c("Hem","Alb","Dil","Flu","D (mg)","tau (hr)"),value=c(0))
      TacSMMpar<-edit(TacSMMpar)
-     TacSMMpar<-ycheck(TacSMMpar)
+##     TacSMMpar<-ycheck(TacSMMpar)
      cat("\n")
      note_for_Tacsm_conc_input()
      cat("\n")

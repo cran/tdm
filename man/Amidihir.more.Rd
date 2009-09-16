@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amidihir.more}
 
 \alias{Amidihir.more}

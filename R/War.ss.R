@@ -3,10 +3,10 @@ library(BRugs)                                        # active BRugs
 oldwd<-getwd()
 setwd(system.file("PK",package="tdm"))                # set working directory
 modelCheck("WarSSmodel.txt")                          # Load model
-bugsData(                                             # porduce a BUGS data file and name it Wardata
+bugsData(                                             # produce a BUGS data file and name it Wardata
 list(
 D=a,
-tau=b,
+Dtau=b,
 INR=c
 )
 , fileName=file.path(getwd(),"Wardata.txt"),digits=5)

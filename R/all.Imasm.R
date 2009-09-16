@@ -20,7 +20,7 @@ all.Imasm<-function(){
      note_for_close_window()
      ImaSMpar<-data.frame(n=c(0),ts=c(0),conc=c(0))
      ImaSMpar<-edit(ImaSMpar)
-     ImaSMpar<-mscheck(ImaSMpar)
+##     ImaSMpar<-mscheck(ImaSMpar)
      cat("\n")
      Ima.sm(length(ImaSMpar$ts),ImaSMpar$conc,ImaSMpar$ts,ImaSMMpar[6,2],ImaSMpar$n,ImaSMMpar[5,2],ImaSMMpar[2,2],ImaSMMpar[1,2],ImaSMMpar[3,2],ImaSMMpar[4,2])
      note_for_convergence_plots()

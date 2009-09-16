@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Litcit.ms}
 
 \alias{Litcit.ms}

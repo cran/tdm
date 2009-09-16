@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Van.ss}
 
 \alias{Van.ss}

@@ -5,7 +5,7 @@ all.Valss<-function(){
      note_for_close_window()
      ValSSpar<-data.frame(parameter=c("age (yr)","INDI","CBZ","ka","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))
      ValSSpar<-edit(ValSSpar)
-     ValSSpar<-ycheck(ValSSpar)
+##     ValSSpar<-ycheck(ValSSpar)
      cat("\n")
      Val.ss(ValSSpar[8,2],ValSSpar[6,2],ValSSpar[7,2],ValSSpar[5,2],ValSSpar[1,2],ValSSpar[3,2],ValSSpar[2,2],ValSSpar[4,2])
      note_for_convergence_plots()

@@ -5,7 +5,7 @@ all.Tacms<-function(){
      note_for_close_window()
      TacMSpar<-data.frame(subject=c(1,2),Hem=c(0),Alb=c(0),Dil=c(0),Flu=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      TacMSpar<-edit(TacMSpar)
-     TacMSpar<-ymscheck(TacMSpar)
+##     TacMSpar<-ymscheck(TacMSpar)
      cat("\n")
      Tac.ms(length(TacMSpar$subject),TacMSpar$c,TacMSpar$tau,TacMSpar$ts,TacMSpar$D,TacMSpar$Hem,TacMSpar$Alb,TacMSpar$Dil,TacMSpar$Flu)
      note_for_convergence_plots()

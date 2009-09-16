@@ -8,7 +8,7 @@ all.Amidihcrms<-function(){
      note_for_close_window()
      AmidihcrMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),c=c(0))
      AmidihcrMSpar<-edit(AmidihcrMSpar)
-     AmidihcrMSpar<-ymscheck(AmidihcrMSpar)
+##     AmidihcrMSpar<-ymscheck(AmidihcrMSpar)
      cat("\n")
      Amidihcr.ms(length(AmidihcrMSpar$subject),AmidihcrMSpar$c,AmidihcrMSpar$tau,AmidihcrMSpar$D,AmidihcrMSpar$ht,AmidihcrMSpar$age,AmidihcrMSpar$smoke,AmidihcrMSpar$Gender,AmidihcrMSpar$CHF)
      note_for_convergence_plots()

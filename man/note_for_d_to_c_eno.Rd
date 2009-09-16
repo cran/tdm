@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{note_for_d_to_c_eno}
 
 \alias{note_for_d_to_c_eno}

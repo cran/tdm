@@ -8,7 +8,7 @@ all.Amidihinfusionms<-function(){
      note_for_close_window()
      AmidihinfusionMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),DL=c(0),tinf=c(0),R=c(0),ts=c(0),c=c(0))
      AmidihinfusionMSpar<-edit(AmidihinfusionMSpar)
-     AmidihinfusionMSpar<-ymscheck(AmidihinfusionMSpar)
+##     AmidihinfusionMSpar<-ymscheck(AmidihinfusionMSpar)
      cat("\n")
      Amidihinfusion.ms(length(AmidihinfusionMSpar$subject),AmidihinfusionMSpar$c,AmidihinfusionMSpar$ts,AmidihinfusionMSpar$ht,AmidihinfusionMSpar$age,AmidihinfusionMSpar$smoke,AmidihinfusionMSpar$Gender,AmidihinfusionMSpar$CHF,AmidihinfusionMSpar$DL,AmidihinfusionMSpar$R,AmidihinfusionMSpar$tinf)
      note_for_convergence_plots()

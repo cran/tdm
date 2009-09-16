@@ -3,7 +3,7 @@ library(BRugs)                                        # active BRugs
 oldwd<-getwd()
 setwd(system.file("PK",package="tdm"))                # set working directory
 modelCheck("DigSSmodel.txt")                          # Load model
-bugsData(                                             # porduce a BUGS data file and name it Digdata
+bugsData(                                             # produce a BUGS data file and name it Digdata
 list(
 c=a,
 tau=b,

@@ -5,7 +5,7 @@ all.Carsm<-function(){
      note_for_close_window()
      CBZSMMpar<-data.frame(parameter=c("TBW (kg)","PB","VPA","PHT","E","D (mg)","tau (hr)"),value=c(0))
      CBZSMMpar<-edit(CBZSMMpar)
-     CBZSMMpar<-ycheck(CBZSMMpar)
+##     CBZSMMpar<-ycheck(CBZSMMpar)
      cat("\n")
      note_for_CBZsm_conc_input()
      cat("\n")

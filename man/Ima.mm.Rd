@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Ima.mm}
 
 \alias{Ima.mm}

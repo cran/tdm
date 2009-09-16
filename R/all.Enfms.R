@@ -5,7 +5,7 @@ all.Enfms<-function(){
      note_for_close_window()
      EnfMSpar<-data.frame(subject=c(1,2),Gender=c(0),bw=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      EnfMSpar<-edit(EnfMSpar)
-     EnfMSpar<-ymscheck(EnfMSpar)
+##     EnfMSpar<-ymscheck(EnfMSpar)
      cat("\n")
      Enf.ms(length(EnfMSpar$subject),EnfMSpar$c,EnfMSpar$tau,EnfMSpar$ts,EnfMSpar$D,EnfMSpar$bw,EnfMSpar$Gender)
      note_for_convergence_plots()

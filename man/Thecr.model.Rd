@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Thecr.model}
 
 \alias{Thecr.model}

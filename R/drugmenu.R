@@ -1,7 +1,7 @@
 # List of Drugs Menu
 run<-function()
 {
- cat("\n")
+  cat("\n")
   file.menu <- c("Aminoglycosides                        ",
                  "Anti-HIV drugs",
                  "Carbamazepine",
@@ -69,7 +69,8 @@ run<-function()
         War.model()
       } else {
       if (pick == 0){
-        cat("\nBye-Bye~~ \n\n")     
+        graphics.off()
+        cat("\nThank you for using tdm. Bye now. \n\n")     
       }
      }
     }

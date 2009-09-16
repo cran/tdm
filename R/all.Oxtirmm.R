@@ -8,7 +8,7 @@ all.Oxtirmm<-function(){
      note_for_close_window()
      OxtirMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0))
      OxtirMMpar<-edit(OxtirMMpar)
-     OxtirMMpar<-ymscheck(OxtirMMpar)
+##     OxtirMMpar<-ymscheck(OxtirMMpar)
      cat("\n")
      cat("\n")
      cat("---------------------------------------------------------\n")

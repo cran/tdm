@@ -5,7 +5,7 @@ all.Enfss<-function(){
      note_for_close_window()
      EnfSSpar<-data.frame(parameter=c("Gender","bw (kg)","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))
      EnfSSpar<-edit(EnfSSpar)
-     EnfSSpar<-ycheck(EnfSSpar)
+##     EnfSSpar<-ycheck(EnfSSpar)
      cat("\n")
      Enf.ss(EnfSSpar[6,2],EnfSSpar[4,2],EnfSSpar[5,2],EnfSSpar[3,2],EnfSSpar[2,2],EnfSSpar[1,2])
      note_for_convergence_plots()

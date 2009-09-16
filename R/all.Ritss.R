@@ -5,7 +5,7 @@ all.Ritss<-function(){
      note_for_close_window()
      RitSSpar<-data.frame(parameter=c("LPV","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))
      RitSSpar<-edit(RitSSpar)
-     RitSSpar<-zcheck(RitSSpar)
+##     RitSSpar<-zcheck(RitSSpar)
      cat("\n")
      Rit.ss(RitSSpar[5,2],RitSSpar[4,2],RitSSpar[3,2],RitSSpar[2,2],RitSSpar[1,2])
      note_for_convergence_plots()

@@ -5,7 +5,7 @@ all.Vanmm<-function(){
      note_for_close_window()
      VanMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),bw=c(0),Scr=c(0),D=c(0),tau=c(0),tin=c(0))
      VanMMpar<-edit(VanMMpar)
-     VanMMpar<-ymscheck(VanMMpar)
+##     VanMMpar<-ymscheck(VanMMpar)
      cat("\n")
      note_for_Vansm_conc_input()
      cat("\n")

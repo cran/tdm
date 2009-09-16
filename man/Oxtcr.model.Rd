@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Oxtcr.model}
 
 \alias{Oxtcr.model}

@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Tac.model}
 
 \alias{Tac.model}

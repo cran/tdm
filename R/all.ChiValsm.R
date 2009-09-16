@@ -5,7 +5,7 @@ all.ChiValsm<-function(){
      note_for_close_window()
      ChiValSMMpar<-data.frame(parameter=c("TBW (Kg)","CBZ","D (mg)","tau (hr)"),value=c(0))
      ChiValSMMpar<-edit(ChiValSMMpar)
-     ChiValSMMpar<-zcheck(ChiValSMMpar)
+##     ChiValSMMpar<-zcheck(ChiValSMMpar)
      cat("\n")
      note_for_ChiValsm_conc_input()
      cat("\n")

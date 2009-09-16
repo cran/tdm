@@ -5,7 +5,7 @@ all.Indss<-function(){
      note_for_close_window()
      IndSSpar<-data.frame(parameter=c("Gender","bw (kg)","Rit","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))
      IndSSpar<-edit(IndSSpar)
-     IndSSpar<-ycheck(IndSSpar)
+##     IndSSpar<-ycheck(IndSSpar)
      Ind.ss(IndSSpar[7,2],IndSSpar[5,2],IndSSpar[6,2],IndSSpar[4,2],IndSSpar[2,2],IndSSpar[3,2],IndSSpar[1,2])
      note_for_convergence_plots()
      convergence_plots_sep()

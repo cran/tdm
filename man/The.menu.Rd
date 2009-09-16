@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{The.menu}
 
 \alias{The.menu}

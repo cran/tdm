@@ -8,7 +8,7 @@ all.Amidihcrss<-function(){
      note_for_close_window()
      AmidihcrSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","c (mg/L)"),value=c(0))                                           
      AmidihcrSSpar<-edit(AmidihcrSSpar)                                                                                                                                          
-     AmidihcrSSpar<-ycheck(AmidihcrSSpar) 
+##     AmidihcrSSpar<-ycheck(AmidihcrSSpar) 
      cat("\n")                                                                                                                                        
      Amidihcr.ss(AmidihcrSSpar[8,2],AmidihcrSSpar[7,2],AmidihcrSSpar[6,2],AmidihcrSSpar[3,2],AmidihcrSSpar[2,2],AmidihcrSSpar[5,2],AmidihcrSSpar[1,2],AmidihcrSSpar[4,2]) 
      note_for_convergence_plots()

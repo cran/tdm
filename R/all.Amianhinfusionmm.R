@@ -8,7 +8,7 @@ all.Amianhinfusionmm<-function(){
      note_for_close_window()
      AmianhinfusionMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),DL=c(0),tinf=c(0),R=c(0))
      AmianhinfusionMMpar<-edit(AmianhinfusionMMpar)
-     AmianhinfusionMMpar<-wmscheck(AmianhinfusionMMpar)
+##     AmianhinfusionMMpar<-wmscheck(AmianhinfusionMMpar)
      cat("\n")
      cat("------------------------------------------------------------------------\n")
      cat("    --Aminophylline anhydrous iv infusion input data information--      \n")

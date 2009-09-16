@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{AntiHIV.menu}
 
 \alias{AntiHIV.menu}

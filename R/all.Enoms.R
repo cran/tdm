@@ -5,7 +5,7 @@ all.Enoms<-function(){
      note_for_close_window()
      EnoMSpar<-data.frame(subject=c(1,2),Gender=c(0),TBW=c(0),Scr=c(0),D=c(0),tau=c(0),Amax=c(0))
      EnoMSpar<-edit(EnoMSpar)
-     EnoMSpar<-ymscheck(EnoMSpar)
+##     EnoMSpar<-ymscheck(EnoMSpar)
      cat("\n")
      Eno.ms(length(EnoMSpar$subject),EnoMSpar$Amax,EnoMSpar$tau,EnoMSpar$D,EnoMSpar$TBW,EnoMSpar$Gender,EnoMSpar$Scr)
      note_for_convergence_plots()

@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amianhcr.model}
 
 \alias{Amianhcr.model}

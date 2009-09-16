@@ -5,7 +5,7 @@ all.Amiss<-function(){
      note_for_close_window()
      AmiSSpar<-data.frame(parameter=c("Gender","age (yr)","bw (kg)","Ht (cm)","Scr (mg/dL)","D (mg)","tau (hr)","tin (hr)","ts (hr)","c (mg/L)"),value=c(0))      # edit table of Aminoglycoside input data information     
      AmiSSpar<-edit(AmiSSpar)                                                                                                                                     # show table of Aminoglycoside input data information for user editing
-     AmiSSpar<-ycheck(AmiSSpar)                                                                                                                                   # avoid user missing input information
+##     AmiSSpar<-ycheck(AmiSSpar)                                                                                                                                   # avoid user missing input information
      cat("\n")                                                                                                                                                    # ªÅ¤@¦æ
      Ami.ss(AmiSSpar[10,2],AmiSSpar[7,2],AmiSSpar[9,2],AmiSSpar[8,2],AmiSSpar[6,2],AmiSSpar[3,2],AmiSSpar[4,2],AmiSSpar[5,2],AmiSSpar[1,2],AmiSSpar[2,2])   # calculate individual Aminoglycoside PK parameters and show its prediction
      note_for_convergence_plots()

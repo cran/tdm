@@ -5,7 +5,7 @@ all.Phems<-function(){
      note_for_close_window()
      PheMSpar<-data.frame(subject=c(1,2),bw=c(0),D=c(0),tau=c(0),c=c(0))
      PheMSpar<-edit(PheMSpar)
-     PheMSpar<-zmscheck(PheMSpar)
+##     PheMSpar<-zmscheck(PheMSpar)
      cat("\n")
      Phe.ms(length(PheMSpar$subject),PheMSpar$c,PheMSpar$tau,PheMSpar$D,PheMSpar$bw)
      note_for_convergence_plots()

@@ -5,7 +5,7 @@ all.Tacmm<-function(){
      note_for_close_window()
      TacMMpar<-data.frame(subject=c(1,2),Hem=c(0),Alb=c(0),Dil=c(0),Flu=c(0),D=c(0),tau=c(0))
      TacMMpar<-edit(TacMMpar)
-     TacMMpar<-ymscheck(TacMMpar)
+##     TacMMpar<-ymscheck(TacMMpar)
      cat("\n")
      note_for_Tacsm_conc_input()
      cat("\n")

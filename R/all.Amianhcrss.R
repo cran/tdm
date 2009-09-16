@@ -8,7 +8,7 @@ all.Amianhcrss<-function(){
      note_for_close_window()
      AmianhcrSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","c (mg/L)"),value=c(0))                                            
      AmianhcrSSpar<-edit(AmianhcrSSpar)                                                                                                                                           
-     AmianhcrSSpar<-ycheck(AmianhcrSSpar)       
+##     AmianhcrSSpar<-ycheck(AmianhcrSSpar)       
      cat("\n")                                                                                                                         
      Amianhcr.ss(AmianhcrSSpar[8,2],AmianhcrSSpar[7,2],AmianhcrSSpar[6,2],AmianhcrSSpar[3,2],AmianhcrSSpar[2,2],AmianhcrSSpar[5,2],AmianhcrSSpar[1,2],AmianhcrSSpar[4,2])
      note_for_convergence_plots()

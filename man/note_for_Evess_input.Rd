@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{note_for_Evess_input}
 
 \alias{note_for_Evess_input}

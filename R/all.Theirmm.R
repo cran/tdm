@@ -8,7 +8,7 @@ all.Theirmm<-function(){
      note_for_close_window()
      TheirMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0))
      TheirMMpar<-edit(TheirMMpar)
-     TheirMMpar<-ymscheck(TheirMMpar)
+##     TheirMMpar<-ymscheck(TheirMMpar)
      cat("\n")
      cat("--------------------------------------------------------\n")
      cat("    --Theophylline IR input data information--          \n")

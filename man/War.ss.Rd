@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{War.ss}
 
 \alias{War.ss}

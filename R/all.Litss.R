@@ -5,7 +5,7 @@ all.Litss<-function(){
      note_for_close_window()
      LitSSpar<-data.frame(parameter=c("age (yr)","f","bw (kg)","Scr (mg/dL)","D (mg)","tau (hr)","c (mEq/L)"),value=c(0))
      LitSSpar<-edit(LitSSpar)
-     LitSSpar<-ycheck(LitSSpar)
+##     LitSSpar<-ycheck(LitSSpar)
      cat("\n")
      Lit.ss(LitSSpar[7,2],LitSSpar[6,2],LitSSpar[1,2],LitSSpar[5,2],LitSSpar[4,2],LitSSpar[3,2],LitSSpar[2,2])
      note_for_convergence_plots()

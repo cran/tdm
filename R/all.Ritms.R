@@ -5,7 +5,7 @@ all.Ritms<-function(){
      note_for_close_window()
      RitMSpar<-data.frame(subject=c(1,2),LPV=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      RitMSpar<-edit(RitMSpar)
-     RitMSpar<-zmscheck(RitMSpar)
+##     RitMSpar<-zmscheck(RitMSpar)
      cat("\n")
      Rit.ms(length(RitMSpar$subject),RitMSpar$c,RitMSpar$ts,RitMSpar$tau,RitMSpar$D,RitMSpar$LPV)
      note_for_convergence_plots()

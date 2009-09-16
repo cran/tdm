@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Ind.ss}
 
 \alias{Ind.ss}

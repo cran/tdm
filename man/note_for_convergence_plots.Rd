@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{note_for_convergence_plots}
 
 \alias{note_for_convergence_plots}

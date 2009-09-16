@@ -8,7 +8,7 @@ all.Amianhcrms<-function(){
      note_for_close_window()
      AmianhcrMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),c=c(0))
      AmianhcrMSpar<-edit(AmianhcrMSpar)
-     AmianhcrMSpar<-ymscheck(AmianhcrMSpar)
+##     AmianhcrMSpar<-ymscheck(AmianhcrMSpar)
      cat("\n")
      Amianhcr.ms(length(AmianhcrMSpar$subject),AmianhcrMSpar$c,AmianhcrMSpar$tau,AmianhcrMSpar$D,AmianhcrMSpar$ht,AmianhcrMSpar$age,AmianhcrMSpar$smoke,AmianhcrMSpar$Gender,AmianhcrMSpar$CHF)
      note_for_convergence_plots()

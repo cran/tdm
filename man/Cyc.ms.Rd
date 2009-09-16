@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Cyc.ms}
 
 \alias{Cyc.ms}

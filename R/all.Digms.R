@@ -5,7 +5,7 @@ all.Digms<-function(){
      note_for_close_window()
      DigMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),bw=c(0),scr=c(0),D=c(0),tau=c(0),c=c(0))
      DigMSpar<-edit(DigMSpar)
-     DigMSpar<-ymscheck(DigMSpar)
+##     DigMSpar<-ymscheck(DigMSpar)
      cat("\n")
      Dig.ms(length(DigMSpar$subject),DigMSpar$c,DigMSpar$tau,DigMSpar$D,DigMSpar$scr,DigMSpar$bw,DigMSpar$age,DigMSpar$Gender)
      note_for_convergence_plots()

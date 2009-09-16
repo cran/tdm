@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amidihir.mm}
 
 \alias{Amidihir.mm}

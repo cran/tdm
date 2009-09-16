@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amidihinfusion.model}
 
 \alias{Amidihinfusion.model}

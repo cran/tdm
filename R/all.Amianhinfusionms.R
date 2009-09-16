@@ -8,7 +8,7 @@ all.Amianhinfusionms<-function(){
      note_for_close_window()
      AmianhinfusionMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),DL=c(0),tinf=c(0),R=c(0),ts=c(0),c=c(0))
      AmianhinfusionMSpar<-edit(AmianhinfusionMSpar)
-     AmianhinfusionMSpar<-ymscheck(AmianhinfusionMSpar)
+##     AmianhinfusionMSpar<-ymscheck(AmianhinfusionMSpar)
      cat("\n")
      Amianhinfusion.ms(length(AmianhinfusionMSpar$subject),AmianhinfusionMSpar$c,AmianhinfusionMSpar$ts,AmianhinfusionMSpar$ht,AmianhinfusionMSpar$age,AmianhinfusionMSpar$smoke,AmianhinfusionMSpar$Gender,AmianhinfusionMSpar$CHF,AmianhinfusionMSpar$DL,AmianhinfusionMSpar$R,AmianhinfusionMSpar$tinf)
      note_for_convergence_plots()

@@ -5,7 +5,7 @@ all.Litcitss<-function(){
      note_for_close_window()
      LitcitSSpar<-data.frame(parameter=c("age (yr)","f","bw (kg)","Scr (mg/dL)","D (mg)","tau (hr)","c (mEq/L)"),value=c(0))
      LitcitSSpar<-edit(LitcitSSpar)
-     LitcitSSpar<-ycheck(LitcitSSpar)
+##     LitcitSSpar<-ycheck(LitcitSSpar)
      cat("\n")
      Litcit.ss(LitcitSSpar[7,2],LitcitSSpar[6,2],LitcitSSpar[1,2],LitcitSSpar[5,2],LitcitSSpar[4,2],LitcitSSpar[3,2],LitcitSSpar[2,2])
      note_for_convergence_plots()

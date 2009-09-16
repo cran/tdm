@@ -8,7 +8,7 @@ all.Theirms<-function(){
      note_for_close_window()
      TheirMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      TheirMSpar<-edit(TheirMSpar)
-     TheirMSpar<-ymscheck(TheirMSpar)
+##     TheirMSpar<-ymscheck(TheirMSpar)
      cat("\n")
      Their.ms(length(TheirMSpar$subject),TheirMSpar$c,TheirMSpar$tau,TheirMSpar$ts,TheirMSpar$D,TheirMSpar$ht,TheirMSpar$age,TheirMSpar$smoke,TheirMSpar$Gender,TheirMSpar$CHF)
      note_for_convergence_plots()

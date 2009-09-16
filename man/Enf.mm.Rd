@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Enf.mm}
 
 \alias{Enf.mm}

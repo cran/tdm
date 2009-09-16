@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Ind.ms}
 
 \alias{Ind.ms}

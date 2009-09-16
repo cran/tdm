@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amianhcr.ss}
 
 \alias{Amianhcr.ss}

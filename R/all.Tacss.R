@@ -5,7 +5,7 @@ all.Tacss<-function(){
      note_for_close_window()
      TacSSpar<-data.frame(parameter=c("Hem","Alb","Dil","Flu","D (mg)","tau (hr)","ts (hr)","c (mcg/mL)"),value=c(0))
      TacSSpar<-edit(TacSSpar)
-     TacSSpar<-ycheck(TacSSpar)
+##     TacSSpar<-ycheck(TacSSpar)
      cat("\n")
      Tac.ss(TacSSpar[8,2],TacSSpar[6,2],TacSSpar[7,2],TacSSpar[5,2],TacSSpar[1,2],TacSSpar[2,2],TacSSpar[3,2],TacSSpar[4,2])
      note_for_convergence_plots()

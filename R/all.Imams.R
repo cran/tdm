@@ -13,7 +13,7 @@ all.Imams<-function(){
      note_for_close_window()
      ImaMSpar<-data.frame(subject=c(1,2),BW=c(0),OCC=c(0),Hb=c(0),WBC=c(0),n=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      ImaMSpar<-edit(ImaMSpar)
-     ImaMSpar<-ymscheck(ImaMSpar)
+##     ImaMSpar<-ymscheck(ImaMSpar)
      cat("\n")
      Ima.ms(length(ImaMSpar$subject),ImaMSpar$c,ImaMSpar$ts,ImaMSpar$tau,ImaMSpar$n,ImaMSpar$D,ImaMSpar$OCC,ImaMSpar$BW,ImaMSpar$Hb,ImaMSpar$WBC)
      note_for_convergence_plots()

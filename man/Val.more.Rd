@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Val.more}
 
 \alias{Val.more}

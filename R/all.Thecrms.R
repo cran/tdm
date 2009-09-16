@@ -8,7 +8,7 @@ all.Thecrms<-function(){
      note_for_close_window()
      ThecrMSpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0),c=c(0))
      ThecrMSpar<-edit(ThecrMSpar)
-     ThecrMSpar<-ymscheck(ThecrMSpar)
+##     ThecrMSpar<-ymscheck(ThecrMSpar)
      cat("\n")
      Thecr.ms(length(ThecrMSpar$subject),ThecrMSpar$c,ThecrMSpar$tau,ThecrMSpar$D,ThecrMSpar$ht,ThecrMSpar$age,ThecrMSpar$smoke,ThecrMSpar$Gender,ThecrMSpar$CHF)
      note_for_convergence_plots()

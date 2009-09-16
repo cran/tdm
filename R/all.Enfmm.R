@@ -5,14 +5,14 @@ all.Enfmm<-function(){
      note_for_close_window()
      EnfMMpar<-data.frame(subject=c(1,2),Gender=c(0),bw=c(0),D=c(0),tau=c(0))
      EnfMMpar<-edit(EnfMMpar)
-     EnfMMpar<-zmscheck(EnfMMpar)
+##     EnfMMpar<-zmscheck(EnfMMpar)
      cat("\n")
      note_for_Enfsm_conc_input()
      cat("\n")
      note_for_close_window()
      EnfMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))
      EnfMMMpar<-edit(EnfMMMpar)
-     EnfMMMpar<-mscheck(EnfMMMpar)
+##     EnfMMMpar<-mscheck(EnfMMMpar)
      for(i in 1:length(unique(EnfMMpar$subject))){
      h=length(EnfMMMpar$ts[EnfMMMpar$subject==i])
      A=EnfMMMpar$conc[EnfMMMpar$subject==i]

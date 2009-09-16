@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amianh.menu}
 
 \alias{Amianh.menu}

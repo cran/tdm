@@ -12,7 +12,7 @@ all.Amimm<-function(){
      note_for_close_window()
      AmiMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))                  # edit table of Aminoglycoside input data information including subject, ts and conc
      AmiMMMpar<-edit(AmiMMMpar)
-     AmiMMMpar<-mscheck(AmiMMMpar)
+##     AmiMMMpar<-mscheck(AmiMMMpar)
      for(i in 1:length(unique(AmiMMpar$subject))){       # Loop, 為了計算多人多點的參數(選擇計算一個人)
      a=length(AmiMMMpar$ts[AmiMMMpar$subject==i])        # a=number of sampling time of subject[i]
      b=AmiMMMpar$conc[AmiMMMpar$subject==i]              # b=concentration of subject[i]

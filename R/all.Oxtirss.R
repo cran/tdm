@@ -7,7 +7,7 @@ all.Oxtirss<-function(){
      note_for_close_window()
      OxtirSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))                   
      OxtirSSpar<-edit(OxtirSSpar)                                                                                                                   
-     OxtirSSpar<-ycheck(OxtirSSpar)           
+##     OxtirSSpar<-ycheck(OxtirSSpar)           
      cat("\n")                                                                                                         
      Oxtir.ss(OxtirSSpar[9,2],OxtirSSpar[7,2],OxtirSSpar[8,2],OxtirSSpar[6,2],OxtirSSpar[3,2],OxtirSSpar[2,2],OxtirSSpar[5,2],OxtirSSpar[1,2],OxtirSSpar[4,2])
      note_for_convergence_plots()

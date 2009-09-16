@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Tac.sm}
 
 \alias{Tac.sm}

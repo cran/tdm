@@ -8,7 +8,7 @@ all.Amidihinfusionss<-function(){
      note_for_close_window()
      AmidihinfusionSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","DL (mg)","tinf (hr)","R (hr)","ts (hr)","c (mg/L)"),value=c(0))                                                                                                          
      AmidihinfusionSSpar<-edit(AmidihinfusionSSpar)                                                                                                                                                                                                              
-     AmidihinfusionSSpar<-ycheck(AmidihinfusionSSpar)     
+##     AmidihinfusionSSpar<-ycheck(AmidihinfusionSSpar)     
      cat("\n")                                                                                                                                                                                                        
      Amidihinfusion.ss(AmidihinfusionSSpar[10,2],AmidihinfusionSSpar[9,2],AmidihinfusionSSpar[6,2],AmidihinfusionSSpar[3,2],AmidihinfusionSSpar[2,2],AmidihinfusionSSpar[5,2],AmidihinfusionSSpar[1,2],AmidihinfusionSSpar[4,2],AmidihinfusionSSpar[6,2],AmidihinfusionSSpar[8,2],AmidihinfusionSSpar[9,2])
      note_for_convergence_plots()

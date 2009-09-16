@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Cyc.model}
 
 \alias{Cyc.model}

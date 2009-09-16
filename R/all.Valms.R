@@ -5,7 +5,7 @@ all.Valms<-function(){
      note_for_close_window()
      ValMSpar<-data.frame(subject=c(1,2),age=c(0),INDI=c(0),CBZ=c(0),ka=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      ValMSpar<-edit(ValMSpar)
-     ValMSpar<-ymscheck(ValMSpar)
+##     ValMSpar<-ymscheck(ValMSpar)
      Val.ms(length(ValMSpar$subject),ValMSpar$c,ValMSpar$tau,ValMSpar$ts,ValMSpar$D,ValMSpar$age,ValMSpar$CBZ,ValMSpar$INDI,ValMSpar$ka)
      note_for_convergence_plots()
      note_for_plot()

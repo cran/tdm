@@ -5,7 +5,7 @@ all.Valmm<-function(){
      note_for_close_window()
      ValMMpar<-data.frame(subject=c(1,2),age=c(0),INDI=c(0),CBZ=c(0),ka=c(0),D=c(0),tau=c(0))
      ValMMpar<-edit(ValMMpar)
-     ValMMpar<-ymscheck(ValMMpar)
+##     ValMMpar<-ymscheck(ValMMpar)
      cat("\n")
      note_for_Valsm_conc_input()
      cat("\n")

@@ -8,7 +8,7 @@ all.Amianhirmm<-function(){
      note_for_close_window()
      AmianhirMMpar<-data.frame(subject=c(1,2),Gender=c(0),age=c(0),ht=c(0),CHF=c(0),smoke=c(0),D=c(0),tau=c(0))      # edit table of aminophylline anhydrous input data information except ts and conc 
      AmianhirMMpar<-edit(AmianhirMMpar)
-     AmianhirMMpar<-ymscheck(AmianhirMMpar)
+##     AmianhirMMpar<-ymscheck(AmianhirMMpar)
      cat("\n")
      cat("-------------------------------------------------------------\n")
      cat("    --Aminophylline anhydrous IR input data information--    \n")

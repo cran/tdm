@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{convergence_plots_sep}
 
 \alias{convergence_plots_sep}

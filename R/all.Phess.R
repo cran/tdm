@@ -5,7 +5,7 @@ all.Phess<-function(){
      note_for_close_window()
      PheSSpar<-data.frame(parameter=c("bw (kg)","D (mg)","tau (hr)","c (mg/L)"),value=c(0))
      PheSSpar<-edit(PheSSpar)
-     PheSSpar<-zcheck(PheSSpar)
+##     PheSSpar<-zcheck(PheSSpar)
      cat("\n")
      Phe.ss(PheSSpar[4,2],PheSSpar[3,2],PheSSpar[2,2],PheSSpar[1,2])
      note_for_convergence_plots()

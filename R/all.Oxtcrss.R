@@ -8,7 +8,7 @@ all.Oxtcrss<-function(){
      note_for_close_window()
      OxtcrSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","c (mg/L)"),value=c(0))                   
      OxtcrSSpar<-edit(OxtcrSSpar)                                                                                                                    
-     OxtcrSSpar<-ycheck(OxtcrSSpar)   
+##     OxtcrSSpar<-ycheck(OxtcrSSpar)   
      cat("\n")                                                                                                                 
      Oxtcr.ss(OxtcrSSpar[8,2],OxtcrSSpar[7,2],OxtcrSSpar[6,2],OxtcrSSpar[3,2],OxtcrSSpar[2,2],OxtcrSSpar[5,2],OxtcrSSpar[1,2],OxtcrSSpar[4,2])
      note_for_convergence_plots()

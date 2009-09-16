@@ -5,7 +5,7 @@ all.Evemm<-function(){
      note_for_close_window()
      EveMMpar<-data.frame(subject=c(1,2),bw=c(0),age=c(0),race=c(0),Ery=c(0),D=c(0),tau=c(0))
      EveMMpar<-edit(EveMMpar)
-     EveMMpar<-ymscheck(EveMMpar)
+##     EveMMpar<-ymscheck(EveMMpar)
      cat("\n")
      note_for_Evesm_conc_input()
      cat("\n")

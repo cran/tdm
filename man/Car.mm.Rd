@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Car.mm}
 
 \alias{Car.mm}

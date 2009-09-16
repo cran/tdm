@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Thecr.ms}
 
 \alias{Thecr.ms}

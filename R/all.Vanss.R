@@ -5,7 +5,7 @@ all.Vanss<-function(){
      note_for_close_window()
      VanSSpar<-data.frame(parameter=c("Gender","age (yr)","bw (kg)","Scr (mg/dL)","D (mg)","tau (hr)","tin (hr)","ts (hr)","c (mg/L)"),value=c(0))
      VanSSpar<-edit(VanSSpar)
-     VanSSpar<-ycheck(VanSSpar)
+##     VanSSpar<-ycheck(VanSSpar)
      cat("\n")
      Van.ss(VanSSpar[9,2],VanSSpar[6,2],VanSSpar[8,2],VanSSpar[7,2],VanSSpar[5,2],VanSSpar[3,2],VanSSpar[4,2],VanSSpar[1,2],VanSSpar[2,2])
      note_for_convergence_plots()

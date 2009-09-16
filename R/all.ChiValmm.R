@@ -5,14 +5,14 @@ all.ChiValmm<-function(){
      note_for_close_window()
      ChiValMMpar<-data.frame(subject=c(1,2),TBW=c(0),CBZ=c(0),D=c(0),tau=c(0))
      ChiValMMpar<-edit(ChiValMMpar)
-     ChiValMMpar<-zmscheck(ChiValMMpar)
+##     ChiValMMpar<-zmscheck(ChiValMMpar)
      cat("\n")
      note_for_ChiValsm_conc_input()
      cat("\n")
      note_for_close_window()
      ChiValMMMpar<-data.frame(subject=c(1),ts=c(0),conc=c(0))
      ChiValMMMpar<-edit(ChiValMMMpar)
-     ChiValMMMpar<-mscheck(ChiValMMMpar)
+##     ChiValMMMpar<-mscheck(ChiValMMMpar)
      for(i in 1:length(unique(ChiValMMpar$subject))){
      k=length(ChiValMMMpar$ts[ChiValMMMpar$subject==i])
      A=ChiValMMMpar$conc[ChiValMMMpar$subject==i]

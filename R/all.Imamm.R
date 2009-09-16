@@ -5,7 +5,7 @@ all.Imamm<-function(){
      note_for_close_window()
      ImaMMpar<-data.frame(subject=c(1,2),BW=c(0),OCC=c(0),Hb=c(0),WBC=c(0),D=c(0),tau=c(0))
      ImaMMpar<-edit(ImaMMpar)
-     ImaMMpar<-ymscheck(ImaMMpar)
+##     ImaMMpar<-ymscheck(ImaMMpar)
      cat("\n")
      note_for_Imasm_conc_input()
      cat("\n")
@@ -20,7 +20,7 @@ all.Imamm<-function(){
      note_for_close_window()
      ImaMMMpar<-data.frame(subject=c(1),n=c(0),ts=c(0),conc=c(0))
      ImaMMMpar<-edit(ImaMMMpar)
-     ImaMMMpar<-mscheck(ImaMMMpar)
+##     ImaMMMpar<-mscheck(ImaMMMpar)
      for(i in 1:length(unique(ImaMMpar$subject))){
      J=length(ImaMMMpar$ts[ImaMMMpar$subject==i])
      A=ImaMMMpar$conc[ImaMMMpar$subject==i]

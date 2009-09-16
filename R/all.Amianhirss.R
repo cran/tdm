@@ -8,7 +8,7 @@ all.Amianhirss<-function(){
      note_for_close_window()
      AmianhirSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))      # edit table of aminophylline anhydrous input data information                                               
      AmianhirSSpar<-edit(AmianhirSSpar)                                                                                                           # show table of aminophylline anhydrous input data information for user editing                                                                                                                                           
-     AmianhirSSpar<-ycheck(AmianhirSSpar)                                                                                                         # avoid user missing input information
+##     AmianhirSSpar<-ycheck(AmianhirSSpar)                                                                                                         # avoid user missing input information
      cat("\n")                                                                                                                                    # ªÅ¤@¦æ
      Amianhir.ss(AmianhirSSpar[9,2],AmianhirSSpar[7,2],AmianhirSSpar[8,2],AmianhirSSpar[6,2],AmianhirSSpar[3,2],AmianhirSSpar[2,2],AmianhirSSpar[5,2],AmianhirSSpar[1,2],AmianhirSSpar[4,2])    # calculate individual aminophylline anhydrous PK parameters and show its prediction
      note_for_convergence_plots()

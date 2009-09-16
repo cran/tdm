@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Litcit.model}
 
 \alias{Litcit.model}

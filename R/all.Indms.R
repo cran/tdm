@@ -5,7 +5,7 @@ all.Indms<-function(){
      note_for_close_window()
      IndMSpar<-data.frame(subject=c(1,2),Gender=c(0),bw=c(0),Rit=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      IndMSpar<-edit(IndMSpar)
-     IndMSpar<-ymscheck(IndMSpar)
+##     IndMSpar<-ymscheck(IndMSpar)
      cat("\n")
      Ind.ms(length(IndMSpar$subject),IndMSpar$c,IndMSpar$tau,IndMSpar$ts,IndMSpar$D,IndMSpar$bw,IndMSpar$Rit,IndMSpar$Gender)
      note_for_convergence_plots()

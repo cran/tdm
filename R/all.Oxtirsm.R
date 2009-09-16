@@ -8,7 +8,7 @@ all.Oxtirsm<-function(){
      note_for_close_window()
      OxtirSMMpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)"),value=c(0))
      OxtirSMMpar<-edit(OxtirSMMpar)
-     OxtirSMMpar<-ycheck(OxtirSMMpar)
+##     OxtirSMMpar<-ycheck(OxtirSMMpar)
      cat("\n")
      cat("---------------------------------------------------------\n")
      cat("    --Oxtriphylline IR input data information--          \n")

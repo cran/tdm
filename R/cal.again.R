@@ -9,7 +9,8 @@ cal.again<-function()
     run()
   } else {
     if (pick == 2){
-    cat("\nBye-Bye~~ \n\n") 
+    graphics.off()
+    cat("\nThank you for using tdm. Bye now.\n\n") 
     }
     }   
 }

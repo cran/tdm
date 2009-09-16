@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Immunosuppressants.menu}
 
 \alias{Immunosuppressants.menu}

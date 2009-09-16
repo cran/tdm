@@ -5,7 +5,7 @@ all.Litms<-function(){
      note_for_close_window()
      LitMSpar<-data.frame(subject=c(1,2),age=c(0),f=c(0),bw=c(0),Scr=c(0),D=c(0),tau=c(0),c=c(0))
      LitMSpar<-edit(LitMSpar)
-     LitMSpar<-ymscheck(LitMSpar)
+##     LitMSpar<-ymscheck(LitMSpar)
      cat("\n")
      Lit.ms(length(LitMSpar$subject),LitMSpar$c,LitMSpar$tau,LitMSpar$age,LitMSpar$D,LitMSpar$Scr,LitMSpar$bw,LitMSpar$f)
      note_for_convergence_plots()

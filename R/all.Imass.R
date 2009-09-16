@@ -13,7 +13,7 @@ all.Imass<-function(){
      note_for_close_window()
      ImaSSpar<-data.frame(parameter=c("BW (kg)","OCC","Hb (g/dL)","WBC (10^9/L)","n","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))
      ImaSSpar<-edit(ImaSSpar)
-     ImaSSpar<-ycheck(ImaSSpar)
+##     ImaSSpar<-ycheck(ImaSSpar)
      cat("\n")
      Ima.ss(ImaSSpar[9,2],ImaSSpar[7,2],ImaSSpar[8,2],ImaSSpar[5,2],ImaSSpar[6,2],ImaSSpar[2,2],ImaSSpar[1,2],ImaSSpar[3,2],ImaSSpar[4,2])
      note_for_convergence_plots()

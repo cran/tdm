@@ -8,7 +8,7 @@ all.Thecrss<-function(){
      note_for_close_window()
      ThecrSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","c (mg/L)"),value=c(0))                    
      ThecrSSpar<-edit(ThecrSSpar)                                                                                                                     
-     ThecrSSpar<-ycheck(ThecrSSpar) 
+##     ThecrSSpar<-ycheck(ThecrSSpar) 
      cat("\n")                                                                                                                   
      Thecr.ss(ThecrSSpar[8,2],ThecrSSpar[7,2],ThecrSSpar[6,2],ThecrSSpar[3,2],ThecrSSpar[2,2],ThecrSSpar[5,2],ThecrSSpar[1,2],ThecrSSpar[4,2])
      note_for_convergence_plots()

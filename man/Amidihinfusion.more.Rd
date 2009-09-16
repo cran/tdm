@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Amidihinfusion.more}
 
 \alias{Amidihinfusion.more}

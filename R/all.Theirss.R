@@ -8,7 +8,7 @@ all.Theirss<-function(){
      note_for_close_window()
      TheirSSpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))                    
      TheirSSpar<-edit(TheirSSpar)                                                                                                                     
-     TheirSSpar<-ycheck(TheirSSpar)   
+##     TheirSSpar<-ycheck(TheirSSpar)   
      cat("\n")                                                                                                                 
      Their.ss(TheirSSpar[9,2],TheirSSpar[7,2],TheirSSpar[8,2],TheirSSpar[6,2],TheirSSpar[3,2],TheirSSpar[2,2],TheirSSpar[5,2],TheirSSpar[1,2],TheirSSpar[4,2])
      note_for_convergence_plots()

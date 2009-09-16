@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Eno.model}
 
 \alias{Eno.model}

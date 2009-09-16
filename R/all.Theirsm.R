@@ -8,7 +8,7 @@ all.Theirsm<-function(){
      note_for_close_window()
      TheirSMMpar<-data.frame(parameter=c("Gender","age (yr)","ht (cm)","CHF","smoke","D (mg)","tau (hr)"),value=c(0))
      TheirSMMpar<-edit(TheirSMMpar)
-     TheirSMMpar<-ycheck(TheirSMMpar)
+##     TheirSMMpar<-ycheck(TheirSMMpar)
      cat("\n")
      cat("--------------------------------------------------------\n")
      cat("    --Theophylline IR input data information--          \n")

@@ -5,7 +5,7 @@ all.Ritmm<-function(){
      note_for_close_window()
      RitMMpar<-data.frame(subject=c(1,2),LPV=c(0),D=c(0),tau=c(0))
      RitMMpar<-edit(RitMMpar)
-     RitMMpar<-wmscheck(RitMMpar)
+##     RitMMpar<-wmscheck(RitMMpar)
      cat("\n")
      note_for_Ritsm_conc_input()
      cat("\n")

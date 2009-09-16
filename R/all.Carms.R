@@ -5,7 +5,7 @@ all.Carms<-function(){
      note_for_close_window()
      CBZMSpar<-data.frame(subject=c(1,2),TBW=c(0),PB=c(0),VPA=c(0),PHT=c(0),E=c(0),D=c(0),tau=c(0),ts=c(0),c=c(0))
      CBZMSpar<-edit(CBZMSpar)
-     CBZMSpar<-ymscheck(CBZMSpar)
+##     CBZMSpar<-ymscheck(CBZMSpar)
      cat("\n")
      Car.ms(length(CBZMSpar$subject),CBZMSpar$c,CBZMSpar$tau,CBZMSpar$ts,CBZMSpar$D,CBZMSpar$TBW,CBZMSpar$PB,CBZMSpar$VPA,CBZMSpar$PHT,CBZMSpar$E)
      note_for_convergence_plots()

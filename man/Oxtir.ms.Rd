@@ -1,3 +1,5 @@
+\encoding{UTF-8}
+
 \name{Oxtir.ms}
 
 \alias{Oxtir.ms}
