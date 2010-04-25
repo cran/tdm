@@ -1,7 +1,7 @@
 Package: tdm
 Title: A Tool for Therapeutic Drug Monitoring (TDM)
-Version: 2.2.1
-Date: 2009/9/16
+Version: 2.2.2
+Date: 2010/04/25
 Author: Miou-Ting Chen, Yung-Jin Lee <mobilePK@gmail.com>
 Description: TDM can be used to estimate individual pharmacokinetic
         parameters with one or more drug serum/plasma concentrations
@@ -11,12 +11,12 @@ Description: TDM can be used to estimate individual pharmacokinetic
         with the target drug concentration (C ->D) or calculate a
         predicted drug concentration with a given dose (D -> C).
 Maintainer: Yung-Jin Lee <mobilePK@gmail.com>
-Depends: R (>= 2.9.2), BRugs
-SystemRequirements: Currently only MS-Windows is supported (BRugs does
-        not support other platforms/OS right now.)
+Depends: R (>= 2.11.0), BRugs
+SystemRequirements: Currently only MS-Windows is supported, because
+        BRugs does not support other platforms/OS right now.
 License: GPL (>= 2)
 URL: http://pkpd.kmu.edu.tw/tdm/
-Packaged: 2009-09-15 21:31:48 UTC; yjlee168
+Packaged: 2010-04-28 10:02:12 UTC; yjlee168
 OS_type: windows
 Repository: CRAN
-Date/Publication: 2009-09-18 20:39:57
+Date/Publication: 2010-04-28 13:05:32
