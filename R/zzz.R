@@ -5,7 +5,7 @@ packageStartupMessage("
 
 *************************** tdm ***********************************
            An R Tool for Therapeutic Drug Monitoring               
-                          v 2.2.3                                   
+                          v 2.2.4                                   
   TDM is created for your own personal uses and testing purposes.  
   TDM shall be used as a guide or a decision support tool only.    
   Medical decisions should NOT be solely based on the results of   
