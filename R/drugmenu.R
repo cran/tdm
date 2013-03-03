@@ -2,7 +2,7 @@
 run<-function()
 {
   cat("\n")
-  file.menu <- c("Aminoglycosides                        ",
+  file.menu <- c("Aminoglycosides",
                  "Anti-HIV drugs",
                  "Carbamazepine",
                  "Digoxin (also for pediatrics)",
@@ -14,7 +14,8 @@ run<-function()
                  "Theophylline",
                  "Valproate",
                  "Vancomycin",              
-                 "Warfarin (PK/PD)")
+                 "Warfarin (PK/PD)",
+                 "Test run with phenytoin")
   pick <- menu(file.menu, title = "<< Drug List (TDM), Enter '0' to quit >>")
   if (pick == 1){
      cat("\n\n")
@@ -68,11 +69,16 @@ run<-function()
         cat("\n\n")  
         War.model()
       } else {
+      if (pick == 14){
+        cat("\n\n")  
+        PheDemo.model()
+      } else {
       if (pick == 0){
         graphics.off()
         cat("\nThank you for using tdm. Bye now. \n\n")     
       }
      }
+    }
     }
     }
     }
@@ -242,7 +248,11 @@ Phe.model <- function()
      run()
   }      
 }
-
+# Phenytoin Demo batch/data file 
+PheDemo.model <- function()
+{
+  PheDemo()
+}
 #choose Valproic acid population group
 Val.menu <- function()
 {

@@ -1,5 +1,5 @@
-a2aefc2a38953bd3381fb2786ca27fc2 *DESCRIPTION
-e8a6215af1f1ea8201095fc89bef8874 *NAMESPACE
+f197d47286be89f444381bbdff66d520 *DESCRIPTION
+30a0226b820703f4211ad65db1a06922 *NAMESPACE
 854ecba2ae0ba17296757c1ec1985ef7 *R/Ami.mm.R
 93ddb732abde17ea02d638da194d0751 *R/Ami.ms.R
 2bd15bc621dc7f072005136a925436e7 *R/Ami.sm.R
@@ -67,7 +67,8 @@ f1c61ddf9246c45cd8f146a870a33706 *R/Oxtir.ms.R
 20319eb866ec966bb189c9074cc905c6 *R/Oxtir.sm.R
 c46760c79c76be1cee068e608b70b813 *R/Oxtir.ss.R
 609fe0e4512fc921feaf378aedff5e1e *R/Phe.ms.R
-3d06eede4792a1c97638962de14bf2ba *R/Phe.ss.R
+bc1816c331193b40f762c8893ebf7216 *R/Phe.ss.R
+ac3d4714b1b6ac092de214de3bf463c3 *R/PheDemo.R
 951d7a07830e88e8f6ca623a9de151d9 *R/Phelimit.R
 73980e62f87f71ce52d1aea1f0620117 *R/Rit.mm.R
 8251a24f606fc9b2a79eba1abdd4ba21 *R/Rit.ms.R
@@ -189,11 +190,11 @@ fea56fd28df3b0d281d6100444e00e28 *R/all.Vanms.R
 e76fa24be419c2603bfdbfe29bddbfcc *R/check.R
 97dce58e89fc860f71cb39224c4d1750 *R/convergence_plots_con.R
 8f3b610c81d0e6a968daf0589aa1c746 *R/convergence_plots_sep.R
-65868e3ab9770fed0b8af8ca0e39ac80 *R/drugmenu.R
+23c2085095d53a124e8f0f7e69069487 *R/drugmenu.R
 2cf0bb77ce65acdb4ef6bc2623c07c89 *R/mscheck.R
 4e612ceff5c5e2e4ca49e83c91fedf44 *R/note.R
 b0b8bdd7bf4168e739a56915043ee74a *R/pr.R
-dc7e3ec3e585cbbaf9d751fb79723075 *R/zzz.R
+5d49fd86893aff44a6b8571f2970de59 *R/zzz.R
 485eac8e72448e6349a4c844a6859efa *inst/PK/AmiMMmodel.txt
 88ec8498e8d874ad6a9289aed5d41992 *inst/PK/AmiMSmodel.txt
 284d54406a7c7d792f4a1333ccbbfb24 *inst/PK/AmiSMmodel.txt
@@ -261,7 +262,7 @@ d4dd420f1e1c513517b80334efcb52a7 *inst/PK/OxtirMSmodel.txt
 de3bde16dbbac8b55f47c667cdfd785e *inst/PK/OxtirSMmodel.txt
 16590dc16e5ab1105a3c793df3d70678 *inst/PK/OxtirSSmodel.txt
 fff75e699e20d96ae6f12e83064326f7 *inst/PK/PheMSmodel.txt
-881a579a39bc74bd48730233cbe6fc89 *inst/PK/PheSSmodel.txt
+582c2047a43b6b15aa4dfb581a1d1d7c *inst/PK/PheSSmodel.txt
 9c5af35fa848caa328359e7b0be5184a *inst/PK/RitMMmodel.txt
 73cefff42bbb16caa8116c4c02cdb4f4 *inst/PK/RitMSmodel.txt
 5bcc6194dfbe4efb7e18927e81bdcfe9 *inst/PK/RitSMmodel.txt
@@ -415,8 +416,10 @@ e8f85a5d99a1d6628efa04b1915fcafc *man/Oxtir.more.Rd
 d2195d42ec47a75984a98e55f495550a *man/Phe.more.Rd
 a76a42c5d657df4b0723256f7d1b5724 *man/Phe.ms.Rd
 768adf91eb7c505e3250ef377009a611 *man/Phe.ss.Rd
+ccf66c8c2623efacb37801528d0db773 *man/PheDemo.Rd
 9bedb7a0979e97a141547d36743ad1c8 *man/Phecpr.Rd
 5d2bab07867a5881b29f6b7c80f07a4e *man/Phelimit.Rd
+8a77852ee86260a1356185a493af95a4 *man/PhenDemo.model.Rd
 a84cb083040f47968ea3cb62e0bab9d3 *man/Rit.mm.Rd
 b31362ad52096223f33ef326487911a4 *man/Rit.model.Rd
 e302dffd03d3f4afe65e5b229dfb15c8 *man/Rit.more.Rd

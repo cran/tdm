@@ -1,0 +1,35 @@
+PheDemo<-function(){
+     cat("\n")
+     cat("---------< Test Runs with Phenytoin PK Parameter Estimation >---------\n")
+     cat("\n")
+     cat("Scenario: A male patient was taking phentoin 300 mg PO every day (24 hr).\n")
+     cat("to treat his epilepsy for more than one month. He is 45 years old with body \n")
+     cat("weight of 65 Kg. A plasma concentration of phenytoin was measured as\n")
+     cat("26.1 mg/L right before next dose. Now we try to estimate his Km and Vmax\n")
+     cat("for this patient in order to individualize his optimal phneytoin dosage.\n")
+     cat("\n")
+     cat("\n")
+     note_for_Phe_input()
+     cat("\n")
+     note_for_close_window()
+     PheSSpar<-data.frame(parameter=c("bw (kg)","D (mg)","tau (hr)","c (mg/L)"),value=c(0))
+##     PheSSpar<-edit(PheSSpar)
+##     PheSSpar<-zcheck(PheSSpar)
+     cat("\n")
+     PheSSpar[4,2]<-26.7
+     PheSSpar[3,2]<-24
+     PheSSpar[2,2]<-300
+     PheSSpar[1,2]<-65
+     Phe.ss(PheSSpar[4,2],PheSSpar[3,2],PheSSpar[2,2],PheSSpar[1,2])
+     note_for_convergence_plots()
+     convergence_plots_sep()
+     note_for_Phe_output()    
+     show(samplesStats("*"))
+     cat("\n")
+     C<-Phecpr(PheSSpar[2,2],PheSSpar[3,2])
+     sim<-matrix(C[1 ,1])
+     coutput<-data.frame(sim)
+     colnames(coutput)<-list("Cmss_pr (mg/L)")
+     show(coutput)
+     cat("\n")
+}
