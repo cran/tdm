@@ -16,7 +16,7 @@ modelCompile(numChains=1)                               # compile
 modelGenInits()                                         # gen inits
 modelUpdate(6000)                                       # burn in 4000
 samplesSet(c("Vmax","Km"))                              # set monitored PK parameters
-modelUpdate(16000)                                      # update 50000
+modelUpdate(506000)                                     # update 50000
 }
 
 

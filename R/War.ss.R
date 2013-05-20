@@ -22,9 +22,9 @@ v_F=c(7.5)
 )
 , fileName=file.path(getwd(),"WarSSInits.txt"),digits=5)
 modelInits("WarSSInits.txt")
-modelUpdate(4000)                                    # burn in 4000
-samplesSet(c("Cpmax","cl_F","kc","m","v_F"))          # set monitored PK parameters
-modelUpdate(10000)                                    # update 10000
+modelUpdate(4000)                                      # burn in 4000
+samplesSet(c("Cpmax","cl_F","kc","m","v_F"))           # set monitored PK parameters
+modelUpdate(50000)                                    # update 10000
 }
 
 

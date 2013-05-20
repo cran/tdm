@@ -1,6 +1,5 @@
-# change the following line since R v.2.15.3 as .onAttach
-# (either works fine) [2013/3/4 AM06:27:15]
-# .First.lib <- function(...) {
+# change the following line since R v.2.15.3 as .onAttach [2013/3/4 AM 06:27:15]
+
 
 .onAttach <- function(lib, pkg)  {
 # echo output to screen
@@ -8,7 +7,7 @@ packageStartupMessage("
 
 ************************--> tdm <--********************************
            An R Tool for Therapeutic Drug Monitoring               
-                          v 2.2.5                                   
+                          v 2.2.6                                   
   TDM is created for your own personal uses and testing purposes.  
   TDM shall be used as a guide or a decision support tool only.    
   Medical decisions should NOT be solely based on the results of   
@@ -17,8 +16,10 @@ packageStartupMessage("
   use tdm, you have automatically agreed with this disclaimer.      
 
   ** Please type 'run()' to get started or 
-     type 'PheDemo()' for the test runs of estimating phenytoin 
-     PK parameters.
+     type 'demo(phenytoin)' for the test runs of estimation
+     phenytoin PK parameters.
+     type 'demo(warfarin)' for the test runs of estimation
+     warfarin PK/PD parameters.
 
 ps. Please install openBUGS from http://www.openbugs.info/ 
     based on your platform (linux or Windows) before running 

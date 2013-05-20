@@ -14,9 +14,9 @@ bw=c(e)
 modelData("Phedata.txt")                                # Load data
 modelCompile(numChains=1)                               # compile
 modelGenInits()                                         # gen inits
-modelUpdate(4000)                                       # buurn in 4000
+modelUpdate(6000)                                       # buurn in 4000
 samplesSet(c("Vmax","Km"))                              # set monitored PK parameters
-modelUpdate(50000)                                      # update 50000
+modelUpdate(56000)                                      # update 50000
 }
 
 

@@ -4,8 +4,8 @@
 
 \alias{PheDemo}
 
-\title{Test runs to estimate individual PK parameters of phenytoin with one concentration}
+\title{Function for the test runs to estimate individual PK parameters of phenytoin with one concentration}
 
-\description{Test runs to estimate individual PK parameters of phenytoin with one concentration at steady-state including estimation of PK parameters and dose adjustment.}
+\description{Function for the test runs to estimate individual PK parameters of phenytoin with one concentration at steady-state including estimation of PK parameters}
 
 \keyword{misc}

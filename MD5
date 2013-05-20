@@ -1,4 +1,4 @@
-f197d47286be89f444381bbdff66d520 *DESCRIPTION
+15d9c8faf3c206d587798e9d3618c5d5 *DESCRIPTION
 30a0226b820703f4211ad65db1a06922 *NAMESPACE
 854ecba2ae0ba17296757c1ec1985ef7 *R/Ami.mm.R
 93ddb732abde17ea02d638da194d0751 *R/Ami.ms.R
@@ -66,9 +66,9 @@ c439d2a3aa9db36e5410fc3b40604fc7 *R/Oxtir.mm.R
 f1c61ddf9246c45cd8f146a870a33706 *R/Oxtir.ms.R
 20319eb866ec966bb189c9074cc905c6 *R/Oxtir.sm.R
 c46760c79c76be1cee068e608b70b813 *R/Oxtir.ss.R
-609fe0e4512fc921feaf378aedff5e1e *R/Phe.ms.R
-bc1816c331193b40f762c8893ebf7216 *R/Phe.ss.R
-ac3d4714b1b6ac092de214de3bf463c3 *R/PheDemo.R
+1915a9d587cd8bf53a1676641d5a86fc *R/Phe.ms.R
+f62e30e4191d9604b42c20d322d74208 *R/Phe.ss.R
+44f7afede41fc58a63f28092fb49a091 *R/PheDemo.R
 951d7a07830e88e8f6ca623a9de151d9 *R/Phelimit.R
 73980e62f87f71ce52d1aea1f0620117 *R/Rit.mm.R
 8251a24f606fc9b2a79eba1abdd4ba21 *R/Rit.ms.R
@@ -93,7 +93,8 @@ c0ae310a045d43c395666cea248b4ffc *R/Val.sm.R
 8965d8a48f4918942ec6ac2d4b1261a2 *R/Van.ms.R
 b5e27812a624a631ed96905b2b735e03 *R/Van.sm.R
 d785d5fbbcb9ee311c5965f000c41978 *R/Van.ss.R
-b1b4b1f2363f9f4ecffda5d0dc9b7af2 *R/War.ss.R
+46c571ea70814a5ec929063aef6566a8 *R/War.ss.R
+9a320e9788f6b1f242c3bc272afe7b8d *R/WarfDemo.R
 6dd46fc51325c3915483bfb7fbb17330 *R/adjustss.more.R
 0af8ae5a11e79fc01fb2e1a4b7f123c1 *R/all.Amianhcrms.R
 e1b2bce146667a3f4f68b80c4680552e *R/all.Amianhcrss.R
@@ -162,7 +163,7 @@ b51f2426aa3fc38c01df3ebd948ea01d *R/all.Oxtcrms.R
 c351d63c4693e0f8577d7c05a363140f *R/all.Oxtirsm.R
 d4e2ad8d42ce102bcb5028b4601e22cd *R/all.Oxtirss.R
 7b08628a198119f4d51fe3e05f611bad *R/all.Phems.R
-ce52afc34810bed8b6b462eb1030c138 *R/all.Phess.R
+be1a3453571f5326eb72f98e987656d4 *R/all.Phess.R
 a4cabce182272445e9a8f5b5cecd2f79 *R/all.Ritmm.R
 b41c178612e1b3d0f4de5797ff10dfcb *R/all.Ritms.R
 54f92ea00494ba5a5509e53d74048338 *R/all.Ritsm.R
@@ -190,11 +191,14 @@ fea56fd28df3b0d281d6100444e00e28 *R/all.Vanms.R
 e76fa24be419c2603bfdbfe29bddbfcc *R/check.R
 97dce58e89fc860f71cb39224c4d1750 *R/convergence_plots_con.R
 8f3b610c81d0e6a968daf0589aa1c746 *R/convergence_plots_sep.R
-23c2085095d53a124e8f0f7e69069487 *R/drugmenu.R
 2cf0bb77ce65acdb4ef6bc2623c07c89 *R/mscheck.R
-4e612ceff5c5e2e4ca49e83c91fedf44 *R/note.R
+447eb330e21bd22b55d108f8e9e9077e *R/note.R
 b0b8bdd7bf4168e739a56915043ee74a *R/pr.R
-5d49fd86893aff44a6b8571f2970de59 *R/zzz.R
+8b100945df4f5ddefb99c1bce3ce8372 *R/run.R
+d7ec678a1dd56e55d6a82e00bdf5c3bc *R/zzz.R
+3f1ce14e5a1cad9c6b07457c308b2c71 *demo/00Index
+d00688d09cfac99e1b53dfdf749e319f *demo/phenytoin.R
+af48967e9829de98b29ea7062a74a323 *demo/warfarin.R
 485eac8e72448e6349a4c844a6859efa *inst/PK/AmiMMmodel.txt
 88ec8498e8d874ad6a9289aed5d41992 *inst/PK/AmiMSmodel.txt
 284d54406a7c7d792f4a1333ccbbfb24 *inst/PK/AmiSMmodel.txt
@@ -262,7 +266,7 @@ d4dd420f1e1c513517b80334efcb52a7 *inst/PK/OxtirMSmodel.txt
 de3bde16dbbac8b55f47c667cdfd785e *inst/PK/OxtirSMmodel.txt
 16590dc16e5ab1105a3c793df3d70678 *inst/PK/OxtirSSmodel.txt
 fff75e699e20d96ae6f12e83064326f7 *inst/PK/PheMSmodel.txt
-582c2047a43b6b15aa4dfb581a1d1d7c *inst/PK/PheSSmodel.txt
+de69676839017b157020e7c39af0f0ec *inst/PK/PheSSmodel.txt
 9c5af35fa848caa328359e7b0be5184a *inst/PK/RitMMmodel.txt
 73cefff42bbb16caa8116c4c02cdb4f4 *inst/PK/RitMSmodel.txt
 5bcc6194dfbe4efb7e18927e81bdcfe9 *inst/PK/RitSMmodel.txt
@@ -286,7 +290,7 @@ da2d343fb0673944d954cac1eccb6076 *inst/PK/VanMMmodel.txt
 9ea502d579010f68a76aaf3d9241c71b *inst/PK/VanMSmodel.txt
 12631cfd3a88b0304de57e4a04c3e6fd *inst/PK/VanSMmodel.txt
 dcd12b956340ee47761d8e279c0d9e1b *inst/PK/VanSSmodel.txt
-c6f46943fa80477c5943e9adcb4b3ae3 *inst/PK/WarSSmodel.txt
+ba437b114045683112e143bc9c0d578e *inst/PK/WarSSmodel.txt
 04522a61770ef245e96b08c64481c042 *man/Ami.mm.Rd
 7a8dfbfd2d9f8b0da1fcca429eba38d9 *man/Ami.model.Rd
 aa2a9d34b0da17ee180efde7ad1c0e5a *man/Ami.more.Rd
@@ -416,10 +420,9 @@ e8f85a5d99a1d6628efa04b1915fcafc *man/Oxtir.more.Rd
 d2195d42ec47a75984a98e55f495550a *man/Phe.more.Rd
 a76a42c5d657df4b0723256f7d1b5724 *man/Phe.ms.Rd
 768adf91eb7c505e3250ef377009a611 *man/Phe.ss.Rd
-ccf66c8c2623efacb37801528d0db773 *man/PheDemo.Rd
+d6ff2646bcdc45205f4bb32c68a99edf *man/PheDemo.Rd
 9bedb7a0979e97a141547d36743ad1c8 *man/Phecpr.Rd
 5d2bab07867a5881b29f6b7c80f07a4e *man/Phelimit.Rd
-8a77852ee86260a1356185a493af95a4 *man/PhenDemo.model.Rd
 a84cb083040f47968ea3cb62e0bab9d3 *man/Rit.mm.Rd
 b31362ad52096223f33ef326487911a4 *man/Rit.model.Rd
 e302dffd03d3f4afe65e5b229dfb15c8 *man/Rit.more.Rd
@@ -468,6 +471,7 @@ d8dfb60b6bd86ae37d9a2f5527d56c70 *man/Van.ss.Rd
 382bee58ade72659f196737b27ed0d06 *man/War.ss.Rd
 8608ef3b0815a19209297447cbad057c *man/Warcpr.Rd
 2879deac95ef46ac86c2948771560d41 *man/Wardpr.Rd
+794b7c4b800af40f5496a717c3b0308a *man/WarfDemo.Rd
 68e2e3db1cbeb88fed23b22f40ff9650 *man/all.Amianhinfusionmm.Rd
 3869432564bd69028aa993200714dbbe *man/all.Amianhinfusionms.Rd
 25d783a57efbf3f30720213266259aef *man/all.Amianhinfusionsm.Rd
@@ -668,9 +672,11 @@ b225f63c55d762a3a278094f69e84c9c *man/note_for_infusionR_c_to_d.Rd
 910acaacbd767799653bb17ab602d75e *man/note_for_infusion_c_to_d.Rd
 3c485464df9a34ca6e75e6a865ce6d64 *man/note_for_infusion_d_to_c.Rd
 f7cd8a81bac60d3dcd63a6c0d4fa9b7a *man/note_for_plot.Rd
+b4ceaa0a2897512944dcf49889364166 *man/phenytoin.Rd
 70d516a9bc8ca290958bd49f0faa4ffa *man/pocpr.Rd
-b813260c620bc44fc7ebbeaa6e3d0e7e *man/run.Rd
+8b3553ddae736d63ba42e9ac8b0e234b *man/run.Rd
 ecdce9f764703b8660fee0a7c2347a79 *man/tdm.Rd
+0055c200df70a2f485d6e56aff79d0d6 *man/warfarin.Rd
 f7b7e720177274abaa6df15f3360a010 *man/wcheck.Rd
 5d385db6f053a106b65f842909d44d6b *man/wmscheck.Rd
 2fc457b0a43ae82ad5068f2de1ee0f01 *man/ycheck.Rd

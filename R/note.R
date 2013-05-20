@@ -30,7 +30,7 @@ note_for_infusion_c_to_d <- function(){
      cat("  tin = desired infusion time (hr)          \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Dose = desired/predicted dose (mg)        \n")
+     cat("  Dose = desired/calculated dose (mg)        \n")
      cat("--------------------------------------------\n\n")
          }
          
@@ -42,7 +42,7 @@ note_for_infusion_d_to_c <- function(){
      cat("  tin = desired infusion time (hr)          \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
+     cat("  Css_trough = calculated trough conc (mg/L) \n")
      cat("--------------------------------------------\n\n")
          }
 
@@ -52,7 +52,7 @@ note_for_infusionR_c_to_d <- function(){
      cat("  Css_trough = desired trough conc (mg/L)         \n")
      cat("                                                  \n")
      cat("  --output data--                                 \n")
-     cat("  R = constant intravenous infusion rate (mg/hr)  \n")
+     cat("  R = intravenous infusion rate (mg/hr)  \n")
      cat("--------------------------------------------------\n\n")
          }
          
@@ -62,7 +62,7 @@ note_for_infusionR_d_to_c <- function(){
      cat("  R = constant intravenous infusion rate (mg/hr) \n")
      cat("                                                 \n")
      cat("  --output data--                                \n")
-     cat("  Css_trough = predicted trough conc (mg/L)      \n")
+     cat("  Css_trough = calculated trough conc (mg/L)      \n")
      cat("-------------------------------------------------\n\n")
          }
 
@@ -73,7 +73,7 @@ note_for_c_to_d <- function(){
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Dose = predicted dose (mg)                \n")
+     cat("  Dose = calculated dose (mg)                \n")
      cat("--------------------------------------------\n\n")
  }
  
@@ -84,7 +84,7 @@ note_for_d_to_c <- function(){
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Css_trough = predicted trough conc (mg/L) \n")
+     cat("  Css_trough = calculated trough conc (mg/L) \n")
      cat("--------------------------------------------\n\n")
  } 
  
@@ -96,7 +96,7 @@ note_for_c_to_d_ng <- function(){
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Dose = predicted dose (mg)                \n")
+     cat("  Dose = calculated dose (mg)                \n")
      cat("--------------------------------------------\n\n")
  }
  
@@ -107,7 +107,7 @@ note_for_d_to_c_ng <- function(){
      cat("  tau = desired dosing interval (hr)          \n")
      cat("                                              \n")
      cat("  --output data--                             \n")
-     cat("  Css_trough = predicted trough conc (ng/mL)  \n")
+     cat("  Css_trough = calculated trough conc (ng/mL)  \n")
      cat("----------------------------------------------\n\n")
  }
  
@@ -119,7 +119,7 @@ note_for_c_to_d_mcg <- function(){
      cat("  tau = desired dosing interval (hr)         \n")
      cat("                                             \n")
      cat("  --output data--                            \n")
-     cat("  Dose = predicted dose (mg)                 \n")
+     cat("  Dose = calculated dose (mg)                 \n")
      cat("---------------------------------------------\n\n")
  }
  
@@ -130,7 +130,7 @@ note_for_d_to_c_mcg <- function(){
      cat("  tau = desired dosing interval (hr)           \n")
      cat("                                               \n")
      cat("  --output data--                              \n")
-     cat("  Css_trough = predicted trough conc (mcg/mL)  \n")
+     cat("  Css_trough = calculated trough conc (mcg/mL)  \n")
      cat("-----------------------------------------------\n\n")
  }
  
@@ -141,7 +141,7 @@ note_for_c_to_d_meq <- function(){
      cat("  tau = desired dosing interval (hr)        \n")
      cat("                                            \n")
      cat("  --output data--                           \n")
-     cat("  Dose = predicted dose (mg)                \n")
+     cat("  Dose = calculated dose (mg)                \n")
      cat("--------------------------------------------\n\n")
  }
  
@@ -152,7 +152,7 @@ note_for_d_to_c_meq <- function(){
      cat("  tau = desired dosing interval (hr)          \n")
      cat("                                              \n")
      cat("  --output data--                             \n")
-     cat("  Css_trough = predicted trough conc (mEq/L)  \n")
+     cat("  Css_trough = calculated trough conc (mEq/L)  \n")
      cat("----------------------------------------------\n\n")
  }
  
@@ -163,7 +163,7 @@ note_for_c_to_d_eno <- function(){
      cat("  tau = desired dosing interval (hr)                             \n")
      cat("                                                                 \n")
      cat("  --output data--                                                \n")
-     cat("  Dose = predicted dose (IU,1 mg = 100 IU)                       \n")
+     cat("  Dose = calculated dose (IU,1 mg = 100 IU)                       \n")
      cat("-----------------------------------------------------------------\n\n")
  }
  
@@ -174,18 +174,18 @@ note_for_d_to_c_eno <- function(){
      cat("  tau = desired dosing interval (hr)                                \n")
      cat("                                                                    \n")
      cat("  --output data--                                                   \n")
-     cat("  Amax = predicted anti-Xa maximal activity at stedy state (IU/mL)  \n")
+     cat("  Amax = calculated anti-Xa maximal activity at steady state (IU/mL)  \n")
      cat("--------------------------------------------------------------------\n\n")
  }
  
 note_for_c_to_d_war <- function(){ 
      cat("--------------------------------------------------\n")
      cat("  --input data--                                  \n")
-     cat("  INR = predicted international normalized ratio  \n")
+     cat("  INR = calculated international normalized ratio  \n")
      cat("  tau = desired dosing interval (day)             \n")
      cat("                                                  \n")
      cat("  --output data--                                 \n")
-     cat("  Dose = desired/predicted dose (mg)              \n")
+     cat("  Dose = desired/calculated dose (mg)              \n")
      cat("--------------------------------------------------\n\n")
  }
  
@@ -196,7 +196,7 @@ note_for_d_to_c_war <- function(){
      cat("  tau = desired dosing interval (day)             \n")
      cat("                                                  \n")
      cat("  --output data--                                 \n")
-     cat("  INR = predicted international normalized ratio  \n")
+     cat("  INR = calculated international normalized ratio  \n")
      cat("--------------------------------------------------\n\n")
  }
     
@@ -219,11 +219,11 @@ note_for_Amiss_input <- function(){
 note_for_Amiss_output <- function(){
      cat("------------------------------------------------------------\n")
      cat("    --Aminoglycoside output data information--              \n")
-     cat("    cl = estimated clerance (L/hr)                          \n")
+     cat("    cl = estimated clearance (L/hr)                          \n")
      cat("    v = estimated volume of distribution (L)                \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)   \n")
-     cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)       \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)     \n")
+     cat("    Cmss_pr = calculated steady-state measured conc.(mg/L)   \n")
+     cat("    Cpss_pr = calculated steady-state peak conc.(mg/L)       \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)     \n")
      cat("------------------------------------------------------------\n")
 }
 
@@ -252,10 +252,10 @@ note_for_Amism_conc_input <- function(){
 note_for_Amism_output <- function(){
      cat("-----------------------------------------------------------\n")
      cat("    --Aminoglycoside output data information--             \n")
-     cat("    cl = estimated clerance (L/hr)                         \n")
+     cat("    cl = estimated clearance (L/hr)                         \n")
      cat("    v = estimated volume of distribution (L)               \n")
-     cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)      \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)    \n")
+     cat("    Cpss_pr = calculated steady-state peak conc.(mg/L)      \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)    \n")
      cat("-----------------------------------------------------------\n")
 }
 
@@ -278,10 +278,10 @@ note_for_CBZss_input <- function(){
 note_for_CBZss_output <- function(){
      cat("-----------------------------------------------------------------\n")
      cat("    --Carbamazepine output data information--                    \n")
-     cat("    cl = estimated clerance/bioavailability (L/hr)               \n")
+     cat("    cl = estimated clearance/bioavailability (L/hr)               \n")
      cat("    v = estimated volume of distribution/bioavailability (L)     \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)        \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)          \n")
+     cat("    Cmss_pr = calculated steady-state conc.(mg/L)        \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)          \n")
      cat("-----------------------------------------------------------------\n")
 }
 
@@ -309,9 +309,9 @@ note_for_CBZsm_conc_input <- function(){
 note_for_CBZsm_output <- function(){
      cat("------------------------------------------------------------------\n")
      cat("    --Carbamazepine output data information--                     \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)              \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)              \n")
      cat("    V_F = estimated volume of distribution/bioavailability (L)    \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)           \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)          \n")
      cat("------------------------------------------------------------------\n")
 }
 
@@ -332,8 +332,8 @@ note_for_Dig_input <- function(){
 note_for_Dig_output <- function(){
      cat("--------------------------------------------------------------\n")
      cat("    --Digoxin output data information--                       \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)          \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(ng/mL)    \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)          \n")
+     cat("    Cmss_pr = calculated steady-state conc.(ng/mL)    \n")
      cat("--------------------------------------------------------------\n")
 }
 
@@ -354,8 +354,8 @@ note_for_Lit_input <- function(){
 note_for_Lit_output <- function(){
      cat("--------------------------------------------------------------\n")
      cat("    --Lithium carbonate output data information--             \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)          \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mEq/L)    \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)          \n")
+     cat("    Cmss_pr = calculated steady-state conc.(mEq/L)            \n")
      cat("--------------------------------------------------------------\n")
 }
 
@@ -376,29 +376,30 @@ note_for_Litcit_input <- function(){
 note_for_Litcit_output <- function(){
      cat("--------------------------------------------------------------\n") 
      cat("    --Lithium citrate output data information--               \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)          \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mEq/L)    \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)          \n")
+     cat("    Cmss_pr = calculated steady-state conc.(mEq/L)            \n")
      cat("--------------------------------------------------------------\n") 
 }
 
 
 note_for_Phe_input <- function(){
      cat("----------------------------------------------------\n")
-     cat("    --Phenytoin input data information--            \n")
-     cat("    bw = body weight(kg)                            \n")
-     cat("    D = dose for each dosing interval(mg)           \n")
+     cat("   -- Phenytoin input data information --           \n")
+     cat("     bw = body weight(kg)                           \n")
+     cat("      D = dose for each dosing interval(mg)         \n")
      cat("    tau = dosing interval(hr)                       \n")
-     cat("    c = measured steady-state conc.(mg/L)           \n")
+     cat("      c = measured steady-state conc.(mg/L)         \n")
      cat("----------------------------------------------------\n") 
 }
 
 note_for_Phe_output <- function(){
      cat("-----------------------------------------------------------------\n") 
-     cat("    --Phenytoin output data information--                        \n")
+     cat("          -- Phenytoin output data information --                \n")
      cat("    Vamx = estimated maximum rate of metabolism (mg/day)         \n")
      cat("    Km = estimated plasma concentration at which metabolism      \n")
      cat("         is occurring at half the maximum rate (mg/L)            \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)        \n")
+     cat("    C(ss_calc) = calculated steady-state conc.(mg/L)             \n")
+     cat("    C(ss_obs)  = observed steady-state conc.(mg/L)               \n")
      cat("-----------------------------------------------------------------\n") 
 }
 
@@ -417,9 +418,9 @@ note_for_Eno_input <- function(){
 note_for_Eno_output <- function(){
      cat("-----------------------------------------------------------------------------\n") 
      cat("    --Enoxaparin output data information--                                   \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)                         \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)                         \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)               \n")
-     cat("    Amaxss_pr = predicted anti-Xa maximal activity at stedy state (IU/mL)    \n")
+     cat("    Amaxss_pr = calculated anti-Xa maximal activity at stedy state (IU/mL)    \n")
      cat("-----------------------------------------------------------------------------\n") 
 }
 
@@ -439,12 +440,12 @@ note_for_War_output <- function(){
      cat("  --Warfarin output data information--                           \n")
      cat("  Cpmax = estimated concentration related with maximum           \n")
      cat("          suppression of clotting factors (mg/L)                 \n")
-     cat("  cl_F = estimated clerance/bioavailability (L/day)              \n")
+     cat("  cl_F = estimated clearance/bioavailability (L/day)              \n")
      cat("  kc = estimated first order rate constant for clotting          \n")
      cat("       factor degradation (1/day)                                \n")
      cat("  m = estiamted prothrombin complex activity remaining (%/day)   \n")
      cat("  v_F = estimated volume of distribution/bioavailability (L)     \n")
-     cat("  INR = predicted international normalized ratio                 \n")
+     cat("  INR = calculated international normalized ratio                 \n")
      cat("-----------------------------------------------------------------\n") 
 }
 
@@ -467,9 +468,9 @@ note_for_Valss_input <- function(){
 note_for_Valss_output <- function(){
      cat("--------------------------------------------------------------\n")
      cat("    --Valpraote output data information--                     \n")
-     cat("    cl = estimated clerance (L/hr)                            \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)     \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)       \n")
+     cat("    cl = estimated clearance (L/hr)                            \n")
+     cat("    Cmss_pr = calculated steady-state conc.(mg/L)     \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)       \n")
      cat("--------------------------------------------------------------\n")
 }
 
@@ -477,7 +478,7 @@ note_for_Valsm_input <- function(){
      cat("-----------------------------------------------------------------\n")
      cat("    --Valpraote input data information--                         \n")
      cat("    age = age (yr)                                               \n")   
-     cat("    CBZ = combine CArbamazepine (Y=1, N=0)                       \n")
+     cat("    CBZ = combine the use of carbamazepine (Yes=1, No=0)         \n")
      cat("    INDI(indication)=1 for uncontrolled epilepsy, otherwise 0    \n")
      cat("    ka = 4 for oral solution, 1 for enteric tablet               \n")
      cat("    tau = dosing interval(hr)                                    \n")
@@ -496,8 +497,8 @@ note_for_Valsm_conc_input <- function(){
 note_for_Valsm_output <- function(){
      cat("--------------------------------------------------------------\n")
      cat("    --Valpraote output data information--                     \n")
-     cat("    cl = estimated clerance (L/hr)                            \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)       \n")
+     cat("    cl = estimated clearance (L/hr)                            \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)       \n")
      cat("--------------------------------------------------------------\n")
 }
 
@@ -507,7 +508,7 @@ note_for_ChiValss_input <- function(){
      cat("-----------------------------------------------------------\n")
      cat("    --Children Valpraote input data information--          \n")
      cat("    TBW = total body weight (Kg)                           \n")   
-     cat("    CBZ = combine CArbamazepine (Y=1, N=0)                 \n")
+     cat("    CBZ = combine the use of carbamazepine (Yes=1, No=0)   \n")
      cat("    D = dose for each dosing interval(mg)                  \n") 
      cat("    tau = dosing interval(hr)                              \n")
      cat("    ts = sampling time (hr)                                \n") 
@@ -518,9 +519,9 @@ note_for_ChiValss_input <- function(){
 note_for_ChiValss_output <- function(){
      cat("--------------------------------------------------------------\n")
      cat("    --Children Valpraote output data information--            \n")
-     cat("    cl = estimated clerance (L/hr)                            \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)     \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)       \n")
+     cat("    cl = estimated clearance (L/hr)                            \n")
+     cat("    Cmss_pr = calculated steady-state measured conc.(mg/L)     \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)       \n")
      cat("--------------------------------------------------------------\n")
 }
 
@@ -528,7 +529,7 @@ note_for_ChiValsm_input <- function(){
      cat("-----------------------------------------------------------\n")
      cat("    --Children Valpraote input data information--          \n")
      cat("    TBW = total body weight (Kg)                           \n")   
-     cat("    CBZ = combine CArbamazepine (Y=1, N=0)                 \n")
+     cat("    CBZ = combine the use of carbamazepine (Yes=1, No=0)   \n")
      cat("    D = dose for each dosing interval(mg)                  \n") 
      cat("    tau = dosing interval(hr)                              \n")
      cat("-----------------------------------------------------------\n")
@@ -545,8 +546,8 @@ note_for_ChiValsm_conc_input <- function(){
 note_for_ChiValsm_output <- function(){
      cat("--------------------------------------------------------------\n")
      cat("    --Children Valpraote output data information--            \n")
-     cat("    cl = estimated clerance (L/hr)                            \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)       \n")
+     cat("    cl = estimated clearance (L/hr)                            \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)       \n")
      cat("--------------------------------------------------------------\n")
 }
 
@@ -569,11 +570,11 @@ note_for_Vanss_input <- function(){
 note_for_Vanss_output <- function(){
      cat("--------------------------------------------------------------\n")
       cat("    --Vancomycin output data information--                   \n")
-     cat("    cl = estimated clerance (L/hr)                            \n")
+     cat("    cl = estimated clearance (L/hr)                            \n")
      cat("    v = estimated volume of distribution (L)                  \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)     \n")
-     cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)         \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)       \n")
+     cat("    Cmss_pr = calculated steady-state conc.(mg/L)     \n")
+     cat("    Cpss_pr = calculated steady-state peak conc.(mg/L)         \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)       \n")
      cat("--------------------------------------------------------------\n")
 }
 
@@ -601,10 +602,10 @@ note_for_Vansm_conc_input <- function(){
 note_for_Vansm_output <- function(){
      cat("-------------------------------------------------------------\n")
      cat("    --Vancomycin output data information--                   \n")
-     cat("    cl = estimated clerance (L/hr)                           \n")
+     cat("    cl = estimated clearance (L/hr)                           \n")
      cat("    v = estimated volume of distribution (L)                 \n")
-     cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)        \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)      \n")
+     cat("    Cpss_pr = calculated steady-state peak conc.(mg/L)        \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)      \n")
      cat("-------------------------------------------------------------\n")
 }
 
@@ -624,11 +625,11 @@ note_for_Enfss_input <- function(){
 note_for_Enfss_output <- function(){
      cat("----------------------------------------------------------------------\n")
      cat("    --Enfuvirtide output data information--                           \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)                  \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)                  \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)        \n")
      cat("    ka = estimated absorption rate constant/bioavailability (1/hr)    \n") 
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)             \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)               \n")
+     cat("    Cmss_pr = calculated steady-state conc.(mg/L)             \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)               \n")
      cat("----------------------------------------------------------------------\n")
 }
 
@@ -653,10 +654,10 @@ note_for_Enfsm_conc_input <- function(){
 note_for_Enfsm_output <- function(){
      cat("---------------------------------------------------------------------\n")
      cat("    --Enfuvirtide output data information--                          \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)                 \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)                 \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)       \n")
      cat("    ka = estimated absorption rate constant/bioavailability (1/hr)   \n") 
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)              \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)              \n")
      cat("---------------------------------------------------------------------\n")
 }
 
@@ -666,7 +667,7 @@ note_for_Indss_input <- function(){
      cat("    --Indinavir input data information--         \n")
      cat("    Gender = 1 for Male ; 0 for Female           \n")
      cat("    bw = body weight(kg)                         \n")
-     cat("    Rit = combine Ritonavir(Y=1;N=0)             \n")
+     cat("    Rit = combine Ritonavir(Yes=1;No=0)          \n")
      cat("    D = dose for each dosing interval(mg)        \n")
      cat("    tau = dosing interval(hr)                    \n")
      cat("    ts = sampling time(hr)                       \n")
@@ -677,10 +678,10 @@ note_for_Indss_input <- function(){
 note_for_Indss_output <- function(){
      cat("----------------------------------------------------------------------\n")
      cat("   --Indinavir output data information--                              \n")
-     cat("   cl_F = estimated clerance/bioavailability (L/hr)                   \n")
+     cat("   cl_F = estimated clearance/bioavailability (L/hr)                   \n")
      cat("   ka = estimated absorption rate constant/bioavailability (1/hr)     \n") 
-     cat("   Cmss_pr = predicted steady-state measured conc.(mg/L)              \n")
-     cat("   Ctss_pr = predicted steady-state trough conc.(mg/L)                \n")
+     cat("   Cmss_pr = calculated steady-state conc.(mg/L)              \n")
+     cat("   Ctss_pr = calculated steady-state trough conc.(mg/L)                \n")
      cat("----------------------------------------------------------------------\n")
 }
 
@@ -706,9 +707,9 @@ note_for_Indsm_conc_input <- function(){
 note_for_Indsm_output <- function(){
      cat("---------------------------------------------------------------------\n")
      cat("   --Indinavir output data information--                             \n")
-     cat("   cl_F = estimated clerance/bioavailability (L/hr)                  \n")
+     cat("   cl_F = estimated clearance/bioavailability (L/hr)                  \n")
      cat("   ka = estimated absorption rate constant/bioavailability (1/hr)    \n") 
-     cat("   Ctss_pr = predicted steady-state trough conc.(mg/L)               \n")
+     cat("   Ctss_pr = calculated steady-state trough conc.(mg/L)               \n")
      cat("---------------------------------------------------------------------\n")
 }
 
@@ -727,10 +728,10 @@ note_for_Ritss_input <- function(){
 note_for_Ritss_output <- function(){
      cat("-------------------------------------------------------------------\n")
      cat("    --Ritonavir output data information--                          \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)               \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)               \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)     \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)          \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)            \n")
+     cat("    Cmss_pr = calculated steady-state measured conc.(mg/L)          \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)            \n")
      cat("-------------------------------------------------------------------\n")
 }
 
@@ -754,9 +755,9 @@ note_for_Ritsm_conc_input <- function(){
 note_for_Ritsm_output <- function(){
      cat("------------------------------------------------------------------\n")
      cat("    --Ritonavir output data information--                         \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)              \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)              \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)    \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)           \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)           \n")
      cat("------------------------------------------------------------------\n")
 }
 
@@ -767,7 +768,7 @@ note_for_Cycss_input <- function(){
      cat("    --Cyclosporine input data information--      \n")
      cat("    bw = body weight(kg)                         \n")
      cat("    PTD = post-transplant day(day)               \n")
-     cat("    Dia = combine Diatiazem(Y=1;N=0)             \n")
+     cat("    Dia = combine Diatiazem(Yes=1;No=0)          \n")
      cat("    D = dose for each dosing interval(mg)        \n")
      cat("    tau = dosing interval(hr)                    \n")
      cat("    ts = sampling time(hr)                       \n")
@@ -778,9 +779,9 @@ note_for_Cycss_input <- function(){
 note_for_Cycss_output <- function(){
      cat("-------------------------------------------------------------\n")
      cat("   --Cyclosporine output data information--                  \n")
-     cat("   cl = estimated clerance (L/hr)                            \n")
-     cat("   Cmss_pr = predicted steady-state measured conc.(mcg/L)    \n")
-     cat("   Ctss_pr = predicted steady-state trough conc.(mcg/L)      \n")
+     cat("   cl = estimated clearance (L/hr)                            \n")
+     cat("   Cmss_pr = calculated steady-state conc.(mcg/L)    \n")
+     cat("   Ctss_pr = calculated steady-state trough conc.(mcg/L)      \n")
      cat("-------------------------------------------------------------\n")
 }
 
@@ -806,8 +807,8 @@ note_for_Cycsm_conc_input <- function(){
 note_for_Cycsm_output <- function(){
      cat("------------------------------------------------------------\n")
      cat("   --Cyclosporine output data information--                 \n")
-     cat("   cl = estimated clerance (L/hr)                           \n")
-     cat("   Ctss_pr = predicted steady-state trough conc.(mcg/L)     \n")
+     cat("   cl = estimated clearance (L/hr)                           \n")
+     cat("   Ctss_pr = calculated steady-state trough conc.(mcg/L)     \n")
      cat("------------------------------------------------------------\n")
 }
 
@@ -818,7 +819,7 @@ note_for_Evess_input <- function(){
      cat("    bw = body weight(kg)                         \n")
      cat("    age = age(yr)                                \n")
      cat("    race = 1 for black ; otherwise 0             \n")
-     cat("    Ery = combine Erythromycin(Y=1;N=0)          \n")
+     cat("    Ery = combine Erythromycin(Yes=1;No=0)       \n")
      cat("    D = dose for each dosing interval(mg)        \n")
      cat("    tau = dosing interval(hr)                    \n")
      cat("    ts = sampling time(hr)                       \n")
@@ -829,10 +830,10 @@ note_for_Evess_input <- function(){
 note_for_Evess_output <- function(){
      cat("--------------------------------------------------------------------\n")
      cat("    --Everolimus output data information--                          \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)                \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)                \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)      \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mcg/L)          \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mcg/L)            \n")
+     cat("    Cmss_pr = calculated steady-state measured conc.(mcg/L)          \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mcg/L)            \n")
      cat("--------------------------------------------------------------------\n")
 }
 
@@ -842,7 +843,7 @@ note_for_Evesm_input <- function(){
      cat("    bw = body weight(kg)                         \n")
      cat("    age = age(yr)                                \n")
      cat("    race = 1 for black ; otherwise 0             \n")
-     cat("    Ery = combine Erythromycin(Y=1;N=0)          \n")
+     cat("    Ery = combine Erythromycin(Yes=1;No=0)          \n")
      cat("    D = dose for each dosing interval(mg)        \n")
      cat("    tau = dosing interval(hr)                    \n")
      cat("-------------------------------------------------\n")
@@ -859,9 +860,9 @@ note_for_Evesm_conc_input <- function(){
 note_for_Evesm_output <- function(){
      cat("-------------------------------------------------------------------\n")
      cat("    --Everolimus output data information--                         \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)               \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)               \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)     \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mcg/L)           \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mcg/L)           \n")
      cat("-------------------------------------------------------------------\n")
 }
 
@@ -884,10 +885,10 @@ note_for_Tacss_input <- function(){
 note_for_Tacss_output <- function(){
      cat("--------------------------------------------------------------------\n")
      cat("    --Tacrolimus output data information--                          \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)                \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)                \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)      \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mcg/mL)         \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mcg/mL)           \n")
+     cat("    Cmss_pr = calculated steady-state conc.(mcg/mL)         \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mcg/mL)           \n")
      cat("--------------------------------------------------------------------\n")
 }
 
@@ -895,7 +896,7 @@ note_for_Tacsm_input <- function(){
      cat("-----------------------------------------------------\n")
      cat("    --Tacrolimus input data information--            \n")
      cat("    Hem = 0 for hematocrit < 30% , otherwise 1       \n")   
-     cat("    Alb = 0 for albumin < 3.5g/dL , otherwise 1      \n") 
+     cat("    Alb = 0 for albumin < 3.5 g/dL , otherwise 1     \n") 
      cat("    Dil = combine Diltiazem(Y=1, N=0)                \n")
      cat("    Flu = combine Fluconazole(Y=1, N=0)              \n")
      cat("    D = dose for each dosing interval(mg)            \n")
@@ -914,9 +915,9 @@ note_for_Tacsm_conc_input <- function(){
 note_for_Tacsm_output <- function(){
      cat("-------------------------------------------------------------------\n")
      cat("    --Tacrolimus output data information--                         \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)               \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)               \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)     \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mcg/mL)          \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mcg/mL)          \n")
      cat("-------------------------------------------------------------------\n")
 }
 
@@ -940,10 +941,10 @@ note_for_Imass_input <- function(){
 note_for_Imass_output <- function(){
      cat("------------------------------------------------------------------\n")
      cat("    --Imatinib mesylate output data information--                 \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)              \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)              \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)    \n")
-     cat("    Cm_pr = predicted measured conc.(mg/L)                        \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)           \n")
+     cat("    Cm_pr = calculated plasma conc.(mg/L)                         \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)           \n")
      cat("------------------------------------------------------------------\n")
 }
 
@@ -971,9 +972,9 @@ note_for_Imasm_conc_input <- function(){
 note_for_Imasm_output <- function(){
      cat("------------------------------------------------------------------\n")
      cat("    --Imatinib mesylate output data information--                 \n")
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)              \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)              \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)    \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)           \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)           \n")
      cat("------------------------------------------------------------------\n")
 }
 
@@ -991,15 +992,15 @@ note_for_Theirss_input <- function(){
 }
 
 note_for_Theirss_output <- function(){
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)              \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)              \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)    \n")
-     cat("    Cmss_pr = predicted steady-state measured conc.(mg/L)         \n")
-     cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)             \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)           \n")
+     cat("    Cmss_pr = calculated steady-state measured conc.(mg/L)         \n")
+     cat("    Cpss_pr = calculated steady-state peak conc.(mg/L)             \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)           \n")
 }
 
 note_for_Theirsm_input <- function(){
-     cat("    Gender = Male=1 ; Female=0                               \n")
+     cat("    Gender =  Male=1 ; Female=0                               \n")
      cat("    age = age (yr)                                           \n")
      cat("    ht = height (cm)                                         \n") 
      cat("    CHF = 1 for yes ; otherwise = 0                          \n")
@@ -1014,10 +1015,10 @@ note_for_Thesm_conc_input <- function(){
 }
 
 note_for_Theirsm_output <- function(){
-     cat("    cl_F = estimated clerance/bioavailability (L/hr)              \n")
+     cat("    cl_F = estimated clearance/bioavailability (L/hr)              \n")
      cat("    v_F = estimated volume of distribution/bioavailability (L)    \n")
-     cat("    Cpss_pr = predicted steady-state peak conc.(mg/L)             \n")
-     cat("    Ctss_pr = predicted steady-state trough conc.(mg/L)           \n")
+     cat("    Cpss_pr = calculated steady-state peak conc.(mg/L)             \n")
+     cat("    Ctss_pr = calculated steady-state trough conc.(mg/L)           \n")
 }
 
 note_for_Thecrss_input <- function(){
@@ -1032,8 +1033,8 @@ note_for_Thecrss_input <- function(){
 }
 
 note_for_Thecr_output <- function(){
-     cat("   cl_F = estimated clerance/bioavailability (L/hr)        \n")
-     cat("   Css_pr = predicted steady-state conc.(mg/L)             \n")
+     cat("   cl_F = estimated clearance/bioavailability (L/hr)        \n")
+     cat("   Css_pr = calculated steady-state conc.(mg/L)             \n")
 }
 
 note_for_Theinfusionss_input <- function(){
@@ -1050,10 +1051,10 @@ note_for_Theinfusionss_input <- function(){
 }
 
 note_for_Theinfusionss_output <- function(){
-     cat("   cl = estimated clerance (L/hr)                                    \n")
+     cat("   cl = estimated clearance (L/hr)                                    \n")
      cat("   v = estimated volume of distribution (L)                          \n")
-     cat("   Cm_pr = predicted measured conc.(mg/L)                            \n")
-     cat("   Ctss_pr = predicted steady-state trough conc.(mg/L)               \n")
+     cat("   Cm_pr = calculated plasma conc.(mg/L)                            \n")
+     cat("   Ctss_pr = calculated steady-state trough conc.(mg/L)               \n")
 }
 
 note_for_Theinfusionsm_input <- function(){
@@ -1068,8 +1069,8 @@ note_for_Theinfusionsm_input <- function(){
 }
 
 note_for_Theinfusionsm_output <- function(){
-     cat("   cl = estimated clerance (L/hr)                                    \n")
+     cat("   cl = estimated clearance (L/hr)                                    \n")
      cat("   v = estimated volume of distribution (L)                          \n")
-     cat("   Ctss_pr = predicted steady-state trough conc.(mg/L)               \n")
+     cat("   Ctss_pr = calculated steady-state trough conc.(mg/L)               \n")
 }
 

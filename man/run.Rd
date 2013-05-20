@@ -7,7 +7,7 @@
 \title{All drugs menu}
 
 \description{
- All drugs menu in tdm.
+ Top menu in tdm.
 }
 
 \keyword{misc}
