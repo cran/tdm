@@ -2,15 +2,16 @@ model
 
            {
      
-           for (i in 1:1){           # one subject
-           c~dnorm(mu, 100.)         # c:drug concentration
-           mu<-(D*24/tau)*Km/(Vmax-D*24/tau)    # oral phenytoin concentration equation at steady state 
+           for (i in 1:1){                            # one subject
+           c~dnorm(mu, 100.)                          # c:drug concentration; better than using y[i] here
+           # y[i]~dnorm(mu, 100.)                     # c:drug concentration
+           mu<-(D*24/tau)*Km/(Vmax-D*24/tau)          # oral phenytoin concentration equation at steady state 
 
-           Vmax~dnorm(theta1, 0.1)    #  Vmax~dnorm(theta1, 0.01) <- original
-           Km~dnorm(theta2, 10)       #  Km~dnorm(theta2, 10) <- original
+           Vmax~dnorm(theta1,0.01)                    #  Vmax~dnorm(theta1, 0.01) <- original
+           Km~dnorm(theta2,10)                        #  Km~dnorm(theta2, 10) <- original
 
-           theta1<-7.22*bw   # 7.22*bw population estimate of Phenytoin Vmax
-           theta2<-4.44      # 4.44 population estimate of Phenytoin Km 
+           theta1<-7.22*bw                            # 7.22*bw population estimate of Phenytoin Vmax
+           theta2<-4.44                               # 4.44 population estimate of Phenytoin Km 
               
            }
 

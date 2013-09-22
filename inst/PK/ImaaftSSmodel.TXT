@@ -1,21 +1,21 @@
 model
 
-           {
+      {
      
-           for (i in 1:1){           # one subject
-           c~dnorm(mu,1.0E+6)        # c:drug concentration
-           mu<-((D/(1.5*cl_F))*(1-exp(-k*1.5))*(exp(-k*(ts-1.5)))*((exp(-k*n*tau))-1))/((exp(-k*tau))-1)    # oral concentration equation at non-steady state
-           k<-cl_F/v_F
+      for (i in 1:1){           # one subject
+      c~dnorm(mu,1.0E+6)        # c:drug concentration
+      mu<-((D/(1.5*cl_F))*(1-exp(-k*1.5))*(exp(-k*(ts-1.5)))*((exp(-k*n*tau))-1))/((exp(-k*tau))-1)    # oral concentration equation at non-steady state
+      k<-cl_F/v_F
 
-           cl_F~dnorm(theta1, 500)
-           v_F~dnorm(theta2, 1)
+      cl_F~dnorm(theta1, 500)
+      v_F~dnorm(theta2, 1)
 
-           theta1<-(13.8-3.81*OCC)*pow((BW/80),0.301)*pow((Hb/13),0.897)*pow((WBC/16),(-0.105))    # population estimate of Imatinib mesylate clearance
-           theta2<-(252-7.82*OCC)*pow((BW/80),0.405)*pow((Hb/13),0.676)*pow((WBC/16),0.07)         # population estimate of Imatinib mesylate apparent volume of distribution 
-              
-           }
+      theta1<-(13.8-3.81*OCC)*pow((BW/80),0.301)*pow((Hb/13),0.897)*pow((WBC/16),(-0.105))    # population estimate of Imatinib mesylate clearance
+      theta2<-(252-7.82*OCC)*pow((BW/80),0.405)*pow((Hb/13),0.676)*pow((WBC/16),0.07)         # population estimate of Imatinib mesylate apparent volume of distribution 
+         
+      }
 
-           }
+      }
            
            
           

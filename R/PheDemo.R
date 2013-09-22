@@ -13,58 +13,27 @@ PheDemo<-function(){
      note_for_Phe_input()
      cat("\n")
      note_for_close_window()
-     PheSSpar<-data.frame(parameter=c("bw (kg)","D (mg)","tau (hr)","c (mg/L)"),value=c(0))
-##     PheSSpar<-edit(PheSSpar)
-##     PheSSpar<-zcheck(PheSSpar)
+     PheSSpar<-data.frame(parameter=c("bw (kg)","D (mg)","tau (hr)","c (mg/L)"),value=c(65,300,24,7.61))
      cat("\n")
-     PheSSpar[4,2]<-7.61
-     PheSSpar[3,2]<-24
-     PheSSpar[2,2]<-300
-     PheSSpar[1,2]<-65
+     cat("--- Phenytoin: Case Study #1 ---\n\n")
+     show(PheSSpar);cat("\n\n")
      Phe.ss(PheSSpar[4,2],PheSSpar[3,2],PheSSpar[2,2],PheSSpar[1,2])
      note_for_convergence_plots()
-     convergence_plots_sep()
-     note_for_Phe_output()    
-     show(samplesStats("*"))
+     note_for_Phe_output()
+     PheSSpar<-data.frame(parameter=c("bw (kg)","D (mg)","tau (hr)","c (mg/L)"),value=c(65,300,24,15.1))
      cat("\n")
-     C<-Phecpr(PheSSpar[2,2],PheSSpar[3,2])
-     Final<-(c(matrix(C[1 ,1]), PheSSpar[4,2]))
-     coutput<-data.frame(Final)
-     row.names(coutput)<-list("C(ss_calc)","C(ss_obs)")
-     show(coutput)
-     cat("\n")
-     cat("\n")
-     PheSSpar[4,2]<-15.1
-     PheSSpar[3,2]<-24
-     PheSSpar[2,2]<-300
-     PheSSpar[1,2]<-65
+     cat("--- Phenytoin: Case Study #2 ---\n\n")
+     show(PheSSpar);cat("\n\n")
      Phe.ss(PheSSpar[4,2],PheSSpar[3,2],PheSSpar[2,2],PheSSpar[1,2])
      note_for_convergence_plots()
-     convergence_plots_sep()
-     note_for_Phe_output()    
-     show(samplesStats("*"))
+     note_for_Phe_output()
+     PheSSpar<-data.frame(parameter=c("bw (kg)","D (mg)","tau (hr)","c (mg/L)"),value=c(65,300,24,30.1))
      cat("\n")
-     C<-Phecpr(PheSSpar[2,2],PheSSpar[3,2])
-     Final<-(c(matrix(C[1 ,1]), PheSSpar[4,2]))
-     coutput<-data.frame(Final)
-     row.names(coutput)<-list("C(ss_calc)","C(ss_obs)")
-     show(coutput)
-     cat("\n")
-     cat("\n")
-     PheSSpar[4,2]<-30.1
-     PheSSpar[3,2]<-24
-     PheSSpar[2,2]<-300
-     PheSSpar[1,2]<-65
+     cat("--- Phenytoin: Case Study #3 ---\n\n")
+     show(PheSSpar);cat("\n\n")
      Phe.ss(PheSSpar[4,2],PheSSpar[3,2],PheSSpar[2,2],PheSSpar[1,2])
      note_for_convergence_plots()
-     convergence_plots_sep()
-     note_for_Phe_output()    
-     show(samplesStats("*"))
-     cat("\n")
-     C<-Phecpr(PheSSpar[2,2],PheSSpar[3,2])
-     Final<-(c(matrix(C[1 ,1]), PheSSpar[4,2]))
-     coutput<-data.frame(Final)
-     row.names(coutput)<-list("C(ss_calc)","C(ss_obs)")
-     show(coutput)
-     cat("\n")
+     note_for_Phe_output()
+     cat("\n\n")
+     unlink("params.csv")
 }

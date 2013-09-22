@@ -4,14 +4,19 @@ model
      
            for (i in 1:1) {      # one subject
            c~dnorm(mu,100)
-           mu<-1.9*D/(v*(1.9-k))*((1/(1-exp(-k*tau)))*exp(-k*ts)-(1/(1-exp(-1.9*tau)))*exp(-1.9*ts))     # oral concentration equation at steady state
-           k<-cl/v
-           v<-0.24*TBW
+           mu<-ka*D/(vd_F*(ka-k))*((1/(1-exp(-k*tau)))*exp(-k*ts)-(1/(1-exp(-ka*tau)))*exp(-ka*ts))     # oral concentration equation at steady state
+           # k<-cl/v
+           # v<-0.24*TBW
+           k<-cl_F/vd_F        # added by YJ 
 
-           cl~dnorm(theta1,10000)
+           # cl~dnorm(theta1,10000)
+           cl_F~dnorm(theta1,1.)
+           vd_F~dnorm(theta2,100)         # added by YJ 
+           ka  ~dnorm(theta3,100)         # added by YJ 
 
            theta1<-0.012*pow(TBW,0.715)*pow((D/TBW*24/tau),0.306)*(1+0.359*CBZ)     # population estimate of children valproate clearance
-              
+           theta2<-0.24*TBW               # added by YJ
+           theta3<-4                      # ka = 4 for solution valproate; added by YJ   
            }
 
            }

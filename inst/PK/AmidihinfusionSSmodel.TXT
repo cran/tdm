@@ -1,7 +1,7 @@
 model
 
            {     
-           for (i in 1:1) {          # one subject
+           for (i in 1:1) {       # one subject
            c~dnorm(mu, 100)       # c:drug concentration
            mu<-DL*0.8/(tinf*cl)*(1-exp(-k*tinf))*exp(-k*(T))+R*0.8/cl*(1-exp(-k*(T)))
            k<-cl/v

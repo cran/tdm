@@ -1,18 +1,18 @@
 model
 
-           {
-     
-           for (i in 1:1) {        # one subject
-           Amax~dnorm(mu,1.0E+6)   # Amax:anti-Xa maximal activity at stedy state
-           mu<-D*exp(-k*(log(0.34*(1-exp(-k*tau))/(k*(1-exp(-0.34*tau)))))/(0.34-k))/v_F*(1-exp(-k*tau))/1000   # equation of anti-Xa maximal activity at stedy state 
-           k<-cl_F/v_F
+    {
+    
+    for (i in 1:1) {        # one subject
+    Amax~dnorm(mu,1.0E+6)   # Amax:anti-Xa maximal activity at stedy state
+    mu<-D*exp(-k*(log(0.34*(1-exp(-k*tau))/(k*(1-exp(-0.34*tau)))))/(0.34-k))/v_F*(1-exp(-k*tau))/1000   # equation of anti-Xa maximal activity at steady state 
+    k<-cl_F/v_F
 
-           cl_F~dnorm(theta1,100)
-           v_F~dnorm(theta2,10)
+    cl_F~dnorm(theta1,1)       ### converged successfully; adjusted by YJ at July 13, 2013
+    v_F ~dnorm(theta2,10000)   ### converged successfully; adjusted by YJ at July 13, 2013
 
-           theta1<-0.74*pow((TBW/Scr/0.79),0.24)*pow(0.75,(1-Gender))    # population estimate of Enoxaparin clearance
-           theta2<-5.29*pow((TBW/73),1.49)                               # population estimate of Enoxaparin apparent volume of distribution 
-              
-           }
+    theta1<-0.74*pow((TBW/Scr/0.79),0.24)*pow(0.75,(1-Gender))    # population estimate of Enoxaparin clearance
+    theta2<-5.29*pow((TBW/73),1.49)                               # population estimate of Enoxaparin apparent volume of distribution 
+       
+    }
 
-           }
+    }

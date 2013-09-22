@@ -1,0 +1,18 @@
+v3.0.0 (official release)
+-------------------------
+
+    - warfarin model is still not working yet.
+    - started to change codes from BUGS to JAGS; and added packages
+      "rjags", "R2jags", etc..
+    - remove the function of multiple subjects with single data point.
+    - saved posterior estimate as .csv format and read it back to
+      the system for dosage prediction; it used to be using
+      'sampleStats("P") to call posterior estimates in previous
+      version which takes a lot of time and computer resources
+      to get such a value.
+    - added Cys with target C2 levels;
+    - fixed enoxaparin dosing adjustment with 'mg' now; originally
+      was 'IU' which is not common to used in this way.
+    - fixed multiple concs. listing with obs. vs. calc.
+    - 
+      

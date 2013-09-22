@@ -2,8 +2,8 @@ model
 
            {
       
-           for (i in 1:1) {     # one subject
-           c~dnorm(mu, 1.0E+6)     # c:drug concentration
+           for (i in 1:1) {            # one subject
+           c~dnorm(mu, 1.0E+6)         # c:drug concentration
            mu<-(D/36.9458)/(cl_F*tau)  # oral Lthium carbonate concentration equation at steady state
 
            cl_F~dnorm(theta1, 7.032131)

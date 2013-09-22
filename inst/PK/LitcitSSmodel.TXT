@@ -2,9 +2,9 @@ model
 
            {
      
-           for (i in 1:1) {     # one subject
+           for (i in 1:1) {        # one subject
            c~dnorm(mu, 1.0E+6)     # c:drug concentration
-           mu<-(D/94)/(cl_F*tau)  # oral Lthium citrate concentration equation at steady state
+           mu<-(D/94)/(cl_F*tau)   # oral Lthium citrate concentration equation at steady state
 
            cl_F~dnorm(theta1, 7.032131)
 

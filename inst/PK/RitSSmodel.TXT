@@ -7,8 +7,8 @@ model
            mu<-ka*D/(v_F*(ka-k))*((1/(1-exp(-k*tau)))*exp(-k*(ts-0.778))-(1/(1-exp(-ka*tau)))*exp(-ka*(ts-0.778)))  # oral concentration equation at steady state
            k<-cl_F/v_F
 
-           cl_F~dnorm(theta1,100)
-           v_F~dnorm(theta2, 100)
+           cl_F~dnorm(theta1,100)  # original  cl_F~dnorm(theta1,100)
+           v_F~dnorm(theta2, 100)  # original  v_F~dnorm(theta2, 100)
            ka~dnorm(theta3, 10000)I(0,100)
 
            theta1<-10.5*pow(2.72, LPV)   # population estimate of Ritonavir clearance

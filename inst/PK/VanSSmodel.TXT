@@ -1,14 +1,14 @@
 model
 
-           {     
-           for (i in 1:1) {        # one subject
-           c~dnorm(mu,100)         # c:drug concentration
-           mu<-(D*(1-exp(-cl/v*tin))/(tin*cl*(1-exp(-cl/v*tau))))*exp(-cl/v*ts)  # oral concentration equation at steady state
-           cl~dnorm(theta1,10)
-           v~dnorm(theta2, 0.1)
+     {     
+     for (i in 1:1) {        # one subject
+     c~dnorm(mu,100)         # c:drug concentration
+     mu<-(D*(1-exp(-cl/v*tin))/(tin*cl*(1-exp(-cl/v*tau))))*exp(-cl/v*ts)  # oral concentration equation at steady state
+       cl~dnorm(theta1,10)
+       v~dnorm(theta2, 0.1)
 
-           theta1<-1.08*(140-age)*bw/(72*Scr)*pow(0.85,(1-Gender))*60/1000  # population estimate of Vancomycin clearance
-           theta2<-0.98*bw                                                  # population estimate of Vancomycin apparent volume of distribution 
+       theta1<-1.08*(140-age)*bw/(72*Scr)*pow(0.85,(1-Gender))*60/1000    # population estimate of Vancomycin clearance
+       theta2<-0.98*bw                                                    # population estimate of Vancomycin apparent volume of distribution 
 
-           }
-           }
+     }
+     }

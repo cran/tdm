@@ -1,9 +1,9 @@
 model
 
            {     
-           for (i in 1:1) {            # one subject
-           for(j in 1:T) {             # T:number of sampling time
-           c[j]~dnorm(mu[j], 100)   # c:drug concentration
+           for(i in 1:1) {            # one subject
+           for(j in 1:T) {            # T:number of sampling time
+           c[j]~dnorm(mu[j], 100)     # c:drug concentration
            mu[j]<-1.85*0.85*D/(v_F*(1.85-k))*((1/(1-exp(-k*tau)))*exp(-k*ts[j])-(1/(1-exp(-1.85*tau)))*exp(-1.85*ts[j]))   # oral IR tablet concentration equation at steady state
 
            }

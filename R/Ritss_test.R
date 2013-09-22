@@ -1,0 +1,22 @@
+Ritss_test<-function(){
+     cat("\n")
+     note_for_Ritss_input()
+     cat("\n")
+     note_for_close_window()
+     RitSSpar<-data.frame(parameter=c("LPV","D (mg)","tau (hr)","ts (hr)","c (mcg/L)"),
+                          value=c(1,200,24,22,100))
+     ### RitSSpar<-edit(RitSSpar)
+     cat("\n Input data are as follows:\n")
+     cat(" --------------------------\n")
+     show(RitSSpar);cat("\n\n")
+     cat("\n")
+     Rit.ss(RitSSpar[5,2],RitSSpar[4,2],RitSSpar[3,2],RitSSpar[2,2],RitSSpar[1,2])
+     note_for_convergence_plots()
+     note_for_Ritss_output()
+     C1<-Ritcpr(RitSSpar[2,2],RitSSpar[3,2],RitSSpar[4,2])
+     C2<-Ritcpr(RitSSpar[2,2],RitSSpar[3,2],RitSSpar[3,2])
+     coutput<-data.frame(conc=c("Cmss_obs","Cmss_pr","Ctss_pr"),value=c(RitSSpar[5,2],C1,C2))
+     show(coutput)    
+     cat("\n")   
+     ### Rit.more()
+}

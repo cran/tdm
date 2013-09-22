@@ -6,11 +6,12 @@ cal.again<-function()
                   "No")
    pick <- menu(file.menu, title = "<< Do you want to calculate with other drugs? >>")
  if (pick == 1){
-    run()
+    go2menu()
   } else {
     if (pick == 2){
     graphics.off()
-    cat("\nThank you for using tdm. Bye now.\n\n") 
+    if(file.exists("params.csv")) file.remove("params.csv")
+    cat("\n  Thank you for using tdm. Bye now.\n\n") 
     }
     }   
 }

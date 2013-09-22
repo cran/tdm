@@ -4,10 +4,10 @@
 
 \alias{run}
 
-\title{All drugs menu}
+\title{logo and disclaimer}
 
 \description{
- Top menu in tdm.
+ show logo and disclaimer for using this package.
 }
 
 \keyword{misc}

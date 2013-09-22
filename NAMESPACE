@@ -6,6 +6,8 @@ exportPattern(".")
 
 # Import all packages listed as Imports or Depends
 import(
-  BRugs,
-  R2OpenBUGS
+  rjags,
+  coda,
+  png,
+  grid
 )

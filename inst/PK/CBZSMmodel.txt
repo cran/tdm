@@ -1,20 +1,20 @@
 model
 
-           {
+     {
      
-           for (i in 1:1) {                      # one subject
-           for(j in 1:T) {                       # T:number of sampling time
-           c[j]~dnorm(mu[j], 1.0E+6)             # c:drug concentration
-           mu[j]<-1.2*D/(v_F*(1.2-k))*((1/(1-exp(-k*tau)))*exp(-k*ts[j])-(1/(1-exp(-1.2*tau)))*exp(-1.2*ts[j]))    # oral concentration equation at steady state
-            }
-            k<-cl_F/v_F
-          
+     for (i in 1:1) {                              # one subject
+       for(j in 1:T) {                             # T:number of sampling time
+            c[j]~dnorm(mu[j], 1.0E+6)              # c:drug concentration
+            mu[j]<-1.2*D/(v_F*(1.2-k))*((1/(1-exp(-k*tau)))*exp(-k*ts[j])-(1/(1-exp(-1.2*tau)))*exp(-1.2*ts[j]))    # oral concentration equation at steady state
+                    }
+        k<-cl_F/v_F
+        
+        
+        cl_F~dnorm(theta1, 39.37)
+        v_F~dnorm(theta2, 100)
 
-           cl_F~dnorm(theta1, 39.37)
-           v_F~dnorm(theta2, 100)
-
-           theta1<-0.0734*pow((D/TBW/tau*24), 0.406)*pow(TBW, 0.694)*pow(1.45,PHT) *pow(1.17,PB)*pow(1.21,VPA)*pow(0.849,E)   # population estimate of Carbamazepine clearance
-           theta2<-1.91*TBW                                                                                                   # population estimate of Carbamazepine apparent volume of distribution 
-           }
-           }
+        theta1<-0.0734*pow((D/TBW/tau*24), 0.406)*pow(TBW, 0.694)*pow(1.45,PHT) *pow(1.17,PB)*pow(1.21,VPA)*pow(0.849,E)   # population estimate of Carbamazepine clearance
+        theta2<-1.91*TBW                                                                                                   # population estimate of Carbamazepine apparent volume of distribution 
+                  }
+     }
 
