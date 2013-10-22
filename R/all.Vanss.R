@@ -16,29 +16,16 @@ all.Vanss<-function(){
      note_for_Vanss_output()
      ### show(samplesStats("*"))
      cat("\n")
-     C<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[8,2]+VanSSpar[7,2])
-     ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Cmss_pr (mg/L)")
-     output1<-coutput
-     show(coutput)
+     C1<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[8,2]+VanSSpar[7,2])
      ### read from saved .cvs -YJ
      X <- read.table("params.csv",header=FALSE)
      cl <- X[1,2]
      v  <- X[2,2]
      ###
-     C<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[6,2])/(exp(-(cl/v)*(VanSSpar[6,2]-(VanSSpar[7,2]+1))))
+     C2<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[6,2])/(exp(-(cl/v)*(VanSSpar[6,2]-(VanSSpar[7,2]+1))))
+     C3<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[6,2])
      ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Cpss_pr (mg/L)")
-     output2<-coutput
-     show(coutput)
-     C<-infcpr(VanSSpar[5,2],VanSSpar[7,2],VanSSpar[6,2],VanSSpar[6,2])
-     ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Ctss_pr (mg/L)")
-     output3<-coutput
-     show(coutput)     
-     cat("\n")   
+     coutput<-data.frame(Parameters=c("Cmss_pr (mg/L)","Cpss_pr (mg/L)","Ctss_pr (mg/L)"),Values=c(C1,C2,C3))
+     cat("\n\n");show(coutput);cat("\n")   
      Van.more()
 }

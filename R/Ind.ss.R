@@ -1,19 +1,4 @@
 Ind.ss<-function(a,b,c,d,e,f,g){
-### library(BRugs)                                                # active BRugs
-library(R2jags)
-### oldwd<-getwd()
-### setwd(system.file("PK",package="tdm"))                        # set working directory
-### modelCheck("IndSSmodel.txt")                                  # load model
-### bugsData(                                                     # produce a BUGS data file and name it Inddata
-### list(
-### c=a,
-### tau=b,
-### ts=c,
-### D=d,
-### bw=e,
-### Rit=f,
-### Gender=g
-### )
 dataList= list(
 c=a,
 tau=b,
@@ -23,15 +8,7 @@ bw=e,
 Rit=f,
 Gender=g
 )       
-### , fileName=file.path(getwd(),"Inddata.txt"),digits=5)
-### modelData("Inddata.txt")                                      # Load data
-### modelCompile(numChains=1)                                     # compile
-### modelGenInits()                                               # gen inits
-### modelUpdate(10000)                                            # burn in 25000
-### samplesSet(c("ka","cl_F"))                                    # set monitored PK parameters
-### modelUpdate(60000)                                            # update 50000
 params = c("cl_F","ka")                                 # The parameter(s) to be monitored.
-### theta1(cl_F)<-32.4*(1+0.3*Gender)*(1-0.63*Rit)*(1+0.16*(bw-70)/70);theta2<-1.
 initsList = list(cl_F=32.4*(1+0.3*g)*(1-0.63*f)*(1+0.16*(e-70)/70),ka=1.)  # initialize prior here; not working if use 'bw' instead of 'd' here.  --YJ
 adaptSteps = 500                                            # Number of steps to "tune" the samplers.
 burnInSteps = 6000                                          # Number of steps to "burn-in" the samplers.
@@ -51,37 +28,13 @@ cat("Sampling final MCMC chain...\n")
 codaSamples <- coda.samples(jagsModel, params, n.iter=nIter)
 ### codaSamples <- autojags(jagsModel, params, n.iter=nIter)              ### still not work!  figure out how. -YJ 
 
-# resulting codaSamples object has these indices:
-# codaSamples[[ chainIdx ]][ stepIdx , paramIdx ]
-#------------------------------------------------------------------------------
-# EXAMINE THE RESULTS
-# Convert coda-object codaSamples to matrix object for easier handling.
-# But note that this concatenates the different chains into one long chain.
-# Result is mcmcChain[ stepIdx , paramIdx ]
-
 checkConvergence = TRUE
 if (checkConvergence) {
-  ### openGraph(width=7,height=7)   ### there is a openGraphSaveGraph.R file; not to use for now.
   show(summary(codaSamples))
-  ### str(codaSamples)
-  ### show(gelman.diag(codaSamples))
-  ### effectiveChainLength = effectiveSize(codaSamples) 
-  ### show(effectiveChainLength)
   dev.new()
   plot(codaSamples) 
-  ### dev.new()
-  ### autocorr.plot(codaSamples)
-  ### dev.new()
-  ### caterplot(codaSamples)
-  ### dev.new()
-  ### traplot(codaSamples)
   dev.new()
   gelman.plot(codaSamples)             ### why is this line not working?  -YJ
-  # dev.new()
-  # denplot(codaSamples)
-  # dev.new()
-  # traceplot(codaSamples)
-  ### mcmcplot(codaSamples)              ### uhh... it outputs the plots as .html format. -YJ
 }
 ###
 ### show prediction/calc Cp obtained from JAGS here
@@ -109,6 +62,3 @@ half_life <- log(2)/(cl_F/v_F)
 X <- data.frame(Estimated_Parameters=c("ka","Cl/F","Vd/F (as constant)","Half-life"),value=c(X[2,2],X[1,2],65.7,half_life))
 show(X);cat("\n\n")
 }
-
-
-

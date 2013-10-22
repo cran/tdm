@@ -43,18 +43,10 @@ all.Vansm<-function(){
      }
      cat("\n")
      ### C<-infcpr(VanSMMpar[5,2],VanSMMpar[7,2],VanSMMpar[6,2],VanSMMpar[6,2])/(exp(-(cl/v)*(VanSMMpar[6,2]-(VanSMMpar[7,2]+1))))  ### the C_peack  -YJ
-     C<-C.peak                           ### don't need to calc. again here -YJ
+     C2<-C.peak                           ### don't need to calc. again here -YJ
+     C3<-infcpr(VanSMMpar[5,2],VanSMMpar[7,2],VanSMMpar[6,2],VanSMMpar[6,2])
      ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Cpss_pr (mg/L)")
-     output1<-coutput
-     show(coutput)
-     C<-infcpr(VanSMMpar[5,2],VanSMMpar[7,2],VanSMMpar[6,2],VanSMMpar[6,2])
-     ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Ctss_pr (mg/L)")
-     output2<-coutput
-     show(coutput)     
-     cat("\n")
+     coutput<-data.frame(Parameters=c("Cpss_pr (mg/L)","Ctss_pr (mg/L)"),Values=c(C2,C3))
+     cat("\n\n");show(coutput);cat("\n")
      Van.more()
 }

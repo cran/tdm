@@ -16,25 +16,13 @@ all.Amiss<-function(){
      note_for_Amiss_output()                                                     # show Aminoglycoside output data information
      ### show(samplesStats("*"))                                                 # show estimated PK parameters of Aminoglycoside
      cat("\n") 
-     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[9,2]+AmiSSpar[8,2])     # calculate predicted steady-state measured concentration of Aminoglycoside (equation of intermediate iv infusion concentration)
-     ### sim<-matrix(C[1 ,1])                                                             # take the entry of form[1,1] as the input of sim
-     coutput<-data.frame(C)                                                               # 命名所取出來的[1,1]為couput
-     colnames(coutput)<-list("Cmss_pr (mg/L)")                                            # 並命名此欄為為Cmss_pr(mg/L)
-     output1<-coutput                                                                     # 將Cmss_pr命名為coutput1    
-     show(coutput);cat("\n\n")
+     C1<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[9,2]+AmiSSpar[8,2])     # calculate predicted steady-state measured concentration of Aminoglycoside (equation of intermediate iv infusion concentration)
      ### below 'infcpr()' can be found at 'pr.R' -YJ 
-     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[7,2])                   # calculate predicted steady-state trough concentration of Aminoglycoside
-     ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Ctss_pr (mg/L)")                                            # 並命名此欄為為Ctss_pr(mg/L)
-     output3<-coutput                                                                     # 將Cmss_pr命名為coutput3
-     show(coutput);cat("\n\n") 
-     C<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[8,2])                   # calculate predicted steady-state peak concentration of Aminoglycoside
-     ### sim<-matrix(C[1 ,1])                                                                 
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Cpss_pr (mg/L)")                                            # 並命名此欄為為Cpss_pr(mg/L)
-     output2<-coutput                                                                     # 將Cpss_pr命名為coutput2
-     show(coutput);cat("\n\n")     
+     C2<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[7,2])                   # calculate predicted steady-state trough concentration of Aminoglycoside
+     C3<-infcpr(AmiSSpar[6,2],AmiSSpar[8,2],AmiSSpar[7,2],AmiSSpar[8,2])                   # calculate predicted steady-state peak concentration of Aminoglycoside
+     coutput<-data.frame(Parameters=c("Cmss_pr (mg/L)","Cpss_pr (mg/L)","Ctss_pr (mg/L)"),
+                             Values=c(C1,C3,C2))
+     cat("\n");show(coutput);cat("\n\n")     
      cat("\n")   
      Ami.more()               # in 'adjustss.more()'; doing 'C -> D' or 'D -> C'
 }

@@ -18,26 +18,13 @@ all.Cycss<-function(){
      note_for_Cycss_output()
      ### show(samplesStats("*"))
      cat("\n") 
-     C<-Cyccpr(CycSSpar[2,2],CycSSpar[1,2],CycSSpar[4,2],CycSSpar[5,2],CycSSpar[6,2])
-     ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Cmss_pr (mcg/L)")
-     output1<-coutput
-     show(coutput);cat("\n")
+     C1<-Cyccpr(CycSSpar[2,2],CycSSpar[1,2],CycSSpar[4,2],CycSSpar[5,2],CycSSpar[6,2])
      ### here we can also calculate C(2) =?  --YJ
      C2<-Cyccpr(CycSSpar[2,2],CycSSpar[1,2],CycSSpar[4,2],CycSSpar[5,2],2)  ### set 'CycSSpar[6,2] = 2' to calc. C(2) here
+     C3<-Cyccpr(CycSSpar[2,2],CycSSpar[1,2],CycSSpar[4,2],CycSSpar[5,2],CycSSpar[5,2])
      ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C2)
-     colnames(coutput)<-list("C(2)ss_pr (mcg/L)")
-     output1<-coutput
-     show(coutput);cat("\n")
-     C<-Cyccpr(CycSSpar[2,2],CycSSpar[1,2],CycSSpar[4,2],CycSSpar[5,2],CycSSpar[5,2])
-     ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Ctss_pr (mcg/L)")
-     output2<-coutput
-     show(coutput)    
-     cat("\n")   
+     coutput<-data.frame(Parameters=c("Cmss_pr (mcg/L)","C(2)ss_pr (mcg/L)","Ctss_pr (mcg/L)"),Values=c(C1,C2,C3))
+     cat("\n\n");show(coutput);cat("\n")
      ### Cyc.more(CycSSpar[2,2],CycSSpar[1,2])
      Cyc.more(30,CycSSpar[1,2])   ### set 'CycSSpar[2,2] =30' for PTD as SS has been reached.
 }

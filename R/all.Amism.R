@@ -37,19 +37,12 @@ all.Amism<-function(){
      }
      cat("\n")
      ### below 'infcpr()' can be found at 'pr.R' -YJ
-     C<-infcpr(AmiSMMpar[6,2],AmiSMMpar[8,2],AmiSMMpar[7,2],AmiSMMpar[8,2])  ### for peak conc.?  correct! same as following line. --YJ
+     C2<-infcpr(AmiSMMpar[6,2],AmiSMMpar[8,2],AmiSMMpar[7,2],AmiSMMpar[8,2])  ### for peak conc.?  correct! same as following line. --YJ
      ### C<-infcpr(AmiSMMpar[6,2],AmiSMMpar[8,2],AmiSMMpar[7,2],AmiSMMpar[7,2])/exp(-cl/v*(AmiSMMpar[7,2]-AmiSMMpar[8,2]))  ### Ctrough=Cpeak*exp(-kel*(tau-tin)) --YJ
      ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Cpss_pr (mg/L)")
-     output1<-coutput
-     show(coutput)  
-     C<-infcpr(AmiSMMpar[6,2],AmiSMMpar[8,2],AmiSMMpar[7,2],AmiSMMpar[7,2])
+     C3<-infcpr(AmiSMMpar[6,2],AmiSMMpar[8,2],AmiSMMpar[7,2],AmiSMMpar[7,2])
      ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Ctss_pr (mg/L)")
-     output2<-coutput
-     show(coutput)     
-     cat("\n")
+     coutput<-data.frame(Parameters=c("Cpss_pr (mg/L)","Ctss_pr (mg/L)"),Values=c(C2,C3))
+     cat("\n\n");show(coutput);cat("\n")
      Ami.more()                # in 'adjustss.more()'; doing 'C -> D' or 'D -> C'
 }

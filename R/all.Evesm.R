@@ -5,7 +5,7 @@ all.Evesm<-function(){
      note_for_close_window()
      ### EveSMMpar<-data.frame(parameter=c("bw (kg)","age (yr)","race","Ery","D (mg)","tau (hr)"),value=c(0))
      EveSMMpar<-data.frame(parameter=c("bw (kg)","age (yr)","race","Ery","D (mg)","tau (hr)"),value=c(78,56,0,0,1.5,24))
-     ### EveSMMpar<-edit(EveSMMpar)
+     EveSMMpar<-edit(EveSMMpar)
      cat("\n Input data are as follows:\n")
      cat(" --------------------------\n")
      show(EveSMMpar);cat("\n\n")

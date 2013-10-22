@@ -12,7 +12,7 @@ all.Imass<-function(){
      ### ImaSSpar<-data.frame(parameter=c("BW (kg)","OCC","Hb (g/dL)","WBC (10^9/L)","n","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),value=c(0))
      ImaSSpar<-data.frame(parameter=c("BW (kg)","OCC","Hb (g/dL)","WBC (10^9/L)","n","D (mg)","tau (hr)","ts (hr)","c (mg/L)"),
                               value=c(67,1,12.1,110,10,400,24,3.6,2.81))
-     ### ImaSSpar<-edit(ImaSSpar)   ### for model testing.  -YJ
+     ImaSSpar<-edit(ImaSSpar)   ### for model testing.  -YJ
      while(ImaSSpar[8,2]<1.5) {
         readline(" The parameter, ts (hr), must be greater than 1.5.\n Press Enter to fix it...")
         ImaSSpar<-edit(ImaSSpar)

@@ -44,11 +44,12 @@ all.Cycsm<-function(){
      colnames(coutput)<-list("C(2)ss_pr (mcg/L)")
      output1<-coutput
      show(coutput);cat("\n")
-     C<-Cyccpr(CycSMMpar[2,2],CycSMMpar[1,2],CycSMMpar[4,2],CycSMMpar[5,2],CycSMMpar[5,2])
+     C3<-Cyccpr(CycSMMpar[2,2],CycSMMpar[1,2],CycSMMpar[4,2],CycSMMpar[5,2],CycSMMpar[5,2])
      ### sim<-matrix(C[1 ,1])
      coutput<-data.frame(C)
      colnames(coutput)<-list("Ctss_pr (or C(0)ss_pr) (mcg/L)")
-     show(coutput)    
-     cat("\n")    
+     coutput<-data.frame(Parameters=c("C(2)ss_pr (mcg/L)","Ctss_pr (or C(0)ss_pr) (mcg/L)"),Values=c(C2,C3))
+     cat("\n\n");show(coutput);cat("\n")
+     ### Cyc.more(CycSSpar[2,2],CycSSpar[1,2
      Cyc.more(30,CycSMMpar[1,2])  ### here 30 = PTD; 'CycSMMpar[1,2]' = BW. -YJ
 }

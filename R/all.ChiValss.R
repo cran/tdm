@@ -16,18 +16,12 @@ all.ChiValss<-function(){
      note_for_ChiValss_output()
      ### show(samplesStats("*"))
      cat("\n") 
-     C<-ChiValcpr(ChiValSSpar[3,2],ChiValSSpar[4,2],ChiValSSpar[5,2])
+     C1<-ChiValcpr(ChiValSSpar[3,2],ChiValSSpar[4,2],ChiValSSpar[5,2])
      ### sim<-matrix(C[1 ,1])
      coutput<-data.frame(C)
-     colnames(coutput)<-list("Cmss_pr (mg/L)")
-     output1<-coutput
-     show(coutput)
-     C<-ChiValcpr(ChiValSSpar[3,2],ChiValSSpar[4,2],ChiValSSpar[4,2])
+     C2<-ChiValcpr(ChiValSSpar[3,2],ChiValSSpar[4,2],ChiValSSpar[4,2])
      ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Ctss_pr (mg/L)")
-     output2<-coutput
-     show(coutput)    
-     cat("\n")
+     coutput<-data.frame(Parameters=c("Cmss_pr (mg/L)","Ctss_pr (mg/L)"),Values=c(C1,C2))
+     cat("\n\n");show(coutput);cat("\n")
      ChiVal.more()
 }

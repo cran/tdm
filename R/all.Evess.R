@@ -6,7 +6,7 @@ all.Evess<-function(){
      ### EveSSpar<-data.frame(parameter=c("bw (kg)","age (yr)","race","Ery","D (mg)","tau (hr)","ts (hr)","c (mcg/L)"),value=c(0))
      EveSSpar<-data.frame(parameter=c("bw (kg)","age (yr)","race","Ery","D (mg)","tau (hr)","ts (hr)","c (mcg/L)"),
                           value=c(76,68,0,0,1.5,24,20,13.1))             ### for model testing -YJ
-     ### EveSSpar<-edit(EveSSpar)                                        ### for model testing -YJ
+     EveSSpar<-edit(EveSSpar)                                        ### for model testing -YJ
 ##     EveSSpar<-ycheck(EveSSpar)
      cat("\n")
      cat("\n Input data are as follows:\n")
@@ -18,18 +18,10 @@ all.Evess<-function(){
      note_for_Evess_output()          
      ### show(samplesStats("*"))
      cat("\n") 
-     C<-Evecpr(6.07,EveSSpar[5,2],EveSSpar[6,2],EveSSpar[7,2])  ### 6.07 is 'ka' as a constant in model. -YJ
+     C1<-Evecpr(6.07,EveSSpar[5,2],EveSSpar[6,2],EveSSpar[7,2])  ### 6.07 is 'ka' as a constant in model. -YJ
+     C2<-Evecpr(6.07,EveSSpar[5,2],EveSSpar[6,2],EveSSpar[6,2])  ### 6.07 is 'ka' as a constant in model. -YJ
      ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Cmss_pr (mcg/L)")
-     output1<-coutput
-     show(coutput);cat("\n")
-     C<-Evecpr(6.07,EveSSpar[5,2],EveSSpar[6,2],EveSSpar[6,2])  ### 6.07 is 'ka' as a constant in model. -YJ
-     ### sim<-matrix(C[1 ,1])
-     coutput<-data.frame(C)
-     colnames(coutput)<-list("Ctss_pr (mcg/L)")
-     output2<-coutput
-     show(coutput)    
-     cat("\n")  
+     coutput<-data.frame(Parameters=c("Cmss_pr (mcg/L)","Ctss_pr (mcg/L)"),Values=c(C1,C2))
+     cat("\n\n");show(coutput);cat("\n")
      Eve.more()
 }

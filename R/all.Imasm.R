@@ -5,7 +5,7 @@ all.Imasm<-function(){
      note_for_close_window()
      ImaSMMpar<-data.frame(parameter=c("BW (kg)","OCC","Hb (g/dL)","WBC (10^9/L)","D (mg)","tau (hr)"),value=c(67,1,12.1,110,400,24))  # for model testing
      ### ImaSMMpar<-data.frame(parameter=c("BW (kg)","OCC","Hb (g/dL)","WBC (10^9/L)","D (mg)","tau (hr)"),value=c(0))
-     ### ImaSMMpar<-edit(ImaSMMpar)   ### for model testing
+     ImaSMMpar<-edit(ImaSMMpar)   ### for model testing
      ### ImaSMMpar<-ycheck(ImaSMMpar)
      cat("\n Input data are as follows:\n")
      cat(" --------------------------\n")
