@@ -9,7 +9,7 @@
 
 \description{
  Algorithm to estimate individual PK parameters of aminoglycoside by Bayesian 
- technique(OpenBUGS).
+ technique(JAGS).
 }
 
 \references{

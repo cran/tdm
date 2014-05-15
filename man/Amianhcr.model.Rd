@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of aminophylline anhydrous CR}
 
 \description{
- Algorithm to estimate individual PK parameters of aminophylline anhydrous CR by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of aminophylline anhydrous CR by Bayesian technique(JAGS).
 }
 
 \references{

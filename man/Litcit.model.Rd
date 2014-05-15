@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameter of lithium citrate}
 
 \description{
- Algorithm to estimate individual PK parameters of lithium citrate by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of lithium citrate by Bayesian technique(JAGS).
 }
 
 \references{

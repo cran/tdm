@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of cyclosporine-A}
 
 \description{
- Algorithm to estimate individual PK parameters of cyclosporine-A by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of cyclosporine-A by Bayesian technique(JAGS).
 }
 
 \references{

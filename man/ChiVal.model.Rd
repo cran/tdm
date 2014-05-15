@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of valproate in children}
 
 \description{
- Algorithm to estimate individual PK parameters of valproate in children by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of valproate in children by Bayesian technique(JAGS).
 }
 
 \references{

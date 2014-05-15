@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of enfuvirtide}
 
 \description{
- Algorithm to estimate individual PK parameters of enfuvirtide by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of enfuvirtide by Bayesian technique(JAGS).
 }
 
 \references{

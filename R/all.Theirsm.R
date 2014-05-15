@@ -34,7 +34,7 @@ all.Theirsm<-function(){
      cl_F <- X[1,2]
      v_F  <- X[2,2]
      cat("\n")
-     Tmax=log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))
+     Tmax=log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))
      ### show obs. and calc. conc. here  -YJ
      cat("\n\n")
      for(i in 1:length(TheirSMpar$ts)){

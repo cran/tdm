@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of everolimus}
 
 \description{
- Algorithm to estimate individual PK parameters of everolimus by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of everolimus by Bayesian technique(JAGS).
 }
 
 \references{

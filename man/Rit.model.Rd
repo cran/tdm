@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of ritonavir}
 
 \description{
- Algorithm to estimate individual PK parameters of ritonavir by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of ritonavir by Bayesian technique(JAGS).
 }
 
 \references{

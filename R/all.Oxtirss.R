@@ -26,7 +26,7 @@ all.Oxtirss<-function(){
      v_F  <- X[2,2]
      cat("\n") 
      C1<-TheIRsscpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],OxtirSSpar[8,2])
-     Tmax=log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))
+     Tmax=log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))
      C2<-TheIRsscpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],Tmax)
      ### sim<-matrix(C[1 ,1])
      C3<-TheIRsscpr(0.65,OxtirSSpar[6,2],OxtirSSpar[7,2],OxtirSSpar[7,2])

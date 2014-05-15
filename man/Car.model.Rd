@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of carbamazepine}
 
 \description{
- Algorithm to estimate individual PK parameters of carbamazepine by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of carbamazepine by Bayesian technique(JAGS).
 }
 
 \references{

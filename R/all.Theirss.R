@@ -27,7 +27,7 @@ all.Theirss<-function(){
      ### show(samplesStats("*"))
      cat("\n") 
      C1<-TheIRsscpr(1,TheirSSpar[6,2],TheirSSpar[7,2],TheirSSpar[8,2])
-     Tmax=log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))
+     Tmax=log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))
      C2<-TheIRsscpr(1,TheirSSpar[6,2],TheirSSpar[7,2],Tmax)
      C3<-TheIRsscpr(1,TheirSSpar[6,2],TheirSSpar[7,2],TheirSSpar[7,2])
      ### sim<-matrix(C[1 ,1])

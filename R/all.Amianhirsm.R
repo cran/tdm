@@ -49,7 +49,7 @@ all.Amianhirsm<-function(){
      }
      cat("\n") 
      C1<-TheIRsscpr(0.85,AmianhirSMMpar[6,2],AmianhirSMMpar[7,2],AmianhirSMMpar[7,2])
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))  # r is the Tmax.  -YJ
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))  # r is the Tmax.  -YJ
      C2<-TheIRsscpr(0.85,AmianhirSMMpar[6,2],AmianhirSMMpar[7,2],Tmax)
      coutput<-data.frame(conc=c("Cpss_pr (mg/L)","Ctss_pr (mg/L)"),calc=c(C2,C1))
      show(coutput) 

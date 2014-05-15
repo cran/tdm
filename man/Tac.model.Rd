@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of tacrolimus}
 
 \description{
- Algorithm to estimate individual PK parameters of tacrolimus by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of tacrolimus by Bayesian technique(JAGS).
 }
 
 \references{

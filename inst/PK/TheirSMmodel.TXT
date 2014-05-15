@@ -7,7 +7,7 @@ model
            mu[j]<-1.85*D/(v_F*(1.85-k))*((1/(1-exp(-k*tau)))*exp(-k*ts[j])-(1/(1-exp(-1.85*tau)))*exp(-1.85*ts[j]))   # oral IR tablet concentration equation at steady state
            }
            cl_F~dnorm(theta1, 10)
-           v_F~dnorm(theta2,0.1)
+           v_F~dnorm(theta2, 0.1)
            k<-cl_F/v_F
 
            theta1<-(0.037*IBW-0.006*age)*pow(1.284,smoke)*pow(0.751,CHF)      # population estimate of Theophylline clearance

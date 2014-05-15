@@ -1,0 +1,19 @@
+model
+
+ {     
+ for(i in 1:1) {              # one subject
+  for(j in 1:T) {             # T:number of sampling time
+    c[j]~dnorm(mu[j], 10)     # c:drug concentration
+    mu[j]<- (ka*D)/(v_F*(ka-(cl_F/v_F)))*(exp(-(cl_F/v_F)*ts[j])-exp(-ka*ts[j]))  # oral IR concentration equation after the 1st dose
+                                               # where D = Dose, 'ka' for OC-IR; F = bioavailability
+ }                                             # no lag time in this model.ref.: Gibaldi. Pharmacokinetics, 2nd, p.36.
+ cl_F~dnorm(theta1, 100)
+ v_F~ dnorm(theta2, 10)
+ k<-cl_F/v_F
+ ka<-ka_value
+ 
+ theta1<-cl_F_init            # population estimate of OC-IR Cl
+ theta2<-v_F_init             # population estimate of OC-IR Vd
+  
+ }
+}

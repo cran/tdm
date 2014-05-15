@@ -736,7 +736,7 @@ v_F  <- X[2,2]
 ##     Amianhirdpar<-check(Amianhirdpar)
      d<-Amianhirdpar[1,2]/(0.85*1.85/((v_F)*(1.85-(cl_F)/(v_F)))*((1/(1-exp(-(cl_F)/(v_F)*Amianhirdpar[2,2])))*
         exp(-(cl_F)/(v_F)*Amianhirdpar[2,2])-(1/(1-exp(-1.85*Amianhirdpar[2,2])))*exp(-1.85*Amianhirdpar[2,2])))
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
      Cmax<-TheIRsscpr(0.85,d,Amianhirdpar[2,2],Tmax) # then calc. estimated Cpeak
      ### sim<-matrix(d[1 ,1])
      doutput<-data.frame(Parameters=c("**calc Css_Peak (mg/L)","Target Css_trough (mg/L)","tau (hr)"," -> Dose (mg)"),
@@ -759,7 +759,7 @@ v_F  <- X[2,2]
 ##     Amianhircpar<-check(Amianhircpar)
      C<-0.85*1.85*Amianhircpar[1,2]/((v_F)*(1.85-(cl_F)/(v_F)))*((1/(1-exp(-(cl_F)/(v_F)*Amianhircpar[2,2])))*
         exp(-(cl_F)/(v_F)*Amianhircpar[2,2])-(1/(1-exp(-1.85*Amianhircpar[2,2])))*exp(-1.85*Amianhircpar[2,2]))
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
      Cmax<-TheIRsscpr(0.85,Amianhircpar[1,2],Amianhircpar[2,2],Tmax) # then calc. estimated Cpeak
      ### sim<-matrix(C[1 ,1])
      coutput<-data.frame(Parameters=c("D (mg)","tau (hr)","calc Css_trough (mg/L)","calc Css_Peak (mg/L)"),
@@ -918,7 +918,7 @@ v_F  <- X[2,2]
 ##     Amidihirdpar<-check(Amidihirdpar)
      d<-Amidihirdpar[1,2]/(0.8*1.85/((v_F)*(1.85-(cl_F)/(v_F)))*((1/(1-exp(-(cl_F)/(v_F)*Amidihirdpar[2,2])))*
         exp(-(cl_F)/(v_F)*Amidihirdpar[2,2])-(1/(1-exp(-1.85*Amidihirdpar[2,2])))*exp(-1.85*Amidihirdpar[2,2])))
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
      Cmax<-TheIRsscpr(0.8,d,Amidihirdpar[2,2],Tmax) # then calc. estimated Cpeak
      ### sim<-matrix(d[1 ,1])
      doutput<-data.frame(Parameters=c("Target Css_trough (mg/L)","**calc Css_peak (mg/L)","tau (hr)"," -> Dose (mg)"),
@@ -941,7 +941,7 @@ v_F  <- X[2,2]
 ##     Amidihircpar<-check(Amidihircpar)
      C<-1.85*0.8*Amidihircpar[1,2]/((v_F)*(1.85-(cl_F)/(v_F)))*((1/(1-exp(-(cl_F)/(v_F)*Amidihircpar[2,2])))*
         exp(-(cl_F)/(v_F)*Amidihircpar[2,2])-(1/(1-exp(-1.85*Amidihircpar[2,2])))*exp(-1.85*Amidihircpar[2,2]))
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
      Cmax<-TheIRsscpr(0.8,Amidihircpar[1,2],Amidihircpar[2,2],Tmax) # then calc. estimated Cpeak
      ### sim<-matrix(C[1 ,1])
      coutput<-data.frame(Parameters=c("D (mg)","tau (hr)","calc Css_peak (mg/L)"," -> Css_trough (mg/L)"),
@@ -1099,7 +1099,7 @@ v_F  <- X[2,2]
 ##     Oxtirdpar<-check(Oxtirdpar)
      d<-Oxtirdpar[1,2]/(0.65*1.85/((v_F)*(1.85-(cl_F)/(v_F)))*((1/(1-exp(-(cl_F)/(v_F)*Oxtirdpar[2,2])))*
         exp(-(cl_F)/(v_F)*Oxtirdpar[2,2])-(1/(1-exp(-1.85*Oxtirdpar[2,2])))*exp(-1.85*Oxtirdpar[2,2])))
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
      Cmax<-TheIRsscpr(0.65,d,Oxtirdpar[2,2],Tmax) # then calc. estimated Cpeak
      ### sim<-matrix(d[1 ,1])
      doutput<-data.frame(Parameters=c("Target Css_trough (mg/L)","**calc Css_peak (mg/L)","tau (hr)"," -> Dose (mg)"),
@@ -1122,7 +1122,7 @@ v_F  <- X[2,2]
 ##     Oxtircpar<-check(Oxtircpar)
      C<-1.85*0.65*Oxtircpar[1,2]/((v_F)*(1.85-(cl_F)/(v_F)))*((1/(1-exp(-(cl_F)/(v_F)*Oxtircpar[2,2])))*
         exp(-(cl_F)/(v_F)*Oxtircpar[2,2])-(1/(1-exp(-1.85*Oxtircpar[2,2])))*exp(-1.85*Oxtircpar[2,2]))
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
      Cmax<-TheIRsscpr(0.65,Oxtircpar[1,2],Oxtircpar[2,2],Tmax) # then calc. estimated Cpeak
      ### sim<-matrix(C[1 ,1])
      coutput<-data.frame(Parameters=c("D (mg)","tau (hr)","calc Css_Peak (mg/L)","calc Css_trough (mg/L)"),
@@ -1220,7 +1220,7 @@ v_F  <- X[2,2]
 ##     Theirdpar<-check(Theirdpar)
      d<-Theirdpar[1,2]/(1.85/((v_F)*(1.85-(cl_F)/(v_F)))*((1/(1-exp(-(cl_F)/(v_F)*Theirdpar[2,2])))*
         exp(-(cl_F)/(v_F)*Theirdpar[2,2])-(1/(1-exp(-1.85*Theirdpar[2,2])))*exp(-1.85*Theirdpar[2,2])))
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))    # estimate Tmax first, and
      Cmax<-TheIRsscpr(1.0,d,Theirdpar[2,2],Tmax) # then calc. estimated Cpeak
      ### sim<-matrix(d[1 ,1])
      doutput<-data.frame(Parameters=c("Target Css_trough (mg/L)","**calc Css_peak (mg/L)","tau (hr)"," -> Dose (mg)"),
@@ -1241,7 +1241,7 @@ v_F  <- X[2,2]
 ##     Theircpar<-check(Theircpar)
      C<-1.85*Theircpar[1,2]/((v_F)*(1.85-(cl_F)/(v_F)))*((1/(1-exp(-(cl_F)/(v_F)*Theircpar[2,2])))*
         exp(-(cl_F)/(v_F)*Theircpar[2,2])-(1/(1-exp(-1.85*Theircpar[2,2])))*exp(-1.85*Theircpar[2,2]))
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))             # estimate Tmax first, and
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))             # estimate Tmax first, and
      Cmax<-TheIRsscpr(1.0,Theircpar[1,2],Theircpar[2,2],Tmax) # then calc. estimated Cpeak
      ### sim<-matrix(C[1 ,1])
      coutput<-data.frame(Parameters=c("D (mg)","tau (hr)","calc Css_peak (mg/L)"," -> Css_trough (mg/L)"),

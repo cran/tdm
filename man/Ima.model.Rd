@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of imatinib mesylate}
 
 \description{
- Algorithm to estimate individual PK parameters of imatinib mesylate by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of imatinib mesylate by Bayesian technique(JAGS).
 }
 
 \references{

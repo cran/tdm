@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of lithium carbonate}
 
 \description{
- Algorithm to estimate individual PK parameters of lithium carbonate by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of lithium carbonate by Bayesian technique(JAGS).
 }
 
 \references{

@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of valproate}
 
 \description{
- Algorithm to estimate individual PK parameters of valproate by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of valproate by Bayesian technique(JAGS).
 }
 
 \references{

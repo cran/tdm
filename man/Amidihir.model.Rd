@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of aminophylline dihydrous IR}
 
 \description{
- Algorithm to estimate individual PK parameters of aminophylline dihydrous IR by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of aminophylline dihydrous IR by Bayesian technique(JAGS).
 }
 
 \references{

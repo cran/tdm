@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of vancomycin}
 
 \description{
- Algorithm to estimate individual PK parameters of vancomycin by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of vancomycin by Bayesian technique(JAGS).
 }
 
 \references{

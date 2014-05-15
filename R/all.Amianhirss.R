@@ -29,7 +29,7 @@ all.Amianhirss<-function(){
      cat("\n") 
      C1<-TheIRsscpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],AmianhirSSpar[8,2])   # C1 is obs conc.; calculate predicted steady-state measured concentration of aminophylline anhydrous (equation of _phylline IR concentration)
      ### sim<-matrix(C[1 ,1])                                                        # 取表格[1,1]之答案
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))  # 計算tmax
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))  # 計算tmax
      C2<-TheIRsscpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],Tmax)                 # calculate predicted steady-state peak concentration of aminophylline anhydrous
      C3<-TheIRsscpr(0.85,AmianhirSSpar[6,2],AmianhirSSpar[7,2],AmianhirSSpar[7,2])   # calculate predicted steady-state trough concentration of aminophylline anhydrous
      coutput<-data.frame(conc=c("Cmss_obs","** Cmss_pr","** Cpss_pr","** Ctss_pr"),value=c(AmianhirSSpar[9,2],C1,C2,C3))

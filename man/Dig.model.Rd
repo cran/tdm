@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of digoxin}
 
 \description{
- Algorithm to estimate individual PK parameters of digoxin by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of digoxin by Bayesian technique(JAGS).
 }
 
 \references{

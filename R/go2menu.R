@@ -15,7 +15,7 @@ go2menu<-function()
                  "Theophylline",
                  "Valproate",
                  "Vancomycin")
-  pick <- menu(file.menu, title = "<< Drug List (TDM), Press Enter to quit.>>")
+  pick <- menu(file.menu, title = "<< Drug List (TDM), Select '0' to quit.>>")
   if (pick == 1){
      cat("\n\n")
      Ami.model()

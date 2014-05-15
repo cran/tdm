@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of indinavir}
 
 \description{
- Algorithm to estimate individual PK parameters of indinavir by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of indinavir by Bayesian technique(JAGS).
 }
 
 \references{

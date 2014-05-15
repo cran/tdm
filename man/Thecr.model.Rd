@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of theophylline CR}
 
 \description{
- Algorithm to estimate individual PK parameters of theophylline CR by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of theophylline CR by Bayesian technique(JAGS).
 }
 
 \references{

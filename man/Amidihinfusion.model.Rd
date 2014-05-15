@@ -8,7 +8,7 @@
 
 \description{
  Algorithm to estimate individual PK parameters of iv infusion aminophylline dihydrous 
- with loading dose by Bayesian technique(OpenBUGS).
+ with loading dose by Bayesian technique(JAGS).
 }
 
 \references{

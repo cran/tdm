@@ -1,8 +1,21 @@
 tdm: Update log
 
+v3.0.2
+-------------------------
+ - added 11 opioids tdm suggested by Dr. Oscar A. Linares, M.D..
+ - fixed Tmax equation in some module;
+ - fixed some *.rd files;
+ - added simulation plots for opioids tdm in opioids tdm;
+ - improved appropriate dosage regimen selection in opioids tdm;
+ - adjusted the position of displayed texts in plots in opioids tdm;
+ - switched from lsoda(...) to lsode(...) in opioids tdm for solving
+   differential equations;
+ - improved cl_F estimation with changing prior probability for cl_F 
+   of its JAGS model in opioids tdm;
+ - fixed simulation plots for multiple-dose with lsoda(..., evenst=...);
+
 v3.0.1
 -------------------------
- 
  - fixed some tdm's input; used to be disabled for testing purpose;
  - tested with JAGS v3.4.0 vs. JAGS v3.3.0 under Windows 7; found 
    JAGS v3.4.0 may cause some models crashed; suggest to use JAGS 
@@ -11,10 +24,8 @@ v3.0.1
  - fixed NAMESPACE and DESCRIPTION two files for imported
    packages.
 
-
 v3.0.0
 -------------------------
-
  - warfarin model is still not working yet.
  - started to change codes from BUGS to JAGS; and added packages
    "rjags", "R2jags", etc..

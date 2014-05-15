@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of enoxaparin}
 
 \description{
- Algorithm to estimate individual PK parameters of enoxaparin by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters of enoxaparin by Bayesian technique(JAGS).
 }
 
 \references{

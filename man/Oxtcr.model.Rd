@@ -7,7 +7,7 @@
 \title{Algorithm to estimate individual PK parameters of oxtriphylline CR}
 
 \description{
- Algorithm to estimate individual PK parameters oxtriphyllline CR by Bayesian technique(OpenBUGS).
+ Algorithm to estimate individual PK parameters oxtriphyllline CR by Bayesian technique(JAGS).
 }
 
 \references{

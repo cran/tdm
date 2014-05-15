@@ -1,7 +1,7 @@
 Package: tdm
 Title: A Tool for Therapeutic Drug Monitoring (TDM)
-Version: 3.0.1
-Date: 2013/10/22
+Version: 3.0.2
+Date: 2014/05/15
 Author: Miou-ting Chen, Yung-jin Lee <mobilepk@gmail.com>
 Description: TDM is designed to estimate individual pharmacokinetic
         parameters with one or more drug serum/plasma concentrations
@@ -11,11 +11,11 @@ Description: TDM is designed to estimate individual pharmacokinetic
         with the target drug concentration (C ->D) or calculate a 
         predicted drug concentration with a given dose (D -> C).
 Maintainer: Yung-jin Lee <mobilepk@gmail.com>
-Depends: R (>= 2.12.0), rjags, coda
-Imports: png, grid
+Depends: R (>= 2.12.0)
+Imports: rjags, coda, png, grid, deSolve
 License: GPL (>= 2)
 URL: http://pkpd.kmu.edu.tw/tdm/
-Packaged: 2013-10-21 17:09:00 UTC; datawalker
+Packaged: 2014-05-14 18:22:04 UTC; datawalker
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-10-21 19:46:49
+Date/Publication: 2014-05-14 20:36:50

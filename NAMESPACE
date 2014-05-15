@@ -9,5 +9,6 @@ import(
   rjags,
   coda,
   png,
-  grid
+  grid,
+  deSolve
 )

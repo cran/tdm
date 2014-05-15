@@ -39,7 +39,7 @@ all.Amidihirsm<-function(){
      cl_F <- X[1,2]
      v_F  <- X[2,2]
      cat("\n")
-     Tmax<-log(1.85-(cl_F/v_F))/(1.85-(cl_F/v_F))
+     Tmax<-log(1.85/(cl_F/v_F))/(1.85-(cl_F/v_F))
      C1<-TheIRsscpr(0.8,AmidihirSMMpar[6,2],AmidihirSMMpar[7,2],Tmax)
      ### sim<-matrix(C[1 ,1])
      ### show obs. and calc. conc. here  -YJ
