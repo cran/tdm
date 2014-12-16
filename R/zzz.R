@@ -6,10 +6,10 @@
 packageStartupMessage("
 
 ************************--> tdm <--********************************
-           An R Tool for Therapeutic Drug Monitoring               
-                          v 3.0.2                                 
+     Data Analysis for Therapeutic Drug Monitoring (TDM)              
+                          v 3.0.3                                 
   DISCLAIMER:                        
-  TDM is created for your own personal uses and testing purposes.  
+  tdm is created for your own personal uses and testing purposes.  
   TDM shall be used as a guide or a decision support tool only.    
   Medical decisions should NOT be solely based on the results of   
   this program. Although this program has been tested thoroughly,  
@@ -19,8 +19,6 @@ packageStartupMessage("
   ** Please type 'run()' to get started or 
      type 'demo(phenytoin)' for the test runs of estimation
      phenytoin PK parameters.
-     
-  ** oscar() to run opioid TDM.
 
 *******************************************************************")
 }

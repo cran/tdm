@@ -1,9 +1,15 @@
 tdm: Update log
 
+v3.0.3
+-------------------------
+ - fixed package title as suggested;
+ - fixed run();
+ - modified the content of DESCRIPTION;
+ 
 v3.0.2
 -------------------------
- - added 11 opioids tdm suggested by Dr. Oscar A. Linares, M.D..
- - fixed Tmax equation in some module;
+ - added 11 opioids tdm; type 'oscar()' to run;
+ - fixed Tmax equation in some modules;
  - fixed some *.rd files;
  - added simulation plots for opioids tdm in opioids tdm;
  - improved appropriate dosage regimen selection in opioids tdm;
@@ -12,7 +18,7 @@ v3.0.2
    differential equations;
  - improved cl_F estimation with changing prior probability for cl_F 
    of its JAGS model in opioids tdm;
- - fixed simulation plots for multiple-dose with lsoda(..., evenst=...);
+ - fixed simulation plots for multiple-dose with lsoda(..., events=...);
 
 v3.0.1
 -------------------------

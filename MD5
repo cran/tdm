@@ -1,6 +1,6 @@
-bfb8218d5b54fae46dd02891cdece3ff *DESCRIPTION
+9eff054d0546192eddd5f3dfa01a5972 *DESCRIPTION
 7b0251a9609934e0a3235e0eaa3354ae *NAMESPACE
-d09b120d3708f18c1d5903a56bbdfff4 *NEWS
+bd9fe5d61e9625bacf3f91507d8ab23a *NEWS
 30d7857fe120ece68ce4e6d851b1e177 *R/Ami.sm.R
 e6189a222ee91a92c37cc6e10645e502 *R/Ami.ss.R
 c6a58c0dd5d99eff5cceef7ec4d56253 *R/Amianhcr.ss.R
@@ -109,9 +109,9 @@ e182d648d3d51778fedf27a0ca88e526 *R/oscar.note.R
 d9799cd0f1d7e09d99b80f4bbee9c4b0 *R/plotting_tdm.sim.R
 2c15a3c23a916a146e6d3a0a5cb96b4d *R/pr.R
 bd2805799757db10bf6b8af36f9f7776 *R/pr.oscar.R
-08d4ef20d129219e32e271bf5dd78d78 *R/run.R
+3df9f045ebd2696d408957e24c983622 *R/run.R
 a2a9f600a7d41f2190ee43f1e75c073d *R/sdToss.R
-da03d08b89ad8dc74007cff010aac600 *R/zzz.R
+4278e08a7e635cbfc119d450af872a20 *R/zzz.R
 5dc9142d290a1835f154da96c637b534 *demo/00Index
 d00688d09cfac99e1b53dfdf749e319f *demo/phenytoin.R
 4ddfc1adb4a4740e2282bf054c46b95c *inst/PK/AmiSMmodel.txt
